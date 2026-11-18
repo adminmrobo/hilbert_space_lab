@@ -234,6 +234,9 @@ np.linalg.lstsq(X, y)              # 예측선 긋기 = 여러 축 바닥에 떨
     <div class="minis"><div class="mini g"><span>안쪽 (반지름 0.9 안)</span><b id="m9d">—</b></div><div class="mini r"><span>겉 껍질 (0.9 ~ 1)</span><b id="m9e">—</b></div></div>
     <div class="insight" id="i9b" aria-live="polite"></div>
   </div>
+  <details class="fold"><summary>교안의 파이썬 코드로 보면 (몰라도 됩니다)</summary>
+    <pre>np.linalg.norm(X - c, axis=1) &lt;= r   # 중심 c에서 반지름 r 안쪽인 점 고르기
+0.9 ** n                              # n칸 공에서 반지름 0.9 안쪽 비율</pre></details>
   <p class="muted" style="font-size:13.5px">원자료 카드 09의 머리 상자는 중심 c를 쓰지만(‖x − c‖ = r), 아래 식 x² + y² = r²은 중심을 원점에 둔 경우입니다. 제목은 n-Balls이지만 n칸 내용이 없어, ② 껍질 비율 실험은 이 페이지에서 더한 것입니다. 흩어진 점 40개는 시드 고정 예시값입니다.</p>
   <div class="lim"><b>이 방의 한계</b> 공도 거리로 만듭니다. 칸마다 단위가 다르면 공이 한쪽으로 찌그러져요 → 10번 방.</div>
   <div class="quiz" data-quiz="r9"></div>
@@ -255,7 +258,7 @@ np.linalg.lstsq(X, y)              # 예측선 긋기 = 여러 축 바닥에 떨
       <table><thead><tr><th>식 조각</th><th>뜻</th></tr></thead><tbody>
         <tr><td>키 × 10</td><td>cm → mm. 키 차이가 10배로 커짐</td></tr>
         <tr><td>차이 ÷ 한 칸 크기</td><td>단위 맞추기 (여기서는 키 8cm, 몸무게 10kg을 한 칸으로)</td></tr>
-        <tr><td>호 = Rθ</td><td>지구 표면을 따라 간 길이 (θ는 라디안)</td></tr>
+        <tr><td>호 = Rθ</td><td>지구 표면을 따라 간 길이. θ는 라디안(반지름 1인 원에서 그 각이 잘라 내는 호의 길이로 잰 각도, 180° = π ≈ 3.14)</td></tr>
         <tr><td>현 = 2R sin(θ/2)</td><td>땅속을 곧게 뚫은 길이</td></tr></tbody></table>
       <span class="lbl">숫자로 한 번 해 보기</span>
       <div class="try">시아(160, 50)·모아(163, 54): cm로는 <b>5</b> → 키를 mm로 쓰면 √(30² + 4²) ≈ <b>30.3</b>, 키가 거리를 독차지<br>지구 R = 6,371km, 두 도시 사이 각도 90° → 호 ≈ <b>10,008km</b>, 현 ≈ <b>9,010km</b></div>

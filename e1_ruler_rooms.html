@@ -370,7 +370,7 @@ section.sec{padding:88px 0 40px}
   <div class="cast" id="castgrid"></div>
   <div class="secret"><button class="bt" id="secretbtn" type="button" aria-expanded="false">방청석 보기 (미공개 식구)</button><div class="row" id="secretrow" hidden></div></div>
   <div class="steps four" style="margin-top:16px">
-    <div class="step"><b>점 끌기</b>점선 동그라미가 있는 점은 마우스나 손가락으로 끌 수 있어요. 그림을 누른 뒤 화살표 키로도 움직입니다.</div>
+    <div class="step"><b>점 끌기</b>점선 동그라미가 있는 점은 마우스나 손가락으로 끌 수 있어요. 그림을 누른 뒤 화살표 키로 움직이고, 스페이스로 움직일 점을 바꿉니다.</div>
     <div class="step"><b>축 색깔</b>가로축(x₁)은 빨강, 세로축(x₂)은 청록입니다. 모든 방이 같은 색을 씁니다.</div>
     <div class="step"><b>조수 수식 상자</b>분홍 상자는 수식이 어려운 조수 하루가 대신 묻고 숫자로 풀어 보는 곳입니다.</div>
     <div class="step"><b>밑줄 누르기</b>노란 점선 밑줄을 누르면 용어 뜻이 나옵니다. 오른쪽 아래 버튼으로 끌 수 있어요.</div>
@@ -515,7 +515,7 @@ section.sec{padding:88px 0 40px}
   </div>
   <div class="pair">
     <div><div class="tl">일상으로 치면</div>액션 별점 5·로맨스 1인 시아와 액션 4·로맨스 2인 모아는 숫자는 달라도 "액션 쪽"이라는 방향이 같습니다. 각도가 작을수록 취향이 닮았어요.</div>
-    <div><div class="tr">머신러닝에서는</div>추천·검색은 <b>코사인 유사도</b>(cos θ)로 "비슷한 사용자", "비슷한 문서"를 찾습니다. 언어 모델의 <b>어텐션</b>도 질문과 각 단어의 겹침 점수로 어디를 볼지 정해요.</div>
+    <div><div class="tr">머신러닝에서는</div>추천·검색은 <b>코사인 유사도</b>(cos θ)로 "비슷한 사용자", "비슷한 문서"를 찾습니다. 언어 모델의 <b>어텐션</b>도 질문과 각 단어의 겹침 점수에서 출발해 어디를 볼지 정해요(점수의 크기를 조정하고 확률로 바꾸는 단계는 여기서 생략).</div>
   </div>
   <div data-dlg="r4"></div>
   <div class="panel">
@@ -900,10 +900,10 @@ function P2(cv,o){var S=this;S.cv=cv;S.o=o;S.dirty=true;S.hot=-1;
     x=Math.max(S.o.xr[0],Math.min(S.o.xr[1],x));y=Math.max(S.o.yr[0],Math.min(S.o.yr[1],y));h.set(x,y);S.dirty=true;if(S.o.onChange)S.o.onChange();});
   function up(){drag=-1;}cv.addEventListener('pointerup',up);cv.addEventListener('pointercancel',up);
   if((S.o.handles||[]).length){cv.style.touchAction='none';cv.tabIndex=0;
-    cv.addEventListener('keydown',function(e){var h=S.o.handles[0];if(!h)return;var p=h.get(),sn=h.snap||0.5,dx=0,dy=0;
+    S.kh=0;cv.addEventListener('keydown',function(e){var hs=S.o.handles;if(e.key===' '||e.key==='Enter'){e.preventDefault();S.kh=(S.kh+1)%hs.length;S.hot=S.kh;S.dirty=true;return;}var h=hs[S.kh];if(!h)return;var p=h.get(),sn=h.snap||0.5,dx=0,dy=0;
       if(e.key==='ArrowLeft')dx=-sn;else if(e.key==='ArrowRight')dx=sn;else if(e.key==='ArrowUp')dy=sn;else if(e.key==='ArrowDown')dy=-sn;else return;e.preventDefault();
       h.set(Math.max(S.o.xr[0],Math.min(S.o.xr[1],p[0]+dx)),Math.max(S.o.yr[0],Math.min(S.o.yr[1],p[1]+dy)));S.dirty=true;if(S.o.onChange)S.o.onChange();});}
-  cv.setAttribute('role','img');if(o.aria)cv.setAttribute('aria-label',o.aria);
+  cv.setAttribute('role','img');if(o.aria)cv.setAttribute('aria-label',o.aria+((o.handles||[]).length>1?' — 화살표 키로 점을 움직이고 스페이스로 점을 바꿉니다':''));
   U.reg(cv,function(dt){if(S.dirty||dt===0){S.draw();S.dirty=false;}});}
 P2.prototype.draw=function(){var S=this,R=U.setup(S.cv),g=R.g,w=R.w,h=R.h,o=S.o,m=o.margin||30;S.g=g;S.w=w;S.h=h;
   var sx=(w-2*m)/(o.xr[1]-o.xr[0]),sy=(h-2*m)/(o.yr[1]-o.yr[0]),sc=o.free?null:Math.min(sx,sy);
@@ -1001,14 +1001,14 @@ function draw1(){var R=U.setup($('#cv1')),g=R.g,w=R.w,h=R.h,n=N1;U.grid24(g,w,h)
     g.fillStyle=cssv('--muted');g.textAlign='center';for(var v=150;v<=175;v+=5){g.fillRect(X(v),y-4,1,8);g.fillText(String(v),X(v),y+20);}
     dot(X(160),y,cs,'시아 160');dot(X(163),y,cm,'모아 163',22);g.strokeStyle=ct;g.lineWidth=3;g.beginPath();g.moveTo(X(160),y-30);g.lineTo(X(163),y-30);g.stroke();U.label(g,(X(160)+X(163))/2,y-44,'3',ct,'center');
     U.label(g,x1,y-24,'키(cm)',cssv('--eye'),'right');U.label(g,20,24,'1칸 방 = 수직선',cssv('--muted'));}
-  else if(n===2){var m=44,sx=(w-2*m)/20,sy=(h-2*m)/16,k=Math.min(sx,sy),ox=(w-20*k)/2,oy=h-(h-16*k)/2,X2=function(a){return ox+(a-150)*k;},Y2=function(b){return oy-(b-42)*k;};
-    g.strokeStyle='rgba(22,33,43,.07)';g.beginPath();for(var a=150;a<=170;a++){g.moveTo(X2(a),Y2(42));g.lineTo(X2(a),Y2(58));}for(var b=42;b<=58;b++){g.moveTo(X2(150),Y2(b));g.lineTo(X2(170),Y2(b));}g.stroke();
-    U.arrow2(g,X2(150),Y2(42),X2(170)+10,Y2(42),cssv('--eye'),1.5);U.arrow2(g,X2(150),Y2(42),X2(150),Y2(58)-10,ct,1.5);
-    g.fillStyle=cssv('--muted');g.textAlign='center';[150,155,160,165,170].forEach(function(a){g.fillText(String(a),X2(a),Y2(42)+16);});g.textAlign='right';[45,50,55].forEach(function(b){g.fillText(String(b),X2(150)-6,Y2(b)+4);});
+  else if(n===2){var m=44,sx=(w-2*m)/12,sy=(h-2*m)/12,k=Math.min(sx,sy),ox=(w-12*k)/2,oy=h-(h-12*k)/2,X2=function(a){return ox+(a-156)*k;},Y2=function(b){return oy-(b-46)*k;};
+    g.strokeStyle='rgba(22,33,43,.07)';g.beginPath();for(var a=156;a<=168;a++){g.moveTo(X2(a),Y2(46));g.lineTo(X2(a),Y2(58));}for(var b=46;b<=58;b++){g.moveTo(X2(156),Y2(b));g.lineTo(X2(168),Y2(b));}g.stroke();
+    U.arrow2(g,X2(156),Y2(46),X2(168)+10,Y2(46),cssv('--eye'),1.5);U.arrow2(g,X2(156),Y2(46),X2(156),Y2(58)-10,ct,1.5);
+    g.fillStyle=cssv('--muted');g.textAlign='center';[156,158,160,162,164,166,168].forEach(function(a){g.fillText(String(a),X2(a),Y2(46)+16);});g.textAlign='right';[46,48,50,52,54,56,58].forEach(function(b){g.fillText(String(b),X2(156)-6,Y2(b)+4);});
     g.setLineDash([5,4]);g.strokeStyle=cssv('--amber');g.lineWidth=2;g.beginPath();g.moveTo(X2(160),Y2(50));g.lineTo(X2(163),Y2(50));g.lineTo(X2(163),Y2(54));g.stroke();g.setLineDash([]);
     g.strokeStyle=ct;g.lineWidth=3;g.beginPath();g.moveTo(X2(160),Y2(50));g.lineTo(X2(163),Y2(54));g.stroke();
-    dot(X2(160),Y2(50),cs,'시아 (160, 50)',18);dot(X2(163),Y2(54),cm,'모아 (163, 54)');U.label(g,X2(161.5),Y2(50)+14,'3',cssv('--amber'),'center');U.label(g,X2(163)+10,Y2(52),'4',cssv('--amber'));U.label(g,X2(161.2),Y2(52.6),'5',ct,'right');
-    U.label(g,X2(170),Y2(42)-14,'키(cm)',cssv('--eye'),'right');U.label(g,X2(150)+8,Y2(58)+2,'몸무게(kg)',ct);}
+    dot(X2(160),Y2(50),cs,null);U.label(g,X2(160)-10,Y2(50)-14,'시아 (160, 50)',cs,'right');dot(X2(163),Y2(54),cm,'모아 (163, 54)');U.label(g,X2(161.5),Y2(50)+16,'가로 3',cssv('--amber'),'center');U.label(g,X2(163)+10,Y2(52),'세로 4',cssv('--amber'));U.label(g,X2(161.2)-4,Y2(52.4),'거리 5',ct,'right');
+    U.label(g,X2(168),Y2(46)-14,'키(cm)',cssv('--eye'),'right');U.label(g,X2(156)+8,Y2(58)+2,'몸무게(kg)',ct);}
   else if(n===3){var c=[w*0.36,h*0.72],s=Math.min(w,h)*0.055,P3=function(a,b,d){return [c[0]+(a-158)*s*1.9-(d-22)*s*0.9,c[1]-(b-47)*s*1.1+(d-22)*s*0.55];};
     var o=P3(158,47,22);U.arrow2(g,o[0],o[1],P3(167,47,22)[0],P3(167,47,22)[1],cssv('--eye'),1.5);U.arrow2(g,o[0],o[1],P3(158,57,22)[0],P3(158,57,22)[1],ct,1.5);U.arrow2(g,o[0],o[1],P3(158,47,28)[0],P3(158,47,28)[1],'rgba(22,33,43,.7)',1.5);
     U.label(g,P3(167,47,22)[0]+4,P3(167,47,22)[1],'키',cssv('--eye'));U.label(g,P3(158,57,22)[0]+6,P3(158,57,22)[1],'몸무게',ct);U.label(g,P3(158,47,28)[0]-4,P3(158,47,28)[1],'나이',cssv('--text'),'right');

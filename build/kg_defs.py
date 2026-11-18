@@ -157,7 +157,16 @@ pages = {
         ref('bellman1961', 'Adaptive Control Processes: A Guided Tour', [{"family": "Bellman", "given": "Richard"}], 1961, {"type": "book", "publisher": "Princeton University Press"}, ['lab:concept/curse-of-dimensionality'])],
         meta('e2', '유클리드 공간 ② 그림자와 칸막이의 방 — 그림자·칸막이·움직임·공·곧은 자의 한계', '2', 'e2_shadow_rooms.html', ['lab:concept/orthogonal-projection', 'lab:concept/hyperplane', 'lab:method/feature-scaling'], ['eea_euclid', 'moe_curriculum'])),
 }
+ALL = {}
+for k, v in pages.items():
+    for n in v[0]: ALL.setdefault(n['id'], n)
 for k, (nodes, edges, refs, m) in pages.items():
+    have = {n['id'] for n in nodes}
+    for e in edges:
+        for x in (e['s'], e['o']):
+            if x not in have and x in ALL:
+                st = dict(ALL[x]); st['anchor'] = ALL[x]['page'] + '.html' + ALL[x]['anchor']; st['coverage'] = 'mentioned'; nodes.append(st); have.add(x)
+
     page = m['url'].split('/')[-1].replace('.html', '')
     json.dump({"version": "1.3", "page": page, "nodes": nodes, "edges": edges}, open(os.path.join(B, 'kg_%s.json' % k), 'w'), ensure_ascii=False, indent=1)
     json.dump(refs, open(os.path.join(B, 'refs_%s.json' % k), 'w'), ensure_ascii=False, indent=1)

@@ -481,6 +481,94 @@
     "ai"
    ],
    "match": []
+  },
+  {
+   "id": "lab:concept/inner-product",
+   "type": "Concept",
+   "label": {
+    "ko": "겹침 점수(내적)",
+    "en": "Inner product"
+   },
+   "page": "e1_ruler_rooms",
+   "anchor": "e1_ruler_rooms.html#r4",
+   "level": 1,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "mentioned",
+   "family": "representation",
+   "domain": [
+    "ai"
+   ],
+   "match": [],
+   "definition": {
+    "ko": "같은 자리 숫자끼리 곱해서 더한 값. 길이 × 길이 × cos θ."
+   }
+  },
+  {
+   "id": "lab:concept/orthonormal-basis",
+   "type": "Concept",
+   "label": {
+    "ko": "자 세트(정규직교기저)",
+    "en": "Orthonormal basis"
+   },
+   "page": "e1_ruler_rooms",
+   "anchor": "e1_ruler_rooms.html#r5",
+   "level": 2,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "mentioned",
+   "family": "representation",
+   "domain": [
+    "ai"
+   ],
+   "match": [],
+   "definition": {
+    "ko": "길이 1이고 서로 직각인 자들. 좌표 = 겹침 점수."
+   }
+  },
+  {
+   "id": "lab:concept/euclidean-space",
+   "type": "Concept",
+   "label": {
+    "ko": "유클리드 공간 ℝⁿ",
+    "en": "Euclidean space"
+   },
+   "page": "e1_ruler_rooms",
+   "anchor": "e1_ruler_rooms.html#r1",
+   "level": 1,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "mentioned",
+   "family": "representation",
+   "domain": [
+    "ai"
+   ],
+   "match": [],
+   "definition": {
+    "ko": "숫자 n개로 주소를 적고, 곧은 자와 각도기로 거리·각도를 재는 방."
+   }
+  },
+  {
+   "id": "lab:concept/euclidean-distance",
+   "type": "Concept",
+   "label": {
+    "ko": "거리",
+    "en": "Euclidean distance"
+   },
+   "page": "e1_ruler_rooms",
+   "anchor": "e1_ruler_rooms.html#r3",
+   "level": 1,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "mentioned",
+   "family": "representation",
+   "domain": [
+    "ai"
+   ],
+   "match": [],
+   "definition": {
+    "ko": "칸마다 차이를 제곱해 더한 뒤 제곱근."
+   }
   }
  ],
  "edges": [

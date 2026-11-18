@@ -12,10 +12,10 @@ function P2(cv,o){var S=this;S.cv=cv;S.o=o;S.dirty=true;S.hot=-1;
     x=Math.max(S.o.xr[0],Math.min(S.o.xr[1],x));y=Math.max(S.o.yr[0],Math.min(S.o.yr[1],y));h.set(x,y);S.dirty=true;if(S.o.onChange)S.o.onChange();});
   function up(){drag=-1;}cv.addEventListener('pointerup',up);cv.addEventListener('pointercancel',up);
   if((S.o.handles||[]).length){cv.style.touchAction='none';cv.tabIndex=0;
-    cv.addEventListener('keydown',function(e){var h=S.o.handles[0];if(!h)return;var p=h.get(),sn=h.snap||0.5,dx=0,dy=0;
+    S.kh=0;cv.addEventListener('keydown',function(e){var hs=S.o.handles;if(e.key===' '||e.key==='Enter'){e.preventDefault();S.kh=(S.kh+1)%hs.length;S.hot=S.kh;S.dirty=true;return;}var h=hs[S.kh];if(!h)return;var p=h.get(),sn=h.snap||0.5,dx=0,dy=0;
       if(e.key==='ArrowLeft')dx=-sn;else if(e.key==='ArrowRight')dx=sn;else if(e.key==='ArrowUp')dy=sn;else if(e.key==='ArrowDown')dy=-sn;else return;e.preventDefault();
       h.set(Math.max(S.o.xr[0],Math.min(S.o.xr[1],p[0]+dx)),Math.max(S.o.yr[0],Math.min(S.o.yr[1],p[1]+dy)));S.dirty=true;if(S.o.onChange)S.o.onChange();});}
-  cv.setAttribute('role','img');if(o.aria)cv.setAttribute('aria-label',o.aria);
+  cv.setAttribute('role','img');if(o.aria)cv.setAttribute('aria-label',o.aria+((o.handles||[]).length>1?' — 화살표 키로 점을 움직이고 스페이스로 점을 바꿉니다':''));
   U.reg(cv,function(dt){if(S.dirty||dt===0){S.draw();S.dirty=false;}});}
 P2.prototype.draw=function(){var S=this,R=U.setup(S.cv),g=R.g,w=R.w,h=R.h,o=S.o,m=o.margin||30;S.g=g;S.w=w;S.h=h;
   var sx=(w-2*m)/(o.xr[1]-o.xr[0]),sy=(h-2*m)/(o.yr[1]-o.yr[0]),sc=o.free?null:Math.min(sx,sy);
