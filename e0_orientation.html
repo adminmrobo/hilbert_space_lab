@@ -375,8 +375,8 @@ section.sec{padding:88px 0 40px}
   <h3>실험 ② 피타고라스 — 가로·세로를 바꿔 빗변 재기</h3>
   <div class="panel">
     <div class="cwrap"><canvas id="cv02" aria-label="가로와 세로를 바꿀 수 있는 직각삼각형과 세 변 위의 정사각형"></canvas></div>
-    <div class="ctrl"><div class="group"><label class="glabel" for="r02a">가로 a</label><input type="range" id="r02a" min="1" max="8" step="1" value="3"><span class="val" id="v02a">3</span>
-      <label class="glabel" for="r02b">세로 b</label><input type="range" id="r02b" min="1" max="8" step="1" value="4"><span class="val" id="v02b">4</span></div></div>
+    <div class="ctrl"><div class="group"><label class="glabel" for="s02a">가로 a</label><input type="range" id="s02a" min="1" max="8" step="1" value="3"><span class="val" id="v02a">3</span>
+      <label class="glabel" for="s02b">세로 b</label><input type="range" id="s02b" min="1" max="8" step="1" value="4"><span class="val" id="v02b">4</span></div></div>
     <div class="eq" id="eq02"></div>
     <div class="insight" id="i02" aria-live="polite"></div>
   </div>
@@ -384,7 +384,7 @@ section.sec{padding:88px 0 40px}
   <h3>실험 ③ sin·cos — 각도를 돌려 가로·세로 그림자 보기</h3>
   <div class="panel">
     <div class="cwrap sq"><canvas id="cv03" aria-label="반지름 1인 원 위의 점과 가로 그림자 cos, 세로 그림자 sin"></canvas></div>
-    <div class="ctrl"><div class="group"><label class="glabel" for="r03">각도 θ</label><input type="range" id="r03" min="0" max="360" step="5" value="60"><span class="val" id="v03">60°</span><button class="bt" type="button" data-a03="0">0°</button><button class="bt" type="button" data-a03="45">45°</button><button class="bt" type="button" data-a03="90">90°</button><button class="bt" type="button" data-a03="180">180°</button></div></div>
+    <div class="ctrl"><div class="group"><label class="glabel" for="s03">각도 θ</label><input type="range" id="s03" min="0" max="360" step="5" value="60"><span class="val" id="v03">60°</span><button class="bt" type="button" data-a03="0">0°</button><button class="bt" type="button" data-a03="45">45°</button><button class="bt" type="button" data-a03="90">90°</button><button class="bt" type="button" data-a03="180">180°</button></div></div>
     <div class="minis"><div class="mini r"><span>cos θ (가로 그림자)</span><b id="m03a">—</b></div><div class="mini g"><span>sin θ (세로 그림자)</span><b id="m03b">—</b></div><div class="mini a"><span>cos² + sin²</span><b id="m03c">—</b></div><div class="mini m"><span>쓰이는 곳</span><b style="font-size:15px">4번 방 각도</b></div></div>
     <div class="insight" id="i03" aria-live="polite"></div>
   </div>
@@ -798,7 +798,7 @@ var v2=V($('#cv02'),function(){var R=U.setup($('#cv02')),g=R.g,w=R.w,h=R.h;U.gri
   g.strokeRect(ox,oy-10,10,10);U.label(g,(P0[0]+PA[0])/2,oy-12,'a = '+A2,cssv('--eye'),'center');U.label(g,ox+8,(P0[1]+PB[1])/2,'b = '+B2,cssv('--terrain'));U.stamp(g,w,'정사각형 넓이로 보기');});
 function up02(){var c=Math.hypot(A2,B2),ok=Math.abs(c-Math.round(c))<1e-9;$('#eq02').innerHTML='c = √('+A2+'² + '+B2+'²) = √'+(A2*A2+B2*B2)+' = <b>'+fmt(c,ok?0:3)+'</b>';
   U.ins($('#i02'),[['g','빨간 정사각형('+A2*A2+') + 청록 정사각형('+B2*B2+') = 주황 정사각형('+(A2*A2+B2*B2)+'). 빗변 c = '+fmt(c,ok?0:3)+'.'],['a',ok?'딱 떨어지는 짝이에요(3·4·5, 6·8·10 같은). 3번 방에서 A(1, 1)–B(4, 5)의 거리가 바로 이것!':'보통은 딱 떨어지지 않아요. 그래도 자로 재는 법은 같습니다.']]);v2.dirty=true;}
-[['r02a','v02a',function(v){A2=v;}],['r02b','v02b',function(v){B2=v;}]].forEach(function(z){var r=$('#'+z[0]);r.oninput=function(){z[2](+r.value);$('#'+z[1]).textContent=r.value;up02();};});up02();
+[['s02a','v02a',function(v){A2=v;}],['s02b','v02b',function(v){B2=v;}]].forEach(function(z){var r=$('#'+z[0]);r.oninput=function(){z[2](+r.value);$('#'+z[1]).textContent=r.value;up02();};});up02();
 
 /* 실험 ③ sin·cos */
 var T3=60;
@@ -808,7 +808,7 @@ var P3=new P2($('#cv03'),{xr:[-1.4,1.4],yr:[-1.3,1.3],tick:0.5,labelTick:0.5,dra
   P.pt([c,s],cssv('--stain'),'(cos θ, sin θ)',5);P.text([c/2,0],'cos '+fmt(c,2),cssv('--eye'),'center',0,16);P.text([c,s/2],'sin '+fmt(s,2),cssv('--gfp'),c>=0?'left':'right',c>=0?8:-8,0);}});
 function up03(){var t=EG.rad(T3),c=Math.cos(t),s=Math.sin(t);$('#m03a').textContent=fmt(c,3);$('#m03b').textContent=fmt(s,3);$('#m03c').textContent=fmt(c*c+s*s,3);
   U.ins($('#i03'),[['g','θ = '+T3+'°: 가로 그림자 cos θ = '+fmt(c,3)+', 세로 그림자 sin θ = '+fmt(s,3)+'.'],['a',T3%360===90||T3%360===270?'90°에서는 가로 그림자가 0 — 4번 방에서 "직각이면 겹침 점수 0"으로 다시 나옵니다.':'cos² + sin² = 1은 언제나 성립해요. 반지름 1인 원에서의 피타고라스입니다.']]);P3.dirty=true;}
-var r03=$('#r03');function set03(v){T3=v;r03.value=v;$('#v03').textContent=v+'°';up03();}r03.oninput=function(){set03(+r03.value);};$$('[data-a03]').forEach(function(b){b.onclick=function(){set03(+b.dataset.a03);};});up03();
+var r03=$('#s03');function set03(v){T3=v;r03.value=v;$('#v03').textContent=v+'°';up03();}r03.oninput=function(){set03(+r03.value);};$$('[data-a03]').forEach(function(b){b.onclick=function(){set03(+b.dataset.a03);};});up03();
 
 U.Gloss({'좌표평면':['좌표평면','2칸 방','가로·세로 두 축으로 점의 자리를 적는 평면.'],'공간좌표':['공간좌표','3칸 방','축이 셋인 좌표.'],'원점':['원점','origin','두 축이 만나는 (0, 0).'],'피타고라스 정리':['피타고라스 정리','Pythagorean theorem','직각삼각형에서 빗변² = 가로² + 세로².']},['좌표평면','피타고라스 정리']);
 U.Study({quiz:{chk:[

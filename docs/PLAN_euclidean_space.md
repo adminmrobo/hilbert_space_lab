@@ -34,6 +34,6 @@
 `python3 code/shot.py <파일> 390 1280` — 네 페이지 모두 가로 넘침 0, 콘솔 오류 0(글꼴 차단 제외), 빈 캐릭터 그림 0.
 
 ## 남은 일
-- 표지 그림 4장(cover_index·cover_e0·cover_e1·cover_e2) → [COVER_PROMPTS_euclidean.md](COVER_PROMPTS_euclidean.md). 받으면 `img/`에 넣고 `.cover` 그림판을 교체, og:image 추가
+- 표지 그림 4장(cover_index·cover_e0·cover_e1·cover_e2) → [COVER_PROMPTS.md](COVER_PROMPTS.md). 받으면 `img/`에 넣고 `.cover` 그림판을 교체, og:image 추가
 - 원 게시물 주소·게시일(@eeanimation) 받으면 출처 표 "미확인" 갱신
 - 페르소나 평가, 언어팩 번역, ahnboat_lab_cover_status 명부 등록

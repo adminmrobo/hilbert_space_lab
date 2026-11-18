@@ -1,0 +1,38 @@
+{
+ "title": "힐베르트 공간 ② 곡선을 쪼개는 방 — 자 세트·그림자·물결 조각·피타고라스의 확장·커널 방",
+ "series": "유클리드 공간 · 힐베르트 공간",
+ "number": "4",
+ "creator": [
+  {
+   "name": "안상선",
+   "role": "author",
+   "affiliation": "(주)M-Robo"
+  }
+ ],
+ "contributor": [
+  {
+   "name": "AI 보조 제작",
+   "role": "assistant"
+  }
+ ],
+ "date": "2026-11-19",
+ "version": "1.0",
+ "language": [
+  "ko"
+ ],
+ "license": "",
+ "url": "https://adminmrobo.github.io/hilbert_space_lab/h2_wave_rooms.html",
+ "about": [
+  "lab:concept/fourier-series",
+  "lab:concept/parseval",
+  "lab:concept/kernel-method"
+ ],
+ "basedOn": [
+  "eea_hilbert",
+  "moe_curriculum"
+ ],
+ "educationalLevel": "입문",
+ "learningResourceType": "interactive explainer",
+ "registry": "KG_00_registry 0.2",
+ "suggestedCitation": "안상선 (2026). 힐베르트 공간 ② 곡선을 쪼개는 방 — 자 세트·그림자·물결 조각·피타고라스의 확장·커널 방. 유클리드 공간 · 힐베르트 공간 4, v1.0."
+}

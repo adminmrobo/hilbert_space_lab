@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>힐베르트 공간 ① 화살표의 방 — 끝없는 방에서도 자와 각도기를 쓰려면</title>
+<meta name="description" content="시아·모아가 끝없는 방 1~5번을 지나며 힐베르트 공간을 배웁니다. 곡선끼리의 겹침 점수, 곡선의 길이와 직각, 빈틈 없는 방, 끝없는 목록 방과 곡선 방까지. 음성·센서 데이터와 인공지능으로 이어집니다.">
+<meta property="og:title" content="힐베르트 공간 ① 화살표의 방">
+<meta property="og:description" content="곡선도 화살표처럼 — 겹침 점수, 길이, 직각, 빈틈 없는 방">
+<meta property="og:type" content="article">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+<!--@@CSS@@-->
+<style>
+.nest{border:2px solid var(--terrain);border-radius:14px;padding:12px 14px;background:#eef8f7}
+.nest .nest{border-color:var(--info);background:#eaf1fc;margin-top:10px}
+.nest .nest .nest{border-color:var(--c-doc);background:#f3eefc}
+.nest b{display:block}
+.nest span{font-size:14px;color:var(--muted)}
+.nest.on{box-shadow:0 0 0 4px rgba(163,92,0,.25)}
+</style>
+</head>
+<body>
+<nav class="top" aria-label="섹션 바로가기"><div class="row">
+  <a class="logo" href="index.html">힐베르트 <i>공간</i> ①</a>
+  <div class="links">
+    <a href="#entry">입구 방</a><a href="#r1">1 세 겹 상자</a><a href="#r2">2 곡선의 겹침</a><a href="#r3">3 길이·직각</a><a href="#r4">4 빈틈 없음</a><a href="#r5">5 세 종류의 방</a><a href="#sum">정리</a><a href="#kg">색인</a><a href="#export">꾸러미</a><a href="h2_wave_rooms.html">② →</a>
+  </div>
+</div></nav>
+
+<div class="cover" id="cover" data-img="cover_h1"><div class="frame">
+  <canvas id="coverCv" aria-hidden="true"></canvas>
+  <div class="cast4"><img class="s" data-mood="robo_wow" alt="" aria-hidden="true"><img data-mood="sia_explain" alt="" aria-hidden="true"><img data-mood="moa_sparkle" alt="" aria-hidden="true"><img class="s" data-mood="doc_magic" alt="" aria-hidden="true"></div>
+  <span class="cap">끝없는 방에서 겹쳐 보는 두 곡선</span>
+  <span class="badge">표지 그림 준비 중 · 설명용 그림</span>
+  <span class="cover-chip">힐베르트 공간 · ① 화살표의 방</span>
+</div></div>
+
+<header class="hero" id="top"><div class="wrap">
+  <div class="eyebrow">힐베르트 공간 · ① 화살표의 방 · 입구 방 + 1~5번 방</div>
+  <h1>힐베르트 공간 ① — 화살표의 방</h1>
+  <p class="question">칸이 끝없는 방에서도 "얼마나 먼가", "얼마나 닮았나"를 잴 수 있을까?</p>
+  <p class="lead">유클리드 공간에서 챙긴 자(거리)와 각도기(겹침 점수)를 들고, 이번엔 <b>칸이 끝없는 방</b>으로 들어갑니다. 소리·센서 곡선처럼 값이 끝없이 이어지는 데이터도 이 방에서는 화살표 하나입니다. 곡선끼리 겹침 점수를 재고, 곡선의 길이와 직각을 재고, 방에 빈틈이 없어야 하는 이유를 시아·모아가 직접 확인합니다.</p>
+  <p class="byline">글 · 안상선 ((주)M-Robo 대표) · <a href="https://adminmrobo.github.io/who_am_i/who_am_i.html">저자 소개</a> · 2026-11-19 · v1.0</p>
+  <div class="three"><b>처음 오신 분께 — 이 페이지를 3줄로</b><ol>
+    <li><b>무엇을</b>: 곡선을 화살표처럼 다루는 방법 — 곡선끼리 곱해서 넓이를 구하면 겹침 점수가 됩니다.</li>
+    <li><b>왜 중요한가</b>: 음성·센서·주가처럼 끝없이 이어지는 데이터를 인공지능이 비교하고 줄이고 나누는 바탕입니다.</li>
+    <li><b>업무에서는</b>: 두 기계의 진동 곡선이 얼마나 닮았는지, 센서 신호를 몇 개의 숫자로 줄일 수 있는지 판단할 때 씁니다.</li></ol>
+    <p style="margin:8px 0 0">코드·수식을 몰라도 됩니다. 이 페이지는 실수만 다룹니다(복소수는 ②편 10번 방에서 이름만 소개).</p>
+    <details class="fold" style="margin:8px 0 0"><summary>이 페이지에 나오는 기호 풀이</summary>
+      <div class="gloss" style="margin-top:8px">
+        <div><b>⟨f, g⟩</b> 겹침 점수(내적). 곡선이면 f × g의 넓이.</div>
+        <div><b>‖f‖</b> 길이. √⟨f, f⟩.</div>
+        <div><b>∫₀¹ … dt</b> 0부터 1까지 넓이를 구하는 정적분.</div>
+        <div><b>ℓ², L²</b> 끝없는 목록 방, 곡선 방.</div>
+        <div><b>(xₙ)</b> 수열 x₁, x₂, x₃, …</div>
+        <div><b>ℋ</b> 힐베르트 공간을 적는 글자.</div>
+      </div></details>
+  </div>
+  <div class="start"><b>앞 편</b> 이 편은 <a href="e1_ruler_rooms.html">유클리드 공간 ①</a>·<a href="e2_shadow_rooms.html">②</a>의 도구를 그대로 씁니다. 처음이라면 아래 「입구 방」의 세 줄 요약만 읽어도 따라올 수 있어요.</div>
+  <div class="kpis" aria-label="숫자 요약">
+    <div class="kpi g"><b>0.25</b><span>60° 어긋난 두 물결 곡선의 겹침 점수</span></div>
+    <div class="kpi m"><b>0.707</b><span>곡선 sin(πt)의 길이 (0~1)</span></div>
+    <div class="kpi a"><b>1.6449</b><span>1 + 1/4 + 1/9 + … 끝없는 합 (π²/6)</span></div>
+    <div class="kpi r"><b>0.091</b><span>경사로(n = 10)와 계단 사이 거리</span></div>
+  </div>
+  <div data-dlg="hero"></div>
+</div></header>
+
+<main>
+<section class="sec" id="entry" aria-labelledby="h-entry"><div class="wrap">
+  <h2 id="h-entry"><span class="door e">∞</span>입구 방 — 앞 편에서 들고 온 것 <span class="sub">유클리드 공간 요약</span></h2>
+  <div class="three" style="border-left-color:var(--terrain)"><b>유클리드 공간을 3줄로</b><ol>
+    <li>데이터 한 줄은 방 안의 점(화살표) 하나. 칸 수 = 열 수.</li>
+    <li>자(거리) = 차이 제곱 합의 제곱근, 각도기(겹침 점수) = 같은 자리끼리 곱해서 더하기.</li>
+    <li>그림자 = 바닥에 똑바로 내린 발 = 가장 덜 틀린 답. 그런데 <b>칸 수가 정해져 있어야</b> 했다.</li></ol></div>
+  <div class="tblwrap"><table class="cmp"><thead><tr><th>들고 온 도구</th><th>유클리드 방에서</th><th>이 편에서 바뀌는 것</th><th>다시 보기</th></tr></thead><tbody>
+    <tr><td>겹침 점수</td><td>같은 자리끼리 곱해서 <b>더하기</b></td><td>곡선끼리 곱해서 <b>넓이 구하기</b></td><td><a href="e1_ruler_rooms.html#r4">유클리드 4번 방</a></td></tr>
+    <tr><td>자 (길이·거리)</td><td>√(차이² 합)</td><td>√(차이² 곡선의 넓이)</td><td><a href="e1_ruler_rooms.html#r3">유클리드 3번 방</a></td></tr>
+    <tr><td>그림자</td><td>바닥에 내린 발</td><td>그대로 (②편 7번 방)</td><td><a href="e2_shadow_rooms.html#r6">유클리드 6번 방</a></td></tr>
+    <tr><td>끝없는 방</td><td>칸 수 슬라이더 "끝없이"</td><td>이 편의 출발점</td><td><a href="e2_shadow_rooms.html#endless">복도 끝의 끝없는 방</a></td></tr>
+  </tbody></table></div>
+  <p class="muted" style="font-size:14px">반복 계산이 한 점으로 모이는 이야기(4번 방)는 <a href="https://adminmrobo.github.io/optimization_3d_map/first_step_0.html">최적화 첫걸음 ⓪</a>의 "한 걸음씩 수백 번"과 이어집니다.</p>
+  <div data-dlg="entry"></div>
+</div></section>
+
+<!-- 1번 방 -->
+<section class="sec" id="r1" aria-labelledby="h-r1"><div class="wrap">
+  <h2 id="h-r1"><span class="door">1</span>세 겹 상자 — 더하기, 재기, 빈틈 없음 <span class="sub">원자료 카드 01</span></h2>
+  <div class="tags"><span class="tag">방법: 규칙을 하나씩 더해 방을 만든다</span><span class="tag">일상: 장바구니 → 저울 → 빈 곳 없는 진열대</span><span class="tag">원자료: HILBERT SPACE 01/10 (@eeanimation)</span></div>
+  <div class="wm">
+    <div class="why"><h4>왜 이 방법을 쓰나</h4><ol>
+      <li><b>문제</b>: 곡선·소리처럼 끝없이 이어지는 데이터도 화살표처럼 다루고 싶습니다.</li>
+      <li><b>앞 방의 한계</b>: 유클리드 방은 칸 수가 정해져 있어야 했어요.</li>
+      <li><b>해법</b>: 칸 수 대신 <b>규칙</b>으로 방을 정합니다. ① 더하고 늘릴 수 있다 ② 겹침 점수가 있다 ③ 빈틈이 없다. 세 규칙을 모두 갖춘 방이 힐베르트 공간이에요.</li></ol>
+      <div class="easy"><b>쉽게 말하면</b> 힐베르트 공간 = 겹침 점수가 있는 방 + 빈틈 없음.</div></div>
+    <div class="am"><h4><img data-mood="asst_shock" alt="" aria-hidden="true">수학 수식을 어려워하는 조수가 대신 물어봅니다</h4>
+      <p class="aq">"상자가 세 겹이면, 바깥 상자에 있는 건 다 힐베르트 공간이에요?"</p>
+      <span class="lbl">학교 수학으로 보면</span>벡터의 덧셈·실수배, 내적, 그리고 수열의 극한입니다. 안쪽 상자일수록 규칙이 많아요.
+      <table><thead><tr><th>식 조각</th><th>뜻</th></tr></thead><tbody>
+        <tr><td>u + v, αu</td><td>더하기, 늘리기 (바깥 상자)</td></tr>
+        <tr><td>⟨u, v⟩</td><td>겹침 점수 → 길이·각도 (가운데 상자)</td></tr>
+        <tr><td>xₙ → x ∈ ℋ</td><td>점점 모이는 수열의 목적지가 방 안에 (안쪽 상자)</td></tr></tbody></table>
+      <span class="lbl">숫자로 한 번 해 보기</span>
+      <div class="try">u = (1, 2), v = (3, 1) → u + v = <b>(4, 3)</b>, 2u = <b>(2, 4)</b><br>겹침 점수 ⟨u, v⟩ = 3 + 2 = <b>5</b></div>
+      <div class="ac"><img data-mood="asst_smile" alt="" aria-hidden="true"><p>아니네요. 안쪽 상자까지 들어와야 힐베르트 공간이에요!</p></div></div>
+  </div>
+  <div class="pair">
+    <div><div class="tl">일상으로 치면</div>장바구니는 합치고 두 배로 늘릴 수 있습니다(바깥 상자). 저울과 자가 있으면 무게·길이를 잴 수 있고(가운데 상자), 진열대에 빈 곳이 없으면 "찾던 물건이 없다"는 일이 없습니다(안쪽 상자).</div>
+    <div><div class="tr">머신러닝에서는</div>모델이 하는 일 대부분은 "더하고 늘리기"(가중합), "겹침 점수"(유사도), "반복해서 한 점으로 모이기"(학습)입니다. 이 세 가지가 끝없는 방에서도 안전하게 되도록 보장하는 곳이 힐베르트 공간이에요.</div>
+  </div>
+  <div data-dlg="r1"></div>
+  <div class="panel">
+    <div class="ptitle">규칙을 하나씩 켜 보기 — u·v를 끌고, 상자를 고르면 그 상자에서 할 수 있는 일이 그려진다</div>
+    <div class="twin">
+      <div class="cwrap sq"><canvas id="cv1" aria-label="화살표 u, v와 더한 u + v, 겹침 각도, 점점 모이는 점들"></canvas></div>
+      <div><div class="nest" id="n1a"><b>벡터 공간</b><span>더하기·늘리기</span>
+        <div class="nest" id="n1b"><b>내적 공간</b><span>+ 겹침 점수 → 길이·각도</span>
+          <div class="nest" id="n1c"><b>힐베르트 공간</b><span>+ 빈틈 없음 → 극한이 방 안에</span></div></div></div></div>
+    </div>
+    <div class="ctrl"><div class="group" role="group" aria-label="상자"><span id="g1"></span></div></div>
+    <div class="insight" id="i1" aria-live="polite"></div>
+  </div>
+  <p class="muted" style="font-size:13.5px">원자료 카드 01·06의 끝맺음 마침표 두 개(..)는 하나로 고쳐 읽습니다.</p>
+  <div class="lim"><b>이 방의 한계</b> 규칙 이름만으로는 감이 오지 않아요. 곡선끼리 겹침 점수는 실제로 어떻게 잴까요? → 2번 방.</div>
+  <div class="quiz" data-quiz="r1"></div>
+</div></section>
+
+<!-- 2번 방 -->
+<section class="sec" id="r2" aria-labelledby="h-r2"><div class="wrap">
+  <h2 id="h-r2"><span class="door">2</span>곡선의 겹침 점수 <span class="sub">원자료 카드 02</span></h2>
+  <div class="tags"><span class="tag">방법: 곱해서 더하기 → 곱해서 넓이</span><span class="tag">일상: 두 사람의 하루 기분 그래프 비교</span><span class="tag">원자료: HILBERT SPACE 02/10</span></div>
+  <div class="wm">
+    <div class="why"><h4>왜 이 방법을 쓰나</h4><ol>
+      <li><b>문제</b>: 두 곡선(두 기계의 진동, 두 사람의 목소리)이 얼마나 닮았는지 숫자 하나로 알고 싶습니다.</li>
+      <li><b>앞 방의 한계</b>: 화살표의 겹침 점수는 "같은 자리끼리 곱해서 더하기"였는데, 곡선은 자리가 끝없이 많아요.</li>
+      <li><b>해법</b>: 자리마다 곱한 값을 <b>넓이로</b> 모읍니다. 칸을 끝없이 잘게 쪼개 더한 것이 곧 넓이(정적분)예요.</li></ol>
+      <div class="easy"><b>쉽게 말하면</b> 두 곡선을 겹쳐 같은 쪽(둘 다 위, 둘 다 아래)인 곳이 넓을수록 점수가 큽니다.</div></div>
+    <div class="am"><h4><img data-mood="asst_shock" alt="" aria-hidden="true">수학 수식을 어려워하는 조수가 대신 물어봅니다</h4>
+      <p class="aq">"더하기가 왜 갑자기 넓이로 바뀌어요?"</p>
+      <span class="lbl">학교 수학으로 보면</span>정적분은 "잘게 쪼갠 막대 넓이의 합"이었죠. 칸이 끝없으면 합이 넓이가 됩니다.
+      <table><thead><tr><th>식 조각</th><th>뜻</th></tr></thead><tbody>
+        <tr><td>⟨x, y⟩ = Σ xₖyₖ</td><td>화살표: 같은 자리끼리 곱해서 더하기</td></tr>
+        <tr><td>⟨f, g⟩ = ∫₀¹ f(t)g(t) dt</td><td>곡선: 같은 시각끼리 곱해서 넓이</td></tr>
+        <tr><td>⟨f, g⟩ ÷ (‖f‖‖g‖)</td><td>곡선 사이의 "각도"의 cos</td></tr></tbody></table>
+      <span class="lbl">숫자로 한 번 해 보기</span>
+      <div class="try">화살표 (3, 4)·(4, 3) = 24, cos θ = 24 ÷ 25 = <b>0.96</b><br>곡선 f = sin(πt), g = sin(πt + 60°) → 넓이 = ½ × cos 60° = <b>0.25</b>, 길이로 나누면 cos 60° = 0.5</div>
+      <div class="ac"><img data-mood="asst_smile" alt="" aria-hidden="true"><p>60° 어긋난 곡선은 60° 벌어진 화살표처럼 닮았네요!</p></div></div>
+  </div>
+  <div class="pair">
+    <div><div class="tl">일상으로 치면</div>두 사람의 하루 기분 그래프를 겹쳐 봅니다. 둘 다 좋은 시간과 둘 다 나쁜 시간이 길수록 "리듬이 닮았다"고 하죠. 한 사람이 좋을 때 다른 사람이 나쁘면 점수가 깎입니다.</div>
+    <div><div class="tr">머신러닝에서는</div>음성 인식·이상 감지는 들어온 신호와 기준 신호의 겹침 점수로 "얼마나 닮았나"를 잽니다. 신호를 일정한 간격으로 찍어 숫자로 바꾸면 화살표의 겹침 점수가 되고, 간격을 좁힐수록 넓이에 가까워져요.</div>
+  </div>
+  <div data-dlg="r2"></div>
+  <div class="panel">
+    <div class="ptitle">g를 어긋나게 해 보기 — f × g 곡선(주황)의 넓이가 겹침 점수</div>
+    <div class="cwrap tall"><canvas id="cv2" aria-label="곡선 f, 어긋난 곡선 g, 두 곡선을 곱한 곡선과 그 넓이"></canvas></div>
+    <div class="ctrl"><div class="group"><label class="glabel" for="s2">어긋난 정도 φ</label><input type="range" id="s2" min="0" max="180" step="5" value="60"><span class="val" id="v2">60°</span><button class="bt" type="button" data-p2="0">0°</button><button class="bt" type="button" data-p2="90">90°</button><button class="bt" type="button" data-p2="180">180°</button></div></div>
+    <div class="minis"><div class="mini m"><span>겹침 점수 ⟨f, g⟩</span><b id="m2a">—</b></div><div class="mini a"><span>‖f‖ × ‖g‖</span><b id="m2b">—</b></div><div class="mini g"><span>cos (곡선의 각도)</span><b id="m2c">—</b></div><div class="mini r"><span>같은 각도의 화살표</span><b id="m2d">—</b></div></div>
+    <div class="insight" id="i2" aria-live="polite"></div>
+  </div>
+  <details class="fold"><summary>교안의 파이썬 코드로 보면 (몰라도 됩니다)</summary>
+    <pre>t = np.linspace(0, 1, 1001)
+np.trapz(f(t) * g(t), t)      # 곱해서 넓이 = 곡선의 겹침 점수</pre></details>
+  <div class="lim"><b>이 방의 한계</b> 겹침 점수가 생겼으니 길이·거리·직각도 생겨야 합니다. 곡선이 서로 "직각"이라는 건 무슨 뜻일까요? → 3번 방.</div>
+  <div class="quiz" data-quiz="r2"></div>
+</div></section>
+
+<!-- 3번 방 -->
+<section class="sec" id="r3" aria-labelledby="h-r3"><div class="wrap">
+  <h2 id="h-r3"><span class="door">3</span>길이·거리·직각 — 겹침 점수 하나에서 셋 <span class="sub">원자료 카드 03</span></h2>
+  <div class="tags"><span class="tag">방법: 자기 자신과의 겹침 = 길이²</span><span class="tag">일상: 서로 간섭하지 않는 두 소리</span><span class="tag">원자료: HILBERT SPACE 03/10</span></div>
+  <div class="wm">
+    <div class="why"><h4>왜 이 방법을 쓰나</h4><ol>
+      <li><b>문제</b>: 곡선의 "크기", 두 곡선의 "차이", "서로 상관없음"을 재고 싶습니다.</li>
+      <li><b>앞 방의 한계</b>: 겹침 점수만으로는 크기와 차이를 바로 말하기 어려워요.</li>
+      <li><b>해법</b>: 자기 자신과의 겹침 점수의 제곱근 = 길이, 차이의 길이 = 거리, 겹침 점수 0 = 직각. 셋 다 겹침 점수 하나에서 나옵니다.</li></ol>
+      <div class="easy"><b>쉽게 말하면</b> 각도기 하나로 자까지 만든 셈입니다.</div></div>
+    <div class="am"><h4><img data-mood="asst_shock" alt="" aria-hidden="true">수학 수식을 어려워하는 조수가 대신 물어봅니다</h4>
+      <p class="aq">"곡선끼리 직각이라는 게 그림으로 상상이 안 돼요!"</p>
+      <span class="lbl">학교 수학으로 보면</span>내적이 0이면 수직, 그리고 피타고라스 정리입니다. 곡선은 "곱한 넓이가 0"이면 직각이에요.
+      <table><thead><tr><th>식 조각</th><th>뜻</th></tr></thead><tbody>
+        <tr><td>‖x‖ = √⟨x, x⟩</td><td>길이</td></tr>
+        <tr><td>d(x, y) = ‖x − y‖</td><td>거리 = 차이의 길이</td></tr>
+        <tr><td>⟨x, y⟩ = 0</td><td>직각</td></tr>
+        <tr><td>‖x + y‖² = ‖x‖² + ‖y‖²</td><td>직각일 때 피타고라스</td></tr></tbody></table>
+      <span class="lbl">숫자로 한 번 해 보기</span>
+      <div class="try">화살표 (3, 4)와 (−4, 3): 겹침 −12 + 12 = 0 → 직각, ‖x + y‖² = 1 + 49 = <b>50</b> = 25 + 25<br>곡선 sin(πt)의 길이 √½ ≈ <b>0.707</b>, sin(πt)와 sin(2πt)는 곱한 넓이 0 → <b>직각</b></div>
+      <div class="ac"><img data-mood="asst_smile" alt="" aria-hidden="true"><p>위로 볼록한 산 하나랑, 산 하나 골짜기 하나인 곡선은 곱하면 플러스·마이너스가 똑같이 상쇄되는구나!</p></div></div>
+  </div>
+  <div class="pair">
+    <div><div class="tl">일상으로 치면</div>"도" 음과 한 옥타브 위 "도" 음은 같이 울려도 서로의 세기를 깎지 않습니다. 두 소리의 세기(길이²)가 그대로 더해지는 것, 그게 직각입니다.</div>
+    <div><div class="tr">머신러닝에서는</div>서로 직각인 특성은 서로 정보가 겹치지 않아 모델이 각각의 효과를 따로 배울 수 있습니다. ②편의 물결 조각(푸리에)과 PCA 주성분이 서로 직각인 조각들이에요.</div>
+  </div>
+  <div data-dlg="r3"></div>
+  <div class="panel">
+    <div class="ptitle">x·y를 끌어 보기 — 직각일 때만 피타고라스가 맞는다</div>
+    <div class="cwrap sq"><canvas id="cv3" aria-label="화살표 x, y와 x + y, 그리고 두 점 사이 거리"></canvas></div>
+    <div class="ctrl"><div class="group"><button class="bt" type="button" id="b3a">직각 예: (3, 4), (−4, 3)</button><button class="bt" type="button" id="b3b">직각 아님: (3, 4), (4, 3)</button></div></div>
+    <div class="minis"><div class="mini m"><span>겹침 점수 ⟨x, y⟩</span><b id="m3a">—</b></div><div class="mini a"><span>거리 ‖x − y‖</span><b id="m3b">—</b></div><div class="mini g"><span>‖x + y‖²</span><b id="m3c">—</b></div><div class="mini r"><span>‖x‖² + ‖y‖²</span><b id="m3d">—</b></div></div>
+    <div class="insight" id="i3" aria-live="polite"></div>
+  </div>
+  <div class="lim"><b>이 방의 한계</b> 재는 도구는 다 갖췄어요. 그런데 끝없는 방에서 반복 계산이 "점점 모이는데 목적지가 방 밖"이면 어떡하죠? → 4번 방.</div>
+  <div class="quiz" data-quiz="r3"></div>
+</div></section>
+
+<!-- 4번 방 -->
+<section class="sec" id="r4" aria-labelledby="h-r4"><div class="wrap">
+  <h2 id="h-r4"><span class="door">4</span>빈틈 없는 방 — 목적지가 방 안에 <span class="sub">원자료 카드 04</span></h2>
+  <div class="tags"><span class="tag">방법: 점점 모이는 수열은 반드시 방 안의 점에 닿는다</span><span class="tag">일상: 1.4, 1.41, 1.414 … → √2</span><span class="tag">원자료: HILBERT SPACE 04/10</span></div>
+  <div class="wm">
+    <div class="why"><h4>왜 이 방법을 쓰나</h4><ol>
+      <li><b>문제</b>: 학습은 숫자를 조금씩 고치는 반복입니다. 반복이 한 점으로 모여야 "학습이 끝났다"고 말할 수 있어요.</li>
+      <li><b>앞 방의 한계</b>: 겹침 점수가 있는 방도 빈틈이 있을 수 있습니다. 점점 모이는데 그 목적지가 방에 없는 경우예요.</li>
+      <li><b>해법</b>: 점점 서로 가까워지는 수열(코시 수열)의 목적지가 늘 방 안에 있도록, 빈틈을 메운 방을 씁니다.</li></ol>
+      <div class="easy"><b>쉽게 말하면</b> 유리수만 있는 방에서 1.4, 1.41, 1.414 …를 따라가면 √2라는 구멍에 빠집니다. 빈틈 없는 방엔 그런 구멍이 없어요.</div></div>
+    <div class="am"><h4><img data-mood="asst_shock" alt="" aria-hidden="true">수학 수식을 어려워하는 조수가 대신 물어봅니다</h4>
+      <p class="aq">"점점 가까워지면 당연히 어딘가에 도착하는 거 아니에요?"</p>
+      <span class="lbl">학교 수학으로 보면</span>수열의 극한입니다. "유리수 수열의 극한이 무리수"인 예를 떠올리면 돼요.
+      <table><thead><tr><th>식 조각</th><th>뜻</th></tr></thead><tbody>
+        <tr><td>‖xₙ − xₘ‖ → 0</td><td>뒤로 갈수록 서로 가까워짐 (코시 수열)</td></tr>
+        <tr><td>xₙ → x ∈ ℋ</td><td>목적지 x가 방 안에 있음</td></tr>
+        <tr><td>‖fₙ − 계단‖ = 1 ÷ √(12n)</td><td>경사로가 계단에 다가가는 거리</td></tr></tbody></table>
+      <span class="lbl">숫자로 한 번 해 보기</span>
+      <div class="try">경사로 n = 10 → 계단까지 거리 1 ÷ √120 ≈ <b>0.091</b>, n = 100 → ≈ <b>0.029</b><br>그런데 목적지인 계단은 끊어진 곡선이라 "매끈한 곡선만 있는 방"에는 없어요</div>
+      <div class="ac"><img data-mood="asst_smile" alt="" aria-hidden="true"><p>도착할 곳이 방에 없으면 길을 잃는 거네요. 그래서 구멍을 메운 방이 필요하구나!</p></div></div>
+  </div>
+  <div class="pair">
+    <div><div class="tl">일상으로 치면</div>계속 가까워지는 택배 위치 알림을 받는데, 목적지 주소가 지도에 없다면 곤란하죠. 빈틈 없는 지도에서는 가까워지는 위치가 반드시 지도 위 어딘가에 도착합니다.</div>
+    <div><div class="tr">머신러닝에서는</div>경사 하강처럼 숫자를 조금씩 고치는 반복이 한 점으로 모일 때, 그 점이 실제로 존재해야 "가장 좋은 답"을 말할 수 있습니다. 끝없는 방의 이론(커널 방법 등)이 안심하고 극한을 쓰는 이유예요.</div>
+  </div>
+  <div data-dlg="r4"></div>
+  <div class="panel">
+    <div class="ptitle">① 1.4, 1.41, 1.414 … — 유리수만 있는 방에서는 목적지가 구멍</div>
+    <div class="cwrap"><canvas id="cv4" aria-label="수직선 위에서 √2로 다가가는 점들과 √2 자리의 구멍"></canvas></div>
+    <div class="ctrl"><div class="group"><label class="glabel" for="s4">몇 번째 점까지</label><input type="range" id="s4" min="1" max="7" step="1" value="4"><span class="val" id="v4">4</span><button class="bt" type="button" id="b4" aria-pressed="true">유리수만 있는 방</button></div></div>
+    <div class="insight" id="i4" aria-live="polite"></div>
+  </div>
+  <div class="panel">
+    <div class="ptitle">② 매끈한 경사로가 계단으로 — 목적지가 "매끈한 곡선 방" 밖에 있다</div>
+    <div class="cwrap"><canvas id="cv4b" aria-label="기울기가 점점 가팔라지는 경사로 곡선과 계단 곡선"></canvas></div>
+    <div class="ctrl"><div class="group" role="group" aria-label="경사로 가파르기"><span class="glabel">가파르기 n</span><span id="g4b"></span></div></div>
+    <div class="minis"><div class="mini m"><span>n</span><b id="m4a">—</b></div><div class="mini g"><span>계단까지 거리</span><b id="m4b">—</b></div><div class="mini a"><span>계단은 매끈한가</span><b style="font-size:16px">아니오 (끊김)</b></div><div class="mini r"><span>곡선 방(L²)에는</span><b style="font-size:16px">있음</b></div></div>
+    <div class="insight" id="i4b" aria-live="polite"></div>
+  </div>
+  <div class="lim"><b>이 방의 한계</b> 빈틈을 메운 방이 구체적으로 어떻게 생겼는지 아직 안 봤어요. 끝없는 목록 방, 곡선 방 → 5번 방.</div>
+  <div class="quiz" data-quiz="r4"></div>
+</div></section>
+
+<!-- 5번 방 -->
+<section class="sec" id="r5" aria-labelledby="h-r5"><div class="wrap">
+  <h2 id="h-r5"><span class="door">5</span>세 종류의 방 — 숫자 n개, 끝없는 목록, 곡선 <span class="sub">원자료 카드 05</span></h2>
+  <div class="tags"><span class="tag">방법: 길이²이 끝없이 커지지 않는 것만 모은다</span><span class="tag">일상: 갈수록 작아지는 할인 쿠폰</span><span class="tag">원자료: HILBERT SPACE 05/10</span></div>
+  <div class="wm">
+    <div class="why"><h4>왜 이 방법을 쓰나</h4><ol>
+      <li><b>문제</b>: 끝없는 목록이나 곡선을 화살표로 쓰려면 길이가 있어야 합니다.</li>
+      <li><b>앞 방의 한계</b>: 아무 목록이나 다 받으면 길이²(제곱의 합)가 끝없이 커지는 것도 들어와요.</li>
+      <li><b>해법</b>: 제곱의 합(곡선은 제곱의 넓이)이 유한한 것만 모은 방을 씁니다. 숫자 n개 방(ℝⁿ), 끝없는 목록 방(ℓ²), 곡선 방(L²) 세 가지예요.</li></ol>
+      <div class="easy"><b>쉽게 말하면</b> 셋 다 "길이를 잴 수 있는 것만" 들어오는 방입니다.</div></div>
+    <div class="am"><h4><img data-mood="asst_shock" alt="" aria-hidden="true">수학 수식을 어려워하는 조수가 대신 물어봅니다</h4>
+      <p class="aq">"끝없이 더하는데 어떻게 끝이 있는 숫자가 나와요?"</p>
+      <span class="lbl">학교 수학으로 보면</span>급수입니다. 더하는 수가 충분히 빨리 작아지면 합이 한 숫자로 모여요.
+      <table><thead><tr><th>식 조각</th><th>뜻</th></tr></thead><tbody>
+        <tr><td>Σ |xₖ|² &lt; ∞</td><td>끝없는 목록 방(ℓ²)에 들어올 조건</td></tr>
+        <tr><td>∫₀¹ |f(t)|² dt &lt; ∞</td><td>곡선 방(L²)에 들어올 조건</td></tr>
+        <tr><td>거의 모든 곳에서 같음</td><td>점 몇 개만 다른 곡선은 같은 것으로 본다</td></tr></tbody></table>
+      <span class="lbl">숫자로 한 번 해 보기</span>
+      <div class="try">목록 1, 1/2, 1/3, … → 제곱의 합 1 + 1/4 + 1/9 + … : 10항 1.5498, 100항 1.6350 → <b>π²/6 ≈ 1.6449</b> (들어옴)<br>목록 1, 1/√2, 1/√3, … → 제곱의 합 1 + 1/2 + 1/3 + … : 10항 2.93, 100항 5.19 → <b>끝없이 커짐</b> (못 들어옴)</div>
+      <div class="ac"><img data-mood="asst_smile" alt="" aria-hidden="true"><p>비슷해 보이는 두 목록인데 하나만 들어오네요. 작아지는 빠르기가 중요하구나!</p></div></div>
+  </div>
+  <div class="pair">
+    <div><div class="tl">일상으로 치면</div>쿠폰이 1000원, 500원, 333원, …처럼 줄어들면 끝없이 받아도 총액은 계속 늘어납니다. 그런데 "쿠폰 금액의 제곱"으로 세면 일정한 값에 멈춰요. 무엇으로 재느냐가 방의 문지기입니다.</div>
+    <div><div class="tr">머신러닝에서는</div>표 데이터는 숫자 n개 방(ℝⁿ), 시간에 따라 점점 줄어드는 가중치(오래된 데이터일수록 작게)는 끝없는 목록 방(ℓ²), 음성·센서 신호는 곡선 방(L²)에 삽니다. 곡선 방에서는 센서가 한 순간 튀어도(점 하나) 전체 세기는 바뀌지 않아요.</div>
+  </div>
+  <div data-dlg="r5"></div>
+  <div class="panel">
+    <div class="ptitle">항 수를 늘려 보기 — 두 목록의 제곱의 합</div>
+    <div class="cwrap tall"><canvas id="cv5" aria-label="항 수에 따라 늘어나는 두 제곱 합 곡선"></canvas></div>
+    <div class="ctrl"><div class="group"><label class="glabel" for="s5">항 수</label><input type="range" id="s5" min="1" max="200" step="1" value="10"><span class="val" id="v5">10</span><button class="bt" type="button" data-n5="10">10</button><button class="bt" type="button" data-n5="100">100</button><button class="bt" type="button" data-n5="200">200</button></div></div>
+    <div class="minis"><div class="mini g"><span>1/k 목록의 제곱 합</span><b id="m5a">—</b></div><div class="mini m"><span>π²/6 (끝까지)</span><b>1.6449</b></div><div class="mini r"><span>1/√k 목록의 제곱 합</span><b id="m5b">—</b></div><div class="mini a"><span>끝까지 더하면</span><b style="font-size:16px">끝없이 커짐</b></div></div>
+    <div class="insight" id="i5" aria-live="polite"></div>
+  </div>
+  <div class="tblwrap"><table class="cmp"><thead><tr><th>방</th><th>들어 있는 것</th><th>겹침 점수</th><th>데이터 예</th></tr></thead><tbody>
+    <tr><td>ℝⁿ 숫자 n개 방</td><td>(x₁, …, xₙ)</td><td>Σ xₖyₖ</td><td>표 데이터 한 행</td></tr>
+    <tr><td>ℓ² 끝없는 목록 방</td><td>제곱 합이 유한한 목록</td><td>Σ xₖyₖ (끝없이)</td><td>점점 줄어드는 가중치, 계수 목록</td></tr>
+    <tr><td>L² 곡선 방</td><td>제곱의 넓이가 유한한 곡선</td><td>∫ f g</td><td>소리, 센서, 주가 흐름</td></tr></tbody></table></div>
+  <div class="lim"><b>이 방의 한계</b> 곡선 방에서 좌표는 어떻게 읽을까요? 끝없이 많은 자 세트가 필요합니다 → <a href="h2_wave_rooms.html#r6">②편 6번 방</a>.</div>
+  <div class="quiz" data-quiz="r5"></div>
+</div></section>
+
+<section class="sec" id="sum" aria-labelledby="h-sum"><div class="wrap">
+  <h2 id="h-sum">정리 — 끝없는 방에 가져온 도구</h2>
+  <div class="tblwrap"><table class="cmp"><thead><tr><th>방</th><th>도구</th><th>답 한 줄</th><th>머신러닝에서는</th></tr></thead><tbody>
+    <tr><td>1</td><td>세 겹 상자</td><td>더하기·늘리기 + 겹침 점수 + 빈틈 없음 = 힐베르트 공간</td><td>가중합, 유사도, 학습의 수렴</td></tr>
+    <tr><td>2</td><td>곡선의 겹침 점수</td><td>같은 시각끼리 곱해서 넓이</td><td>신호 유사도</td></tr>
+    <tr><td>3</td><td>길이·거리·직각</td><td>겹침 점수 하나에서 셋. 직각이면 피타고라스</td><td>서로 겹치지 않는 특성</td></tr>
+    <tr><td>4</td><td>빈틈 없음</td><td>점점 모이는 수열의 목적지가 방 안에</td><td>반복 학습이 도착할 자리</td></tr>
+    <tr><td>5</td><td>세 종류의 방</td><td>ℝⁿ, ℓ², L² — 길이를 잴 수 있는 것만</td><td>표, 계수 목록, 신호</td></tr>
+  </tbody></table></div>
+  <h3>비유의 한계</h3>
+  <ul>
+    <li>이 편은 실수만 다룹니다. 양자역학 등에서 쓰는 복소수 힐베르트 공간은 ②편 10번 방에서 이름만 소개합니다.</li>
+    <li>곡선 방(L²)의 "넓이"는 엄밀하게는 르베그 적분이라는 더 넓은 넓이입니다. 이 페이지의 곡선들은 학교 정적분으로 충분해요.</li>
+  </ul>
+  <div class="next"><a href="h2_wave_rooms.html"><b>② 곡선을 쪼개는 방 →</b><br>자 세트, 그림자, 물결 조각, 피타고라스의 확장, 커널 방, 곡선 맞히기 대결</a><a href="e2_shadow_rooms.html#endless"><b>유클리드 ② 끝없는 방</b></a><a href="index.html"><b>목차</b></a></div>
+</div></section>
+
+<section class="sec" id="outro" aria-labelledby="h-outro"><div class="wrap">
+  <h2 id="h-outro">아웃트로</h2>
+  <div data-dlg="outro"></div>
+</div></section>
+</main>
+
+<footer><div class="wrap">
+  <h3>출처</h3>
+  <table><thead><tr><th>#</th><th>자료</th><th>이 페이지에서 쓴 곳</th></tr></thead><tbody>
+    <tr><td>[1]</td><td>eeanimation, 인포그래픽 「HILBERT SPACE 01~10」 (사용자 제공 이미지, 원 게시물 주소·게시일 미확인)</td><td>1~5번 방 — 카드 01~05의 구성과 도표(세 겹 상자, u + v 평행사변형, f·g 겹침, 노름·거리·직교 세 그림, 점열 수렴, 1/k 막대)를 따라 새로 그림</td></tr>
+    <tr><td>[2]</td><td>교육부 고등학교 수학·미적분·기하 교육과정 (벡터, 내적, 정적분, 수열의 극한, 급수)</td><td>조수 수식 상자의 "학교 수학으로 보면"</td></tr>
+    <tr><td>[3]</td><td>Kreyszig, E. (1978). Introductory Functional Analysis with Applications. Wiley.</td><td>정의(내적 공간, 완비성, ℓ², L²) 대조</td></tr>
+  </tbody></table>
+  <h3>예시값·설명용 모형인 것</h3>
+  <ul><li>2번 방의 두 물결 곡선, 4번 방의 경사로 곡선, 1·3번 방의 화살표 좌표(원자료 카드 03·09의 예와 같은 값)</li></ul>
+  <p>원자료와 다르게 쓴 곳: 카드 01 끝맺음 마침표 두 개를 하나로. 실수만 다룬다는 점을 3줄 상자에 밝힘. 4번 방 경사로 실험과 5번 방 1/√k 비교는 이 페이지에서 더한 것. 계산 값은 모두 다시 검산함(code/check_hilbert.js).</p>
+  <p>캐릭터 이름·설정·그림은 저작권자 안상선의 허락 없이 사용할 수 없습니다.</p>
+  <p>글 · 안상선 ((주)M-Robo 대표) · <a href="https://adminmrobo.github.io/who_am_i/who_am_i.html">저자 소개</a> · <a href="index.html">목차</a> · <a href="h2_wave_rooms.html">②편</a></p>
+</div></footer>
+
+<script>
+/*@@SPRITES@@*/
+/*@@GEO@@*/
+/*@@HGEO@@*/
+/*@@COMMON@@*/
+/*@@PLANE@@*/
+(function(){
+'use strict';
+var $=U.$,$$=U.$$,fmt=U.fmt,cssv=U.cssv;
+function f1(x){return fmt(x,Math.abs(x-Math.round(x))<1e-9?0:2);}
+function vec(p){return '('+p.map(f1).join(', ')+')';}
+function V(cv,draw){var o={dirty:true};U.reg(cv,function(dt){if(o.dirty||dt===0){draw();o.dirty=false;}});return o;}
+function curve(o,f,a,b,col,wd,dash){var g=o.g;g.strokeStyle=col;g.lineWidth=wd||2;g.setLineDash(dash||[]);g.beginPath();for(var i=0;i<=300;i++){var t=a+(b-a)*i/300,x=o.X(t),y=o.Y(f(t));i?g.lineTo(x,y):g.moveTo(x,y);}g.stroke();g.setLineDash([]);}
+function area(o,f,a,b,pos,neg){var g=o.g;for(var i=0;i<300;i++){var t0=a+(b-a)*i/300,t1=a+(b-a)*(i+1)/300,v=f((t0+t1)/2);g.fillStyle=v>=0?pos:neg;g.beginPath();g.moveTo(o.X(t0),o.Y(0));g.lineTo(o.X(t0),o.Y(f(t0)));g.lineTo(o.X(t1),o.Y(f(t1)));g.lineTo(o.X(t1),o.Y(0));g.closePath();g.fill();}}
+
+var DLG={
+ hero:[["doc","doc_magic","유클리드 복도 끝의 문을 열었습니다. 여기는 칸이 끝없는 방이에요. 자와 각도기는 그대로 들고 오세요."],
+   ["sia","sia_explain","곡선 하나가 화살표 하나라니, 그림으로 보면 금방 이해될 것 같아요!"],
+   ["moa","moa_sparkle","저는 '끝없이'가 걸려요. 끝없이 더하면 끝없이 커지지 않나요?"]],
+ entry:[["fly","fly_point","앞 편 표를 한 번 보고 와. 바뀌는 건 딱 하나야 — 더하기가 넓이로."],
+   ["robo","robo_wow","끝없는 방이면 내 주판알도 끝없이 필요하겠군…"],
+   ["asst","asst_spark","걱정 마세요, 주판봇. 넓이는 한 번에 구할 수 있어요."]],
+ r1:[["doc","doc_think","세 겹 상자 중 바깥 상자에만 있는 방은 무엇을 못 할까요?"],
+   ["robo","robo_coin","더할 수 있으면 다 되는 거 아냐?"],
+   ["fly","fly_magnify","'벡터 공간' 버튼부터 눌러 봐. 길이와 각도가 그려지나?"],
+   ["sia","sia_signal","더하기 그림만 나와요! 길이·각도는 가운데 상자부터네요."]],
+ r2:[["moa","moa_report","곡선은 점이 끝없이 많은데, 곱해서 더하면 끝없이 커지지 않아요?"],
+   ["robo","robo_calc","당연히 끝없이 커지지! 계산 불가."],
+   ["fly","fly_point","더하는 게 아니라 넓이야. φ를 0°, 90°, 180°로 눌러 봐."],
+   ["sia","sia_explain","0°면 0.5, 90°면 0, 180°면 −0.5! 화살표 각도랑 똑같아요."]],
+ r3:[["sia","sia_think","곡선끼리 직각이라는 게 가능해요?"],
+   ["robo","robo_coin","곡선은 휘었는데 무슨 직각!"],
+   ["fly","fly_magnify","화살표로 먼저 확인하고, 조수 상자의 곡선 예를 봐. 곱한 넓이가 0이면 직각이야."],
+   ["moa","moa_ok","직각일 때만 ‖x + y‖²와 ‖x‖² + ‖y‖²가 같아요. 곡선도 똑같이 성립해요."]],
+ r4:[["moa","moa_report","점점 가까워지는데 도착을 못 하는 경우가 진짜 있어요?"],
+   ["robo","robo_coin","가까워지면 언젠간 도착하지!"],
+   ["fly","fly_point","'유리수만 있는 방' 버튼을 켠 채로 점을 7번째까지 늘려 봐."],
+   ["sia","sia_signal","√2 자리가 구멍이에요! 가까워지기만 하고 들어갈 데가 없어요."]],
+ r5:[["sia","sia_think","1/k랑 1/√k, 거의 비슷한데요?"],
+   ["robo","robo_calc","둘 다 0으로 작아지니까 둘 다 들어오겠지!"],
+   ["fly","fly_magnify","항 수를 200까지 올리면서 두 곡선 끝을 봐."],
+   ["moa","moa_sparkle","하나는 1.64 근처에 멈추고, 하나는 계속 올라가요. 작아지는 빠르기가 문지기네요."]],
+ outro:[["doc","doc_magic","다섯 방에서 확인한 것입니다.<br>① 힐베르트 공간 = 겹침 점수 + 빈틈 없음 ② 곡선의 겹침 = 곱해서 넓이 ③ 겹침 0 = 직각, 그때 피타고라스 ④ 점점 모이면 목적지가 방 안에 ⑤ 길이를 잴 수 있는 것만 들어온다."],
+   ["robo","robo_sigh","끝없이 더해도 멈출 수 있다니… 주판알을 덜 들고 와도 되겠군."],
+   ["sia","sia_smile","다음 방에선 곡선을 물결 조각으로 쪼갠대요!"],
+   ["moa","moa_cheer","그리고 대결이 있대요. 이번엔 무슨 대결일까요?"]]
+};
+U.dialogues(DLG);U.fillImgs();
+
+/* 표지 */
+(function(){var cv=$('#coverCv');var v=V(cv,function(){var o=U.plot(cv,{xr:[0,1],yr:[-1.2,1.2],xt:[],yt:[]});area(o,function(t){return HG.f2(t)*HG.g2(Math.PI/3)(t);},0,1,'rgba(163,92,0,.22)','rgba(201,48,44,.18)');curve(o,HG.f2,0,1,cssv('--info'),3);curve(o,HG.g2(Math.PI/3),0,1,cssv('--terrain'),3);});})();
+
+/* 1번 방 */
+var U1=[1,2],V1=[3,1],L1='hil';
+var P1=new P2($('#cv1'),{xr:[-1,6],yr:[-1.5,5],stamp:'u·v를 끌어 보세요',handles:[{get:function(){return U1;},set:function(x,y){U1=[x,y];}},{get:function(){return V1;},set:function(x,y){V1=[x,y];},col:cssv('--info')}],onChange:up1,
+  draw:function(g,P){var s=EG.add(U1,V1);P.line(U1,s,'rgba(30,85,200,.5)',1.4,[5,4]);P.line(V1,s,'rgba(30,85,200,.5)',1.4,[5,4]);P.arrow([0,0],U1,cssv('--gfp'),3);P.arrow([0,0],V1,cssv('--gfp'),3);P.arrow([0,0],s,cssv('--amber'),3);
+    P.text(U1,'u '+vec(U1),cssv('--gfp'),'left',6,-8);P.text(V1,'v '+vec(V1),cssv('--gfp'),'left',6,12);P.text(s,'u + v '+vec(s),cssv('--amber'),'left',6,-8);
+    if(L1!=='vec'){var a0=Math.atan2(V1[1],V1[0]),a1=Math.atan2(U1[1],U1[0]);P.arcAng([0,0],30,Math.min(a0,a1),Math.max(a0,a1),cssv('--stain'));P.text([0.2,-0.6],'‖u‖ = '+fmt(EG.norm(U1),2)+', 각도 '+fmt(EG.angle(U1,V1),1)+'°',cssv('--stain'),'left');}
+    if(L1==='hil'){var tgt=[4.6,-0.9];for(var k=1;k<=6;k++){var q=[tgt[0]-2.6/Math.pow(1.7,k),tgt[1]+0.0];P.pt(q,cssv('--info'),null,4);}P.pt(tgt,cssv('--amber'),'목적지 (방 안)',5,-14);}}});
+function up1(){['n1a','n1b','n1c'].forEach(function(id,i){$('#'+id).classList.toggle('on',['vec','inn','hil'][i]===L1);});
+  var M={vec:[['g','벡터 공간: 더하고(u + v = '+vec(EG.add(U1,V1))+') 늘릴 수 있어요. 하지만 길이·각도를 재는 규칙은 아직 없습니다.']],inn:[['g','내적 공간: 겹침 점수 ⟨u, v⟩ = '+f1(EG.dot(U1,V1))+'가 생기면 길이와 각도가 따라옵니다.'],['a','그래도 아직 "빈틈"이 있을 수 있어요 → 4번 방.']],hil:[['g','힐베르트 공간: 더하기 + 겹침 점수 + 빈틈 없음. 파란 점들처럼 점점 모이는 수열의 목적지(주황)가 방 안에 꼭 있습니다.'],['m','유클리드 방(숫자 n개)도 힐베르트 공간이에요. 이 시리즈는 칸이 끝없을 때를 봅니다.']]};
+  U.ins($('#i1'),M[L1]);P1.dirty=true;}
+U.btns($('#g1'),[['vec','벡터 공간'],['inn','내적 공간'],['hil','힐베르트 공간']],'hil',function(v){L1=v;up1();});up1();
+
+/* 2번 방 */
+var PH=60;var v2=V($('#cv2'),function(){var p=PH*Math.PI/180,g2=HG.g2(p),pr=function(t){return HG.f2(t)*g2(t);};
+  var o=U.plot($('#cv2'),{xr:[0,1],yr:[-1.15,1.15],xt:[0,0.25,0.5,0.75,1],yt:[-1,-0.5,0,0.5,1],xl:'t',stamp:'설명용 곡선'});
+  area(o,pr,0,1,'rgba(163,92,0,.25)','rgba(201,48,44,.2)');curve(o,HG.f2,0,1,cssv('--info'),2.6);curve(o,g2,0,1,cssv('--terrain'),2.6);curve(o,pr,0,1,cssv('--amber'),2,[5,3]);
+  U.label(o.g,o.X(0.5),o.Y(1)-10,'f(t) = sin(πt)',cssv('--info'),'center');U.label(o.g,o.X(0.9),o.Y(g2(0.9))-12,'g(t)',cssv('--terrain'),'center');U.label(o.g,o.X(0.12),o.Y(pr(0.12))+14,'f × g',cssv('--amber'));});
+function up2(){var p=PH*Math.PI/180,ipv=HG.ip(HG.f2,HG.g2(p),0,1),n=0.5;$('#m2a').textContent=fmt(ipv,3);$('#m2b').textContent=fmt(n,3);$('#m2c').textContent=fmt(ipv/n,3);$('#m2d').textContent=PH+'°';
+  U.ins($('#i2'),[['g','주황 넓이(위는 +, 아래는 −) = '+fmt(ipv,3)+'. 두 곡선의 길이가 각각 0.707이니 cos = '+fmt(ipv,3)+' ÷ 0.5 = '+fmt(ipv/n,3)+'.'],[PH===90?'m':'a',PH===90?'90° 어긋나면 넓이가 0 — 두 곡선이 "직각"입니다 → 3번 방.':PH===180?'180°면 정반대 곡선, cos = −1. 한쪽이 오를 때 다른 쪽이 내려가요.':'곡선이 어긋날수록 + 넓이가 줄고 − 넓이가 늘어요. 화살표가 벌어질 때 cos이 줄어드는 것과 같은 일입니다.']]);v2.dirty=true;}
+var r2=$('#s2');function set2(v){PH=v;r2.value=v;$('#v2').textContent=v+'°';up2();}r2.oninput=function(){set2(+r2.value);};$$('[data-p2]').forEach(function(b){b.onclick=function(){set2(+b.dataset.p2);};});up2();
+
+/* 3번 방 */
+var X3=[3,4],Y3=[-4,3];
+var P3=new P2($('#cv3'),{xr:[-5.5,7],yr:[-1.5,8],stamp:'x·y를 끌어 보세요',handles:[{get:function(){return X3;},set:function(x,y){X3=[x,y];}},{get:function(){return Y3;},set:function(x,y){Y3=[x,y];},col:cssv('--info')}],onChange:up3,
+  draw:function(g,P){var s=EG.add(X3,Y3);P.line(X3,Y3,cssv('--amber'),2,[6,4]);P.line(X3,s,'rgba(22,33,43,.25)',1.2,[4,4]);P.line(Y3,s,'rgba(22,33,43,.25)',1.2,[4,4]);
+    P.arrow([0,0],X3,cssv('--gfp'),3);P.arrow([0,0],Y3,cssv('--info'),3);P.arrow([0,0],s,cssv('--stain'),2.4);P.text(X3,'x '+vec(X3),cssv('--gfp'),'left',6,-8);P.text(Y3,'y '+vec(Y3),cssv('--info'),'right',-6,-8);P.text(s,'x + y',cssv('--stain'),'left',6,0);
+    P.text([(X3[0]+Y3[0])/2,(X3[1]+Y3[1])/2],'d = '+fmt(EG.dist(X3,Y3),2),cssv('--amber'),'center',0,-12);if(Math.abs(EG.dot(X3,Y3))<0.05)P.text([0,-0.9],'직각!',cssv('--gfp'),'center');}});
+function up3(){var d=EG.dot(X3,Y3),s=EG.add(X3,Y3),a=EG.dot(s,s),b=EG.dot(X3,X3)+EG.dot(Y3,Y3);$('#m3a').textContent=f1(d);$('#m3b').textContent=fmt(EG.dist(X3,Y3),2);$('#m3c').textContent=f1(a);$('#m3d').textContent=f1(b);
+  var orth=Math.abs(d)<0.05;U.ins($('#i3'),[[orth?'g':'a',orth?'겹침 점수 0 — 직각. ‖x + y‖² = '+f1(a)+' = ‖x‖² + ‖y‖². 피타고라스가 맞습니다.':'겹침 점수 '+f1(d)+' — 직각이 아니에요. ‖x + y‖² = '+f1(a)+', ‖x‖² + ‖y‖² = '+f1(b)+', 차이 '+f1(a-b)+' = 2 × 겹침 점수.'],['m','곡선도 같아요. sin(πt)와 sin(2πt)는 곱한 넓이가 0이라 ‖f + g‖² = 0.5 + 0.5 = 1.']]);P3.dirty=true;}
+$('#b3a').onclick=function(){X3=[3,4];Y3=[-4,3];up3();};$('#b3b').onclick=function(){X3=[3,4];Y3=[4,3];up3();};up3();
+
+/* 4번 방 ① */
+var N4=4,HOLE=true;var v4=V($('#cv4'),function(){var R=U.setup($('#cv4')),g=R.g,w=R.w,h=R.h;U.grid24(g,w,h);var a=0.95,b=1.5,X=function(v){return 40+(v-a)/(b-a)*(w-80);},y=h*0.55;
+  U.arrow2(g,30,y,w-20,y,cssv('--eye'),1.5);g.fillStyle=cssv('--muted');g.font='11.5px '+cssv('--font');g.textAlign='center';[1,1.1,1.2,1.3,1.4,1.5].forEach(function(v){g.fillRect(X(v),y-4,1,8);g.fillText(String(v),X(v),y+20);});
+  for(var i=0;i<N4;i++){var v=HG.ROOT2[i],x=X(v);g.beginPath();g.arc(x,y-24-i*10,5,0,7);g.fillStyle=cssv('--info');g.fill();U.label(g,x,y-40-i*10-6,String(v),cssv('--info'),'center');g.strokeStyle='rgba(30,85,200,.35)';g.setLineDash([2,3]);g.beginPath();g.moveTo(x,y-24-i*10);g.lineTo(x,y);g.stroke();g.setLineDash([]);}
+  var xr=X(Math.SQRT2);g.beginPath();g.arc(xr,y,7,0,7);if(HOLE){g.fillStyle='#fff';g.fill();g.strokeStyle=cssv('--eye');g.lineWidth=2;g.stroke();U.label(g,xr+12,y+28,'√2 = 구멍 (유리수가 아님)',cssv('--eye'));}else{g.fillStyle=cssv('--amber');g.fill();U.label(g,xr+12,y+28,'√2 ≈ 1.41421… (실수 방엔 있음)',cssv('--amber'));}
+  U.stamp(g,w,'수직선 확대');});
+function up4(){var v=HG.ROOT2[N4-1],gap=Math.abs(Math.SQRT2-v);U.ins($('#i4'),[['g',N4+'번째 점 '+v+', √2까지 '+fmt(gap,6)+'. 뒤로 갈수록 점들끼리도 점점 가까워져요(코시 수열).'],[HOLE?'r':'m',HOLE?'유리수만 있는 방에는 목적지 √2가 없습니다 — 빈틈 있는 방.':'실수 방은 빈틈을 메운 방이라 목적지가 방 안에 있습니다.']]);v4.dirty=true;}
+var r4=$('#s4');r4.oninput=function(){N4=+r4.value;$('#v4').textContent=N4;up4();};$('#b4').onclick=function(){HOLE=!HOLE;this.setAttribute('aria-pressed',String(HOLE));this.textContent=HOLE?'유리수만 있는 방':'실수 방 (빈틈 없음)';up4();};up4();
+/* 4번 방 ② */
+var NR=10;var v4b=V($('#cv4b'),function(){var o=U.plot($('#cv4b'),{xr:[0,1],yr:[-0.1,1.15],xt:[0,0.25,0.5,0.75,1],yt:[0,0.5,1],xl:'t',stamp:'설명용 곡선'});
+  curve(o,HG.step,0,0.4999,'rgba(201,48,44,.7)',3);curve(o,HG.step,0.5,1,'rgba(201,48,44,.7)',3);curve(o,HG.ramp(NR),0,1,cssv('--terrain'),2.6);U.label(o.g,o.X(0.8),o.Y(1)+16,'계단 (끊긴 곡선)',cssv('--eye'),'center');U.label(o.g,o.X(0.25),o.Y(0.2),'경사로 fₙ, n = '+NR,cssv('--terrain'),'center');});
+function up4b(){$('#m4a').textContent=NR;$('#m4b').textContent=fmt(HG.rampGap(NR),3);U.ins($('#i4b'),[['g','n = '+NR+': 경사로와 계단 사이 거리 1 ÷ √(12 × '+NR+') ≈ '+fmt(HG.rampGap(NR),3)+'. n이 커질수록 0에 가까워져요.'],['a','경사로는 모두 매끈한 곡선이지만 목적지인 계단은 끊겨 있습니다. 그래서 "매끈한 곡선만 있는 방"은 빈틈이 있고, 그 빈틈을 메운 방이 곡선 방(L²)입니다.']]);v4b.dirty=true;}
+U.btns($('#g4b'),[[1,'1'],[2,'2'],[5,'5'],[10,'10'],[100,'100']],10,function(v){NR=v;up4b();});up4b();
+
+/* 5번 방 */
+var N5=10;var v5=V($('#cv5'),function(){var a=[],b=[],s1=0,s2=0;for(var k=1;k<=200;k++){s1+=1/(k*k);s2+=1/k;a.push([k,s1]);b.push([k,s2]);}
+  var o=U.plot($('#cv5'),{xr:[1,200],yr:[0,6.2],xt:[1,10,50,100,150,200],yt:[0,1,1.6449,2,3,4,5,6],yf:function(t){return t===1.6449?'π²/6':String(t);},xl:'항 수',yl:'제곱의 합',
+    series:[{pts:a,color:cssv('--gfp'),width:2.6,name:'1/k 목록',ndy:-12},{pts:b,color:cssv('--eye'),width:2.6,name:'1/√k 목록',ndy:14}],hlines:[{y:Math.PI*Math.PI/6,color:cssv('--gfp'),dash:[4,4]}],vlines:[{x:N5,color:cssv('--amber'),label:N5+'항'}]});});
+function up5(){var a=HG.psum(function(k){return 1/(k*k);},N5),b=HG.psum(function(k){return 1/k;},N5);$('#m5a').textContent=fmt(a,4);$('#m5b').textContent=fmt(b,3);
+  U.ins($('#i5'),[['g','1/k 목록: '+N5+'항까지 '+fmt(a,4)+' → 끝까지 더해도 1.6449에서 멈춥니다. 끝없는 목록 방(ℓ²)에 들어와요.'],['r','1/√k 목록: '+N5+'항까지 '+fmt(b,3)+' → 아주 느리지만 끝없이 커집니다(1만 항이면 9.79). 이 목록은 길이를 잴 수 없어 들어오지 못해요.']]);v5.dirty=true;}
+var r5=$('#s5');function set5(v){N5=v;r5.value=v;$('#v5').textContent=v;up5();}r5.oninput=function(){set5(+r5.value);};$$('[data-n5]').forEach(function(b){b.onclick=function(){set5(+b.dataset.n5);};});up5();
+
+U.Gloss({
+ '힐베르트 공간':['힐베르트 공간','Hilbert space','겹침 점수(내적)가 있고 빈틈이 없는(완비) 방. 칸이 끝없어도 길이·각도·그림자·극한을 쓸 수 있다.'],
+ '겹침 점수':['겹침 점수(내적)','inner product','화살표는 같은 자리끼리 곱해서 더하기, 곡선은 곱해서 넓이.'],
+ '정적분':['정적분','definite integral','곡선 아래 넓이. 잘게 쪼갠 막대 넓이의 합.'],
+ '코시 수열':['코시 수열','Cauchy sequence','뒤로 갈수록 항끼리 점점 가까워지는 수열.'],
+ '빈틈':['빈틈 없음(완비성)','completeness','점점 모이는 수열의 목적지가 늘 방 안에 있는 성질.'],
+ '곡선 방':['곡선 방(L²)','L² space','제곱의 넓이가 유한한 곡선을 모은 방. 점 몇 개만 다른 곡선은 같은 것으로 본다.'],
+ '끝없는 목록 방':['끝없는 목록 방(ℓ²)','ℓ² space','제곱의 합이 유한한 끝없는 목록을 모은 방.'],
+ '급수':['급수','series','끝없이 더하는 것. 더하는 수가 빨리 작아지면 한 값에 멈춘다.'],
+ '직각':['직각(직교)','orthogonal','겹침 점수가 0. 서로 영향을 주지 않는 방향.']
+},['힐베르트 공간','겹침 점수','코시 수열','곡선 방','끝없는 목록 방']);
+U.Study({quiz:{
+ r1:[{q:'힐베르트 공간이 되려면 내적 공간에 무엇이 더 있어야 하나요?',o:['빈틈 없음 (점점 모이는 수열의 목적지가 방 안에)','더하기','칸 수가 정해져 있음','곡선만 들어 있음'],a:0,why:'힐베르트 공간 = 겹침 점수(내적) + 빈틈 없음(완비성).',hint:'세 겹 상자의 가장 안쪽 글씨.'}],
+ r2:[{q:'f = sin(πt)와 g = sin(πt + 90°)의 겹침 점수는?',o:['0','0.5','1','−0.5'],a:0,why:'½ × cos 90° = 0. 두 곡선이 직각입니다.',hint:'φ = 90° 버튼.'}],
+ r3:[{q:'x와 y가 직각일 때 ‖x + y‖²는?',o:['‖x‖² + ‖y‖²','‖x‖ + ‖y‖','0','(‖x‖ + ‖y‖)²'],a:0,why:'직각이면 피타고라스: ‖x + y‖² = ‖x‖² + ‖y‖².',hint:'(3, 4)와 (−4, 3) 예.'}],
+ r4:[{q:'1.4, 1.41, 1.414, …는 유리수만 있는 방에서 어디에 도착하나요?',o:['방 안에 도착하지 못한다 (√2는 유리수가 아님)','1.414','1.5','2'],a:0,why:'점점 모이지만 목적지 √2가 유리수가 아니라서, 유리수 방은 빈틈이 있습니다.',hint:'4번 방 ① 패널의 흰 구멍.'}],
+ r5:[{q:'끝없는 목록 방(ℓ²)에 들어오는 목록은?',o:['1, 1/2, 1/3, …','1, 1/√2, 1/√3, …','1, 1, 1, …','1, 2, 3, …'],a:0,why:'제곱의 합 1 + 1/4 + 1/9 + …가 1.6449에서 멈춥니다. 1/√k는 제곱 합이 끝없이 커져요.',hint:'초록 곡선이 멈추는 목록.'}]
+}});
+U.start();
+})();
+</script>
+</body>
+</html>

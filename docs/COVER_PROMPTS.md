@@ -13,3 +13,13 @@
 
 ## cover_e2 — ② 그림자와 칸막이의 방
 > White lab room, an orange arrow casting a sharp shadow straight down onto a translucent teal floor plane, a thin purple dividing panel splitting scattered blue and red dots into two groups. The two interns face each other across the panel like friendly rivals (black-haired one confident, beige-haired one holding unit-conversion cards), the pink-haired assistant stands between them as referee with a small flag. Cute anime style matching the reference sheet, minimal, lots of white space on the right. 16:9.
+
+---
+
+# 표지 그림 지시문 — 힐베르트 공간
+
+## cover_h1 — 힐베르트 ① 화살표의 방
+> Bright white lab room that seems to extend endlessly into soft white light, faint grid lines fading into infinity. Two smooth glowing curves (one blue, one teal) float in the air and overlap, with the overlapping area shaded in soft orange. The black-haired intern points at the overlap with excitement; the beige-haired intern holds a notebook showing a small sequence of dots approaching a point. A small boxy abacus robot looks amazed at the endless room. Cute anime style matching the reference sheet, lots of white space on the right. 16:9.
+
+## cover_h2 — 힐베르트 ② 곡선을 쪼개는 방
+> White lab room, one wavy teal curve on a large transparent board being split into several thin colored sine waves like layers of light, with a small bar chart of wave strengths beside it. The two interns face each other as friendly rivals — the black-haired one stacking waves in order from small numbers, the beige-haired one holding a magnifier over the tallest bar — while the pink-haired assistant raises a referee flag. Cute anime style matching the reference sheet, minimal, lots of white space on the right. 16:9.

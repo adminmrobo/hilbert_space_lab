@@ -1,0 +1,504 @@
+{
+ "version": "1.3",
+ "page": "h2_wave_rooms",
+ "nodes": [
+  {
+   "id": "lab:concept/hilbert-basis",
+   "type": "Concept",
+   "label": {
+    "ko": "곡선 방의 자 세트(힐베르트 기저)",
+    "en": "Orthonormal (Hilbert) basis"
+   },
+   "page": "h2_wave_rooms",
+   "anchor": "#r6",
+   "level": 2,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "representation",
+   "domain": [
+    "ai"
+   ],
+   "match": [],
+   "definition": {
+    "ko": "길이 1이고 서로 직각인 곡선들. 좌표 = 겹침 점수."
+   }
+  },
+  {
+   "id": "lab:concept/hilbert-projection",
+   "type": "Concept",
+   "label": {
+    "ko": "끝없는 방의 그림자",
+    "en": "Projection theorem"
+   },
+   "page": "h2_wave_rooms",
+   "anchor": "#r7",
+   "level": 2,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "representation",
+   "domain": [
+    "ai"
+   ],
+   "match": [],
+   "definition": {
+    "ko": "닫힌 바닥 위 가장 가까운 점은 하나뿐이고, 빗나간 만큼은 바닥과 직각."
+   }
+  },
+  {
+   "id": "lab:concept/fourier-series",
+   "type": "Concept",
+   "label": {
+    "ko": "물결 조각(푸리에 급수)",
+    "en": "Fourier series"
+   },
+   "page": "h2_wave_rooms",
+   "anchor": "#r8",
+   "level": 1,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "representation",
+   "domain": [
+    "ai"
+   ],
+   "match": [],
+   "definition": {
+    "ko": "곡선을 서로 직각인 sin·cos 물결의 합으로."
+   }
+  },
+  {
+   "id": "lab:concept/parseval",
+   "type": "Concept",
+   "label": {
+    "ko": "피타고라스의 확장(파스발 항등식)",
+    "en": "Parseval's identity"
+   },
+   "page": "h2_wave_rooms",
+   "anchor": "#r9",
+   "level": 1,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "representation",
+   "domain": [
+    "ai"
+   ],
+   "match": [],
+   "definition": {
+    "ko": "곡선의 세기 = 조각 세기의 합."
+   }
+  },
+  {
+   "id": "lab:concept/kernel-method",
+   "type": "Method",
+   "label": {
+    "ko": "커널 방(RKHS)",
+    "en": "Kernel methods / RKHS"
+   },
+   "page": "h2_wave_rooms",
+   "anchor": "#r10",
+   "level": 2,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "representation",
+   "domain": [
+    "ai"
+   ],
+   "match": [],
+   "definition": {
+    "ko": "닮음 점수표로 끝없는 방에서 곧게 가른다."
+   }
+  },
+  {
+   "id": "lab:concept/gibbs",
+   "type": "Limitation",
+   "label": {
+    "ko": "꺾인 곳의 튀어나옴(평균제곱 수렴 ≠ 모든 점 수렴)",
+    "en": "Gibbs overshoot"
+   },
+   "page": "h2_wave_rooms",
+   "anchor": "#r8",
+   "level": 2,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "representation",
+   "domain": [
+    "ai"
+   ],
+   "match": []
+  },
+  {
+   "id": "lab:method/compression",
+   "type": "Method",
+   "label": {
+    "ko": "큰 조각만 남기기(압축)",
+    "en": "Truncation / compression"
+   },
+   "page": "h2_wave_rooms",
+   "anchor": "#duel",
+   "level": 1,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "representation",
+   "domain": [
+    "ai"
+   ],
+   "match": []
+  },
+  {
+   "id": "lab:analogy/smoothie",
+   "type": "Analogy",
+   "label": {
+    "ko": "스무디를 과일별 컵 수로",
+    "en": "Smoothie back to fruit cups"
+   },
+   "page": "h2_wave_rooms",
+   "anchor": "#r6",
+   "level": 1,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "representation",
+   "domain": [
+    "ai"
+   ],
+   "match": []
+  },
+  {
+   "id": "lab:analogy/choir-parts",
+   "type": "Analogy",
+   "label": {
+    "ko": "합창을 파트별로",
+    "en": "Choir parts"
+   },
+   "page": "h2_wave_rooms",
+   "anchor": "#r8",
+   "level": 1,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "representation",
+   "domain": [
+    "ai"
+   ],
+   "match": []
+  },
+  {
+   "id": "lab:analogy/allowance-accounts",
+   "type": "Analogy",
+   "label": {
+    "ko": "용돈을 통장에 나눠도 합은 같다",
+    "en": "Allowance split across accounts"
+   },
+   "page": "h2_wave_rooms",
+   "anchor": "#r9",
+   "level": 1,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "representation",
+   "domain": [
+    "ai"
+   ],
+   "match": []
+  },
+  {
+   "id": "lab:claim/kernel-beats-line",
+   "type": "Claim",
+   "label": {
+    "ko": "커널 방은 곧은 칸막이가 못 가르는 원 무리를 가른다",
+    "en": "Kernel separates ring data a line cannot"
+   },
+   "page": "h2_wave_rooms",
+   "anchor": "#r10",
+   "level": 2,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "representation",
+   "domain": [
+    "ai"
+   ],
+   "match": []
+  },
+  {
+   "id": "lab:claim/largest-first",
+   "type": "Claim",
+   "label": {
+    "ko": "큰 조각부터 고르면 가장 적은 조각으로 세기를 살린다",
+    "en": "Largest coefficients first is most efficient"
+   },
+   "page": "h2_wave_rooms",
+   "anchor": "#duel",
+   "level": 1,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "representation",
+   "domain": [
+    "ai"
+   ],
+   "match": []
+  },
+  {
+   "id": "lab:sim/h2-basis",
+   "type": "Simulation",
+   "label": {
+    "ko": "조각 켜기 실험",
+    "en": "Toggle basis components"
+   },
+   "page": "h2_wave_rooms",
+   "anchor": "#r6",
+   "level": 2,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "representation",
+   "domain": [
+    "ai"
+   ],
+   "match": []
+  },
+  {
+   "id": "lab:sim/h2-fourier",
+   "type": "Simulation",
+   "label": {
+    "ko": "물결 조각 늘리기 실험",
+    "en": "Fourier partial sums"
+   },
+   "page": "h2_wave_rooms",
+   "anchor": "#r8",
+   "level": 2,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "representation",
+   "domain": [
+    "ai"
+   ],
+   "match": []
+  },
+  {
+   "id": "lab:sim/h2-kernel",
+   "type": "Simulation",
+   "label": {
+    "ko": "커널 방 실험",
+    "en": "RBF kernel classifier"
+   },
+   "page": "h2_wave_rooms",
+   "anchor": "#r10",
+   "level": 2,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "representation",
+   "domain": [
+    "ai"
+   ],
+   "match": []
+  },
+  {
+   "id": "lab:sim/h2-duel",
+   "type": "Simulation",
+   "label": {
+    "ko": "곡선 맞히기 대결",
+    "en": "Curve reconstruction duel"
+   },
+   "page": "h2_wave_rooms",
+   "anchor": "#duel",
+   "level": 2,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "representation",
+   "domain": [
+    "ai"
+   ],
+   "match": []
+  },
+  {
+   "id": "lab:concept/hilbert-space",
+   "type": "Concept",
+   "label": {
+    "ko": "힐베르트 공간",
+    "en": "Hilbert space"
+   },
+   "page": "h1_arrow_rooms",
+   "anchor": "h1_arrow_rooms.html#r1",
+   "level": 1,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "mentioned",
+   "family": "representation",
+   "domain": [
+    "ai"
+   ],
+   "match": [],
+   "definition": {
+    "ko": "겹침 점수(내적)가 있고 빈틈이 없는(완비) 방."
+   }
+  },
+  {
+   "id": "lab:concept/completeness",
+   "type": "Concept",
+   "label": {
+    "ko": "빈틈 없음(완비성)",
+    "en": "Completeness"
+   },
+   "page": "h1_arrow_rooms",
+   "anchor": "h1_arrow_rooms.html#r4",
+   "level": 2,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "mentioned",
+   "family": "representation",
+   "domain": [
+    "ai"
+   ],
+   "match": [],
+   "definition": {
+    "ko": "점점 모이는 수열의 목적지가 방 안에 있다."
+   }
+  }
+ ],
+ "edges": [
+  {
+   "s": "lab:concept/hilbert-basis",
+   "p": "lab:partOf",
+   "o": "lab:concept/hilbert-space",
+   "anchor": "#r6",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/fourier-series",
+   "p": "lab:broader",
+   "o": "lab:concept/hilbert-basis",
+   "anchor": "#r8",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/parseval",
+   "p": "lab:derivedFrom",
+   "o": "lab:concept/hilbert-basis",
+   "anchor": "#r9",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/hilbert-projection",
+   "p": "lab:derivedFrom",
+   "o": "lab:concept/completeness",
+   "anchor": "#r7",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/fourier-series",
+   "p": "lab:hasLimitation",
+   "o": "lab:concept/gibbs",
+   "anchor": "#r8",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:method/compression",
+   "p": "lab:derivedFrom",
+   "o": "lab:concept/parseval",
+   "anchor": "#duel",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:claim/largest-first",
+   "p": "lab:supports",
+   "o": "lab:method/compression",
+   "anchor": "#duel",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:claim/kernel-beats-line",
+   "p": "lab:supports",
+   "o": "lab:concept/kernel-method",
+   "anchor": "#r10",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:analogy/smoothie",
+   "p": "lab:analogyOf",
+   "o": "lab:concept/hilbert-basis",
+   "anchor": "#r6",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:analogy/choir-parts",
+   "p": "lab:analogyOf",
+   "o": "lab:concept/fourier-series",
+   "anchor": "#r8",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:analogy/allowance-accounts",
+   "p": "lab:analogyOf",
+   "o": "lab:concept/parseval",
+   "anchor": "#r9",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:sim/h2-basis",
+   "p": "lab:demonstratedBy",
+   "o": "lab:concept/hilbert-basis",
+   "anchor": "#r6",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:sim/h2-fourier",
+   "p": "lab:demonstratedBy",
+   "o": "lab:concept/gibbs",
+   "anchor": "#r8",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:sim/h2-kernel",
+   "p": "lab:demonstratedBy",
+   "o": "lab:claim/kernel-beats-line",
+   "anchor": "#r10",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:sim/h2-duel",
+   "p": "lab:demonstratedBy",
+   "o": "lab:claim/largest-first",
+   "anchor": "#duel",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/kernel-method",
+   "p": "lab:relatedTo",
+   "o": "lab:topic/svm",
+   "anchor": "#sum",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/fourier-series",
+   "p": "lab:relatedTo",
+   "o": "lab:topic/positional-encoding",
+   "anchor": "#sum",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/parseval",
+   "p": "lab:relatedTo",
+   "o": "lab:topic/pca",
+   "anchor": "#sum",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/hilbert-projection",
+   "p": "lab:relatedTo",
+   "o": "lab:topic/linear-regression",
+   "anchor": "#sum",
+   "confidence": "high"
+  }
+ ]
+}

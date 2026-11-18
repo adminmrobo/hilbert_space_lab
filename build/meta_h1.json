@@ -1,0 +1,37 @@
+{
+ "title": "힐베르트 공간 ① 화살표의 방 — 끝없는 방에서도 자와 각도기를 쓰려면",
+ "series": "유클리드 공간 · 힐베르트 공간",
+ "number": "3",
+ "creator": [
+  {
+   "name": "안상선",
+   "role": "author",
+   "affiliation": "(주)M-Robo"
+  }
+ ],
+ "contributor": [
+  {
+   "name": "AI 보조 제작",
+   "role": "assistant"
+  }
+ ],
+ "date": "2026-11-19",
+ "version": "1.0",
+ "language": [
+  "ko"
+ ],
+ "license": "",
+ "url": "https://adminmrobo.github.io/hilbert_space_lab/h1_arrow_rooms.html",
+ "about": [
+  "lab:concept/hilbert-space",
+  "lab:concept/completeness"
+ ],
+ "basedOn": [
+  "eea_hilbert",
+  "moe_curriculum"
+ ],
+ "educationalLevel": "입문",
+ "learningResourceType": "interactive explainer",
+ "registry": "KG_00_registry 0.2",
+ "suggestedCitation": "안상선 (2026). 힐베르트 공간 ① 화살표의 방 — 끝없는 방에서도 자와 각도기를 쓰려면. 유클리드 공간 · 힐베르트 공간 3, v1.0."
+}

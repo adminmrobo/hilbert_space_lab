@@ -16,7 +16,7 @@
 <nav class="top" aria-label="섹션 바로가기"><div class="row">
   <a class="logo" href="index.html">유클리드 <i>공간</i> ②</a>
   <div class="links">
-    <a href="e1_ruler_rooms.html">← ①</a><a href="#r6">6 그림자</a><a href="#r7">7 칸막이</a><a href="#r8">8 움직임</a><a href="#r9">9 공</a><a href="#r10">10 곧은 자의 한계</a><a href="#duel">대결</a><a href="#sum">정리</a><a href="#endless">끝없는 방</a><a href="#kg">색인</a><a href="#export">꾸러미</a>
+    <a href="e1_ruler_rooms.html">← ①</a><a href="#r6">6 그림자</a><a href="#r7">7 칸막이</a><a href="#r8">8 움직임</a><a href="#r9">9 공</a><a href="#r10">10 곧은 자의 한계</a><a href="#duel">대결</a><a href="#sum">정리</a><a href="#endless">끝없는 방</a><a href="#kg">색인</a><a href="#export">꾸러미</a><a href="h1_arrow_rooms.html">힐베르트 →</a>
   </div>
 </div></nav>
 
@@ -93,14 +93,14 @@
   <div class="panel">
     <div class="ptitle">① 바닥 방향을 돌리고, 바닥 위의 점 m을 끌어 보기 — 그림자 p보다 가까운 곳이 있을까?</div>
     <div class="cwrap sq"><canvas id="cv6" aria-label="화살표 v, 원점을 지나는 바닥 직선, 그림자 p와 빗나간 만큼 r, 바닥 위의 다른 점 m"></canvas></div>
-    <div class="ctrl"><div class="group"><label class="glabel" for="r6">바닥 방향</label><input type="range" id="r6" min="-30" max="80" step="0.5" value="0"><span class="val" id="v6">0°</span><button class="bt" type="button" id="b6a">u = (1, 0)</button><button class="bt" type="button" id="b6b">u = (2, 1) 방향</button></div></div>
+    <div class="ctrl"><div class="group"><label class="glabel" for="s6">바닥 방향</label><input type="range" id="s6" min="-30" max="80" step="0.5" value="0"><span class="val" id="v6">0°</span><button class="bt" type="button" id="b6a">u = (1, 0)</button><button class="bt" type="button" id="b6b">u = (2, 1) 방향</button></div></div>
     <div class="minis"><div class="mini g"><span>그림자 p</span><b id="m6a" style="font-size:17px">—</b></div><div class="mini a"><span>빗나간 만큼 r · 바닥과 겹침</span><b id="m6b" style="font-size:17px">—</b></div><div class="mini m"><span>v에서 p까지</span><b id="m6c">—</b></div><div class="mini r"><span>v에서 m까지</span><b id="m6d">—</b></div></div>
     <div class="insight" id="i6" aria-live="polite"></div>
   </div>
   <div class="panel">
     <div class="ptitle">② 키 160·162·164를 숫자 하나 c로 대표하기 — 빗나간 거리² 합이 그리는 그릇</div>
     <div class="cwrap"><canvas id="cv6b" aria-label="대표값 c에 따른 빗나간 거리 제곱 합의 그릇 모양 그래프"></canvas></div>
-    <div class="ctrl"><div class="group"><label class="glabel" for="r6b">대표값 c</label><input type="range" id="r6b" min="157" max="167" step="0.5" value="160"><span class="val" id="v6b">160</span></div></div>
+    <div class="ctrl"><div class="group"><label class="glabel" for="s6b">대표값 c</label><input type="range" id="s6b" min="157" max="167" step="0.5" value="160"><span class="val" id="v6b">160</span></div></div>
     <div class="insight" id="i6b" aria-live="polite"></div>
   </div>
   <details class="fold"><summary>교안의 파이썬 코드로 보면 (몰라도 됩니다)</summary>
@@ -141,9 +141,9 @@ np.linalg.lstsq(X, y)              # 예측선 긋기 = 여러 축 바닥에 떨
     <div class="ptitle">점 x를 옮겨 보기 — 칸막이 x₁ + 2x₂ + 2x₃ = 6의 어느 쪽인지, 얼마나 먼지</div>
     <div class="cwrap t3"><canvas id="cv7" aria-label="세 축 공간의 삼각형 칸막이, 꽂힌 화살표 n, 움직이는 점 x와 칸막이에 내린 수선"></canvas><span class="hint">끌어서 돌리기</span></div>
     <div class="ctrl"><div class="group">
-      <label class="glabel" for="r7a">x₁</label><input type="range" id="r7a" min="0" max="4" step="0.5" value="2"><span class="val" id="v7a">2</span>
-      <label class="glabel" for="r7b">x₂</label><input type="range" id="r7b" min="0" max="3" step="0.5" value="2"><span class="val" id="v7b">2</span>
-      <label class="glabel" for="r7c">x₃</label><input type="range" id="r7c" min="0" max="3" step="0.5" value="2"><span class="val" id="v7c">2</span></div></div>
+      <label class="glabel" for="s7a">x₁</label><input type="range" id="s7a" min="0" max="4" step="0.5" value="2"><span class="val" id="v7a">2</span>
+      <label class="glabel" for="s7b">x₂</label><input type="range" id="s7b" min="0" max="3" step="0.5" value="2"><span class="val" id="v7b">2</span>
+      <label class="glabel" for="s7c">x₃</label><input type="range" id="s7c" min="0" max="3" step="0.5" value="2"><span class="val" id="v7c">2</span></div></div>
     <div class="minis"><div class="mini m"><span>겹침 점수 n·x</span><b id="m7a">—</b></div><div class="mini a"><span>n·x − 6</span><b id="m7b">—</b></div><div class="mini g"><span>어느 쪽</span><b id="m7c" style="font-size:17px">—</b></div><div class="mini r"><span>칸막이까지 거리</span><b id="m7d">—</b></div></div>
     <div class="insight" id="i7" aria-live="polite"></div>
   </div>
@@ -185,7 +185,7 @@ np.linalg.lstsq(X, y)              # 예측선 긋기 = 여러 축 바닥에 떨
     <div class="ptitle">삼각형을 움직여 보기 — 세 변의 길이 표가 바뀌는지</div>
     <div class="cwrap sq"><canvas id="cv8" aria-label="원래 삼각형(흐리게)과 움직인 삼각형, 세 변 길이"></canvas></div>
     <div class="ctrl"><div class="group" role="group" aria-label="움직임"><span id="g8"></span></div>
-      <div class="group"><label class="glabel" for="r8">돌리기 각도</label><input type="range" id="r8" min="0" max="360" step="5" value="90"><span class="val" id="v8">90°</span></div></div>
+      <div class="group"><label class="glabel" for="s8">돌리기 각도</label><input type="range" id="s8" min="0" max="360" step="5" value="90"><span class="val" id="v8">90°</span></div></div>
     <div class="tblwrap"><table class="cmp"><thead><tr><th>변</th><th>원래 길이</th><th>움직인 뒤 길이</th><th>같은가</th></tr></thead><tbody id="t8"></tbody></table></div>
     <div class="insight" id="i8" aria-live="polite"></div>
   </div>
@@ -223,14 +223,14 @@ np.linalg.lstsq(X, y)              # 예측선 긋기 = 여러 축 바닥에 떨
   <div class="panel">
     <div class="ptitle">① 중심을 끌고 반지름을 바꿔 보기 — 공 안의 이웃 수</div>
     <div class="cwrap sq"><canvas id="cv9" aria-label="흩어진 점 40개와 중심을 끌 수 있는 원"></canvas></div>
-    <div class="ctrl"><div class="group"><label class="glabel" for="r9">반지름 r</label><input type="range" id="r9" min="0.5" max="3" step="0.1" value="1"><span class="val" id="v9">1.0</span><button class="bt" type="button" id="b9">r = 1 → 2</button></div></div>
+    <div class="ctrl"><div class="group"><label class="glabel" for="s9">반지름 r</label><input type="range" id="s9" min="0.5" max="3" step="0.1" value="1"><span class="val" id="v9">1.0</span><button class="bt" type="button" id="b9">r = 1 → 2</button></div></div>
     <div class="minis"><div class="mini m"><span>반지름</span><b id="m9a">—</b></div><div class="mini a"><span>원 넓이 πr²</span><b id="m9b">—</b></div><div class="mini g"><span>공 안의 이웃</span><b id="m9c">—</b></div><div class="mini r"><span>전체 점</span><b>40</b></div></div>
     <div class="insight" id="i9" aria-live="polite"></div>
   </div>
   <div class="panel">
     <div class="ptitle">② 칸 수를 늘려 보기 — 반지름 0.9 안쪽이 차지하는 비율 0.9ⁿ (이 페이지에서 더한 실험)</div>
     <div class="cwrap"><canvas id="cv9b" aria-label="칸 수에 따른 안쪽 비율 곡선"></canvas></div>
-    <div class="ctrl"><div class="group"><label class="glabel" for="r9b">칸 수 n</label><input type="range" id="r9b" min="1" max="100" step="1" value="3"><span class="val" id="v9b">3</span><button class="bt" type="button" data-n9="2">2</button><button class="bt" type="button" data-n9="3">3</button><button class="bt" type="button" data-n9="10">10</button><button class="bt" type="button" data-n9="100">100</button></div></div>
+    <div class="ctrl"><div class="group"><label class="glabel" for="s9b">칸 수 n</label><input type="range" id="s9b" min="1" max="100" step="1" value="3"><span class="val" id="v9b">3</span><button class="bt" type="button" data-n9="2">2</button><button class="bt" type="button" data-n9="3">3</button><button class="bt" type="button" data-n9="10">10</button><button class="bt" type="button" data-n9="100">100</button></div></div>
     <div class="minis"><div class="mini g"><span>안쪽 (반지름 0.9 안)</span><b id="m9d">—</b></div><div class="mini r"><span>겉 껍질 (0.9 ~ 1)</span><b id="m9e">—</b></div></div>
     <div class="insight" id="i9b" aria-live="polite"></div>
   </div>
@@ -279,7 +279,7 @@ np.linalg.lstsq(X, y)              # 예측선 긋기 = 여러 축 바닥에 떨
   <div class="panel">
     <div class="ptitle">② 두 도시 사이 각도를 바꿔 보기 — 표면을 따라 간 길(호)과 곧은 자(현)</div>
     <div class="cwrap"><canvas id="cv10b" aria-label="지구 단면 원 위의 두 도시, 호와 현"></canvas></div>
-    <div class="ctrl"><div class="group"><label class="glabel" for="r10b">두 도시 사이 각도 θ</label><input type="range" id="r10b" min="5" max="180" step="5" value="90"><span class="val" id="v10b">90°</span></div></div>
+    <div class="ctrl"><div class="group"><label class="glabel" for="s10b">두 도시 사이 각도 θ</label><input type="range" id="s10b" min="5" max="180" step="5" value="90"><span class="val" id="v10b">90°</span></div></div>
     <div class="minis"><div class="mini g"><span>호 (표면을 따라)</span><b id="m10e">—</b></div><div class="mini a"><span>현 (곧은 자)</span><b id="m10f">—</b></div><div class="mini r"><span>곧은 자가 짧게 잰 만큼</span><b id="m10g">—</b></div></div>
     <div class="insight" id="i10b" aria-live="polite"></div>
   </div>
@@ -353,7 +353,7 @@ np.linalg.lstsq(X, y)              # 예측선 긋기 = 여러 축 바닥에 떨
   </div>
   <details class="fold"><summary>원어 풀이</summary><p style="margin:8px 0 0">힐베르트 공간(Hilbert space): 겹침 점수(내적)가 있고, 빈틈이 없는(완비) 방. 칸이 끝없이 많아도 길이·각도·그림자·극한을 모두 쓸 수 있다. 이름은 수학자 다비트 힐베르트에서 왔다.</p></details>
   <div data-dlg="end2"></div>
-  <div class="seriescards"><div class="scard soon"><span class="k">다음 편 · 곧 열립니다</span><h3>힐베르트 공간 — 끝없는 방의 자와 각도기</h3><p>곡선의 겹침 점수, 빈틈 없는 방, 물결 조각(푸리에), 피타고라스의 확장(파스발), 커널 방. 같은 저장소에서 이어집니다.</p></div>
+  <div class="seriescards"><a class="scard" href="h1_arrow_rooms.html"><span class="k">다음 편 · 힐베르트 공간 ①</span><h3>화살표의 방 — 끝없는 방의 자와 각도기</h3><p>곡선의 겹침 점수, 길이·직각, 빈틈 없는 방, 끝없는 목록 방과 곡선 방. ②편에서 물결 조각(푸리에)·피타고라스의 확장(파스발)·커널 방으로 이어집니다.</p></a>
     <a class="scard" href="index.html"><span class="k">목차</span><h3>유클리드 공간 · 힐베르트 공간</h3><p>0편 가방 점검부터 다시 보기</p></a></div>
 </div></section>
 </main>
@@ -439,7 +439,7 @@ var P6=new P2($('#cv6'),{xr:[-1.5,5.5],yr:[-1.5,4.5],stamp:'m을 끌어 보세�
 function up6(){var u=u6(),p=EG.project(V6,u),r=EG.sub(V6,p),m=EG.mul(u,M6),dp=EG.dist(V6,p),dm=EG.dist(V6,m);
   $('#m6a').textContent=vec(p.map(function(x){return Math.round(x*100)/100;}));$('#m6b').textContent=vec(r.map(function(x){return Math.round(x*100)/100;}))+' · '+fmt(Math.abs(EG.dot(r,u))<1e-9?0:EG.dot(r,u),2);$('#m6c').textContent=fmt(dp,2);$('#m6d').textContent=fmt(dm,2);
   var near=Math.abs(dm-dp)<0.02;U.ins($('#i6'),[['g','그림자 p까지 '+fmt(dp,2)+', 점 m까지 '+fmt(dm,2)+'. '+(near?'m이 p와 겹쳤어요. 이보다 가까운 곳은 없습니다.':'m이 p보다 '+fmt(dm-dp,2)+' 멉니다.')],['a','빗나간 만큼 r과 바닥 방향의 겹침 점수는 늘 0 — 직각입니다. 바닥 방향을 돌려도 마찬가지예요.']]);P6.dirty=true;}
-var r6=$('#r6');function setT6(t){T6=t;r6.value=t;$('#v6').textContent=fmt(t,1).replace('.0','')+'°';M6=Math.max(-1.5,EG.dot(V6,u6())+1.2);up6();}
+var r6=$('#s6');function setT6(t){T6=t;r6.value=t;$('#v6').textContent=fmt(t,1).replace('.0','')+'°';M6=Math.max(-1.5,EG.dot(V6,u6())+1.2);up6();}
 r6.oninput=function(){setT6(+r6.value);};$('#b6a').onclick=function(){setT6(0);};$('#b6b').onclick=function(){setT6(EG.deg(Math.atan2(1,2)));};setT6(0);
 var C6=160;var v6b=V($('#cv6b'),function(){var xs=[],i;for(i=0;i<=100;i++){var c=157+10*i/100;xs.push([c,EG.sse(EG.HEIGHTS,c)]);}
   var o=U.plot($('#cv6b'),{xr:[157,167],yr:[0,80],xt:[157,159,160,161,162,163,164,165,167],yt:[0,8,20,40,60,80],xl:'대표값 c (cm)',yl:'빗나간 거리² 합',series:[{pts:xs,color:cssv('--terrain'),width:2.4}],vlines:[{x:162,color:cssv('--gfp'),label:'평균 162 (바닥)',dash:[4,4]}],stamp:'그릇 모양'});
@@ -447,7 +447,7 @@ var C6=160;var v6b=V($('#cv6b'),function(){var xs=[],i;for(i=0;i<=100;i++){var c
   EG.HEIGHTS.forEach(function(h){g.fillStyle='rgba(91,90,110,.55)';g.fillRect(o.X(h)-1,o.Y(0)-10,2,10);});});
 function up6b(){var s=EG.sse(EG.HEIGHTS,C6),d=EG.HEIGHTS.map(function(h){return f1(h-C6)+'²';}).join(' + ');
   U.ins($('#i6b'),[['g','c = '+f1(C6)+' → '+d+' = <b>'+f1(s)+'</b>'],[Math.abs(C6-162)<1e-9?'m':'a',Math.abs(C6-162)<1e-9?'바닥! 평균 162에서 가장 작은 8이 됩니다. 평균 = 세 숫자의 그림자.':'아직 바닥이 아니에요. 162 쪽으로 옮기면 줄어듭니다. 이 그릇의 바닥을 찾는 일이 그릇 시리즈의 경사 하강이에요.']]);v6b.dirty=true;}
-var r6b=$('#r6b');r6b.oninput=function(){C6=+r6b.value;$('#v6b').textContent=f1(C6);up6b();};up6b();
+var r6b=$('#s6b');r6b.oninput=function(){C6=+r6b.value;$('#v6b').textContent=f1(C6);up6b();};up6b();
 
 /* ── 7번 방: 칸막이 ── */
 var X7=[2,2,2];
@@ -462,7 +462,7 @@ S7.ov.push(function(g,S){var A=S.P(6*0.55,0,0),Bp=S.P(0,3,0),Cp=S.P(0,0,3);
   U.label(g,S.w/2,S.h-16,'보라 판 = 칸막이 (x₁축과는 x₁ = 6에서 만나 그림 밖)',cssv('--muted'),'center');});
 function up7(){var dp=EG.dot(EG.PLANE.n,X7),s=dp-6,d=EG.planeDist(X7);$('#m7a').textContent=f1(dp);$('#m7b').textContent=(s>0?'+':'')+f1(s);$('#m7c').textContent=s>1e-9?'위쪽 (n 쪽)':s<-1e-9?'아래쪽':'칸막이 위';$('#m7d').textContent=fmt(Math.abs(d),2);
   U.ins($('#i7'),[['m','n·x = 1 × '+f1(X7[0])+' + 2 × '+f1(X7[1])+' + 2 × '+f1(X7[2])+' = '+f1(dp)+(s>0?' > 6':s<0?' < 6':' = 6')],['g','칸막이까지 거리 = |'+f1(s)+'| ÷ 3 = '+fmt(Math.abs(d),2)+'. 주황 점선이 칸막이에 똑바로 내린 발(6번 방의 그림자)입니다.'],['a','스팸 분류기라면 "+"는 스팸, "−"는 정상. 칸막이에서 멀수록 확신이 큽니다.']]);S7.dirty=true;}
-[['r7a','v7a',0],['r7b','v7b',1],['r7c','v7c',2]].forEach(function(z){var r=$('#'+z[0]);r.oninput=function(){X7[z[2]]=+r.value;$('#'+z[1]).textContent=f1(+r.value);up7();};});up7();
+[['s7a','v7a',0],['s7b','v7b',1],['s7c','v7c',2]].forEach(function(z){var r=$('#'+z[0]);r.oninput=function(){X7[z[2]]=+r.value;$('#'+z[1]).textContent=f1(+r.value);up7();};});up7();
 
 /* ── 8번 방: 움직임 ── */
 var T0=[[0,0],[3,0],[3,4]],M8='rot',A8=90;
@@ -475,7 +475,7 @@ function up8(){var T=T0.map(tf),names=['O–C','C–B','O–B'],pairs=[[0,1],[1,
   var msg={push:'모든 점을 (2, 1)만큼 밀었어요. 좌표는 다 바뀌었지만 세 변은 그대로입니다.',rot:'원점을 중심으로 '+A8+'° 돌렸어요. 5번 방에서 자 세트를 돌린 것과 같은 일 — 세 변 그대로.',flip:'x₁축을 거울 삼아 뒤집었어요. 왼손·오른손처럼 방향은 바뀌어도 세 변 그대로.',scale:'2배로 늘렸어요. 모양은 닮았지만 세 변이 모두 두 배 — 거리가 바뀌었습니다.'}[M8];
   U.ins($('#i8'),[[M8==='scale'?'r':'g',msg],['a',M8==='scale'?'한 축만 늘리면 모양까지 찌그러져요. 키를 mm로 바꾸는 일이 바로 그것 → 10번 방.':'거리를 지키는 움직임이라, 거리로 판단하는 KNN·칸막이의 결과도 그대로입니다.']]);P8.dirty=true;}
 U.btns($('#g8'),[['push','밀기 (2, 1)'],['rot','돌리기'],['flip','뒤집기 (x₁축 거울)'],['scale','2배 늘리기']],'rot',function(v){M8=v;up8();});
-var r8=$('#r8');r8.oninput=function(){A8=+r8.value;$('#v8').textContent=A8+'°';if(M8!=='rot'){M8='rot';U.$$('#g8 .bt').forEach(function(b,i){b.setAttribute('aria-pressed',String(i===1));});}up8();};up8();
+var r8=$('#s8');r8.oninput=function(){A8=+r8.value;$('#v8').textContent=A8+'°';if(M8!=='rot'){M8='rot';U.$$('#g8 .bt').forEach(function(b,i){b.setAttribute('aria-pressed',String(i===1));});}up8();};up8();
 
 /* ── 9번 방: 공 ── */
 var D9=EG.dots40(),C9=[0,0],R9=1;
@@ -485,14 +485,14 @@ var P9=new P2($('#cv9'),{xr:[-4.5,4.5],yr:[-4.5,4.5],stamp:'중심을 끌어 보
     D9.forEach(function(p){var ins=EG.dist(p,C9)<=R9+1e-9;P.pt(p,ins?cssv('--gfp'):'rgba(91,104,116,.45)',null,ins?5:3.5);});P.line(C9,[C9[0]+R9,C9[1]],cssv('--amber'),1.6);P.text([C9[0]+R9/2,C9[1]],'r',cssv('--amber'),'center',0,-10);P.pt(C9,cssv('--amber'),'c',4);}});
 function up9(){var n=in9();$('#m9a').textContent=fmt(R9,1);$('#m9b').textContent=fmt(Math.PI*R9*R9,2);$('#m9c').textContent=n+'개';
   U.ins($('#i9'),[['g','중심 c '+vec([Math.round(C9[0]*10)/10,Math.round(C9[1]*10)/10])+'에서 거리 '+fmt(R9,1)+' 이하인 점이 '+n+'개. 이것이 "반경 이웃"입니다.'],['a','반지름이 두 배면 넓이 πr²는 네 배. 점이 고르게 흩어져 있을수록 이웃 수도 네 배에 가까워져요.']]);P9.dirty=true;}
-var r9=$('#r9');r9.oninput=function(){R9=+r9.value;$('#v9').textContent=fmt(R9,1);up9();};
+var r9=$('#s9');r9.oninput=function(){R9=+r9.value;$('#v9').textContent=fmt(R9,1);up9();};
 $('#b9').onclick=function(){var n1,n2;R9=1;n1=in9();R9=2;n2=in9();r9.value=2;$('#v9').textContent='2.0';up9();U.ins($('#i9'),[['g','r = 1일 때 '+n1+'개 → r = 2일 때 '+n2+'개. 넓이는 3.14 → 12.57로 네 배.'],['a','점이 고르게 흩어져 있지 않아 정확히 네 배는 아니에요. 그래도 두 배보다는 훨씬 많이 늘었죠.']]);};up9();
 var N9=3;var v9b=V($('#cv9b'),function(){var pts=[];for(var n=1;n<=100;n++)pts.push([n,EG.inner(n)*100]);
   var o=U.plot($('#cv9b'),{xr:[1,100],yr:[0,100],xt:[1,10,20,40,60,80,100],yt:[0,25,50,75,100],xl:'칸 수 n',yl:'안쪽 비율 (%)',series:[{pts:pts,color:cssv('--terrain'),width:2.4}],vlines:[{x:N9,color:cssv('--amber'),label:N9+'칸: '+fmt(EG.inner(N9)*100,N9>40?4:1)+'%'}],stamp:'0.9ⁿ'});
   var g=o.g;g.beginPath();g.arc(o.X(N9),o.Y(EG.inner(N9)*100),6,0,7);g.fillStyle=cssv('--amber');g.fill();});
 function up9b(){var a=EG.inner(N9)*100;$('#m9d').textContent=fmt(a,a<0.1?4:1)+'%';$('#m9e').textContent=fmt(100-a,a<0.1?4:1)+'%';
   U.ins($('#i9b'),[[N9>=10?'r':'g',N9+'칸 공에서 반지름의 90% 안쪽이 차지하는 부피는 '+fmt(a,a<0.1?4:1)+'%, 나머지 '+fmt(100-a,a<0.1?4:1)+'%는 얇은 겉껍질(반지름 0.9~1)에 있어요.'],['a',N9>=10?'거의 모든 점이 껍질 근처 → 중심에서 보면 모두 "비슷하게 먼" 점들. 가까운 이웃 찾기가 약해지는 이유입니다(차원의 저주).':'칸이 적을 때는 안쪽이 넉넉합니다. 버튼으로 10칸, 100칸을 눌러 보세요.']]);v9b.dirty=true;}
-var r9b=$('#r9b');r9b.oninput=function(){N9=+r9b.value;$('#v9b').textContent=N9;up9b();};$$('[data-n9]').forEach(function(b){b.onclick=function(){N9=+b.dataset.n9;r9b.value=N9;$('#v9b').textContent=N9;up9b();};});up9b();
+var r9b=$('#s9b');r9b.oninput=function(){N9=+r9b.value;$('#v9b').textContent=N9;up9b();};$$('[data-n9]').forEach(function(b){b.onclick=function(){N9=+b.dataset.n9;r9b.value=N9;$('#v9b').textContent=N9;up9b();};});up9b();
 
 /* ── 10번 방: 곧은 자의 한계 ── */
 var M10='cm',Q=EG.UNITQ,CA=EG.UNITC[0],CB=EG.UNITC[1];
@@ -518,7 +518,7 @@ var TH=90;var v10b=V($('#cv10b'),function(){var R=U.setup($('#cv10b')),g=R.g,w=R
   var lx=w*0.7;U.label(g,lx,h*0.35,'━ 호 '+fmt(EG.arc(TH),0)+'km',cssv('--gfp'));U.label(g,lx,h*0.35+26,'┅ 현 '+fmt(EG.chord(TH),0)+'km',cssv('--amber'));U.label(g,lx,h*0.35+52,'지구 반지름 6,371km',cssv('--muted'));U.stamp(g,w,'지구 단면');});
 function up10b(){var a=EG.arc(TH),c=EG.chord(TH);function km(x){return Math.round(x).toLocaleString('ko-KR')+'km';}$('#m10e').textContent=km(a);$('#m10f').textContent=km(c);$('#m10g').textContent=km(a-c);
   U.ins($('#i10b'),[['g','θ = '+TH+'°: 호 '+km(a)+', 현 '+km(c)+'. 곧은 자는 땅속을 뚫고 지나가 '+fmt((a-c)/a*100,1)+'% 짧게 잽니다.'],['a',TH<=20?'가까운 두 도시는 호와 현이 거의 같아요. 동네 지도에서는 곧은 자로 충분합니다.':'멀어질수록 차이가 커져요. 휜 표면에서는 표면을 따라 재야 합니다.']]);v10b.dirty=true;}
-var r10b=$('#r10b');r10b.oninput=function(){TH=+r10b.value;$('#v10b').textContent=TH+'°';up10b();};up10b();
+var r10b=$('#s10b');r10b.oninput=function(){TH=+r10b.value;$('#v10b').textContent=TH+'°';up10b();};up10b();
 
 /* ── 대결 ── */
 var DR=null,shown=false,SZC={S:cssv('--info'),M:cssv('--gfp'),L:cssv('--eye')};
@@ -544,7 +544,7 @@ var vE=V($('#cvEnd'),function(){var R=U.setup($('#cvEnd')),g=R.g,w=R.w,h=R.h,L=4
   else{var bw=Math.max(1.5,(w-L-Rm)/NE*0.6);for(var k=0;k<NE;k++){var t=(k+0.5)/NE,v=sig(t),x=X(t);g.fillStyle=NE>50?'rgba(15,127,134,.7)':cssv('--terrain');g.fillRect(x-bw/2,Math.min(mid,mid-v*amp),bw,Math.abs(v*amp));if(NE<=10){g.beginPath();g.arc(x,mid-v*amp,4,0,7);g.fill();}}
     g.strokeStyle='rgba(15,127,134,.18)';g.lineWidth=1;g.setLineDash([3,3]);g.beginPath();for(var i=0;i<=300;i++){var t=i/300,y=mid-sig(t)*amp;i?g.lineTo(X(t),y):g.moveTo(X(t),y);}g.stroke();g.setLineDash([]);U.label(g,L,24,NE+'칸: 점 하나 = 숫자 '+NE+'개',cssv('--muted'));}
   g.fillStyle=cssv('--muted');g.font='11.5px '+cssv('--font');g.fillText('시간 →',w-Rm-46,mid+16);U.stamp(g,w,'설명용 소리 모양');});
-function upE(){var M={2:'2칸이면 소리를 숫자 두 개로만 기억합니다. 원래 모양(흐린 점선)은 거의 알 수 없어요.',3:'3칸: 아직 모양이 거칠어요.',10:'10칸: 오르내림이 보이기 시작합니다. 여기까지는 유클리드 방에서 거리를 잴 수 있어요.',100:'100칸: 거의 곡선처럼 보입니다. 그래도 아직 "칸이 정해진" 방이에요.','-1':'끝없이: 칸 사이 빈틈이 사라지고 곡선 하나가 됐습니다. 이 곡선 하나가 끝없는 방의 점 하나예요. 문이 열렸습니다!'};
+function upE(){var M={2:'2칸이면 소리를 숫자 두 개로만 기억합니다. 원래 모양(흐린 점선)은 거의 알 수 없어요.',3:'3칸: 아직 모양이 거칠어요.',10:'10칸: 오르내림이 보이기 시작합니다. 여기까지는 유클리드 방에서 거리를 잴 수 있어요.',100:'100칸: 거의 곡선처럼 보입니다. 그래도 아직 "칸이 정해진" 방이에요.','-1':'끝없이: 칸 사이 빈틈이 사라지고 곡선 하나가 됐습니다. 이 곡선 하나가 끝없는 방의 점 하나예요. 문이 열렸습니다 → 힐베르트 공간 ①'};
   U.ins($('#iEnd'),[[NE<0?'m':'g',M[String(NE)]],NE<0?['a','곡선끼리 겹침 점수를 재려면 "같은 자리끼리 곱해서 더하기"를 "곱해서 넓이 구하기"로 바꾸면 됩니다. 그 이야기는 다음 편에서!']:['a','칸을 늘릴수록 거리 식의 항도 늘어납니다. 끝까지 늘리면 어떻게 될까요?']]);vE.dirty=true;}
 U.btns($('#gEnd'),[[2,'2'],[3,'3'],[10,'10'],[100,'100'],[-1,'끝없이']],10,function(v){NE=v;upE();});upE();
 

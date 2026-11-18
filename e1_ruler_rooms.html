@@ -561,7 +561,7 @@ section.sec{padding:88px 0 40px}
   <div class="panel">
     <div class="ptitle">자 세트 돌리기 — 좌표 숫자는 바뀌고, 길이² 합은 그대로</div>
     <div class="cwrap sq"><canvas id="cv5" aria-label="화살표 v와 돌아가는 자 세트 e₁, e₂, 그리고 각 자 위에 떨어진 그림자"></canvas></div>
-    <div class="ctrl"><div class="group"><label class="glabel" for="r5">자 세트 각도</label><input type="range" id="r5" min="0" max="90" step="1" value="0"><span class="val" id="v5">0°</span><button class="bt" type="button" id="b5">45°로</button></div></div>
+    <div class="ctrl"><div class="group"><label class="glabel" for="s5">자 세트 각도</label><input type="range" id="s5" min="0" max="90" step="1" value="0"><span class="val" id="v5">0°</span><button class="bt" type="button" id="b5">45°로</button></div></div>
     <div class="minis"><div class="mini m"><span>c₁ = v·e₁</span><b id="m5a">—</b></div><div class="mini a"><span>c₂ = v·e₂</span><b id="m5b">—</b></div><div class="mini g"><span>c₁² + c₂²</span><b id="m5c">—</b></div><div class="mini r"><span>v의 길이</span><b id="m5d">—</b></div></div>
     <div class="insight" id="i5" aria-live="polite"></div>
   </div>
@@ -1083,7 +1083,7 @@ function up5(){var t=EG.rad(T5),e1=[Math.cos(t),Math.sin(t)],e2=[-Math.sin(t),Ma
   $('#m5a').textContent=fmt(c1,2);$('#m5b').textContent=fmt(c2,2);$('#m5c').textContent=fmt(c1*c1+c2*c2,2);$('#m5d').textContent=fmt(Math.hypot(c1,c2),2);
   U.ins($('#i5'),[['g','자를 '+T5+'° 돌리니 좌표는 ('+fmt(c1,2)+', '+fmt(c2,2)+')로 바뀌었어요. 그래도 c₁² + c₂² = '+fmt(c1*c1+c2*c2,2)+', 길이 √13 ≈ 3.61은 그대로입니다.'],
     T5===0?['a','0°는 늘 쓰던 가로·세로 자. 좌표가 원래 숫자 (3, 2) 그대로예요.']:['a','점선은 v에서 각 자 위로 내린 수선입니다. 좌표 숫자 = 그 자 위의 그림자 길이 = 겹침 점수.']]);P5.dirty=true;}
-var r5=$('#r5');r5.oninput=function(){T5=+r5.value;$('#v5').textContent=T5+'°';up5();};$('#b5').onclick=function(){T5=45;r5.value=45;$('#v5').textContent='45°';up5();};up5();
+var r5=$('#s5');r5.oninput=function(){T5=+r5.value;$('#v5').textContent=T5+'°';up5();};$('#b5').onclick=function(){T5=45;r5.value=45;$('#v5').textContent='45°';up5();};up5();
 
 /* ── 용어 ── */
 U.Gloss({

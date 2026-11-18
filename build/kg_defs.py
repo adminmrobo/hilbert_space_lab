@@ -148,10 +148,72 @@ e2e = [E('lab:concept/residual', 'partOf', 'lab:concept/orthogonal-projection', 
        E('lab:concept/curse-of-dimensionality', 'relatedTo', 'lab:topic/knn'),
        E('lab:concept/orthogonal-projection', 'broader', 'lab:topic/linear-algebra')]
 
+
+# ── h1 화살표의 방 ──
+P = 'h1_arrow_rooms'
+h1n = [N('lab:concept/hilbert-space', 'Concept', '힐베르트 공간', 'Hilbert space', P, '#r1', 1, '겹침 점수(내적)가 있고 빈틈이 없는(완비) 방.'),
+       N('lab:concept/vector-space', 'Concept', '벡터 공간', 'Vector space', P, '#r1', 1, '더하고 늘릴 수 있는 방.'),
+       N('lab:concept/inner-product-space', 'Concept', '내적 공간', 'Inner-product space', P, '#r1', 1),
+       N('lab:concept/function-inner-product', 'Concept', '곡선의 겹침 점수', 'Inner product of functions', P, '#r2', 1, '같은 시각끼리 곱해서 넓이(정적분).'),
+       N('lab:concept/norm', 'Concept', '길이(노름)', 'Norm', P, '#r3', 1),
+       N('lab:concept/orthogonality', 'Concept', '직각(직교)', 'Orthogonality', P, '#r3', 1, '겹침 점수 0.'),
+       N('lab:concept/cauchy-sequence', 'Concept', '코시 수열', 'Cauchy sequence', P, '#r4', 2),
+       N('lab:concept/completeness', 'Concept', '빈틈 없음(완비성)', 'Completeness', P, '#r4', 2, '점점 모이는 수열의 목적지가 방 안에 있다.'),
+       N('lab:concept/l2-sequence', 'Concept', '끝없는 목록 방 ℓ²', 'ℓ² space', P, '#r5', 2),
+       N('lab:concept/l2-function', 'Concept', '곡선 방 L²', 'L² space', P, '#r5', 2),
+       N('lab:claim/ramp-to-step', 'Claim', '매끈한 곡선만 있는 방은 빈틈이 있다(경사로 → 계단)', 'Continuous functions are not complete in L² norm', P, '#r4', 2),
+       N('lab:claim/inv-sqrt-not-l2', 'Claim', '1/√k 목록은 ℓ²에 들어오지 못한다', '1/√k is not square-summable', P, '#r5', 2),
+       N('lab:analogy/three-boxes', 'Analogy', '세 겹 상자', 'Three nested boxes', P, '#r1', 1),
+       N('lab:analogy/mood-graphs', 'Analogy', '두 사람의 하루 기분 그래프', 'Two daily mood curves', P, '#r2', 1),
+       N('lab:analogy/root2-hole', 'Analogy', '√2라는 구멍', 'The √2 hole in the rationals', P, '#r4', 1),
+       N('lab:sim/h1-overlap', 'Simulation', '곡선 겹침 실험', 'Function overlap', P, '#r2', 2),
+       N('lab:sim/h1-ramp', 'Simulation', '경사로 → 계단 실험', 'Ramp to step', P, '#r4', 2),
+       N('lab:sim/h1-series', 'Simulation', '두 목록의 제곱 합 실험', 'Square sums of two sequences', P, '#r5', 2),
+       N('lab:work/eea_hilbert', 'Work', 'eeanimation — HILBERT SPACE 01~10', 'eeanimation — Hilbert Space', P, '#top', 1)]
+h1e = [E('lab:concept/inner-product-space', 'broader', 'lab:concept/vector-space', '#r1'), E('lab:concept/hilbert-space', 'broader', 'lab:concept/inner-product-space', '#r1'),
+       E('lab:concept/completeness', 'partOf', 'lab:concept/hilbert-space', '#r4'), E('lab:concept/cauchy-sequence', 'prerequisiteOf', 'lab:concept/completeness', '#r4'),
+       E('lab:concept/norm', 'derivedFrom', 'lab:concept/function-inner-product', '#r3'), E('lab:concept/orthogonality', 'derivedFrom', 'lab:concept/function-inner-product', '#r3'),
+       E('lab:concept/l2-sequence', 'broader', 'lab:concept/hilbert-space', '#r5'), E('lab:concept/l2-function', 'broader', 'lab:concept/hilbert-space', '#r5'),
+       E('lab:claim/ramp-to-step', 'supports', 'lab:concept/completeness', '#r4'), E('lab:claim/inv-sqrt-not-l2', 'supports', 'lab:concept/l2-sequence', '#r5'),
+       E('lab:analogy/three-boxes', 'analogyOf', 'lab:concept/hilbert-space', '#r1'), E('lab:analogy/mood-graphs', 'analogyOf', 'lab:concept/function-inner-product', '#r2'), E('lab:analogy/root2-hole', 'analogyOf', 'lab:concept/completeness', '#r4'),
+       E('lab:sim/h1-overlap', 'demonstratedBy', 'lab:concept/function-inner-product', '#r2'), E('lab:sim/h1-ramp', 'demonstratedBy', 'lab:claim/ramp-to-step', '#r4'), E('lab:sim/h1-series', 'demonstratedBy', 'lab:claim/inv-sqrt-not-l2', '#r5'),
+       E('lab:concept/hilbert-space', 'derivedFrom', 'lab:work/eea_hilbert', '#top'), E('lab:concept/hilbert-space', 'broader', 'lab:topic/linear-algebra')]
+# ── h2 곡선을 쪼개는 방 ──
+P = 'h2_wave_rooms'
+h2n = [N('lab:concept/hilbert-basis', 'Concept', '곡선 방의 자 세트(힐베르트 기저)', 'Orthonormal (Hilbert) basis', P, '#r6', 2, '길이 1이고 서로 직각인 곡선들. 좌표 = 겹침 점수.'),
+       N('lab:concept/hilbert-projection', 'Concept', '끝없는 방의 그림자', 'Projection theorem', P, '#r7', 2, '닫힌 바닥 위 가장 가까운 점은 하나뿐이고, 빗나간 만큼은 바닥과 직각.'),
+       N('lab:concept/fourier-series', 'Concept', '물결 조각(푸리에 급수)', 'Fourier series', P, '#r8', 1, '곡선을 서로 직각인 sin·cos 물결의 합으로.'),
+       N('lab:concept/parseval', 'Concept', '피타고라스의 확장(파스발 항등식)', "Parseval's identity", P, '#r9', 1, '곡선의 세기 = 조각 세기의 합.'),
+       N('lab:concept/kernel-method', 'Method', '커널 방(RKHS)', 'Kernel methods / RKHS', P, '#r10', 2, '닮음 점수표로 끝없는 방에서 곧게 가른다.'),
+       N('lab:concept/gibbs', 'Limitation', '꺾인 곳의 튀어나옴(평균제곱 수렴 ≠ 모든 점 수렴)', 'Gibbs overshoot', P, '#r8', 2),
+       N('lab:method/compression', 'Method', '큰 조각만 남기기(압축)', 'Truncation / compression', P, '#duel', 1),
+       N('lab:analogy/smoothie', 'Analogy', '스무디를 과일별 컵 수로', 'Smoothie back to fruit cups', P, '#r6', 1),
+       N('lab:analogy/choir-parts', 'Analogy', '합창을 파트별로', 'Choir parts', P, '#r8', 1),
+       N('lab:analogy/allowance-accounts', 'Analogy', '용돈을 통장에 나눠도 합은 같다', 'Allowance split across accounts', P, '#r9', 1),
+       N('lab:claim/kernel-beats-line', 'Claim', '커널 방은 곧은 칸막이가 못 가르는 원 무리를 가른다', 'Kernel separates ring data a line cannot', P, '#r10', 2),
+       N('lab:claim/largest-first', 'Claim', '큰 조각부터 고르면 가장 적은 조각으로 세기를 살린다', 'Largest coefficients first is most efficient', P, '#duel', 1),
+       N('lab:sim/h2-basis', 'Simulation', '조각 켜기 실험', 'Toggle basis components', P, '#r6', 2),
+       N('lab:sim/h2-fourier', 'Simulation', '물결 조각 늘리기 실험', 'Fourier partial sums', P, '#r8', 2),
+       N('lab:sim/h2-kernel', 'Simulation', '커널 방 실험', 'RBF kernel classifier', P, '#r10', 2),
+       N('lab:sim/h2-duel', 'Simulation', '곡선 맞히기 대결', 'Curve reconstruction duel', P, '#duel', 2)]
+h2e = [E('lab:concept/hilbert-basis', 'partOf', 'lab:concept/hilbert-space', '#r6'), E('lab:concept/fourier-series', 'broader', 'lab:concept/hilbert-basis', '#r8'),
+       E('lab:concept/parseval', 'derivedFrom', 'lab:concept/hilbert-basis', '#r9'), E('lab:concept/hilbert-projection', 'derivedFrom', 'lab:concept/completeness', '#r7'),
+       E('lab:concept/fourier-series', 'hasLimitation', 'lab:concept/gibbs', '#r8'), E('lab:method/compression', 'derivedFrom', 'lab:concept/parseval', '#duel'),
+       E('lab:claim/largest-first', 'supports', 'lab:method/compression', '#duel'), E('lab:claim/kernel-beats-line', 'supports', 'lab:concept/kernel-method', '#r10'),
+       E('lab:analogy/smoothie', 'analogyOf', 'lab:concept/hilbert-basis', '#r6'), E('lab:analogy/choir-parts', 'analogyOf', 'lab:concept/fourier-series', '#r8'), E('lab:analogy/allowance-accounts', 'analogyOf', 'lab:concept/parseval', '#r9'),
+       E('lab:sim/h2-basis', 'demonstratedBy', 'lab:concept/hilbert-basis', '#r6'), E('lab:sim/h2-fourier', 'demonstratedBy', 'lab:concept/gibbs', '#r8'), E('lab:sim/h2-kernel', 'demonstratedBy', 'lab:claim/kernel-beats-line', '#r10'), E('lab:sim/h2-duel', 'demonstratedBy', 'lab:claim/largest-first', '#duel'),
+       E('lab:concept/kernel-method', 'relatedTo', 'lab:topic/svm'), E('lab:concept/fourier-series', 'relatedTo', 'lab:topic/positional-encoding'), E('lab:concept/parseval', 'relatedTo', 'lab:topic/pca'), E('lab:concept/hilbert-projection', 'relatedTo', 'lab:topic/linear-regression')]
+EEH = dict(EEA); EEH = json.loads(json.dumps(EEA)); EEH['id'] = 'eea_hilbert'; EEH['title'] = 'HILBERT SPACE 01~10'; EEH['lab']['work'] = 'lab:work/eea_hilbert'
+
 pages = {
  'e0': (e0n, e0e, [EEA, CURR], meta('e0', '유클리드 공간 0편 가방 점검 — 좌표평면·피타고라스·sin·cos', '0', 'e0_orientation.html', ['lab:concept/coordinate-plane', 'lab:concept/pythagorean-theorem'], ['moe_curriculum'])),
  'e1': (e1n, e1e, [EEA, CURR, ref('mikolov2013', 'Efficient Estimation of Word Representations in Vector Space', [{"family": "Mikolov", "given": "Tomas"}, {"family": "Chen", "given": "Kai"}, {"family": "Corrado", "given": "Greg"}, {"family": "Dean", "given": "Jeffrey"}], 2013, {"type": "paper-conference", "URL": "https://arxiv.org/abs/1301.3781"}, ['lab:concept/vector'])],
         meta('e1', '유클리드 공간 ① 자와 각도기의 방 — 점·이동·거리·각도·자 세트', '1', 'e1_ruler_rooms.html', ['lab:concept/euclidean-space', 'lab:concept/inner-product'], ['eea_euclid', 'moe_curriculum'])),
+ 'h1': (h1n, h1e, [EEH, CURR, ref('kreyszig1978', 'Introductory Functional Analysis with Applications', [{"family": "Kreyszig", "given": "Erwin"}], 1978, {"type": "book", "publisher": "Wiley"}, ['lab:concept/hilbert-space'])],
+        meta('h1', '힐베르트 공간 ① 화살표의 방 — 끝없는 방에서도 자와 각도기를 쓰려면', '3', 'h1_arrow_rooms.html', ['lab:concept/hilbert-space', 'lab:concept/completeness'], ['eea_hilbert', 'moe_curriculum'])),
+ 'h2': (h2n, h2e, [EEH, CURR, ref('scholkopf2002', 'Learning with Kernels', [{"family": "Schölkopf", "given": "Bernhard"}, {"family": "Smola", "given": "Alexander J."}], 2002, {"type": "book", "publisher": "MIT Press"}, ['lab:concept/kernel-method']),
+        ref('vaswani2017', 'Attention Is All You Need', [{"family": "Vaswani", "given": "Ashish"}], 2017, {"type": "paper-conference", "URL": "https://arxiv.org/abs/1706.03762"}, ['lab:concept/fourier-series'])],
+        meta('h2', '힐베르트 공간 ② 곡선을 쪼개는 방 — 자 세트·그림자·물결 조각·피타고라스의 확장·커널 방', '4', 'h2_wave_rooms.html', ['lab:concept/fourier-series', 'lab:concept/parseval', 'lab:concept/kernel-method'], ['eea_hilbert', 'moe_curriculum'])),
  'e2': (e2n, e2e, [EEA, CURR,
         ref('cortes1995', 'Support-vector networks', [{"family": "Cortes", "given": "Corinna"}, {"family": "Vapnik", "given": "Vladimir"}], 1995, {"container-title": "Machine Learning", "volume": "20", "page": "273-297", "DOI": "10.1007/BF00994018"}, ['lab:concept/hyperplane']),
         ref('bellman1961', 'Adaptive Control Processes: A Guided Tour', [{"family": "Bellman", "given": "Richard"}], 1961, {"type": "book", "publisher": "Princeton University Press"}, ['lab:concept/curse-of-dimensionality'])],

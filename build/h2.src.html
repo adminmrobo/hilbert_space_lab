@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>힐베르트 공간 ② 곡선을 쪼개는 방 — 자 세트·그림자·물결 조각·피타고라스의 확장·커널 방</title>
+<meta name="description" content="시아·모아가 끝없는 방 6~10번을 지나며 곡선을 자 세트로 읽고, 그림자로 가장 가까운 곡선을 찾고, 물결 조각으로 나누고, 조각의 세기로 압축하는 법을 배웁니다. 마지막엔 곡선 맞히기 대결.">
+<meta property="og:title" content="힐베르트 공간 ② 곡선을 쪼개는 방">
+<meta property="og:description" content="음성 인식·압축·커널 방법이 쓰는 끝없는 방의 도구">
+<meta property="og:type" content="article">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+<!--@@CSS@@-->
+</head>
+<body>
+<nav class="top" aria-label="섹션 바로가기"><div class="row">
+  <a class="logo" href="index.html">힐베르트 <i>공간</i> ②</a>
+  <div class="links">
+    <a href="h1_arrow_rooms.html">← ①</a><a href="#r6">6 자 세트</a><a href="#r7">7 그림자</a><a href="#r8">8 물결 조각</a><a href="#r9">9 피타고라스 확장</a><a href="#r10">10 쓰이는 곳</a><a href="#duel">대결</a><a href="#sum">정리</a><a href="#kg">색인</a><a href="#export">꾸러미</a>
+  </div>
+</div></nav>
+
+<div class="cover" id="cover" data-img="cover_h2"><div class="frame">
+  <canvas id="coverCv" aria-hidden="true"></canvas>
+  <div class="cast4"><img class="s" data-mood="fly_point" alt="" aria-hidden="true"><img data-mood="sia_signal" alt="" aria-hidden="true"><img data-mood="moa_cheer" alt="" aria-hidden="true"><img class="s" data-mood="asst_proud" alt="" aria-hidden="true"></div>
+  <span class="cap">곡선 하나를 물결 조각으로</span>
+  <span class="badge">표지 그림 준비 중 · 설명용 그림</span>
+  <span class="cover-chip">힐베르트 공간 · ② 곡선을 쪼개는 방</span>
+</div></div>
+
+<header class="hero" id="top"><div class="wrap">
+  <div class="eyebrow">힐베르트 공간 · ② 곡선을 쪼개는 방 · 6~10번 방 + 대결</div>
+  <h1>힐베르트 공간 ② — 곡선을 쪼개는 방</h1>
+  <p class="question">울퉁불퉁한 곡선 하나를, 몇 개의 숫자로 줄여 다시 만들 수 있을까?</p>
+  <p class="lead">①편에서 끝없는 방에도 자와 각도기가 있다는 걸 확인했어요. 이번엔 그 도구로 곡선을 <b>쪼갭니다</b>. 곡선을 자 세트로 읽고, 그림자로 가장 가까운 곡선을 찾고, 물결 조각(sin·cos)으로 나누고, 조각마다 세기를 재서 큰 조각만 남깁니다. 음성 인식과 MP3 압축이 하는 일이에요. 마지막엔 시아와 모아가 「곡선 맞히기」로 겨룹니다.</p>
+  <p class="byline">글 · 안상선 ((주)M-Robo 대표) · <a href="https://adminmrobo.github.io/who_am_i/who_am_i.html">저자 소개</a> · 2026-11-19 · v1.0</p>
+  <div class="three"><b>처음 오신 분께 — 이 페이지를 3줄로</b><ol>
+    <li><b>무엇을</b>: 곡선을 서로 직각인 물결 조각들의 합으로 나누고, 조각마다 "얼마나 들어 있나"를 잽니다.</li>
+    <li><b>왜 중요한가</b>: 조각의 세기 합이 곡선 전체 세기와 같아서(피타고라스의 확장), 큰 조각만 남겨도 곡선을 거의 그대로 살릴 수 있습니다.</li>
+    <li><b>업무에서는</b>: 센서 신호의 잡음 걸러 내기, 음성·진동 데이터를 몇 개의 숫자로 줄여 모델에 넣기에 씁니다.</li></ol>
+    <p style="margin:8px 0 0">코드·수식을 몰라도 됩니다. 식은 조수 하루가 숫자로 한 번씩 풀어 드립니다.</p>
+    <details class="fold" style="margin:8px 0 0"><summary>이 페이지에 나오는 기호 풀이</summary>
+      <div class="gloss" style="margin-top:8px">
+        <div><b>eₖ</b> k번째 자(조각). 길이 1, 서로 직각.</div>
+        <div><b>cₖ = ⟨f, eₖ⟩</b> f에 k번째 조각이 들어 있는 양.</div>
+        <div><b>fₙ</b> 조각 n개까지만 더한 곡선(부분합).</div>
+        <div><b>P<sub>M</sub>x</b> x를 바닥 M에 떨어뜨린 그림자.</div>
+        <div><b>k(x, x′)</b> 커널: 두 점의 닮음 점수표.</div>
+        <div><b>δⱼₖ</b> j = k면 1, 아니면 0.</div>
+      </div></details>
+  </div>
+  <div class="start"><b>앞 편</b> 곡선의 겹침 점수(넓이)와 직각이 처음이면 <a href="h1_arrow_rooms.html">① 화살표의 방</a>부터 보세요. 6번 방의 자 세트는 <a href="e1_ruler_rooms.html#r5">유클리드 5번 방</a>, 7번 방의 그림자는 <a href="e2_shadow_rooms.html#r6">유클리드 6번 방</a>을 끝없는 방으로 넓힌 것입니다.</div>
+  <div class="kpis" aria-label="숫자 요약">
+    <div class="kpi g"><b>25</b><span>3e₁ + 4e₂ 곡선의 세기 = 3² + 4²</span></div>
+    <div class="kpi m"><b>0.71 → 0</b><span>물결 조각 1개 → 5개일 때 남은 오차<sup>①</sup></span></div>
+    <div class="kpi a"><b>32 : 23</b><span>커널 방 vs 곧은 칸막이가 맞힌 점 (32개 중)<sup>①</sup></span></div>
+    <div class="kpi r"><b>3 : 7</b><span>대결에서 95%를 살리는 데 쓴 조각 수 (모아 : 시아)<sup>①</sup></span></div>
+  </div>
+  <p class="muted" style="font-size:13px">① 설명용 예시 곡선·데이터로 계산한 값입니다.</p>
+  <div data-dlg="hero"></div>
+</div></header>
+
+<main>
+<!-- 6번 방 -->
+<section class="sec" id="r6" aria-labelledby="h-r6"><div class="wrap">
+  <h2 id="h-r6"><span class="door">6</span>곡선을 읽는 자 세트 <span class="sub">원자료 카드 06</span></h2>
+  <div class="tags"><span class="tag">방법: 좌표 = 그 자와의 겹침 점수</span><span class="tag">일상: 스무디를 과일별 컵 수로</span><span class="tag">원자료: HILBERT SPACE 06/10 (@eeanimation)</span></div>
+  <div class="wm">
+    <div class="why"><h4>왜 이 방법을 쓰나</h4><ol>
+      <li><b>문제</b>: 곡선도 화살표처럼 좌표(숫자 목록)로 적고 싶습니다.</li>
+      <li><b>앞 방의 한계</b>: 곡선 방에는 칸이 끝없이 많아, 가로·세로 같은 자가 따로 없어요.</li>
+      <li><b>해법</b>: 길이 1이고 서로 직각인 곡선들을 자로 씁니다. 좌표 cₖ는 "곡선과 k번째 자의 겹침 점수" 한 번이면 나와요.</li></ol>
+      <div class="easy"><b>쉽게 말하면</b> 스무디를 "사과 0.8컵, 딸기 0.5컵, 바나나 0.3컵…"으로 되돌리는 일. 컵 수가 좌표입니다.</div></div>
+    <div class="am"><h4><img data-mood="asst_shock" alt="" aria-hidden="true">수학 수식을 어려워하는 조수가 대신 물어봅니다</h4>
+      <p class="aq">"자가 끝없이 많으면 좌표도 끝없이 많은 거죠? 그걸 언제 다 더해요?"</p>
+      <span class="lbl">학교 수학으로 보면</span>좌표와 내적, 그리고 급수입니다. 앞쪽 몇 개만 더해도 거의 다 맞으면, 나머지는 작아서 끝까지 더한 값에 수렴해요.
+      <table><thead><tr><th>식 조각</th><th>뜻</th></tr></thead><tbody>
+        <tr><td>⟨eⱼ, eₖ⟩ = δⱼₖ</td><td>자끼리: 같으면 1, 다르면 0 (직각)</td></tr>
+        <tr><td>cₖ = ⟨f, eₖ⟩</td><td>k번째 좌표 = 겹침 점수</td></tr>
+        <tr><td>f = Σ cₖ eₖ</td><td>좌표 × 자를 모두 더하면 원래 곡선</td></tr>
+        <tr><td>eₖ(t) = √2 sin(kπt)</td><td>이 방에서 쓰는 자 (0 ≤ t ≤ 1)</td></tr></tbody></table>
+      <span class="lbl">숫자로 한 번 해 보기</span>
+      <div class="try">f = 0.8e₁ + 0.5e₂ + 0.3e₃ + 0.18e₄ + 0.1e₅ → 겹침 점수로 되돌리면 <b>0.8, 0.5, 0.3, 0.18, 0.1</b><br>길이² = 0.64 + 0.25 + 0.09 + 0.0324 + 0.01 = <b>1.0224</b></div>
+      <div class="ac"><img data-mood="asst_smile" alt="" aria-hidden="true"><p>뒤로 갈수록 좌표가 작아지니까, 앞쪽 몇 개만 더해도 거의 같은 곡선이 되네요!</p></div></div>
+  </div>
+  <div class="pair">
+    <div><div class="tl">일상으로 치면</div>믹서기로 간 스무디도, 맛을 보면 사과가 많은지 딸기가 많은지 압니다. 맛보기 = 겹침 점수, 컵 수 = 좌표예요.</div>
+    <div><div class="tr">머신러닝에서는</div>센서 곡선을 자 세트의 좌표 몇 개로 바꾸면, 곡선 하나가 숫자 몇 개짜리 "특성"이 됩니다. 모델에 곡선 대신 그 숫자들을 넣어요. PCA도 데이터에 맞춘 자 세트를 고르는 방법입니다.</div>
+  </div>
+  <div data-dlg="r6"></div>
+  <div class="panel">
+    <div class="ptitle">자(조각)를 하나씩 켜 보기 — 켠 조각만 더한 곡선(초록)과 원래 곡선(파랑)</div>
+    <div class="twin"><div class="cwrap tall"><canvas id="cv6" aria-label="원래 곡선과 켠 조각만 더한 곡선"></canvas></div><div class="cwrap tall"><canvas id="cv6b" aria-label="좌표 막대 c1부터 c5"></canvas></div></div>
+    <div class="ctrl"><div class="group" role="group" aria-label="조각 켜기"><span class="glabel">켤 조각</span><span id="g6"></span><button class="bt" type="button" id="b6">모두 켜기</button></div></div>
+    <div class="minis"><div class="mini m"><span>켠 조각</span><b id="m6a">—</b></div><div class="mini g"><span>켠 조각의 길이² 합</span><b id="m6b">—</b></div><div class="mini a"><span>전체 길이²</span><b>1.0224</b></div><div class="mini r"><span>살린 비율</span><b id="m6c">—</b></div></div>
+    <div class="insight" id="i6" aria-live="polite"></div>
+  </div>
+  <p class="muted" style="font-size:13.5px">원자료 카드 06의 계수 막대(0.8, 0.5, 0.3, 0.18, 0.1)는 제곱합이 1.0224라 "길이 1인 곡선"의 좌표는 아닙니다. 이 페이지에서는 막대 모양을 그대로 쓰고 값은 예시값으로 밝힙니다. "분리 가능한(separable) 공간"은 셀 수 있는 자 세트로 다 읽을 수 있는 방이라는 뜻이에요.</p>
+  <div class="lim"><b>이 방의 한계</b> 조각을 몇 개만 켜면 원래 곡선과 다릅니다. 그때 켠 조각들로 만들 수 있는 곡선 중 가장 가까운 것은? → 7번 방.</div>
+  <div class="quiz" data-quiz="r6"></div>
+</div></section>
+
+<!-- 7번 방 -->
+<section class="sec" id="r7" aria-labelledby="h-r7"><div class="wrap">
+  <h2 id="h-r7"><span class="door">7</span>그림자가 가장 가까운 답 — 끝없는 방에서도 <span class="sub">원자료 카드 07</span></h2>
+  <div class="tags"><span class="tag">방법: 닫힌 바닥 위 수선의 발</span><span class="tag">일상: 정오의 그림자</span><span class="tag">원자료: HILBERT SPACE 07/10</span></div>
+  <div class="wm">
+    <div class="why"><h4>왜 이 방법을 쓰나</h4><ol>
+      <li><b>문제</b>: 쓸 수 있는 조각이 정해져 있을 때, 그 조각들로 만들 수 있는 곡선 중 원래 곡선에 가장 가까운 것을 찾고 싶습니다.</li>
+      <li><b>앞 방의 한계</b>: 6번 방에서 조각을 몇 개만 켜면 원래 곡선과 어긋났어요. "어긋난 것 중 최선"인지는 몰랐죠.</li>
+      <li><b>해법</b>: 그 조각들이 이루는 바닥 M에 똑바로 그림자를 내립니다. 빗나간 만큼 r은 바닥과 직각이고, 그림자 p보다 가까운 곳은 없어요.</li></ol>
+      <div class="easy"><b>쉽게 말하면</b> <a href="e2_shadow_rooms.html#r6">유클리드 6번 방</a>의 그림자가 끝없는 방에서도 그대로 통합니다. 6번 방에서 앞 조각 몇 개만 켠 곡선이 바로 그 그림자예요.</div></div>
+    <div class="am"><h4><img data-mood="asst_shock" alt="" aria-hidden="true">수학 수식을 어려워하는 조수가 대신 물어봅니다</h4>
+      <p class="aq">"끝없는 방에서도 그림자가 하나뿐이에요? 여러 개면 어떡해요?"</p>
+      <span class="lbl">학교 수학으로 보면</span>정사영과 점과 평면 사이의 거리입니다. 바닥이 "닫혀" 있으면(빈틈 없으면) 그림자는 딱 하나예요.
+      <table><thead><tr><th>식 조각</th><th>뜻</th></tr></thead><tbody>
+        <tr><td>x = p + r</td><td>원래 = 그림자 + 빗나간 만큼</td></tr>
+        <tr><td>p = P<sub>M</sub>x</td><td>바닥 M에 떨어뜨린 그림자</td></tr>
+        <tr><td>r ⟂ M</td><td>빗나간 만큼은 바닥과 직각</td></tr>
+        <tr><td>‖x − p‖ ≤ ‖x − m‖</td><td>바닥 위 어떤 m보다 p가 가깝다</td></tr></tbody></table>
+      <span class="lbl">숫자로 한 번 해 보기</span>
+      <div class="try">x = (2, 1, 3), 바닥 = x₁x₂ 평면 → p = <b>(2, 1, 0)</b>, r = (0, 0, 3), 거리 3<br>바닥 위 다른 점 m = (1, 1, 0)까지는 √(1 + 0 + 9) ≈ <b>3.16</b> → 더 멂</div>
+      <div class="ac"><img data-mood="asst_smile" alt="" aria-hidden="true"><p>빈틈 없는 방이라서 그림자가 꼭 하나 있구나. 4번 방이 여기서 쓰였네요!</p></div></div>
+  </div>
+  <div class="pair">
+    <div><div class="tl">일상으로 치면</div>해가 머리 위에 있으면 막대 그림자는 바로 발밑. 발밑에서 벗어난 곳은 모두 막대 끝에서 더 멉니다.</div>
+    <div><div class="tr">머신러닝에서는</div>정해진 특성(바닥)만으로 정답을 예측할 때, 가장 덜 틀린 예측은 정답의 그림자입니다(예측선 긋기). 신호를 조각 몇 개로 줄이는 일도, 그 조각들이 이루는 바닥에 그림자를 내리는 일이에요.</div>
+  </div>
+  <div data-dlg="r7"></div>
+  <div class="panel">
+    <div class="ptitle">바닥 위의 점 m을 옮겨 보기 — 그림자 p보다 가까운 곳이 있을까?</div>
+    <div class="cwrap t3"><canvas id="cv7" aria-label="세 축 공간의 점 x, 바닥 M, 그림자 p, 빗나간 만큼 r, 바닥 위 점 m"></canvas><span class="hint">끌어서 돌리기</span></div>
+    <div class="ctrl"><div class="group"><label class="glabel" for="s7a">m의 x₁</label><input type="range" id="s7a" min="-1" max="3.5" step="0.5" value="1"><span class="val" id="v7a">1</span><label class="glabel" for="s7b">m의 x₂</label><input type="range" id="s7b" min="-1" max="3.5" step="0.5" value="1"><span class="val" id="v7b">1</span><button class="bt" type="button" id="b7">m을 p로</button></div></div>
+    <div class="minis"><div class="mini g"><span>그림자 p</span><b style="font-size:17px">(2, 1, 0)</b></div><div class="mini a"><span>x에서 p까지</span><b>3.00</b></div><div class="mini m"><span>m</span><b id="m7a" style="font-size:17px">—</b></div><div class="mini r"><span>x에서 m까지</span><b id="m7b">—</b></div></div>
+    <div class="insight" id="i7" aria-live="polite"></div>
+  </div>
+  <p class="muted" style="font-size:13.5px">원자료 카드 07은 축 이름 x와 점 이름 x가 겹칩니다. 이 페이지에서는 축을 x₁·x₂·x₃으로 바꿉니다.</p>
+  <div class="lim"><b>이 방의 한계</b> 그림자를 내릴 "조각"으로 무엇을 쓸까요? 소리처럼 출렁이는 곡선에는 물결 조각이 잘 맞습니다 → 8번 방.</div>
+  <div class="quiz" data-quiz="r7"></div>
+</div></section>
+
+<!-- 8번 방 -->
+<section class="sec" id="r8" aria-labelledby="h-r8"><div class="wrap">
+  <h2 id="h-r8"><span class="door">8</span>물결 조각으로 나누기 (푸리에) <span class="sub">원자료 카드 08</span></h2>
+  <div class="tags"><span class="tag">방법: sin·cos 조각의 합</span><span class="tag">일상: 합창을 파트별로 듣기</span><span class="tag">원자료: HILBERT SPACE 08/10</span></div>
+  <div class="wm">
+    <div class="why"><h4>왜 이 방법을 쓰나</h4><ol>
+      <li><b>문제</b>: 소리·진동처럼 출렁이는 곡선을 몇 개의 숫자로 줄이고 싶습니다.</li>
+      <li><b>앞 방의 한계</b>: 그림자를 내릴 조각을 아무렇게나 고르면 조각이 많이 필요해요.</li>
+      <li><b>해법</b>: 매끈한 물결(sin·cos)을 조각으로 씁니다. 물결 조각들은 서로 직각이라, 조각마다 겹침 점수 한 번으로 세기가 나와요.</li></ol>
+      <div class="easy"><b>쉽게 말하면</b> 울퉁불퉁한 곡선도 매끈한 물결 여러 개를 더하면 만들어집니다. 조각을 늘릴수록 원래 곡선에 가까워져요.</div></div>
+    <div class="am"><h4><img data-mood="asst_shock" alt="" aria-hidden="true">수학 수식을 어려워하는 조수가 대신 물어봅니다</h4>
+      <p class="aq">"조각을 끝까지 더하면 모든 점에서 딱 맞아요?"</p>
+      <span class="lbl">학교 수학으로 보면</span>삼각함수 sin·cos과 주기입니다. 1번 물결은 한 바퀴, 2번 물결은 두 바퀴 출렁여요.
+      <table><thead><tr><th>식 조각</th><th>뜻</th></tr></thead><tbody>
+        <tr><td>e₀ = 1/√(2π)</td><td>평평한 조각 (상수항)</td></tr>
+        <tr><td>cos(kx)/√π, sin(kx)/√π</td><td>k번 출렁이는 물결 조각</td></tr>
+        <tr><td>fₙ = c₀e₀ + Σₖ₌₁ⁿ (cos·sin 조각)</td><td>n번 물결까지 더한 곡선</td></tr>
+        <tr><td>‖f − fₙ‖ → 0</td><td>전체로 보면 점점 가까워진다</td></tr></tbody></table>
+      <span class="lbl">숫자로 한 번 해 보기</span>
+      <div class="try">이 방의 곡선: 남은 오차 1번 물결까지 <b>0.71</b> → 3번까지 <b>0.21</b> → 5번까지 <b>0</b><br>꺾인 네모파: 25번 물결까지 더해도 꺾인 곳 근처 최고점이 1이 아닌 <b>약 1.18</b></div>
+      <div class="ac"><img data-mood="asst_smile" alt="" aria-hidden="true"><p>전체로는 가까워지지만, 꺾인 곳 한두 군데는 끝까지 툭 튀어나오는군요!</p></div></div>
+  </div>
+  <div class="pair">
+    <div><div class="tl">일상으로 치면</div>합창을 들으며 소프라노·알토·테너·베이스를 따로 떠올릴 수 있죠. 각 파트의 크기를 알면 합창을 다시 만들 수 있어요. 물결 조각 = 파트, 조각의 세기 = 파트의 크기입니다.</div>
+    <div><div class="tr">머신러닝에서는</div>음성 인식은 소리를 짧게 잘라 물결 조각의 세기로 바꾼 그림(스펙트로그램, 이퀄라이저 화면 같은 것)을 모델에 넣습니다. 트랜스포머의 위치 표시(위치 인코딩)도 여러 빠르기의 sin·cos 물결을 씁니다.</div>
+  </div>
+  <div data-dlg="r8"></div>
+  <div class="panel">
+    <div class="ptitle">물결 조각을 늘려 보기 — 원래 곡선(초록)과 n번 물결까지 더한 곡선(점선)</div>
+    <div class="twin"><div class="cwrap tall"><canvas id="cv8" aria-label="원래 곡선과 부분합 곡선"></canvas></div><div class="cwrap tall"><canvas id="cv8b" aria-label="물결 조각 세 개: 평평한 조각, cos 1번, sin 1번"></canvas></div></div>
+    <div class="ctrl"><div class="group" role="group" aria-label="곡선 고르기"><span class="glabel">곡선</span><span id="g8a"></span></div>
+      <div class="group"><label class="glabel" for="s8">n번 물결까지</label><input type="range" id="s8" min="0" max="25" step="1" value="1"><span class="val" id="v8">1</span></div></div>
+    <div class="minis"><div class="mini m"><span>쓴 조각 수 (상수 포함)</span><b id="m8a">—</b></div><div class="mini g"><span>남은 오차 ‖f − fₙ‖</span><b id="m8b">—</b></div><div class="mini a"><span>가장 높은 점</span><b id="m8c">—</b></div><div class="mini r"><span>원래 곡선의 가장 높은 점</span><b id="m8d">—</b></div></div>
+    <div class="insight" id="i8" aria-live="polite"></div>
+  </div>
+  <p class="muted" style="font-size:13.5px">원자료 카드 08은 상수항 e₀를 기저에 넣었다고 하고는 합을 k = 1부터 씁니다. 이 페이지에서는 상수항부터 세어 fₙ = c₀e₀ + (1번~n번 물결의 cos·sin 조각)으로 바꿉니다. 네모파 실험은 원자료의 주의 문장("평균제곱 수렴이 모든 점의 수렴은 아니다")을 보여 주려고 더한 것입니다.</p>
+  <details class="fold"><summary>교안의 파이썬 코드로 보면 (몰라도 됩니다)</summary>
+    <pre>np.fft.rfft(signal)   # 신호를 물결 조각의 세기로 (빠른 푸리에 변환)</pre></details>
+  <div class="lim"><b>이 방의 한계</b> 조각을 몇 개까지 써야 "충분"할까요? 조각의 세기를 모두 더하면 무엇이 될까요? → 9번 방.</div>
+  <div class="quiz" data-quiz="r8"></div>
+</div></section>
+
+<!-- 9번 방 -->
+<section class="sec" id="r9" aria-labelledby="h-r9"><div class="wrap">
+  <h2 id="h-r9"><span class="door">9</span>피타고라스 정리의 확장 (파스발) <span class="sub">원자료 카드 09</span></h2>
+  <div class="tags"><span class="tag">방법: 전체 길이² = 조각 길이²의 합</span><span class="tag">일상: 용돈을 통장 여러 개에 나눠도 합은 같다</span><span class="tag">원자료: HILBERT SPACE 09/10</span></div>
+  <div class="wm">
+    <div class="why"><h4>왜 이 방법을 쓰나</h4><ol>
+      <li><b>문제</b>: 조각을 몇 개까지 남겨야 곡선을 충분히 살리는지 알고 싶습니다.</li>
+      <li><b>앞 방의 한계</b>: 조각을 늘릴수록 가까워진다는 건 알았지만, "얼마나" 살렸는지 숫자가 없었어요.</li>
+      <li><b>해법</b>: 곡선의 세기(길이²) = 조각 세기(좌표²)의 합. 그래서 남긴 조각의 좌표²만 더하면 몇 %를 살렸는지 바로 압니다.</li></ol>
+      <div class="easy"><b>쉽게 말하면</b> 가로 3, 세로 4인 화살표의 길이²는 9 + 16 = 25. 조각이 끝없이 많아도, 곡선이어도 똑같습니다.</div></div>
+    <div class="am"><h4><img data-mood="asst_shock" alt="" aria-hidden="true">수학 수식을 어려워하는 조수가 대신 물어봅니다</h4>
+      <p class="aq">"곡선 넓이를 구하는 거랑 막대 제곱을 더하는 게 정말 같은 값이에요?"</p>
+      <span class="lbl">학교 수학으로 보면</span>피타고라스 정리입니다. 조각들이 서로 직각이라 "가로² + 세로²"가 끝없이 이어질 뿐이에요.
+      <table><thead><tr><th>식 조각</th><th>뜻</th></tr></thead><tbody>
+        <tr><td>‖x‖² = ∫ x(t)² dt</td><td>곡선의 세기 (제곱의 넓이)</td></tr>
+        <tr><td>Σ |⟨x, eₖ⟩|²</td><td>조각 세기의 합</td></tr>
+        <tr><td>둘이 같다</td><td>자 세트에 빠진 자가 없을 때 (완전한 자 세트)</td></tr></tbody></table>
+      <span class="lbl">숫자로 한 번 해 보기</span>
+      <div class="try">x = 3e₁ + 4e₂ → 조각 세기 9 + 16 = <b>25</b>, 곡선 제곱의 넓이도 <b>25</b>, 길이 5<br>첫 조각만 남기면 9 ÷ 25 = <b>36%</b>, 두 조각 모두면 100%</div>
+      <div class="ac"><img data-mood="asst_smile" alt="" aria-hidden="true"><p>그럼 큰 조각부터 남기면 적은 조각으로 많이 살리겠네요. 대결 힌트 발견!</p></div></div>
+  </div>
+  <div class="pair">
+    <div><div class="tl">일상으로 치면</div>용돈 25만 원을 통장 두 개에 9만 원·16만 원으로 나눠 넣어도 총액은 25만 원입니다. 통장(조각)이 몇 개든 합은 그대로예요.</div>
+    <div><div class="tr">머신러닝에서는</div>MP3·JPEG 압축은 세기가 작은 조각을 버립니다. 버린 세기의 합이 곧 잃은 양이라 품질을 미리 계산할 수 있어요. PCA의 "설명된 분산 비율"도 같은 계산입니다.</div>
+  </div>
+  <div data-dlg="r9"></div>
+  <div class="panel">
+    <div class="ptitle">두 조각의 좌표를 바꿔 보기 — 곡선 제곱의 넓이(왼쪽)와 막대 제곱의 합(오른쪽)</div>
+    <div class="twin"><div class="cwrap tall"><canvas id="cv9" aria-label="곡선 x(t) = a e1 + b e2와 그 제곱의 넓이"></canvas></div><div class="cwrap tall"><canvas id="cv9b" aria-label="조각 세기 막대 a제곱, b제곱과 직각삼각형"></canvas></div></div>
+    <div class="ctrl"><div class="group"><label class="glabel" for="s9a">a (1번 조각)</label><input type="range" id="s9a" min="-5" max="5" step="0.5" value="3"><span class="val" id="v9a">3</span>
+      <label class="glabel" for="s9b">b (2번 조각)</label><input type="range" id="s9b" min="-5" max="5" step="0.5" value="4"><span class="val" id="v9b">4</span></div></div>
+    <div class="minis"><div class="mini g"><span>곡선 제곱의 넓이</span><b id="m9a">—</b></div><div class="mini m"><span>a² + b²</span><b id="m9b">—</b></div><div class="mini a"><span>첫 조각만 남기면</span><b id="m9c">—</b></div><div class="mini r"><span>길이</span><b id="m9d">—</b></div></div>
+    <div class="insight" id="i9" aria-live="polite"></div>
+  </div>
+  <p class="muted" style="font-size:13.5px">원자료 카드 09의 왼쪽 신호 그림과 오른쪽 막대(9, 16, 0)는 서로 다른 예입니다. 이 페이지에서는 막대 예(3e₁ + 4e₂)로 곡선을 직접 만들어 두 값이 같음을 보입니다.</p>
+  <div class="lim"><b>이 방의 한계</b> 지금까지는 신호(곡선) 이야기였어요. 끝없는 방은 분류 같은 다른 문제에서도 쓰일까요? → 10번 방.</div>
+  <div class="quiz" data-quiz="r9"></div>
+</div></section>
+
+<!-- 10번 방 -->
+<section class="sec" id="r10" aria-labelledby="h-r10"><div class="wrap">
+  <h2 id="h-r10"><span class="door">10</span>힐베르트 공간이 쓰이는 곳 <span class="sub">원자료 카드 10</span></h2>
+  <div class="tags"><span class="tag">방법: 겹침 점수 → 기하, 빈틈 없음 → 믿을 수 있는 극한</span><span class="tag">일상: 지도 없이 거리표만으로 길 찾기</span><span class="tag">원자료: HILBERT SPACE 10/10</span></div>
+  <div class="steps four">
+    <div class="step"><b>신호</b>곡선을 직각인 조각에 그림자로 내려 근사합니다(8·9번 방).</div>
+    <div class="step"><b>양자역학</b>입자의 상태는 복소수 힐베르트 공간의 길이 1인 화살표입니다(이름만 소개).</div>
+    <div class="step"><b>미분방정식</b>열·파동 방정식의 "약한 해"를 곡선 방에서 찾습니다(이름만 소개).</div>
+    <div class="step"><b>머신러닝 — 커널 방</b>곧은 칸막이로 안 갈리는 무리를, 끝없는 방에서 곧게 가릅니다(아래 실험).</div>
+  </div>
+  <div class="wm">
+    <div class="why"><h4>왜 이 방법을 쓰나 (커널 방)</h4><ol>
+      <li><b>문제</b>: 안쪽 원의 점(+)과 바깥 고리의 점(−)을 가르고 싶습니다.</li>
+      <li><b>앞 방의 한계</b>: <a href="e2_shadow_rooms.html#r7">유클리드 7번 방</a>의 곧은 칸막이로는 원을 둘러싼 무리를 가를 수 없어요.</li>
+      <li><b>해법</b>: 점마다 "다른 점들과의 닮음 점수표(커널)"를 붙여 끝없는 방으로 옮기면, 그곳에서는 곧은 칸막이로 갈립니다. 원래 방으로 돌아와 보면 그 칸막이가 휘어진 경계로 보여요.</li></ol>
+      <div class="easy"><b>쉽게 말하면</b> 좌표를 몰라도 "누구와 누가 얼마나 닮았나" 표만 있으면 칸막이를 세울 수 있습니다.</div></div>
+    <div class="am"><h4><img data-mood="asst_shock" alt="" aria-hidden="true">수학 수식을 어려워하는 조수가 대신 물어봅니다</h4>
+      <p class="aq">"끝없는 방으로 옮기면 계산도 끝없이 많아지는 거 아니에요?"</p>
+      <span class="lbl">학교 수학으로 보면</span>지수함수와 두 점 사이의 거리입니다. 끝없는 방의 겹침 점수를 닮음 점수표 한 번으로 바로 계산해요.
+      <table><thead><tr><th>식 조각</th><th>뜻</th></tr></thead><tbody>
+        <tr><td>k(x, x′) = e<sup>−거리²/(2σ²)</sup></td><td>닮음 점수: 가까우면 1, 멀면 0</td></tr>
+        <tr><td>f(x) = Σ αᵢ k(x, xᵢ)</td><td>점수 = 이웃마다 (+1 또는 −1) × 닮음 점수</td></tr>
+        <tr><td>f(x) = 0</td><td>원래 방에서 보이는 휘어진 경계</td></tr>
+        <tr><td>σ</td><td>닮음이 미치는 거리</td></tr></tbody></table>
+      <span class="lbl">숫자로 한 번 해 보기</span>
+      <div class="try">거리 0 → 닮음 1, 거리 = σ → e<sup>−0.5</sup> ≈ <b>0.61</b>, 거리 = 3σ → e<sup>−4.5</sup> ≈ <b>0.011</b><br>점 32개: 곧은 칸막이 최고 <b>23개</b>, 커널 방(σ = 0.5) <b>32개</b> 모두 맞힘</div>
+      <div class="ac"><img data-mood="asst_smile" alt="" aria-hidden="true"><p>끝없는 방에 직접 안 가고 닮음 점수표만으로 계산하는 거군요. 똑똑하다!</p></div></div>
+  </div>
+  <div class="pair">
+    <div><div class="tl">일상으로 치면</div>지도가 없어도 "어느 동네끼리 가까운가" 표만 있으면 우리 동네와 옆 동네를 나눌 수 있습니다.</div>
+    <div><div class="tr">머신러닝에서는</div>SVM과 커널 회귀가 이 방법을 씁니다(재생 커널 힐베르트 공간, RKHS). 딥러닝 이전에 이미지·문서 분류의 주력이었고, 지금도 데이터가 적을 때 강합니다.</div>
+  </div>
+  <div data-dlg="r10"></div>
+  <div class="panel">
+    <div class="ptitle">닮음이 미치는 거리 σ를 바꿔 보기 — 색 = 점수 f(x), 경계선 = f(x) = 0</div>
+    <div class="cwrap sq"><canvas id="cv10" aria-label="안쪽 원의 점과 바깥 고리의 점, 커널 점수 색과 경계"></canvas></div>
+    <div class="ctrl"><div class="group"><label class="glabel" for="s10">σ</label><input type="range" id="s10" min="0.3" max="2" step="0.1" value="0.5"><span class="val" id="v10">0.5</span><button class="bt" type="button" id="b10" aria-pressed="false">곧은 칸막이 최선 보기</button></div></div>
+    <div class="minis"><div class="mini g"><span>커널 방이 맞힌 점</span><b id="m10a">—</b></div><div class="mini r"><span>곧은 칸막이 최고</span><b>23 / 32</b></div><div class="mini m"><span>σ</span><b id="m10b">—</b></div><div class="mini a"><span>경계 모양</span><b id="m10c" style="font-size:16px">—</b></div></div>
+    <div class="insight" id="i10" aria-live="polite"></div>
+  </div>
+  <div class="lim"><b>이 방의 한계</b> σ가 너무 작으면 점마다 섬처럼 외워 버리고(과적합), 너무 크면 곧은 칸막이처럼 둔해집니다. σ는 검증 데이터로 고릅니다(<a href="https://adminmrobo.github.io/optimization_3d_map/first_step_0.html#s03">최적화 첫걸음 ⓪ 0.3</a>).</div>
+  <div class="quiz" data-quiz="r10"></div>
+</div></section>
+
+<!-- 대결 -->
+<section class="sec" id="duel" aria-labelledby="h-duel"><div class="wrap">
+  <h2 id="h-duel"><span class="door e">VS</span>대결 — 곡선 맞히기</h2>
+  <p class="lead">박사가 물결 조각 몇 개가 섞인 곡선 하나를 내놓았습니다. 조각을 하나씩 골라 곡선의 세기를 <b>95% 이상</b> 살리면 끝. <b>시아</b>는 "낮은 물결부터 차례로"(1번, 2번, 3번 …), <b>모아</b>는 "조각마다 세기를 먼저 재고 큰 조각부터" 고릅니다. 판정은 조수 하루, 기준은 <b>쓴 조각 수(적을수록 승)</b>입니다.</p>
+  <div class="duel">
+    <div class="side l sia"><div class="head"><img id="d-sia" data-mood="sia_guide" alt="" aria-hidden="true"><div><b style="color:var(--c-sia)">인턴 시아</b><br><span class="muted">"낮은 물결이 기본이죠! 1번부터 차례로 쌓을게요."</span></div></div><div data-dlg="dsia"></div></div>
+    <div class="vs">VS</div>
+    <div class="side r moa"><div class="head"><img id="d-moa" data-mood="moa_report" alt="" aria-hidden="true"><div><b style="color:var(--c-moa)">인턴 모아</b><br><span class="muted">"9번 방 계산이면, 세기가 큰 조각부터 고르면 돼요."</span></div></div><div data-dlg="dmoa"></div></div>
+  </div>
+  <div class="panel">
+    <div class="cwrap tall"><canvas id="cvDuel" aria-label="대결 곡선과 두 사람이 고른 조각으로 다시 만든 곡선"></canvas></div>
+    <div class="ctrl"><div class="group"><span class="glabel">먼저 맞혀 보기</span><button class="bt" data-pred="sia" type="button" aria-pressed="false">시아가 이길 것 같다</button><button class="bt" data-pred="moa" type="button" aria-pressed="false">모아가 이길 것 같다</button></div>
+      <div class="group"><button class="bt primary" data-go type="button">결과 보기</button><button class="bt" data-close type="button" hidden>다시 닫기</button></div></div>
+    <div class="duel-res" hidden>
+      <div class="tblwrap"><table class="cmp"><thead><tr><th>순서</th><th>시아가 고른 조각 → 살린 세기</th><th>모아가 고른 조각 → 살린 세기</th></tr></thead><tbody id="d-tbl"></tbody></table></div>
+      <p class="muted" style="font-size:13.5px;margin:6px 0 0">막대 = 95%까지 쓴 조각 수 (짧을수록 좋음).</p><div class="resbars"><div class="resbar"><span style="color:var(--c-sia)">시아 · 쓴 조각</span><div class="bar"><i id="d-bs" style="background:var(--c-sia)"></i></div><b id="d-vs">—</b></div>
+        <div class="resbar"><span style="color:var(--c-moa)">모아 · 쓴 조각</span><div class="bar"><i id="d-bm" style="background:var(--c-moa)"></i></div><b id="d-vm">—</b></div></div>
+      <div id="d-say"></div>
+      <div class="score"><span id="d-score"></span><span id="d-pred"></span></div>
+    </div>
+  </div>
+  <p class="muted" style="font-size:13.5px">대결 곡선은 1·2·4·7번 sin 물결을 섞은 설명용 예시입니다(세기 0.3, 0.1, 0.9, 0.4). 실제 소리에서는 낮은 물결이 센 경우가 많아 시아의 방법이 잘 맞을 때도 있습니다.</p>
+  <div class="quiz" data-quiz="duel"></div>
+</div></section>
+
+<section class="sec" id="sum" aria-labelledby="h-sum"><div class="wrap">
+  <h2 id="h-sum">정리 — 끝없는 방의 열 가지 도구</h2>
+  <div class="tblwrap"><table class="cmp"><thead><tr><th>방</th><th>도구</th><th>답 한 줄</th><th>머신러닝에서는</th></tr></thead><tbody>
+    <tr><td>1~5</td><td>세 겹 상자·곡선의 겹침·직각·빈틈 없음·세 종류의 방</td><td><a href="h1_arrow_rooms.html">①편</a> — 곡선도 화살표, 겹침 점수는 곱해서 넓이</td><td>신호 유사도, 학습의 수렴</td></tr>
+    <tr><td>6</td><td>자 세트</td><td>좌표 = 그 자와의 겹침 점수. 앞쪽 몇 개로 거의 다 읽는다</td><td>곡선 → 특성 숫자, PCA</td></tr>
+    <tr><td>7</td><td>그림자</td><td>닫힌 바닥 위 그림자는 하나뿐이고 가장 가깝다</td><td>예측선 긋기, 신호 줄이기</td></tr>
+    <tr><td>8</td><td>물결 조각</td><td>sin·cos 조각의 합. 전체로는 가까워지지만 꺾인 곳은 튄다</td><td>스펙트로그램, 위치 인코딩</td></tr>
+    <tr><td>9</td><td>피타고라스 확장</td><td>곡선의 세기 = 조각 세기의 합</td><td>압축, 설명된 분산</td></tr>
+    <tr><td>10</td><td>커널 방</td><td>닮음 점수표로 끝없는 방에서 곧게 가른다</td><td>SVM, 커널 회귀</td></tr>
+  </tbody></table></div>
+  <h3>비유의 한계</h3>
+  <ul>
+    <li>곡선·데이터·대결 곡선은 모두 설명용 예시입니다. 실제 신호는 잡음이 있고, 조각 세기를 재는 데도 오차가 생깁니다.</li>
+    <li>양자역학·미분방정식은 이름만 소개했습니다. 복소수 힐베르트 공간에서는 겹침 점수를 계산하는 규칙이 조금 다릅니다.</li>
+  </ul>
+</div></section>
+
+<section class="sec" id="outro" aria-labelledby="h-outro"><div class="wrap">
+  <h2 id="h-outro">아웃트로 — 복도를 나서며</h2>
+  <div data-dlg="outro"></div>
+  <div class="next"><a href="index.html"><b>목차로</b><br>유클리드 0편부터 다시 보기</a><a href="https://adminmrobo.github.io/optimization_3d_map/"><b>좌표축 위의 그릇</b><br>그릇의 바닥으로 걸어가는 최적화 이야기</a><a href="h1_arrow_rooms.html"><b>① 화살표의 방</b></a></div>
+</div></section>
+</main>
+
+<footer><div class="wrap">
+  <h3>출처</h3>
+  <table><thead><tr><th>#</th><th>자료</th><th>이 페이지에서 쓴 곳</th></tr></thead><tbody>
+    <tr><td>[1]</td><td>eeanimation, 인포그래픽 「HILBERT SPACE 01~10」 (사용자 제공 이미지, 원 게시물 주소·게시일 미확인)</td><td>6~10번 방 — 카드 06~10의 구성과 도표(직각인 자와 계수 막대, 3D 사영, 신호·기저·부분합, 에너지 막대와 3·4·5, 응용 4분할)를 따라 새로 그림</td></tr>
+    <tr><td>[2]</td><td>교육부 고등학교 수학·미적분·기하 교육과정 (삼각함수, 정적분, 정사영, 지수함수)</td><td>조수 수식 상자의 "학교 수학으로 보면"</td></tr>
+    <tr><td>[3]</td><td>Schölkopf, B. & Smola, A. J. (2002). Learning with Kernels. MIT Press.</td><td>10번 방 — 커널 방(RKHS)과 SVM</td></tr>
+    <tr><td>[4]</td><td>Vaswani, A. 외 (2017). Attention Is All You Need. NeurIPS.</td><td>8번 방 — sin·cos 위치 인코딩</td></tr>
+  </tbody></table>
+  <h3>예시값·설명용 모형인 것</h3>
+  <ul><li>6번 방의 계수 0.8·0.5·0.3·0.18·0.1(원자료 막대 모양), 8번 방의 곡선과 네모파, 9번 방의 a·b, 10번 방의 점 32개(시드 고정), 대결 곡선</li></ul>
+  <p>원자료와 다르게 쓴 곳: 카드 06 계수 제곱합(1.0224) 밝힘, 카드 07 축 이름(x → x₁·x₂·x₃), 카드 08 합의 시작(상수항부터), 카드 09 두 그림의 예를 하나로 맞춤. 계산 값은 모두 다시 검산함(code/check_hilbert.js).</p>
+  <p>캐릭터 이름·설정·그림은 저작권자 안상선의 허락 없이 사용할 수 없습니다.</p>
+  <p>글 · 안상선 ((주)M-Robo 대표) · <a href="https://adminmrobo.github.io/who_am_i/who_am_i.html">저자 소개</a> · <a href="index.html">목차</a> · <a href="h1_arrow_rooms.html">①편</a></p>
+</div></footer>
+
+<script>
+/*@@SPRITES@@*/
+/*@@GEO@@*/
+/*@@HGEO@@*/
+/*@@COMMON@@*/
+/*@@PLANE@@*/
+(function(){
+'use strict';
+var $=U.$,$$=U.$$,fmt=U.fmt,cssv=U.cssv,PI=Math.PI;
+function f1(x){return fmt(x,Math.abs(x-Math.round(x))<1e-9?0:2);}
+function V(cv,draw){var o={dirty:true};U.reg(cv,function(dt){if(o.dirty||dt===0){draw();o.dirty=false;}});return o;}
+function curve(o,f,a,b,col,wd,dash,n){var g=o.g;n=n||400;g.strokeStyle=col;g.lineWidth=wd||2;g.setLineDash(dash||[]);g.beginPath();for(var i=0;i<=n;i++){var t=a+(b-a)*i/n,x=o.X(t),y=o.Y(f(t));i?g.lineTo(x,y):g.moveTo(x,y);}g.stroke();g.setLineDash([]);}
+function area(o,f,a,b,col){var g=o.g;g.fillStyle=col;g.beginPath();g.moveTo(o.X(a),o.Y(0));for(var i=0;i<=300;i++){var t=a+(b-a)*i/300;g.lineTo(o.X(t),o.Y(f(t)));}g.lineTo(o.X(b),o.Y(0));g.closePath();g.fill();}
+function bars(cv,vals,labels,cols,o){o=o||{};var R=U.setup(cv),g=R.g,w=R.w,h=R.h,L=44,B=30,T=24,mx=o.max||Math.max.apply(null,vals.map(Math.abs)),bw=(w-L-20)/vals.length;U.grid24(g,w,h);
+  g.strokeStyle=cssv('--rule');g.beginPath();g.moveTo(L,h-B+.5);g.lineTo(w-10,h-B+.5);g.stroke();
+  vals.forEach(function(v,i){var bh=(h-B-T)*Math.abs(v)/mx,x=L+i*bw+bw*0.18;g.fillStyle=cols[i]||cssv('--info');g.fillRect(x,h-B-bh,bw*0.64,bh);g.fillStyle=cssv('--text');g.font='600 12px '+cssv('--font');g.textAlign='center';g.fillText(o.fmt?o.fmt(v):fmt(v,2),x+bw*0.32,h-B-bh-6);g.fillStyle=cssv('--muted');g.font='12px '+cssv('--font');g.fillText(labels[i],x+bw*0.32,h-B+16);});
+  if(o.title)U.label(g,L,12,o.title,cssv('--muted'));if(o.stamp)U.stamp(g,w,o.stamp);return {g:g,w:w,h:h};}
+
+var DLG={
+ hero:[["doc","doc_front","①편에서 끝없는 방에도 자와 각도기가 있다는 걸 봤어요. 이번엔 그걸로 곡선을 쪼개 봅시다."],
+   ["sia","sia_signal","쪼갠다니, 스무디를 과일로 되돌리는 거죠?"],
+   ["moa","moa_cheer","그리고 끝에 대결! 이번엔 조각 고르기래요."]],
+ r6:[["moa","moa_report","자가 끝없이 많으면 좌표를 다 구할 수가 없잖아요."],
+   ["robo","robo_coin","그러니까 곡선은 숫자로 못 적는다는 거지!"],
+   ["fly","fly_point","조각을 1번부터 하나씩 켜면서 '살린 비율'을 봐."],
+   ["sia","sia_explain","세 개만 켰는데 96%예요! 뒤쪽 조각은 작아서 거의 티가 안 나요."]],
+ r7:[["doc","doc_think","켠 조각들로 만들 수 있는 곡선 중, 원래 곡선에 가장 가까운 건 어떻게 고를까요?"],
+   ["robo","robo_coin","아무거나 비슷하면 되지!"],
+   ["fly","fly_magnify","3D에서 확인해 보자. 바닥 위 m을 옮기면서 거리를 봐."],
+   ["moa","moa_ok","m이 p와 겹칠 때만 3이고, 나머지는 다 3보다 멀어요."]],
+ r8:[["sia","sia_think","조각을 끝까지 더하면 완벽하게 맞겠죠?"],
+   ["robo","robo_calc","당연! 끝없이 더하면 완벽!"],
+   ["fly","fly_point","'꺾인 네모파'를 고르고 n을 25까지 올려 봐. 꺾인 곳 근처를 잘 봐."],
+   ["moa","moa_sparkle","전체 오차는 줄어드는데, 꺾인 곳 옆에 툭 튀어나온 뿔은 그대로예요!"]],
+ r9:[["moa","moa_report","곡선 넓이랑 막대 제곱 합이 정말 같아요?"],
+   ["robo","robo_coin","곡선은 휘었는데 같을 리가 없지!"],
+   ["fly","fly_magnify","a, b를 아무렇게나 바꿔 봐. 두 칸 숫자를 비교해."],
+   ["sia","sia_signal","언제나 똑같아요! 3, 4면 둘 다 25."]],
+ r10:[["sia","sia_think","원 안쪽이랑 바깥 고리는 곧은 칸막이로 못 가르잖아요."],
+   ["robo","robo_coin","그럼 그냥 포기해야지!"],
+   ["fly","fly_point","σ를 0.5로 두고 색을 봐. 그다음 '곧은 칸막이 최선'과 비교해."],
+   ["moa","moa_ok","커널 방은 32개 다 맞히고, 곧은 칸막이는 23개가 최고예요."]],
+ dsia:[["sia","sia_guide","1번 물결, 2번 물결… 순서대로 쌓는 게 제일 깔끔하죠!"]],
+ dmoa:[["moa","moa_report","겹침 점수로 조각마다 세기를 먼저 재 볼게요. 큰 것부터요."]],
+ outro:[["doc","doc_magic","유클리드 방 열 개, 끝없는 방 열 개를 지나왔습니다. 남은 것 세 줄.<br>① 곡선도 화살표 — 겹침 점수는 곱해서 넓이 ② 그림자는 끝없는 방에서도 하나뿐이고 가장 가깝다 ③ 조각 세기의 합이 전체 세기라, 큰 조각만 남겨도 된다."],
+   ["robo","robo_happy","끝없이 많아도 큰 것부터 세면 금방이군! 주판알이 남았어."],
+   ["sia","sia_smile","낮은 물결부터 쌓는 것도 진짜 소리에선 잘 맞을 때가 많대요. 다음엔 실제 소리로 해 보고 싶어요!"],
+   ["moa","moa_cheer","저는 커널 방의 σ 고르는 법이 궁금해요. 검증 데이터… 그릇 시리즈로 다시 가 볼래요!"],
+   ["asst","asst_proud","식은 다 숫자로 풀었어요. 수고하셨습니다!"]]
+};
+U.dialogues(DLG);U.fillImgs();
+
+/* 표지 */
+(function(){var cv=$('#coverCv');V(cv,function(){var co=HG.coeffs(HG.sig8,5),o=U.plot(cv,{xr:[0,2*PI],yr:[-1.6,1.6],xt:[],yt:[]});curve(o,HG.sig8,0,2*PI,cssv('--terrain'),3.4);
+  [1,2,3].forEach(function(k,i){curve(o,function(x){return co.s[k-1]*Math.sin(k*x)/Math.sqrt(PI);},0,2*PI,['rgba(30,85,200,.6)','rgba(155,63,181,.6)','rgba(163,92,0,.6)'][i],1.8,[5,4]);});});})();
+
+/* 6번 방 */
+var ON6=[true,false,false,false,false];
+var v6=V($('#cv6'),function(){var p=function(t){var s=0;ON6.forEach(function(on,i){if(on)s+=HG.C6[i]*HG.ek(i+1)(t);});return s;};
+  var o=U.plot($('#cv6'),{xr:[0,1],yr:[-1.2,2.4],xt:[0,0.25,0.5,0.75,1],yt:[-1,0,1,2],xl:'t',stamp:'설명용 곡선'});curve(o,HG.f6,0,1,cssv('--info'),2.6);curve(o,p,0,1,cssv('--gfp'),2.6,[6,4]);
+  U.label(o.g,o.X(0.3),o.Y(2.25),'파랑 = 원래 곡선, 초록 점선 = 켠 조각만',cssv('--muted'));});
+var v6b=V($('#cv6b'),function(){bars($('#cv6b'),HG.C6.map(function(c,i){return c;}),['c₁','c₂','c₃','c₄','c₅'],HG.C6.map(function(c,i){return ON6[i]?cssv('--gfp'):'rgba(91,104,116,.3)';}),{max:0.9,title:'좌표 cₖ = ⟨f, eₖ⟩',stamp:'예시값'});});
+function up6(){var n=0,s=0;ON6.forEach(function(on,i){if(on){n++;s+=HG.C6[i]*HG.C6[i];}});$('#m6a').textContent=n+'개';$('#m6b').textContent=fmt(s,4);$('#m6c').textContent=fmt(s/1.0224*100,1)+'%';
+  U.ins($('#i6'),[['g','켠 조각 '+n+'개의 좌표² 합 '+fmt(s,4)+' → 전체의 '+fmt(s/1.0224*100,1)+'%를 살렸어요.'],['a',n===5?'다섯 개를 모두 켜면 원래 곡선과 똑같습니다. 각 좌표는 곡선과 그 자의 겹침 점수(넓이) 한 번으로 나왔어요.':'좌표가 큰 앞쪽 조각만 켜도 대부분을 살립니다. 켠 조각들로 만든 곡선이 "가장 가까운 곡선"인 이유는 → 7번 방.']]);v6.dirty=true;v6b.dirty=true;}
+(function(){var host=$('#g6');ON6.forEach(function(_,i){var b=document.createElement('button');b.type='button';b.className='bt';b.textContent='e'+(i+1);b.setAttribute('aria-pressed',String(ON6[i]));b.onclick=function(){ON6[i]=!ON6[i];b.setAttribute('aria-pressed',String(ON6[i]));up6();};host.appendChild(b);});
+  $('#b6').onclick=function(){ON6=ON6.map(function(){return true;});$$('#g6 .bt').forEach(function(b){b.setAttribute('aria-pressed','true');});up6();};})();up6();
+
+/* 7번 방 */
+var M7=[1,1];
+var S7=new U.Space3D($('#cv7'),{L:3.5,zoom:1.05,yaw:-0.7,pitch:0.4,ticks:true,axes:['x₁','x₂','x₃'],aria:'바닥 x₁x₂ 평면, 점 x = (2, 1, 3), 그림자 p'});
+S7.ov.push(function(g,S){var c=[[-1,-1,0],[3.5,-1,0],[3.5,3.5,0],[-1,3.5,0]];g.beginPath();c.forEach(function(p,i){var q=S.P(p[0],p[1],p[2]);i?g.lineTo(q[0],q[1]):g.moveTo(q[0],q[1]);});g.closePath();g.fillStyle='rgba(15,127,134,.12)';g.fill();g.strokeStyle='rgba(15,127,134,.5)';g.stroke();
+  var lab=S.P(-0.8,3.2,0);U.label(g,lab[0],lab[1],'바닥 M',cssv('--terrain'));
+  var x=HG.X7,p=[2,1,0],m=[M7[0],M7[1],0];S.arrow3(g,[0,0,0],x,cssv('--info'),2.6);S.arrow3(g,[0,0,0],p,cssv('--gfp'),2.6);S.line3(g,[x,p],cssv('--amber'),2.4);S.line3(g,[x,m],'rgba(155,63,181,.7)',1.8,[5,4]);
+  var q=S.dot3(g,x[0],x[1],x[2],cssv('--info'),6);U.label(g,q[0]+8,q[1]-8,'x (2, 1, 3)',cssv('--info'));q=S.dot3(g,2,1,0,cssv('--gfp'),5);U.label(g,q[0]+8,q[1]+12,'p',cssv('--gfp'));
+  q=S.dot3(g,m[0],m[1],0,cssv('--stain'),5);U.label(g,q[0]-8,q[1]+14,'m',cssv('--stain'),'right');q=S.P(2,1,1.5);U.label(g,q[0]+8,q[1],'r',cssv('--amber'));});
+function up7(){var d=Math.hypot(2-M7[0],1-M7[1],3);$('#m7a').textContent='('+f1(M7[0])+', '+f1(M7[1])+', 0)';$('#m7b').textContent=fmt(d,2);
+  var at=Math.abs(d-3)<1e-9;U.ins($('#i7'),[[at?'g':'a',at?'m이 p와 겹쳤어요. 거리 3 — 이보다 가까운 바닥 위 점은 없습니다.':'m까지 '+fmt(d,2)+' > 3. 바닥 위에서 옮긴 만큼(√('+f1((2-M7[0])*(2-M7[0])+(1-M7[1])*(1-M7[1]))+'))이 빗변으로 더해져 늘 더 멉니다.'],['m','r = (0, 0, 3)은 바닥의 어느 방향과도 직각. 6번 방에서 조각 몇 개만 켠 곡선도 이렇게 "그 조각들의 바닥"에 내린 그림자입니다.']]);S7.dirty=true;}
+[['s7a','v7a',0],['s7b','v7b',1]].forEach(function(z){var r=$('#'+z[0]);r.oninput=function(){M7[z[2]]=+r.value;$('#'+z[1]).textContent=f1(+r.value);up7();};});
+$('#b7').onclick=function(){M7=[2,1];$('#s7a').value=2;$('#s7b').value=1;$('#v7a').textContent='2';$('#v7b').textContent='1';up7();};up7();
+
+/* 8번 방 */
+var F8='sig',N8=1,CO={sig:HG.coeffs(HG.sig8,25),sq:HG.coeffs(HG.sq8,25)},FN={sig:HG.sig8,sq:HG.sq8};
+function maxOf(f){var m=-9;for(var i=0;i<=2000;i++)m=Math.max(m,f(i/2000*2*PI));return m;}
+var v8=V($('#cv8'),function(){var f=FN[F8],p=HG.partial(CO[F8],N8),o=U.plot($('#cv8'),{xr:[0,2*PI],yr:[-1.6,1.6],xt:[0,PI,2*PI],xf:function(t){return t===0?'0':t<4?'π':'2π';},yt:[-1,0,1],xl:'x',stamp:N8+'번 물결까지'});
+  curve(o,f,0,2*PI,cssv('--terrain'),2.8,null,1200);curve(o,p,0,2*PI,cssv('--amber'),2.2,[6,4],1200);});
+var v8b=V($('#cv8b'),function(){var R=U.setup($('#cv8b')),g=R.g,w=R.w,h=R.h;U.grid24(g,w,h);var rows=[['e₀ (평평)',function(){return 1/Math.sqrt(2*PI);}],['cos 1번',function(x){return Math.cos(x)/Math.sqrt(PI);}],['sin 1번',function(x){return Math.sin(x)/Math.sqrt(PI);}]],rh=h/3;
+  rows.forEach(function(r,i){var y0=rh*i+rh/2,X=function(x){return 70+x/(2*PI)*(w-90);},Y=function(v){return y0-v*rh*0.7;};g.strokeStyle=cssv('--rule');g.beginPath();g.moveTo(70,y0);g.lineTo(w-20,y0);g.stroke();
+    g.strokeStyle=cssv('--info');g.lineWidth=2.2;g.beginPath();for(var k=0;k<=200;k++){var x=k/200*2*PI;k?g.lineTo(X(x),Y(r[1](x))):g.moveTo(X(x),Y(r[1](x)));}g.stroke();U.label(g,8,y0,r[0],cssv('--muted'));});U.stamp(g,w,'서로 직각인 조각');});
+function up8(){var co=CO[F8],f=FN[F8],e=HG.err(f,co,N8),mx=maxOf(HG.partial(co,N8));$('#m8a').textContent=(1+2*N8)+'개';$('#m8b').textContent=fmt(e,3);$('#m8c').textContent=fmt(mx,3);$('#m8d').textContent=fmt(maxOf(f),3);
+  var M=F8==='sig'?[['g','남은 오차 '+fmt(e,3)+'. 이 곡선은 1·2·3·5번 sin 물결로 만들어서, 5번 물결까지 더하면 오차가 0이 됩니다.'],['a','조각마다 세기 = 겹침 점수: 1번 sin 1.507, 2번 0.620, 3번 −0.266, 5번 0.213. cos 조각은 모두 0이에요.']]
+    :[['r','네모파: 남은 오차 '+fmt(e,3)+'(n이 커질수록 줄어듦), 그런데 꺾인 곳 옆 최고점은 '+fmt(mx,3)+' — 1보다 약 18% 높게 튀어나온 채 남습니다.'],['a','전체로 가까워지는 것(평균제곱 수렴)과 모든 점에서 맞는 것은 다릅니다. 원자료 카드 08의 주의 문장이 바로 이것이에요.']];
+  U.ins($('#i8'),M);v8.dirty=true;}
+U.btns($('#g8a'),[['sig','이 방의 곡선'],['sq','꺾인 네모파']],'sig',function(v){F8=v;up8();});var r8=$('#s8');r8.oninput=function(){N8=+r8.value;$('#v8').textContent=N8;up8();};up8();
+
+/* 9번 방 */
+var A9=3,B9=4;
+var v9=V($('#cv9'),function(){var x=function(t){return A9*HG.ek(1)(t)+B9*HG.ek(2)(t);},lim=Math.max(2,Math.sqrt(2)*(Math.abs(A9)+Math.abs(B9))*1.05);
+  var o=U.plot($('#cv9'),{xr:[0,1],yr:[-lim,lim],xt:[0,0.5,1],yt:[-Math.round(lim),0,Math.round(lim)],xl:'t',stamp:'x(t) = a·e₁ + b·e₂'});area(o,x,0,1,'rgba(15,127,134,.14)');curve(o,x,0,1,cssv('--terrain'),2.6);});
+var v9b=V($('#cv9b'),function(){bars($('#cv9b'),[A9*A9,B9*B9,0],['a²','b²','다음 조각'],[cssv('--info'),cssv('--stain'),'rgba(91,104,116,.3)'],{max:Math.max(25,A9*A9,B9*B9),fmt:function(v){return f1(v);},title:'조각 세기 |⟨x, eₖ⟩|²'});});
+function up9(){var en=HG.energy(A9,B9),s=A9*A9+B9*B9;$('#m9a').textContent=f1(Math.round(en*1000)/1000);$('#m9b').textContent=f1(s);$('#m9c').textContent=s?fmt(A9*A9/s*100,0)+'%':'—';$('#m9d').textContent=fmt(Math.sqrt(s),2);
+  U.ins($('#i9'),[['g','곡선 제곱의 넓이 '+f1(Math.round(en*1000)/1000)+' = '+f1(A9)+'² + '+f1(B9)+'² = '+f1(s)+'. 서로 직각인 조각이라 피타고라스가 그대로 통합니다.'],['a','첫 조각만 남기면 '+(s?fmt(A9*A9/s*100,0):'—')+'%. 버린 조각의 세기 합이 곧 잃은 양 — 압축이 미리 품질을 계산하는 원리예요.']]);v9.dirty=true;v9b.dirty=true;}
+[['s9a','v9a',function(v){A9=v;}],['s9b','v9b',function(v){B9=v;}]].forEach(function(z){var r=$('#'+z[0]);r.oninput=function(){z[2](+r.value);$('#'+z[1]).textContent=f1(+r.value);up9();};});up9();
+
+/* 10번 방 */
+var SG=0.5,LINE=false;
+function bestLine(){var best=[0,0,0,-1];for(var a=0;a<180;a+=2){var t=a*PI/180,nx=Math.cos(t),ny=Math.sin(t);for(var b=-3;b<=3;b+=0.1){var ok=0;HG.RING.forEach(function(p){if(Math.sign(nx*p[0]+ny*p[1]-b)===p[2])ok++;});if(ok>best[3])best=[nx,ny,b,ok];}}return best;}
+var BL=bestLine();
+var P10=new P2($('#cv10'),{xr:[-3,3],yr:[-3,3],axes:false,draw:function(g,P){var n=60,st=6/n;for(var i=0;i<n;i++)for(var j=0;j<n;j++){var x=-3+(i+0.5)*st,y=-3+(j+0.5)*st,s=HG.kscore(x,y,SG),a=Math.min(0.35,Math.abs(s)*0.25);g.fillStyle=s>0?'rgba(19,115,58,'+a+')':'rgba(201,48,44,'+a+')';g.fillRect(P.X(x-st/2),P.Y(y+st/2),st*P.kx+1,st*P.ky+1);}
+    g.fillStyle=cssv('--text');for(i=0;i<n;i++)for(j=0;j<n;j++){var x0=-3+(i+0.5)*st,y0=-3+(j+0.5)*st,s0=HG.kscore(x0,y0,SG),s1=HG.kscore(x0+st,y0,SG),s2=HG.kscore(x0,y0+st,SG);if(s0*s1<0||s0*s2<0)g.fillRect(P.X(x0)-1,P.Y(y0)-1,2.4,2.4);}
+    if(LINE){var nx=BL[0],ny=BL[1],b=BL[2],px=nx*b,py=ny*b;P.line([px-ny*5,py+nx*5],[px+ny*5,py-nx*5],cssv('--stain'),2.6,[8,5]);P.text([2.8,-2.7],'곧은 칸막이 최선: '+BL[3]+' / 32',cssv('--stain'),'right');}
+    HG.RING.forEach(function(p){var ok=Math.sign(HG.kscore(p[0],p[1],SG))===p[2];P.pt([p[0],p[1]],p[2]>0?cssv('--gfp'):cssv('--eye'),null,ok?5:7);if(!ok){g.strokeStyle=cssv('--amber');g.lineWidth=2;g.beginPath();g.arc(P.X(p[0]),P.Y(p[1]),10,0,7);g.stroke();}});
+    U.label(g,P.X(-2.9),P.Y(2.8),'초록 = 안쪽(+), 빨강 = 바깥(−), 검은 점선 = 경계',cssv('--muted'));}});
+function up10(){var a=HG.kacc(SG);$('#m10a').textContent=a+' / 32';$('#m10b').textContent=fmt(SG,1);$('#m10c').textContent=SG<0.45?'점마다 섬':SG<=1?'둥근 경계':'둔한 경계';
+  U.ins($('#i10'),[[a===32?'g':'a','σ = '+fmt(SG,1)+': 커널 방이 '+a+'개를 맞혔어요. 곧은 칸막이의 최선은 23개입니다.'],['m',SG<0.45?'σ가 작으면 점 하나하나 둘레에 작은 섬을 그립니다. 처음 보는 점에는 약할 수 있어요(과적합).':SG<=1?'적당한 σ에서는 원 모양 경계가 생깁니다. 끝없는 방의 곧은 칸막이가 원래 방에서는 원으로 보이는 셈이에요.':'σ가 크면 모든 점이 서로 닮아 보여 경계가 둔해지고, 바깥 고리 일부를 놓칩니다.']]);P10.dirty=true;}
+var r10=$('#s10');r10.oninput=function(){SG=+r10.value;$('#v10').textContent=fmt(SG,1);up10();};$('#b10').onclick=function(){LINE=!LINE;this.setAttribute('aria-pressed',String(LINE));up10();};up10();
+
+/* 대결 */
+var DS=null,DM=null,shown=false;
+function recon(ks){return function(x){var s=0;ks.forEach(function(k){s+=(HG.DUEL[k]||0)*Math.sin(k*x)/Math.sqrt(PI);});return s;};}
+var vD=V($('#cvDuel'),function(){var o=U.plot($('#cvDuel'),{xr:[0,2*PI],yr:[-1.1,1.1],xt:[0,PI,2*PI],xf:function(t){return t===0?'0':t<4?'π':'2π';},yt:[-1,0,1],xl:'x',stamp:'대결 곡선'});curve(o,HG.duelSig,0,2*PI,cssv('--terrain'),3,null,1000);
+  if(shown){curve(o,recon(DS.steps.map(function(s){return s.k;})),0,2*PI,'rgba(90,90,110,.85)',2,[6,4],1000);curve(o,recon(DM.steps.map(function(s){return s.k;})),0,2*PI,cssv('--c-moa'),2,[2,3],1000);U.label(o.g,o.X(0.2),o.Y(1.0),'초록 = 대결 곡선 · 회색 점선 = 시아 · 갈색 점선 = 모아',cssv('--muted'));}});
+U.Duel({el:'#duel',run:function(){DS=HG.duelPlan('low');DM=HG.duelPlan('big');shown=true;return [DS,DM];},
+  show:function(r,pred){var ns=DS.n,nm=DM.n,rows=Math.max(ns,nm),h='';for(var i=0;i<rows;i++){var a=DS.steps[i],b=DM.steps[i];h+='<tr><td>'+(i+1)+'</td><td>'+(a?a.k+'번 물결 → '+fmt(a.e*100,1)+'%':'—')+'</td><td>'+(b?b.k+'번 물결 → '+fmt(b.e*100,1)+'%':'—')+'</td></tr>';}$('#d-tbl').innerHTML=h;
+    $('#d-bs').style.width=(ns/8*100)+'%';$('#d-bm').style.width=(nm/8*100)+'%';$('#d-vs').textContent=ns+'조각';$('#d-vm').textContent=nm+'조각';var moaWin=nm<ns;
+    $('#d-say').innerHTML=U.say('asst','asst_firm','판정합니다. 이 곡선의 세기는 4번 물결(0.81)과 7번 물결(0.16)에 몰려 있었어요. 시아는 1번부터 차례로 쌓느라 세기가 0인 3·5·6번까지 쓰고 7조각, 모아는 겹침 점수로 세기를 먼저 재서 4번·7번·1번, 3조각으로 99%를 살렸습니다.')+U.say('sia','sia_doze','낮은 물결이 늘 센 줄 알았는데… 이 곡선은 4번 물결이 주인공이었네요.',true)+U.say('moa','moa_cheer','9번 방 덕분이에요. 조각 세기의 합이 전체 세기니까, 큰 것부터 고르면 제일 빨라요!');U.fillImgs();
+    $('#d-score').textContent='이번 판: '+(moaWin?'모아 승':ns===nm?'무승부':'시아 승');$('#d-pred').textContent=pred?('내 예상: '+(pred==='moa'?'모아':'시아')+' → '+((pred==='moa')===moaWin?'맞힘':'빗나감')):'예상을 고르지 않았어요';
+    U.setMood($('#d-sia'),moaWin?'sia_doze':'sia_smile');U.setMood($('#d-moa'),moaWin?'moa_cheer':'moa_tea');vD.dirty=true;},
+  reset:function(){shown=false;vD.dirty=true;U.setMood($('#d-sia'),'sia_guide');U.setMood($('#d-moa'),'moa_report');}});
+
+U.Gloss({
+ '자 세트':['자 세트(정규직교기저)','orthonormal basis','길이 1이고 서로 직각인 자들. 곡선 방에서는 끝없이 많다.'],
+ '그림자':['그림자(정사영)','orthogonal projection','바닥에 똑바로 내린 발. 바닥 위에서 가장 가까운 점.'],
+ '물결 조각':['물결 조각(푸리에 급수)','Fourier series','곡선을 서로 직각인 sin·cos 물결의 합으로 나누는 것.'],
+ '스펙트로그램':['스펙트로그램','spectrogram','소리를 짧게 잘라 물결 조각의 세기를 시간에 따라 그린 그림.'],
+ '위치 인코딩':['위치 인코딩','positional encoding','트랜스포머가 단어의 순서를 알도록 여러 빠르기의 sin·cos 값을 붙이는 방법.'],
+ '피타고라스':['피타고라스의 확장(파스발 항등식)','Parseval\'s identity','완전한 자 세트에서 곡선의 길이² = 좌표²의 합.'],
+ '커널':['커널(닮음 점수표)','kernel','두 점이 얼마나 닮았는지 주는 함수. 끝없는 방의 겹침 점수를 대신 계산한다.'],
+ 'SVM':['SVM','Support Vector Machine','두 무리 사이 틈이 가장 넓도록 칸막이를 세우는 방법. 커널과 함께 쓰면 휘어진 경계도 만든다.'],
+ '과적합':['과적합','overfitting','배운 데이터는 잘 맞히지만 처음 보는 데이터에는 약한 상태.']
+},['자 세트','그림자','물결 조각','커널','피타고라스']);
+U.Study({quiz:{
+ r6:[{q:'곡선 f의 k번째 좌표 cₖ는 어떻게 구하나요?',o:['f와 k번째 자 eₖ의 겹침 점수(곱한 넓이)','f의 가장 높은 점','f를 k로 나눈 값','eₖ의 길이'],a:0,why:'자 세트가 길이 1이고 서로 직각이라, 좌표 = 겹침 점수 한 번이면 됩니다.',hint:'식 조각 cₖ = ⟨f, eₖ⟩.'}],
+ r7:[{q:'x = (2, 1, 3)을 x₁x₂ 바닥에 떨어뜨린 그림자는?',o:['(2, 1, 0)','(0, 0, 3)','(2, 1, 3)','(1, 1, 0)'],a:0,why:'높이(x₃)만 0으로. 빗나간 만큼 r = (0, 0, 3)은 바닥과 직각입니다.',hint:'정오의 그림자는 바로 발밑.'}],
+ r8:[{q:'꺾인 네모파에 물결 조각을 많이 더하면?',o:['전체 오차는 줄지만 꺾인 곳 옆에 튀어나온 뿔이 남는다','모든 점에서 딱 맞는다','오차가 오히려 커진다','조각이 하나뿐이면 충분하다'],a:0,why:'평균제곱 수렴이 모든 점의 수렴을 뜻하지는 않습니다. 최고점이 약 1.18로 남아요.',hint:'"꺾인 네모파"에서 n = 25.'}],
+ r9:[{q:'x = 3e₁ + 4e₂일 때 곡선 제곱의 넓이 ‖x‖²는?',o:['25','7','5','12'],a:0,why:'서로 직각인 조각이라 3² + 4² = 25. 길이는 5입니다.',hint:'피타고라스 정리.'}],
+ r10:[{q:'커널 방법이 원 모양 경계를 만들 수 있는 이유는?',o:['닮음 점수표로 끝없는 방에 옮겨 그곳에서 곧게 가르기 때문','점을 하나씩 외우기 때문','곧은 칸막이를 여러 개 겹치기 때문','σ가 항상 0.5라서'],a:0,why:'끝없는 방의 곧은 칸막이가 원래 방에서는 휘어진 경계로 보입니다.',hint:'왜 이 방법을 쓰나 ③.'}],
+ duel:[{q:'모아가 적은 조각으로 이긴 까닭은?',o:['조각마다 세기를 먼저 재서 큰 조각부터 골랐다','낮은 물결부터 골랐다','조각을 더 많이 썼다','곡선을 외웠다'],a:0,why:'곡선의 세기 = 조각 세기의 합(9번 방)이라, 큰 조각부터 고르면 가장 빨리 95%에 닿습니다.',hint:'모아의 말풍선.'}]
+}});
+U.start();
+})();
+</script>
+</body>
+</html>

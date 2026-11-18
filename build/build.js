@@ -5,7 +5,7 @@
 const fs=require('fs'),path=require('path'),vm=require('vm');
 const B=__dirname,R=path.join(B,'..');
 const rd=f=>fs.readFileSync(path.join(B,f),'utf8');
-const css=rd('common.css'),sprites=rd('sprites96.js'),common=rd('common.js'),plane=rd('plane.js'),geo=rd('geo.js').replace(/\nif\(typeof module[^\n]*\n?/,'\n');
+const css=rd('common.css'),sprites=rd('sprites96.js'),common=rd('common.js'),plane=rd('plane.js'),geo=rd('geo.js').replace(/\nif\(typeof module[^\n]*\n?/,'\n'),hgeo=rd('hgeo.js').replace(/\nif\(typeof module[^\n]*\n?/,'\n');
 const kgx=rd('kgx.js');
 const BB=JSON.parse(rd('backbone.json'));
 const ctx={document:{readyState:'loading',addEventListener(){},getElementById(){return null;}},window:{},navigator:{},console};
@@ -30,11 +30,11 @@ function attach(H,kg,refs,meta){
   H=H.replace('</head>',bh+'</head>');
   let i=H.lastIndexOf('<footer'),j=H.lastIndexOf('</body>'),p=(i>=0&&i<j)?i:j;H=H.slice(0,p)+body+H.slice(p);
   j=H.lastIndexOf('</body>');H=H.slice(0,j)+sc+H.slice(j);return H;}
-const pages=[['idx','index.html'],['e0','e0_orientation.html'],['e1','e1_ruler_rooms.html'],['e2','e2_shadow_rooms.html']];
+const pages=[['idx','index.html'],['e0','e0_orientation.html'],['e1','e1_ruler_rooms.html'],['e2','e2_shadow_rooms.html'],['h1','h1_arrow_rooms.html'],['h2','h2_wave_rooms.html']];
 for(const [n,out] of pages){
   const src=n+'.src.html';if(!fs.existsSync(path.join(B,src)))continue;
   let H=rd(src).replace('<!--@@CSS@@-->','<style>\n'+css+'\n</style>')
-    .replace('/*@@SPRITES@@*/',()=>sprites).replace('/*@@GEO@@*/',()=>geo).replace('/*@@COMMON@@*/',()=>common).replace('/*@@PLANE@@*/',()=>plane);
+    .replace('/*@@SPRITES@@*/',()=>sprites).replace('/*@@GEO@@*/',()=>geo).replace('/*@@HGEO@@*/',()=>hgeo).replace('/*@@COMMON@@*/',()=>common).replace('/*@@PLANE@@*/',()=>plane);
   const kf=path.join(B,'kg_'+n+'.json');
   if(fs.existsSync(kf))H=attach(H,JSON.parse(fs.readFileSync(kf,'utf8')),JSON.parse(rd('refs_'+n+'.json')),JSON.parse(rd('meta_'+n+'.json')));
   fs.writeFileSync(path.join(R,out),H);console.log(out,(Buffer.byteLength(H)/1024).toFixed(0)+' KB');}
