@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>유클리드 공간 ② 그림자와 칸막이의 방 — 그림자·칸막이·움직임·공·곧은 자의 한계</title>
+<meta name="description" content="시아·모아가 6~10번 방을 지나며 그림자(가장 덜 틀린 답), 칸막이(편 가르기), 거리를 지키는 움직임, 공과 칸이 많을 때의 이상한 일, 단위와 곧은 자의 한계를 배웁니다. 마지막엔 가장 가까운 이웃 찾기 대결과 힐베르트 공간 예고.">
+<meta property="og:title" content="유클리드 공간 ② 그림자와 칸막이의 방">
+<meta property="og:description" content="예측선 긋기·분류선·데이터 늘리기·차원의 저주·단위 맞추기를 거리와 각도로">
+<meta property="og:type" content="article">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+<!--@@CSS@@-->
+</head>
+<body>
+<nav class="top" aria-label="섹션 바로가기"><div class="row">
+  <a class="logo" href="index.html">유클리드 <i>공간</i> ②</a>
+  <div class="links">
+    <a href="e1_ruler_rooms.html">← ①</a><a href="#r6">6 그림자</a><a href="#r7">7 칸막이</a><a href="#r8">8 움직임</a><a href="#r9">9 공</a><a href="#r10">10 곧은 자의 한계</a><a href="#duel">대결</a><a href="#sum">정리</a><a href="#endless">끝없는 방</a><a href="#kg">색인</a><a href="#export">꾸러미</a>
+  </div>
+</div></nav>
+
+<!-- lab-cover : 표지 그림(cover_e2)을 받기 전까지 그림판 표지 -->
+<div class="cover" id="cover" data-img="cover_e2"><div class="frame">
+  <canvas id="coverCv" aria-hidden="true"></canvas>
+  <div class="cast4"><img class="s" data-mood="robo_coin" alt="" aria-hidden="true"><img data-mood="sia_explain" alt="" aria-hidden="true"><img data-mood="moa_report" alt="" aria-hidden="true"><img class="s" data-mood="asst_smile" alt="" aria-hidden="true"></div>
+  <span class="cap">바닥에 떨어진 그림자, 무리를 가르는 칸막이</span>
+  <span class="badge">표지 그림 준비 중 · 설명용 그림</span>
+  <span class="cover-chip">유클리드 공간 · ② 그림자와 칸막이의 방</span>
+</div></div>
+<!-- /lab-cover -->
+
+<header class="hero" id="top"><div class="wrap">
+  <div class="eyebrow">유클리드 공간 · ② 그림자와 칸막이의 방 · 6~10번 방 + 대결</div>
+  <h1>유클리드 공간 ② — 그림자와 칸막이의 방</h1>
+  <p class="question">정답에 딱 맞출 수 없을 때, 무리를 둘로 가를 때, 단위가 다를 때 — 자와 각도기는 어떻게 쓰일까?</p>
+  <p class="lead">①편에서 챙긴 자(거리)와 각도기(겹침 점수)로 이번엔 다섯 가지 일을 합니다. 가장 덜 틀린 답을 찾는 <b>그림자</b>, 무리를 가르는 <b>칸막이</b>, 거리를 지키는 <b>움직임</b>, 가까운 이웃을 모으는 <b>공</b>, 그리고 곧은 자가 틀리는 <b>단위와 휜 땅</b>. 마지막엔 시아와 모아가 「가장 가까운 이웃 찾기」로 겨룹니다.</p>
+  <p class="byline">글 · 안상선 ((주)M-Robo 대표) · <a href="https://adminmrobo.github.io/who_am_i/who_am_i.html">저자 소개</a> · 2026-11-19 · v1.0</p>
+  <div class="three"><b>처음 오신 분께 — 이 페이지를 3줄로</b><ol>
+    <li><b>무엇을</b>: 그림자로 가장 가까운 답을, 칸막이로 편 가르기를, 공으로 이웃 모으기를 합니다.</li>
+    <li><b>왜 중요한가</b>: 예측선 긋기(회귀), 스팸 분류, 비슷한 고객 찾기가 모두 이 세 도구입니다.</li>
+    <li><b>업무에서는</b>: 키(cm)와 몸무게(kg)처럼 단위가 다른 열을 섞기 전에 단위를 맞춰야 판단이 틀어지지 않습니다.</li></ol>
+    <p style="margin:8px 0 0">코드·수식을 몰라도 됩니다. 식은 조수 하루가 숫자로 한 번씩 풀어 드립니다.</p>
+    <details class="fold" style="margin:8px 0 0"><summary>이 페이지에 나오는 영어 약어·기호 풀이</summary>
+      <div class="gloss" style="margin-top:8px">
+        <div><b>p, r</b> 그림자(p)와 빗나간 만큼(r). v = p + r.</div>
+        <div><b>n</b> 칸막이에 꽂힌 화살표(법선). 칸 수 n과 헷갈리지 않게 굵게 적습니다.</div>
+        <div><b>SVM</b> Support Vector Machine. 두 무리 사이에 가장 넓은 틈을 두고 칸막이를 세우는 방법.</div>
+        <div><b>MSE</b> 제곱 오차의 평균. 예측선 긋기가 줄이려는 값.</div>
+        <div><b>KNN</b> 가장 가까운 이웃 k명을 보고 판단하는 방법.</div>
+        <div><b>R</b> 지구 반지름 6,371km.</div>
+      </div></details>
+  </div>
+  <div class="start"><b>앞 편</b> 자·각도기·자 세트가 처음이면 <a href="e1_ruler_rooms.html">① 자와 각도기의 방</a>부터 보세요. 6번 방의 그림자는 <a href="https://adminmrobo.github.io/optimization_3d_map/1_math_map.html">좌표축 위의 그릇</a>의 "그릇 바닥"과 이어집니다.</div>
+  <div class="kpis" aria-label="숫자 요약">
+    <div class="kpi g"><b>(3.2, 1.6)</b><span>(3, 2)가 (2, 1) 방향 바닥에 떨어뜨린 그림자</span></div>
+    <div class="kpi m"><b>1.33</b><span>점 (2, 2, 2)에서 칸막이까지 거리</span></div>
+    <div class="kpi a"><b>0.0027%</b><span>100칸 공에서 반지름 0.9 안쪽이 차지하는 부피</span></div>
+    <div class="kpi r"><b>6 : 4</b><span>대결에서 단위를 맞춘 쪽과 안 맞춘 쪽의 맞힌 수<sup>①</sup></span></div>
+  </div>
+  <p class="muted" style="font-size:13px">① 설명용 예시 데이터로 계산한 값입니다. 실제 고객 자료가 아닙니다.</p>
+  <div data-dlg="hero"></div>
+</div></header>
+
+<main>
+<!-- 6번 방 -->
+<section class="sec" id="r6" aria-labelledby="h-r6"><div class="wrap">
+  <h2 id="h-r6"><span class="door">6</span>그림자가 가장 가까운 답 <span class="sub">원자료 카드 06</span></h2>
+  <div class="tags"><span class="tag">방법: 바닥에 똑바로 내린 발</span><span class="tag">일상: 정오의 막대 그림자</span><span class="tag">원자료: EUCLIDEAN SPACE 06/10 (@eeanimation)</span></div>
+  <div class="wm">
+    <div class="why"><h4>왜 이 방법을 쓰나</h4><ol>
+      <li><b>문제</b>: 모델이 낼 수 있는 답은 정해져 있는데, 정답이 그 안에 없을 때가 많습니다.</li>
+      <li><b>앞 방의 한계</b>: 5번 방에서 자를 몇 개만 남기면 정답을 정확히 다시 만들 수 없어요.</li>
+      <li><b>해법</b>: 정답에서 "모델이 낼 수 있는 답들(바닥)"로 똑바로 내린 발을 고릅니다. 그곳이 가장 덜 틀린 답이에요.</li></ol>
+      <div class="easy"><b>쉽게 말하면</b> 해가 머리 위에 있을 때 막대의 그림자는 바로 발밑에 떨어집니다. 그 발밑이 막대 끝에서 바닥까지 가장 가까운 곳이에요.</div></div>
+    <div class="am"><h4><img data-mood="asst_shock" alt="" aria-hidden="true">수학 수식을 어려워하는 조수가 대신 물어봅니다</h4>
+      <p class="aq">"왜 똑바로 내린 곳이 제일 가까워요? 비스듬히 내려도 비슷하지 않아요?"</p>
+      <span class="lbl">학교 수학으로 보면</span>정사영과 수선의 발입니다. 비스듬히 내린 선은 직각삼각형의 빗변이라 늘 더 길어요(피타고라스).
+      <table><thead><tr><th>식 조각</th><th>뜻</th></tr></thead><tbody>
+        <tr><td>p = (v·u ÷ u·u) u</td><td>그림자: 바닥 방향 u로 얼마만큼</td></tr>
+        <tr><td>r = v − p</td><td>빗나간 만큼(남은 오차)</td></tr>
+        <tr><td>r·u = 0</td><td>빗나간 만큼은 바닥과 직각</td></tr>
+        <tr><td>‖v − p‖ ≤ ‖v − m‖</td><td>바닥 위 어떤 점 m보다도 p가 가깝다</td></tr></tbody></table>
+      <span class="lbl">숫자로 한 번 해 보기</span>
+      <div class="try">v = (3, 2), 바닥 방향 u = (2, 1) → v·u = 8, u·u = 5 → p = 1.6 × (2, 1) = <b>(3.2, 1.6)</b><br>r = (−0.2, 0.4), r·u = −0.4 + 0.4 = <b>0</b> (직각 확인)<br>키 160·162·164를 숫자 하나로 대표: 162면 빗나간 거리² 합 4 + 0 + 4 = <b>8</b>, 161이면 1 + 1 + 9 = 11</div>
+      <div class="ac"><img data-mood="asst_smile" alt="" aria-hidden="true"><p>평균이 바로 그림자였네요! 평균보다 덜 틀린 숫자 하나는 없어요.</p></div></div>
+  </div>
+  <div class="pair">
+    <div><div class="tl">일상으로 치면</div>세 번 잰 키 160·162·164를 "대략 몇"이라고 한마디로 말하라면 162라고 합니다. 이 평균이 세 숫자에서 가장 덜 빗나간 한 숫자, 곧 그림자예요.</div>
+    <div><div class="tr">머신러닝에서는</div><b>예측선 긋기</b>(선형 회귀)는 모든 점을 지나는 직선이 없을 때, 빗나간 거리의 제곱 합이 가장 작은 직선을 고릅니다. 그 예측이 정답의 그림자이고, 빗나간 만큼은 바닥과 직각입니다. 아래 두 번째 패널의 그래프가 <a href="https://adminmrobo.github.io/optimization_3d_map/1_math_map.html">좌표축 위의 그릇</a>의 "그릇"이고, 그림자는 그 바닥이에요.</div>
+  </div>
+  <div data-dlg="r6"></div>
+  <div class="panel">
+    <div class="ptitle">① 바닥 방향을 돌리고, 바닥 위의 점 m을 끌어 보기 — 그림자 p보다 가까운 곳이 있을까?</div>
+    <div class="cwrap sq"><canvas id="cv6" aria-label="화살표 v, 원점을 지나는 바닥 직선, 그림자 p와 빗나간 만큼 r, 바닥 위의 다른 점 m"></canvas></div>
+    <div class="ctrl"><div class="group"><label class="glabel" for="r6">바닥 방향</label><input type="range" id="r6" min="-30" max="80" step="0.5" value="0"><span class="val" id="v6">0°</span><button class="bt" type="button" id="b6a">u = (1, 0)</button><button class="bt" type="button" id="b6b">u = (2, 1) 방향</button></div></div>
+    <div class="minis"><div class="mini g"><span>그림자 p</span><b id="m6a" style="font-size:17px">—</b></div><div class="mini a"><span>빗나간 만큼 r · 바닥과 겹침</span><b id="m6b" style="font-size:17px">—</b></div><div class="mini m"><span>v에서 p까지</span><b id="m6c">—</b></div><div class="mini r"><span>v에서 m까지</span><b id="m6d">—</b></div></div>
+    <div class="insight" id="i6" aria-live="polite"></div>
+  </div>
+  <div class="panel">
+    <div class="ptitle">② 키 160·162·164를 숫자 하나 c로 대표하기 — 빗나간 거리² 합이 그리는 그릇</div>
+    <div class="cwrap"><canvas id="cv6b" aria-label="대표값 c에 따른 빗나간 거리 제곱 합의 그릇 모양 그래프"></canvas></div>
+    <div class="ctrl"><div class="group"><label class="glabel" for="r6b">대표값 c</label><input type="range" id="r6b" min="157" max="167" step="0.5" value="160"><span class="val" id="v6b">160</span></div></div>
+    <div class="insight" id="i6b" aria-live="polite"></div>
+  </div>
+  <details class="fold"><summary>교안의 파이썬 코드로 보면 (몰라도 됩니다)</summary>
+    <pre>p = (v @ u) / (u @ u) * u          # 그림자
+np.linalg.lstsq(X, y)              # 예측선 긋기 = 여러 축 바닥에 떨어뜨린 그림자</pre></details>
+  <div class="lim"><b>이 방의 한계</b> 그림자는 "가장 가까운 점"만 알려 줍니다. 점들을 두 편으로 가르려면 바닥이 아니라 <b>칸막이</b>가 필요해요 → 7번 방.</div>
+  <div class="quiz" data-quiz="r6"></div>
+</div></section>
+
+<!-- 7번 방 -->
+<section class="sec" id="r7" aria-labelledby="h-r7"><div class="wrap">
+  <h2 id="h-r7"><span class="door">7</span>선·평면·칸막이 <span class="sub">원자료 카드 07</span></h2>
+  <div class="tags"><span class="tag">방법: 꽂힌 화살표와의 겹침 점수로 편 가르기</span><span class="tag">일상: 운동장 가운데 줄로 청팀·백팀</span><span class="tag">원자료: EUCLIDEAN SPACE 07/10</span></div>
+  <div class="wm">
+    <div class="why"><h4>왜 이 방법을 쓰나</h4><ol>
+      <li><b>문제</b>: 메일을 스팸과 정상으로, 셀을 불량과 정상으로 가르고 싶습니다.</li>
+      <li><b>앞 방의 한계</b>: 그림자는 가장 가까운 점 하나만 알려 주고, 어느 편인지는 말해 주지 않아요.</li>
+      <li><b>해법</b>: 방을 둘로 나누는 칸막이를 세우고, 칸막이에 꽂힌 화살표 <b>n</b>과의 겹침 점수가 기준보다 크면 위쪽, 작으면 아래쪽으로 판정합니다.</li></ol>
+      <div class="easy"><b>쉽게 말하면</b> 2칸 방의 칸막이는 선, 3칸 방은 평면, n칸 방은 한 칸 적은 판입니다. 그림이 없어도 겹침 점수 하나로 어느 쪽인지 알아요.</div></div>
+    <div class="am"><h4><img data-mood="asst_shock" alt="" aria-hidden="true">수학 수식을 어려워하는 조수가 대신 물어봅니다</h4>
+      <p class="aq">"100칸 방의 칸막이는 어떻게 생겼어요? 그림이 안 그려지면 어느 쪽인지 어떻게 알아요?"</p>
+      <span class="lbl">학교 수학으로 보면</span>직선·평면의 방정식과 점과 평면 사이의 거리입니다.
+      <table><thead><tr><th>식 조각</th><th>뜻</th></tr></thead><tbody>
+        <tr><td><b>n</b> = (1, 2, 2)</td><td>칸막이에 꽂힌 화살표 (길이 3)</td></tr>
+        <tr><td>x₁ + 2x₂ + 2x₃ = 6</td><td>칸막이: n과의 겹침 점수가 딱 6인 점들</td></tr>
+        <tr><td>n·x − 6 &gt; 0</td><td>위쪽(n이 가리키는 쪽)</td></tr>
+        <tr><td>(n·x − 6) ÷ ‖n‖</td><td>칸막이까지 거리</td></tr></tbody></table>
+      <span class="lbl">숫자로 한 번 해 보기</span>
+      <div class="try">점 (2, 2, 2) → 2 + 4 + 4 = 10 &gt; 6 → <b>위쪽</b>, 거리 (10 − 6) ÷ 3 ≈ <b>1.33</b><br>원점 (0, 0, 0) → 0 &lt; 6 → 아래쪽, 거리 6 ÷ 3 = <b>2</b></div>
+      <div class="ac"><img data-mood="asst_smile" alt="" aria-hidden="true"><p>칸이 몇 개든 "곱해서 더하고 6과 비교" 한 번이면 되네요!</p></div></div>
+  </div>
+  <div class="pair">
+    <div><div class="tl">일상으로 치면</div>운동장 가운데 줄 하나로 청팀·백팀이 갈립니다. 줄에서 멀리 있을수록 "확실히 청팀"이에요.</div>
+    <div><div class="tr">머신러닝에서는</div><b>로지스틱 회귀</b>와 <b>SVM</b>은 이런 칸막이(결정 경계)를 데이터로 고릅니다. 스팸 분류기의 점수가 "단어 숫자 묶음과 n의 겹침 점수 − 기준"이고, 칸막이에서 멀수록 확신이 큽니다.</div>
+  </div>
+  <div data-dlg="r7"></div>
+  <div class="panel">
+    <div class="ptitle">점 x를 옮겨 보기 — 칸막이 x₁ + 2x₂ + 2x₃ = 6의 어느 쪽인지, 얼마나 먼지</div>
+    <div class="cwrap t3"><canvas id="cv7" aria-label="세 축 공간의 삼각형 칸막이, 꽂힌 화살표 n, 움직이는 점 x와 칸막이에 내린 수선"></canvas><span class="hint">끌어서 돌리기</span></div>
+    <div class="ctrl"><div class="group">
+      <label class="glabel" for="r7a">x₁</label><input type="range" id="r7a" min="0" max="4" step="0.5" value="2"><span class="val" id="v7a">2</span>
+      <label class="glabel" for="r7b">x₂</label><input type="range" id="r7b" min="0" max="3" step="0.5" value="2"><span class="val" id="v7b">2</span>
+      <label class="glabel" for="r7c">x₃</label><input type="range" id="r7c" min="0" max="3" step="0.5" value="2"><span class="val" id="v7c">2</span></div></div>
+    <div class="minis"><div class="mini m"><span>겹침 점수 n·x</span><b id="m7a">—</b></div><div class="mini a"><span>n·x − 6</span><b id="m7b">—</b></div><div class="mini g"><span>어느 쪽</span><b id="m7c" style="font-size:17px">—</b></div><div class="mini r"><span>칸막이까지 거리</span><b id="m7d">—</b></div></div>
+    <div class="insight" id="i7" aria-live="polite"></div>
+  </div>
+  <details class="fold"><summary>교안의 파이썬 코드로 보면 (몰라도 됩니다)</summary>
+    <pre>np.sign(n @ x - 6)   # +1이면 위쪽, −1이면 아래쪽</pre></details>
+  <p class="muted" style="font-size:13.5px">원자료 카드 07은 축 이름 x와 점 이름 x가 겹칩니다. 이 페이지에서는 축을 x₁·x₂·x₃으로 바꾸고 평면 식도 x₁ + 2x₂ + 2x₃ = 6으로 씁니다. 원자료의 "Hyperplane in ℝ³"는 3칸 방에서는 평면과 같은 것입니다.</p>
+  <div class="lim"><b>이 방의 한계</b> 곧은 칸막이 하나로 못 가르는 무리도 있습니다(동그랗게 둘러싼 무리 등). 또 점들을 통째로 옮기거나 돌리면 판정이 바뀔까요? → 8번 방.</div>
+  <div class="quiz" data-quiz="r7"></div>
+</div></section>
+
+<!-- 8번 방 -->
+<section class="sec" id="r8" aria-labelledby="h-r8"><div class="wrap">
+  <h2 id="h-r8"><span class="door">8</span>밀고·돌리고·뒤집어도 거리는 그대로 <span class="sub">원자료 카드 08</span></h2>
+  <div class="tags"><span class="tag">방법: 거리를 지키는 움직임</span><span class="tag">일상: 사진을 돌려도 같은 얼굴</span><span class="tag">원자료: EUCLIDEAN SPACE 08/10</span></div>
+  <div class="wm">
+    <div class="why"><h4>왜 이 방법을 쓰나</h4><ol>
+      <li><b>문제</b>: 사진을 돌리거나, 좌표의 기준점을 옮겨도 "같은 데이터"로 봐도 될까요?</li>
+      <li><b>앞 방의 한계</b>: 거리·칸막이 계산은 좌표 숫자로 합니다. 움직이면 좌표 숫자가 다 바뀌어요.</li>
+      <li><b>해법</b>: 밀기·돌리기·뒤집기는 모든 점 사이 거리를 그대로 둡니다. 그래서 거리로 하는 판단도 그대로예요. 늘리기만은 거리를 바꿉니다.</li></ol>
+      <div class="easy"><b>쉽게 말하면</b> 종이 위 삼각형을 밀고, 돌리고, 뒤집어도 자로 잰 세 변은 같습니다. 복사기로 2배 확대하면 달라지고요.</div></div>
+    <div class="am"><h4><img data-mood="asst_shock" alt="" aria-hidden="true">수학 수식을 어려워하는 조수가 대신 물어봅니다</h4>
+      <p class="aq">"돌리면 좌표 숫자가 다 바뀌는데, 거리는 어떻게 그대로예요?"</p>
+      <span class="lbl">학교 수학으로 보면</span>평행이동, 회전, 대칭이동, 그리고 닮음(확대)입니다.
+      <table><thead><tr><th>식 조각</th><th>뜻</th></tr></thead><tbody>
+        <tr><td>x → x + b</td><td>밀기: 모든 점을 같은 화살표만큼</td></tr>
+        <tr><td>x → Qx</td><td>돌리기·뒤집기 표 Q를 곱함 (자 세트를 바꾼 것과 같음)</td></tr>
+        <tr><td>‖Qx − Qy‖ = ‖x − y‖</td><td>거리 그대로</td></tr>
+        <tr><td>x → 2x</td><td>늘리기: 모든 거리가 2배</td></tr></tbody></table>
+      <span class="lbl">숫자로 한 번 해 보기</span>
+      <div class="try">(0, 0)–(3, 4)의 길이 5 → 90° 돌리면 (0, 0)–(−4, 3), 길이 √(16 + 9) = <b>5</b><br>2배 늘리면 (0, 0)–(6, 8), 길이 <b>10</b></div>
+      <div class="ac"><img data-mood="asst_smile" alt="" aria-hidden="true"><p>돌리기는 5번 방의 "자 세트 돌리기"랑 같은 거였어요!</p></div></div>
+  </div>
+  <div class="pair">
+    <div><div class="tl">일상으로 치면</div>휴대폰을 가로로 돌려도 사진 속 얼굴은 같은 얼굴입니다. 하지만 사진을 가로로만 늘리면 얼굴이 넓적해져요.</div>
+    <div><div class="tr">머신러닝에서는</div>사진 분류 모델을 학습할 때 사진을 돌리고 뒤집어 학습 데이터를 불립니다(<b>데이터 늘리기</b>). 점들 사이 관계가 그대로라 "같은 고양이"로 배울 수 있어요. 반대로 한 축만 늘리는 일은 단위를 바꾸는 것과 같아 거리가 바뀝니다 → 10번 방.</div>
+  </div>
+  <div data-dlg="r8"></div>
+  <div class="panel">
+    <div class="ptitle">삼각형을 움직여 보기 — 세 변의 길이 표가 바뀌는지</div>
+    <div class="cwrap sq"><canvas id="cv8" aria-label="원래 삼각형(흐리게)과 움직인 삼각형, 세 변 길이"></canvas></div>
+    <div class="ctrl"><div class="group" role="group" aria-label="움직임"><span id="g8"></span></div>
+      <div class="group"><label class="glabel" for="r8">돌리기 각도</label><input type="range" id="r8" min="0" max="360" step="5" value="90"><span class="val" id="v8">90°</span></div></div>
+    <div class="tblwrap"><table class="cmp"><thead><tr><th>변</th><th>원래 길이</th><th>움직인 뒤 길이</th><th>같은가</th></tr></thead><tbody id="t8"></tbody></table></div>
+    <div class="insight" id="i8" aria-live="polite"></div>
+  </div>
+  <div class="lim"><b>이 방의 한계</b> 거리를 지키는 움직임만 "같은 것"으로 볼 수 있습니다. 늘리기는 단위를 바꾸는 일과 같아, 가까운 이웃이 달라질 수 있어요 → 10번 방. 그 전에, 가까운 이웃의 범위부터 정해 봅시다 → 9번 방.</div>
+  <div class="quiz" data-quiz="r8"></div>
+</div></section>
+
+<!-- 9번 방 -->
+<section class="sec" id="r9" aria-labelledby="h-r9"><div class="wrap">
+  <h2 id="h-r9"><span class="door">9</span>반지름 r 안쪽 = 이웃 <span class="sub">원자료 카드 09</span></h2>
+  <div class="tags"><span class="tag">방법: 중심에서 거리 r 이하 = 공</span><span class="tag">일상: 집에서 반경 1km 안 편의점</span><span class="tag">원자료: EUCLIDEAN SPACE 09/10</span></div>
+  <div class="wm">
+    <div class="why"><h4>왜 이 방법을 쓰나</h4><ol>
+      <li><b>문제</b>: "가까운 것들"을 한꺼번에 모으고 싶습니다.</li>
+      <li><b>앞 방의 한계</b>: 가장 가까운 하나만 보면 우연에 휘둘립니다.</li>
+      <li><b>해법</b>: 중심에서 거리가 r 이하인 점을 모두 모읍니다. 2칸 방에서는 원, 3칸 방에서는 구, n칸 방에서는 "공"이에요.</li></ol>
+      <div class="easy"><b>쉽게 말하면</b> 지도 앱의 "반경 1km 안 편의점". 그런데 칸이 아주 많아지면 이상한 일이 생깁니다.</div></div>
+    <div class="am"><h4><img data-mood="asst_shock" alt="" aria-hidden="true">수학 수식을 어려워하는 조수가 대신 물어봅니다</h4>
+      <p class="aq">"칸이 많으면 공의 부피가 거의 다 겉껍질에 몰린다는데, 그게 무슨 말이에요?"</p>
+      <span class="lbl">학교 수학으로 보면</span>원·구의 방정식과 지수입니다. n칸 공을 반지름 0.9배로 줄이면 부피는 0.9를 n번 곱한 만큼만 남아요.
+      <table><thead><tr><th>식 조각</th><th>뜻</th></tr></thead><tbody>
+        <tr><td>‖x − c‖ = r</td><td>겉껍질 (중심 c에서 딱 r)</td></tr>
+        <tr><td>‖x − c‖ ≤ r</td><td>공 (껍질과 그 안쪽 전부)</td></tr>
+        <tr><td>πr², (4/3)πr³</td><td>원의 넓이, 구의 부피</td></tr>
+        <tr><td>0.9ⁿ</td><td>반지름 0.9 안쪽이 차지하는 비율</td></tr></tbody></table>
+      <span class="lbl">숫자로 한 번 해 보기</span>
+      <div class="try">r = 1 → 원 넓이 ≈ <b>3.14</b>, 구 부피 ≈ <b>4.19</b><br>반지름 0.9 안쪽 비율: 2칸 81% · 3칸 72.9% · 10칸 34.9% · 100칸 <b>0.0027%</b></div>
+      <div class="ac"><img data-mood="asst_smile" alt="" aria-hidden="true"><p>100칸 공은 속이 텅 빈 풍선 같네요. 거의 모든 점이 껍질에 붙어 있어요!</p></div></div>
+  </div>
+  <div class="pair">
+    <div><div class="tl">일상으로 치면</div>귤은 껍질이 얇아 알맹이가 대부분입니다. 그런데 칸이 100개인 "100칸 귤"이 있다면, 알맹이는 거의 없고 거의 전부가 껍질 근처에 있게 돼요.</div>
+    <div><div class="tr">머신러닝에서는</div>지도 앱의 반경 검색, 이웃을 모아 무리를 찾는 방법이 공을 씁니다. 그런데 칸이 아주 많으면 거의 모든 점이 껍질 근처에 있어 "가까운 이웃"과 "먼 점"의 거리가 비슷해집니다(<b>차원의 저주</b>). 그래서 KNN 전에 PCA 등으로 칸을 줄이곤 해요.</div>
+  </div>
+  <div data-dlg="r9"></div>
+  <div class="panel">
+    <div class="ptitle">① 중심을 끌고 반지름을 바꿔 보기 — 공 안의 이웃 수</div>
+    <div class="cwrap sq"><canvas id="cv9" aria-label="흩어진 점 40개와 중심을 끌 수 있는 원"></canvas></div>
+    <div class="ctrl"><div class="group"><label class="glabel" for="r9">반지름 r</label><input type="range" id="r9" min="0.5" max="3" step="0.1" value="1"><span class="val" id="v9">1.0</span><button class="bt" type="button" id="b9">r = 1 → 2</button></div></div>
+    <div class="minis"><div class="mini m"><span>반지름</span><b id="m9a">—</b></div><div class="mini a"><span>원 넓이 πr²</span><b id="m9b">—</b></div><div class="mini g"><span>공 안의 이웃</span><b id="m9c">—</b></div><div class="mini r"><span>전체 점</span><b>40</b></div></div>
+    <div class="insight" id="i9" aria-live="polite"></div>
+  </div>
+  <div class="panel">
+    <div class="ptitle">② 칸 수를 늘려 보기 — 반지름 0.9 안쪽이 차지하는 비율 0.9ⁿ (이 페이지에서 더한 실험)</div>
+    <div class="cwrap"><canvas id="cv9b" aria-label="칸 수에 따른 안쪽 비율 곡선"></canvas></div>
+    <div class="ctrl"><div class="group"><label class="glabel" for="r9b">칸 수 n</label><input type="range" id="r9b" min="1" max="100" step="1" value="3"><span class="val" id="v9b">3</span><button class="bt" type="button" data-n9="2">2</button><button class="bt" type="button" data-n9="3">3</button><button class="bt" type="button" data-n9="10">10</button><button class="bt" type="button" data-n9="100">100</button></div></div>
+    <div class="minis"><div class="mini g"><span>안쪽 (반지름 0.9 안)</span><b id="m9d">—</b></div><div class="mini r"><span>겉 껍질 (0.9 ~ 1)</span><b id="m9e">—</b></div></div>
+    <div class="insight" id="i9b" aria-live="polite"></div>
+  </div>
+  <p class="muted" style="font-size:13.5px">원자료 카드 09의 머리 상자는 중심 c를 쓰지만(‖x − c‖ = r), 아래 식 x² + y² = r²은 중심을 원점에 둔 경우입니다. 제목은 n-Balls이지만 n칸 내용이 없어, ② 껍질 비율 실험은 이 페이지에서 더한 것입니다. 흩어진 점 40개는 시드 고정 예시값입니다.</p>
+  <div class="lim"><b>이 방의 한계</b> 공도 거리로 만듭니다. 칸마다 단위가 다르면 공이 한쪽으로 찌그러져요 → 10번 방.</div>
+  <div class="quiz" data-quiz="r9"></div>
+</div></section>
+
+<!-- 10번 방 -->
+<section class="sec" id="r10" aria-labelledby="h-r10"><div class="wrap">
+  <h2 id="h-r10"><span class="door">10</span>이 방이 쓰이는 곳과 한계 <span class="sub">원자료 카드 10</span></h2>
+  <div class="tags"><span class="tag">방법: 단위 맞추기, 휜 땅은 표면을 따라</span><span class="tag">일상: 비행기 항로</span><span class="tag">원자료: EUCLIDEAN SPACE 10/10</span></div>
+  <div class="wm">
+    <div class="why"><h4>왜 이 방법을 쓰나</h4><ol>
+      <li><b>문제</b>: 실제 데이터는 열마다 단위가 다르고, 지구 표면처럼 휜 곳도 있습니다.</li>
+      <li><b>앞 방의 한계</b>: 곧은 자는 모든 칸을 같은 무게로, 곧게 잽니다. 큰 숫자 단위의 열이 거리를 독차지하고, 휜 곳에서는 실제로 갈 수 없는 지름길을 잽니다.</li>
+      <li><b>해법</b>: 거리를 재기 전에 열마다 <b>단위를 맞춥니다</b>(한 칸의 크기를 비슷하게). 휜 곳은 표면을 따라 잽니다.</li></ol>
+      <div class="easy"><b>쉽게 말하면</b> 키를 mm로 적는 순간 "키 1mm = 몸무게 1kg"으로 취급됩니다. 그러면 키가 거리를 혼자 정해 버려요.</div></div>
+    <div class="am"><h4><img data-mood="asst_shock" alt="" aria-hidden="true">수학 수식을 어려워하는 조수가 대신 물어봅니다</h4>
+      <p class="aq">"키를 mm로 적었을 뿐인데, 왜 가장 가까운 사람이 바뀌어요?"</p>
+      <span class="lbl">학교 수학으로 보면</span>단위 변환, 그리고 원의 호의 길이와 삼각함수입니다.
+      <table><thead><tr><th>식 조각</th><th>뜻</th></tr></thead><tbody>
+        <tr><td>키 × 10</td><td>cm → mm. 키 차이가 10배로 커짐</td></tr>
+        <tr><td>차이 ÷ 한 칸 크기</td><td>단위 맞추기 (여기서는 키 8cm, 몸무게 10kg을 한 칸으로)</td></tr>
+        <tr><td>호 = Rθ</td><td>지구 표면을 따라 간 길이 (θ는 라디안)</td></tr>
+        <tr><td>현 = 2R sin(θ/2)</td><td>땅속을 곧게 뚫은 길이</td></tr></tbody></table>
+      <span class="lbl">숫자로 한 번 해 보기</span>
+      <div class="try">시아(160, 50)·모아(163, 54): cm로는 <b>5</b> → 키를 mm로 쓰면 √(30² + 4²) ≈ <b>30.3</b>, 키가 거리를 독차지<br>지구 R = 6,371km, 두 도시 사이 각도 90° → 호 ≈ <b>10,008km</b>, 현 ≈ <b>9,010km</b></div>
+      <div class="ac"><img data-mood="asst_smile" alt="" aria-hidden="true"><p>곧은 자를 대기 전에 "단위가 같은가, 땅이 평평한가" 두 가지를 먼저 봐야겠어요.</p></div></div>
+  </div>
+  <div class="pair">
+    <div><div class="tl">일상으로 치면</div>서울에서 뉴욕 가는 비행기는 지도 위 직선이 아니라 북쪽으로 휜 길로 갑니다. 둥근 땅에서는 표면을 따라 간 길이 가장 짧은 길이에요.</div>
+    <div><div class="tr">머신러닝에서는</div>KNN·K-means·SVM처럼 거리를 쓰는 방법은 먼저 <b>단위 맞추기</b>(특성 스케일링, 표준화)를 합니다. 곧은 자로는 잘 안 맞는 데이터(휜 표면, 끝없이 이어지는 곡선)도 있어요. 그 이야기는 맨 끝 「복도 끝의 끝없는 방」에서 합니다.</div>
+  </div>
+  <div data-dlg="r10"></div>
+  <div class="panel">
+    <div class="ptitle">① 단위를 바꿔 보기 — 새 손님 Q와 가장 가까운 사람은 A일까 B일까</div>
+    <div class="cwrap sq"><canvas id="cv10" aria-label="키·몸무게 평면 위의 새 손님 Q와 후보 A, B, 그리고 단위에 따라 찌그러지는 같은 거리 선"></canvas></div>
+    <div class="ctrl"><div class="group" role="group" aria-label="단위"><span class="glabel">거리 재는 법</span><span id="g10"></span></div></div>
+    <div class="minis"><div class="mini m"><span>Q–A 거리</span><b id="m10a">—</b></div><div class="mini a"><span>Q–B 거리</span><b id="m10b">—</b></div><div class="mini g"><span>가장 가까운 사람</span><b id="m10c">—</b></div><div class="mini r"><span>거리를 정한 열</span><b id="m10d" style="font-size:16px">—</b></div></div>
+    <div class="insight" id="i10" aria-live="polite"></div>
+  </div>
+  <div class="panel">
+    <div class="ptitle">② 두 도시 사이 각도를 바꿔 보기 — 표면을 따라 간 길(호)과 곧은 자(현)</div>
+    <div class="cwrap"><canvas id="cv10b" aria-label="지구 단면 원 위의 두 도시, 호와 현"></canvas></div>
+    <div class="ctrl"><div class="group"><label class="glabel" for="r10b">두 도시 사이 각도 θ</label><input type="range" id="r10b" min="5" max="180" step="5" value="90"><span class="val" id="v10b">90°</span></div></div>
+    <div class="minis"><div class="mini g"><span>호 (표면을 따라)</span><b id="m10e">—</b></div><div class="mini a"><span>현 (곧은 자)</span><b id="m10f">—</b></div><div class="mini r"><span>곧은 자가 짧게 잰 만큼</span><b id="m10g">—</b></div></div>
+    <div class="insight" id="i10b" aria-live="polite"></div>
+  </div>
+  <details class="fold"><summary>교안의 파이썬 코드로 보면 (몰라도 됩니다)</summary>
+    <pre>StandardScaler().fit_transform(X)   # 열마다 단위 맞추기 (평균 0, 퍼짐 1)</pre></details>
+  <div class="lim"><b>이 방의 한계</b> 유클리드 공간은 칸 수가 정해져 있어야 합니다. 소리·센서 곡선처럼 값이 끝없이 이어지는 데이터는 담지 못해요 → 대결 뒤 「복도 끝의 끝없는 방」.</div>
+  <div class="quiz" data-quiz="r10"></div>
+</div></section>
+
+<!-- 대결 -->
+<section class="sec" id="duel" aria-labelledby="h-duel"><div class="wrap">
+  <h2 id="h-duel"><span class="door e">VS</span>대결 — 가장 가까운 이웃 찾기</h2>
+  <p class="lead">옷 가게에 새 손님 여섯 명이 왔습니다. 키와 몸무게만 보고, 이미 사이즈를 아는 손님 아홉 명 가운데 가장 닮은 사람을 찾아 그 사람의 사이즈(S·M·L)를 추천합니다. <b>시아</b>는 적힌 그대로(키 mm, 몸무게 kg) 재고, <b>모아</b>는 단위를 맞춘 뒤(키 8cm, 몸무게 10kg을 한 칸으로) 잽니다. 판정은 조수 하루, 기준은 <b>여섯 명 중 맞힌 수</b>입니다.</p>
+  <div class="duel">
+    <div class="side l sia"><div class="head"><img id="d-sia" data-mood="sia_guide" alt="" aria-hidden="true"><div><b style="color:var(--c-sia)">인턴 시아</b><br><span class="muted">"숫자는 적힌 그대로가 정직하죠!" 키 mm, 몸무게 kg으로 거리를 잽니다.</span></div></div><div data-dlg="dsia"></div></div>
+    <div class="vs">VS</div>
+    <div class="side r moa"><div class="head"><img id="d-moa" data-mood="moa_report" alt="" aria-hidden="true"><div><b style="color:var(--c-moa)">인턴 모아</b><br><span class="muted">"단위부터 맞출게요." 키 8cm, 몸무게 10kg을 한 칸으로 바꿔 잽니다.</span></div></div><div data-dlg="dmoa"></div></div>
+  </div>
+  <div class="panel">
+    <div class="cwrap sq"><canvas id="cvDuel" aria-label="키·몸무게 평면의 기존 손님 아홉 명(사이즈별 색)과 새 손님 여섯 명"></canvas></div>
+    <div class="ctrl"><div class="group"><span class="glabel">먼저 맞혀 보기</span><button class="bt" data-pred="sia" type="button" aria-pressed="false">시아가 이길 것 같다</button><button class="bt" data-pred="moa" type="button" aria-pressed="false">모아가 이길 것 같다</button></div>
+      <div class="group"><button class="bt primary" data-go type="button">결과 보기</button><button class="bt" data-close type="button" hidden>다시 닫기</button></div></div>
+    <div class="duel-res" hidden>
+      <div class="tblwrap"><table class="cmp"><thead><tr><th>새 손님</th><th>키·몸무게</th><th>맞는 사이즈</th><th>시아가 고른 이웃</th><th>모아가 고른 이웃</th></tr></thead><tbody id="d-tbl"></tbody></table></div>
+      <p class="muted" style="font-size:13.5px;margin:6px 0 0">막대 = 여섯 명 중 맞힌 수.</p><div class="resbars"><div class="resbar"><span style="color:var(--c-sia)">시아 · 맞힌 수</span><div class="bar"><i id="d-bs" style="background:var(--c-sia)"></i></div><b id="d-vs">—</b></div>
+        <div class="resbar"><span style="color:var(--c-moa)">모아 · 맞힌 수</span><div class="bar"><i id="d-bm" style="background:var(--c-moa)"></i></div><b id="d-vm">—</b></div></div>
+      <div id="d-say"></div>
+      <div class="score"><span id="d-score"></span><span id="d-pred"></span></div>
+    </div>
+  </div>
+  <p class="muted" style="font-size:13.5px">손님 데이터와 사이즈 규칙(몸무게 55kg 미만 S, 68kg 미만 M, 그 이상 L), "한 칸" 크기는 설명용 예시값입니다.</p>
+  <div class="quiz" data-quiz="duel"></div>
+</div></section>
+
+<section class="sec" id="sum" aria-labelledby="h-sum"><div class="wrap">
+  <h2 id="h-sum">정리 — 열 개의 방에서 챙긴 도구</h2>
+  <div class="tblwrap"><table class="cmp"><thead><tr><th>방</th><th>도구</th><th>답 한 줄</th><th>머신러닝에서는</th></tr></thead><tbody>
+    <tr><td>1~5</td><td>점·화살표·자·각도기·자 세트</td><td><a href="e1_ruler_rooms.html">①편</a> — 데이터 한 줄 = 점, 거리 = 차이 제곱 합의 제곱근, 각도 = 겹침 점수 ÷ 길이</td><td>특성 공간, KNN, 코사인 유사도, PCA</td></tr>
+    <tr><td>6</td><td>그림자</td><td>바닥에 똑바로 내린 발이 가장 가까운 답. 빗나간 만큼은 바닥과 직각.</td><td>예측선 긋기(최소제곱), 평균</td></tr>
+    <tr><td>7</td><td>칸막이</td><td>꽂힌 화살표와의 겹침 점수를 기준과 비교해 편을 가른다.</td><td>로지스틱 회귀, SVM의 결정 경계</td></tr>
+    <tr><td>8</td><td>움직임</td><td>밀기·돌리기·뒤집기는 거리를 지키고, 늘리기는 바꾼다.</td><td>데이터 늘리기, 좌표 바꾸기</td></tr>
+    <tr><td>9</td><td>공</td><td>중심에서 r 안쪽이 이웃. 칸이 많으면 거의 전부가 껍질에.</td><td>반경 이웃 찾기, 차원의 저주</td></tr>
+    <tr><td>10</td><td>곧은 자의 한계</td><td>단위를 맞추고, 휜 곳은 표면을 따라 잰다.</td><td>특성 스케일링</td></tr>
+  </tbody></table></div>
+  <h3>비유의 한계</h3>
+  <ul>
+    <li>손님 데이터, 사이즈 규칙, "한 칸" 크기는 설명용 예시입니다. 실제로는 열마다 평균과 퍼짐(표준편차)을 데이터에서 구합니다.</li>
+    <li>대결에서 모아가 이긴 것은 사이즈가 몸무게로 정해지도록 예시를 만들었기 때문이기도 합니다. 어떤 열이 중요한지는 문제마다 다르니, 단위 맞추기는 "열마다 공정한 출발선"을 만드는 일로 보세요.</li>
+  </ul>
+</div></section>
+
+<!-- 끝맺음: 힐베르트 공간 예고 -->
+<section class="sec" id="endless" aria-labelledby="h-end"><div class="wrap">
+  <h2 id="h-end"><span class="door e">∞</span>복도 끝의 끝없는 방 <span class="sub">다음 편 예고</span></h2>
+  <div class="roomstrip" aria-label="지나온 방"><a href="e1_ruler_rooms.html#r1"><b>1</b>점</a><a href="e1_ruler_rooms.html#r2"><b>2</b>화살표</a><a href="e1_ruler_rooms.html#r3"><b>3</b>자</a><a href="e1_ruler_rooms.html#r4"><b>4</b>각도기</a><a href="e1_ruler_rooms.html#r5"><b>5</b>자 세트</a><a href="#r6"><b>6</b>그림자</a><a href="#r7"><b>7</b>칸막이</a><a href="#r8"><b>8</b>움직임</a><a href="#r9"><b>9</b>공</a><a href="#r10"><b>10</b>곧은 자의 한계</a></div>
+  <div data-dlg="end1"></div>
+  <div class="pair">
+    <div><div class="tl">이 방이 못 하는 것</div>유클리드 공간은 <b>칸 수가 정해져 있어야</b> 합니다. 그런데 소리, 센서 곡선, 주가 흐름처럼 값이 끝없이 이어지는 데이터가 있어요. 1초짜리 소리만 해도 숫자 4만 4천 개(44.1kHz 녹음 기준)이고, 곡선 자체는 끝이 없습니다.</div>
+    <div><div class="tr">힐베르트 공간이란</div>자와 각도기는 그대로 두고, <b>방을 끝없이 넓힌 것</b>입니다. 그러면 곡선끼리도 "얼마나 먼가", "얼마나 닮았나", "그림자"를 잴 수 있어요. 오늘 챙긴 도구가 거의 그대로 쓰입니다.</div>
+  </div>
+  <div class="panel">
+    <div class="ptitle">칸 수를 늘려 보기 — 2 → 3 → 10 → 100 → 끝없이</div>
+    <div class="cwrap"><canvas id="cvEnd" aria-label="칸 수에 따라 막대로 찍힌 소리 신호가 끝없이에서 곡선으로 이어지는 그림"></canvas></div>
+    <div class="ctrl"><div class="group" role="group" aria-label="칸 수"><span class="glabel">칸 수</span><span id="gEnd"></span></div></div>
+    <div class="insight" id="iEnd" aria-live="polite"></div>
+  </div>
+  <div class="steps">
+    <div class="step"><b>음성 인식</b>소리 곡선을 물결 조각으로 나눠, 조각마다 세기를 봅니다.</div>
+    <div class="step"><b>압축 (MP3)</b>큰 조각 몇 개만 남기고 작은 조각은 버립니다.</div>
+    <div class="step"><b>커널 방법 (SVM)</b>곧은 칸막이로 안 갈리는 무리를, 끝없는 방에서 곧게 가릅니다.</div>
+  </div>
+  <details class="fold"><summary>원어 풀이</summary><p style="margin:8px 0 0">힐베르트 공간(Hilbert space): 겹침 점수(내적)가 있고, 빈틈이 없는(완비) 방. 칸이 끝없이 많아도 길이·각도·그림자·극한을 모두 쓸 수 있다. 이름은 수학자 다비트 힐베르트에서 왔다.</p></details>
+  <div data-dlg="end2"></div>
+  <div class="seriescards"><div class="scard soon"><span class="k">다음 편 · 곧 열립니다</span><h3>힐베르트 공간 — 끝없는 방의 자와 각도기</h3><p>곡선의 겹침 점수, 빈틈 없는 방, 물결 조각(푸리에), 피타고라스의 확장(파스발), 커널 방. 같은 저장소에서 이어집니다.</p></div>
+    <a class="scard" href="index.html"><span class="k">목차</span><h3>유클리드 공간 · 힐베르트 공간</h3><p>0편 가방 점검부터 다시 보기</p></a></div>
+</div></section>
+</main>
+
+<footer><div class="wrap">
+  <h3>출처</h3>
+  <table><thead><tr><th>#</th><th>자료</th><th>이 페이지에서 쓴 곳</th></tr></thead><tbody>
+    <tr><td>[1]</td><td>eeanimation, 인포그래픽 「EUCLIDEAN SPACE 01~10」 (사용자 제공 이미지, 원 게시물 주소·게시일 미확인)</td><td>6~10번 방 — 카드 06~10의 구성과 도표 좌표(v = (3, 2), 평면 x₁ + 2x₂ + 2x₃ = 6, 삼각형 3·4·5, 원·구, 호와 현)를 따라 새로 그림. 원본 그림은 넣지 않음</td></tr>
+    <tr><td>[2]</td><td>교육부 고등학교 수학·기하 교육과정 (정사영, 평면의 방정식, 회전·대칭, 원·구, 호의 길이)</td><td>조수 수식 상자의 "학교 수학으로 보면"</td></tr>
+    <tr><td>[3]</td><td>Cortes, C. & Vapnik, V. (1995). Support-vector networks. Machine Learning, 20, 273–297.</td><td>7번 방 — 칸막이를 데이터로 고르는 SVM</td></tr>
+    <tr><td>[4]</td><td>Bellman, R. (1961). Adaptive Control Processes: A Guided Tour. Princeton University Press.</td><td>9번 방 — "차원의 저주"라는 이름</td></tr>
+  </tbody></table>
+  <h3>예시값·설명용 모형인 것</h3>
+  <ul><li>흩어진 점 40개(시드 고정), 손님 Q·A·B와 대결 손님 15명, 사이즈 규칙, 단위 맞추기의 "한 칸" 크기(키 8cm, 몸무게 10kg)</li><li>끝없는 방의 소리 신호 모양</li></ul>
+  <p>원자료와 다르게 쓴 곳: 카드 07 축 이름(x → x₁·x₂·x₃), 카드 09 중심 c와 원점 식의 차이 밝힘, 카드 09 껍질 비율 실험 추가. 계산 값은 모두 다시 검산함(code/check_euclid.js).</p>
+  <p>캐릭터 이름·설정·그림은 저작권자 안상선의 허락 없이 사용할 수 없습니다.</p>
+  <p>글 · 안상선 ((주)M-Robo 대표) · <a href="https://adminmrobo.github.io/who_am_i/who_am_i.html">저자 소개</a> · <a href="index.html">목차</a> · <a href="e0_orientation.html">0편</a> · <a href="e1_ruler_rooms.html">①편</a></p>
+</div></footer>
+
+<script>
+/*@@SPRITES@@*/
+/*@@GEO@@*/
+/*@@COMMON@@*/
+/*@@PLANE@@*/
+(function(){
+'use strict';
+var $=U.$,$$=U.$$,fmt=U.fmt,cssv=U.cssv;
+function f1(x){return fmt(x,Math.abs(x-Math.round(x))<1e-9?0:2);}
+function vec(p){return '('+p.map(f1).join(', ')+')';}
+function V(cv,draw){var o={dirty:true};U.reg(cv,function(dt){if(o.dirty||dt===0){draw();o.dirty=false;}});return o;}
+
+/* ── 대사 ── */
+var DLG={
+ hero:[["doc","doc_front","①편에서 자와 각도기를 챙겼죠. 이번 다섯 방에서는 그 도구로 일을 합니다. 그리고 마지막에 두 사람이 겨뤄요."],
+   ["sia","sia_signal","대결이요? 저는 숫자를 적힌 그대로 쓰는 쪽에 걸게요!"],
+   ["moa","moa_ok","저는 10번 방까지 다 보고 정할게요."]],
+ r6:[["doc","doc_think","바닥 위 어느 점이 v에 가장 가까울까요?"],
+   ["robo","robo_coin","v 아래쪽이면 아무 데나 비슷하지!"],
+   ["fly","fly_point","바닥 위의 점 m을 끌어서 v까지 거리를 재 봐. p 칸이랑 비교해."],
+   ["moa","moa_ok","m이 p에 겹칠 때가 가장 짧아요. 비켜나면 빗변이 돼서 길어지고요."]],
+ r7:[["sia","sia_think","그림을 못 그리는 100칸 방에서도 어느 쪽인지 알 수 있어요?"],
+   ["robo","robo_coin","눈으로 봐야 알지! 3칸 넘으면 포기."],
+   ["fly","fly_magnify","슬라이더로 점을 옮기면서 'n·x − 6' 칸의 부호만 봐."],
+   ["moa","moa_sparkle","양수면 위쪽, 음수면 아래쪽, 0이면 칸막이 위. 그림이 없어도 돼요."]],
+ r8:[["moa","moa_report","늘리기도 모양은 같은데, 거리도 같나요?"],
+   ["robo","robo_coin","모양이 같으면 다 같은 거지!"],
+   ["fly","fly_point","'2배 늘리기'를 누르고 변 길이 표를 봐."],
+   ["sia","sia_explain","모양은 닮았는데 길이가 다 두 배예요. 돌리기·뒤집기는 그대로였고요."]],
+ r9:[["sia","sia_think","반지름을 두 배로 늘리면 이웃도 두 배?"],
+   ["robo","robo_calc","당연히 두 배! 반지름이 두 배니까."],
+   ["fly","fly_magnify","'r = 1 → 2'를 누르고 넓이랑 이웃 수를 봐."],
+   ["moa","moa_ok","넓이가 네 배예요. 점이 고르게 흩어져 있으면 이웃도 네 배쯤 늘겠네요."]],
+ r10:[["moa","moa_sparkle","드디어 제 질문이에요. 단위가 다르면요?"],
+   ["robo","robo_coin","숫자는 숫자지, 단위가 무슨 상관!"],
+   ["fly","fly_point","'키를 mm로' 버튼을 눌러 봐. 가장 가까운 사람이 누구로 바뀌지?"],
+   ["sia","sia_signal","A였는데 B가 됐어요! 키 차이가 거리를 독차지했네요… 어? 저 대결에서 mm 쓰기로 했는데!"]],
+ dsia:[["sia","sia_guide","적힌 숫자를 바꾸면 정보가 왜곡될 것 같아요. 그대로 갑니다!"]],
+ dmoa:[["moa","moa_report","키 1mm와 몸무게 1kg은 같은 크기가 아니잖아요. 출발선부터 맞출게요."]],
+ end1:[["doc","doc_magic","열 개의 방에서 챙긴 도구를 한 줄로 보면, 자(거리), 각도기(겹침 점수), 그림자입니다. 그런데 복도 끝에 문이 하나 더 있어요."],
+   ["sia","sia_think","문 너머가 끝이 안 보여요. 방이 끝없이 넓은가 봐요."]],
+ end2:[["doc","doc_front","다음 복도에는 끝없는 방이 열 개 있습니다. 자와 각도기는 그대로 들고 오세요."],
+   ["moa","moa_cheer","끝없는 방에서도 그림자가 생긴다니, 빨리 보고 싶어요!"],
+   ["robo","robo_wow","끝이 없는데 길이를 잰다고? …이번엔 틀리지 않게 먼저 들어 볼게."],
+   ["asst","asst_smile","식은 제가 또 숫자로 풀어 볼게요. 곧 만나요!"]]
+};
+U.dialogues(DLG);U.fillImgs();
+
+/* ── 표지 그림판: 그림자와 칸막이 ── */
+(function(){new P2($('#coverCv'),{xr:[-1,10],yr:[-1,6],ticks:false,margin:20,draw:function(g,P){
+  P.line([-0.5,-0.25],[5.5,2.75],'rgba(15,127,134,.5)',2);P.arrow([0,0],[3,3.6],cssv('--info'),3);var p=EG.project([3,3.6],[2,1]);P.line([3,3.6],p,cssv('--amber'),2,[5,4]);P.pt(p,cssv('--gfp'),'그림자');
+  P.line([6,-0.5],[9.5,5.5],cssv('--stain'),2.5);[[6.2,2.6],[6.8,4],[5.8,1.2],[7.2,4.8]].forEach(function(q){P.pt(q,cssv('--info'),null,5);});[[8.4,0.8],[9,2],[8.8,3.3],[9.6,1.4]].forEach(function(q){P.pt(q,cssv('--eye'),null,5);});}});})();
+
+/* ── 6번 방: 그림자 ── */
+var V6=[3,2],T6=0,M6=4.2;
+function u6(){var t=EG.rad(T6);return [Math.cos(t),Math.sin(t)];}
+var P6=new P2($('#cv6'),{xr:[-1.5,5.5],yr:[-1.5,4.5],stamp:'m을 끌어 보세요',
+  handles:[{get:function(){return EG.mul(u6(),M6);},set:function(x,y){M6=Math.max(-1.5,Math.min(6,EG.dot([x,y],u6())));},snap:0,col:cssv('--stain')}],onChange:up6,
+  draw:function(g,P){var u=u6(),p=EG.project(V6,u),m=EG.mul(u,M6);P.line(EG.mul(u,-3),EG.mul(u,8),'rgba(15,127,134,.55)',3);P.text(EG.mul(u,5.4),'바닥',cssv('--terrain'),'left',0,14);
+    P.line(V6,m,'rgba(155,63,181,.6)',1.6,[4,3]);P.line(V6,p,cssv('--amber'),2.4);
+    var q=0.22,a=EG.add(p,EG.mul(u,-q)),nr=EG.sub(V6,p),nn=EG.norm(nr);if(nn>0.3){var w=EG.mul(nr,q/nn);P.line(a,EG.add(a,w),cssv('--amber'),1.2);P.line(EG.add(a,w),EG.add(p,w),cssv('--amber'),1.2);}
+    P.arrow([0,0],V6,cssv('--info'),3);P.arrow([0,0],p,cssv('--gfp'),3);P.pt(p,cssv('--gfp'),'p '+vec(p.map(function(x){return Math.round(x*100)/100;})),5,18);P.pt(m,cssv('--stain'),'m',5,-14);
+    P.text(V6,'v = (3, 2)',cssv('--info'),'left',8,-8);P.text([(V6[0]+p[0])/2,(V6[1]+p[1])/2],'r',cssv('--amber'),'left',8,0);}});
+function up6(){var u=u6(),p=EG.project(V6,u),r=EG.sub(V6,p),m=EG.mul(u,M6),dp=EG.dist(V6,p),dm=EG.dist(V6,m);
+  $('#m6a').textContent=vec(p.map(function(x){return Math.round(x*100)/100;}));$('#m6b').textContent=vec(r.map(function(x){return Math.round(x*100)/100;}))+' · '+fmt(Math.abs(EG.dot(r,u))<1e-9?0:EG.dot(r,u),2);$('#m6c').textContent=fmt(dp,2);$('#m6d').textContent=fmt(dm,2);
+  var near=Math.abs(dm-dp)<0.02;U.ins($('#i6'),[['g','그림자 p까지 '+fmt(dp,2)+', 점 m까지 '+fmt(dm,2)+'. '+(near?'m이 p와 겹쳤어요. 이보다 가까운 곳은 없습니다.':'m이 p보다 '+fmt(dm-dp,2)+' 멉니다.')],['a','빗나간 만큼 r과 바닥 방향의 겹침 점수는 늘 0 — 직각입니다. 바닥 방향을 돌려도 마찬가지예요.']]);P6.dirty=true;}
+var r6=$('#r6');function setT6(t){T6=t;r6.value=t;$('#v6').textContent=fmt(t,1).replace('.0','')+'°';M6=Math.max(-1.5,EG.dot(V6,u6())+1.2);up6();}
+r6.oninput=function(){setT6(+r6.value);};$('#b6a').onclick=function(){setT6(0);};$('#b6b').onclick=function(){setT6(EG.deg(Math.atan2(1,2)));};setT6(0);
+var C6=160;var v6b=V($('#cv6b'),function(){var xs=[],i;for(i=0;i<=100;i++){var c=157+10*i/100;xs.push([c,EG.sse(EG.HEIGHTS,c)]);}
+  var o=U.plot($('#cv6b'),{xr:[157,167],yr:[0,80],xt:[157,159,160,161,162,163,164,165,167],yt:[0,8,20,40,60,80],xl:'대표값 c (cm)',yl:'빗나간 거리² 합',series:[{pts:xs,color:cssv('--terrain'),width:2.4}],vlines:[{x:162,color:cssv('--gfp'),label:'평균 162 (바닥)',dash:[4,4]}],stamp:'그릇 모양'});
+  var g=o.g;g.beginPath();g.arc(o.X(C6),o.Y(EG.sse(EG.HEIGHTS,C6)),7,0,7);g.fillStyle=cssv('--amber');g.fill();g.strokeStyle='#fff';g.lineWidth=2;g.stroke();
+  EG.HEIGHTS.forEach(function(h){g.fillStyle='rgba(91,90,110,.55)';g.fillRect(o.X(h)-1,o.Y(0)-10,2,10);});});
+function up6b(){var s=EG.sse(EG.HEIGHTS,C6),d=EG.HEIGHTS.map(function(h){return f1(h-C6)+'²';}).join(' + ');
+  U.ins($('#i6b'),[['g','c = '+f1(C6)+' → '+d+' = <b>'+f1(s)+'</b>'],[Math.abs(C6-162)<1e-9?'m':'a',Math.abs(C6-162)<1e-9?'바닥! 평균 162에서 가장 작은 8이 됩니다. 평균 = 세 숫자의 그림자.':'아직 바닥이 아니에요. 162 쪽으로 옮기면 줄어듭니다. 이 그릇의 바닥을 찾는 일이 그릇 시리즈의 경사 하강이에요.']]);v6b.dirty=true;}
+var r6b=$('#r6b');r6b.oninput=function(){C6=+r6b.value;$('#v6b').textContent=f1(C6);up6b();};up6b();
+
+/* ── 7번 방: 칸막이 ── */
+var X7=[2,2,2];
+var S7=new U.Space3D($('#cv7'),{L:3.4,zoom:1.4,yaw:-2.15,pitch:0.32,ticks:false,axes:['x₁','x₂','x₃'],aria:'칸막이 x₁ + 2x₂ + 2x₃ = 6과 점 x'});
+S7.ov.push(function(g,S){var A=S.P(6*0.55,0,0),Bp=S.P(0,3,0),Cp=S.P(0,0,3);
+  /* 축 위 칸막이 꼭짓점 (6,0,0)은 상자 밖이라 삼각형을 상자 안 부분으로 그림 */
+  var tri=[[3.4,1.3,0],[0,3,0],[0,0,3],[3.4,0,1.3]];g.beginPath();tri.forEach(function(p,i){var q=S.P(p[0],p[1],p[2]);i?g.lineTo(q[0],q[1]):g.moveTo(q[0],q[1]);});g.closePath();g.fillStyle='rgba(155,63,181,.16)';g.fill();g.strokeStyle='rgba(155,63,181,.7)';g.lineWidth=1.6;g.stroke();
+  [[0,3,0,'(0, 3, 0)'],[0,0,3,'(0, 0, 3)']].forEach(function(p){var q=S.dot3(g,p[0],p[1],p[2],cssv('--stain'),3.5);U.label(g,q[0]+8,q[1]-8,p[3],cssv('--stain'));});
+  var o=[2,1,1],nn=[1/3,2/3,2/3];S.arrow3(g,o,[o[0]+nn[0]*1.4,o[1]+nn[1]*1.4,o[2]+nn[2]*1.4],cssv('--stain'),2.6);var qn=S.P(o[0]+nn[0]*1.5,o[1]+nn[1]*1.5,o[2]+nn[2]*1.5);U.label(g,qn[0]+6,qn[1],'n',cssv('--stain'));
+  var d=EG.planeDist(X7),foot=[X7[0]-nn[0]*d,X7[1]-nn[1]*d,X7[2]-nn[2]*d];S.line3(g,[X7,foot],cssv('--amber'),2,[5,4]);S.dot3(g,foot[0],foot[1],foot[2],cssv('--amber'),3.5);
+  S.drop(g,X7[0],X7[1],X7[2]);var s=EG.side(X7),col=s>1e-9?cssv('--gfp'):s<-1e-9?cssv('--eye'):cssv('--stain');var q=S.dot3(g,X7[0],X7[1],X7[2],col,6.5);U.label(g,q[0]+10,q[1]-10,'x '+vec(X7),col);
+  U.label(g,S.w/2,S.h-16,'보라 판 = 칸막이 (x₁축과는 x₁ = 6에서 만나 그림 밖)',cssv('--muted'),'center');});
+function up7(){var dp=EG.dot(EG.PLANE.n,X7),s=dp-6,d=EG.planeDist(X7);$('#m7a').textContent=f1(dp);$('#m7b').textContent=(s>0?'+':'')+f1(s);$('#m7c').textContent=s>1e-9?'위쪽 (n 쪽)':s<-1e-9?'아래쪽':'칸막이 위';$('#m7d').textContent=fmt(Math.abs(d),2);
+  U.ins($('#i7'),[['m','n·x = 1 × '+f1(X7[0])+' + 2 × '+f1(X7[1])+' + 2 × '+f1(X7[2])+' = '+f1(dp)+(s>0?' > 6':s<0?' < 6':' = 6')],['g','칸막이까지 거리 = |'+f1(s)+'| ÷ 3 = '+fmt(Math.abs(d),2)+'. 주황 점선이 칸막이에 똑바로 내린 발(6번 방의 그림자)입니다.'],['a','스팸 분류기라면 "+"는 스팸, "−"는 정상. 칸막이에서 멀수록 확신이 큽니다.']]);S7.dirty=true;}
+[['r7a','v7a',0],['r7b','v7b',1],['r7c','v7c',2]].forEach(function(z){var r=$('#'+z[0]);r.oninput=function(){X7[z[2]]=+r.value;$('#'+z[1]).textContent=f1(+r.value);up7();};});up7();
+
+/* ── 8번 방: 움직임 ── */
+var T0=[[0,0],[3,0],[3,4]],M8='rot',A8=90;
+function tf(p){if(M8==='push')return [p[0]+2,p[1]+1];if(M8==='rot')return EG.rot(p,EG.rad(A8));if(M8==='flip')return [p[0],-p[1]];if(M8==='scale')return [p[0]*2,p[1]*2];return p;}
+var P8=new P2($('#cv8'),{xr:[-7,7],yr:[-5,8],draw:function(g,P){P.poly(T0,'rgba(91,104,116,.08)','rgba(91,104,116,.45)',1.4);var T=T0.map(tf);P.poly(T,'rgba(15,127,134,.14)',cssv('--terrain'),2.4);
+  ['O','C','B'].forEach(function(n,i){P.pt(T[i],cssv('--terrain'),n+"'",4,-12);P.pt(T0[i],'rgba(91,104,116,.6)',n,3,14);});
+  if(M8==='rot'&&A8%360)P.arcAng([0,0],30,0,EG.rad(A8),cssv('--amber'));}});
+function up8(){var T=T0.map(tf),names=['O–C','C–B','O–B'],pairs=[[0,1],[1,2],[0,2]];
+  $('#t8').innerHTML=pairs.map(function(pq,i){var a=EG.dist(T0[pq[0]],T0[pq[1]]),b=EG.dist(T[pq[0]],T[pq[1]]),same=Math.abs(a-b)<1e-9;return '<tr><td>'+names[i]+'</td><td class="n">'+fmt(a,2)+'</td><td class="n">'+fmt(b,2)+'</td><td>'+(same?'✓ 같음':'✗ '+fmt(b/a,0)+'배')+'</td></tr>';}).join('');
+  var msg={push:'모든 점을 (2, 1)만큼 밀었어요. 좌표는 다 바뀌었지만 세 변은 그대로입니다.',rot:'원점을 중심으로 '+A8+'° 돌렸어요. 5번 방에서 자 세트를 돌린 것과 같은 일 — 세 변 그대로.',flip:'x₁축을 거울 삼아 뒤집었어요. 왼손·오른손처럼 방향은 바뀌어도 세 변 그대로.',scale:'2배로 늘렸어요. 모양은 닮았지만 세 변이 모두 두 배 — 거리가 바뀌었습니다.'}[M8];
+  U.ins($('#i8'),[[M8==='scale'?'r':'g',msg],['a',M8==='scale'?'한 축만 늘리면 모양까지 찌그러져요. 키를 mm로 바꾸는 일이 바로 그것 → 10번 방.':'거리를 지키는 움직임이라, 거리로 판단하는 KNN·칸막이의 결과도 그대로입니다.']]);P8.dirty=true;}
+U.btns($('#g8'),[['push','밀기 (2, 1)'],['rot','돌리기'],['flip','뒤집기 (x₁축 거울)'],['scale','2배 늘리기']],'rot',function(v){M8=v;up8();});
+var r8=$('#r8');r8.oninput=function(){A8=+r8.value;$('#v8').textContent=A8+'°';if(M8!=='rot'){M8='rot';U.$$('#g8 .bt').forEach(function(b,i){b.setAttribute('aria-pressed',String(i===1));});}up8();};up8();
+
+/* ── 9번 방: 공 ── */
+var D9=EG.dots40(),C9=[0,0],R9=1;
+function in9(){return D9.filter(function(p){return EG.dist(p,C9)<=R9+1e-9;}).length;}
+var P9=new P2($('#cv9'),{xr:[-4.5,4.5],yr:[-4.5,4.5],stamp:'중심을 끌어 보세요',handles:[{get:function(){return C9;},set:function(x,y){C9=[x,y];},snap:0.1}],onChange:up9,
+  draw:function(g,P){g.beginPath();g.arc(P.X(C9[0]),P.Y(C9[1]),R9*P.kx,0,7);g.fillStyle='rgba(15,127,134,.10)';g.fill();g.strokeStyle=cssv('--terrain');g.lineWidth=2;g.stroke();
+    D9.forEach(function(p){var ins=EG.dist(p,C9)<=R9+1e-9;P.pt(p,ins?cssv('--gfp'):'rgba(91,104,116,.45)',null,ins?5:3.5);});P.line(C9,[C9[0]+R9,C9[1]],cssv('--amber'),1.6);P.text([C9[0]+R9/2,C9[1]],'r',cssv('--amber'),'center',0,-10);P.pt(C9,cssv('--amber'),'c',4);}});
+function up9(){var n=in9();$('#m9a').textContent=fmt(R9,1);$('#m9b').textContent=fmt(Math.PI*R9*R9,2);$('#m9c').textContent=n+'개';
+  U.ins($('#i9'),[['g','중심 c '+vec([Math.round(C9[0]*10)/10,Math.round(C9[1]*10)/10])+'에서 거리 '+fmt(R9,1)+' 이하인 점이 '+n+'개. 이것이 "반경 이웃"입니다.'],['a','반지름이 두 배면 넓이 πr²는 네 배. 점이 고르게 흩어져 있을수록 이웃 수도 네 배에 가까워져요.']]);P9.dirty=true;}
+var r9=$('#r9');r9.oninput=function(){R9=+r9.value;$('#v9').textContent=fmt(R9,1);up9();};
+$('#b9').onclick=function(){var n1,n2;R9=1;n1=in9();R9=2;n2=in9();r9.value=2;$('#v9').textContent='2.0';up9();U.ins($('#i9'),[['g','r = 1일 때 '+n1+'개 → r = 2일 때 '+n2+'개. 넓이는 3.14 → 12.57로 네 배.'],['a','점이 고르게 흩어져 있지 않아 정확히 네 배는 아니에요. 그래도 두 배보다는 훨씬 많이 늘었죠.']]);};up9();
+var N9=3;var v9b=V($('#cv9b'),function(){var pts=[];for(var n=1;n<=100;n++)pts.push([n,EG.inner(n)*100]);
+  var o=U.plot($('#cv9b'),{xr:[1,100],yr:[0,100],xt:[1,10,20,40,60,80,100],yt:[0,25,50,75,100],xl:'칸 수 n',yl:'안쪽 비율 (%)',series:[{pts:pts,color:cssv('--terrain'),width:2.4}],vlines:[{x:N9,color:cssv('--amber'),label:N9+'칸: '+fmt(EG.inner(N9)*100,N9>40?4:1)+'%'}],stamp:'0.9ⁿ'});
+  var g=o.g;g.beginPath();g.arc(o.X(N9),o.Y(EG.inner(N9)*100),6,0,7);g.fillStyle=cssv('--amber');g.fill();});
+function up9b(){var a=EG.inner(N9)*100;$('#m9d').textContent=fmt(a,a<0.1?4:1)+'%';$('#m9e').textContent=fmt(100-a,a<0.1?4:1)+'%';
+  U.ins($('#i9b'),[[N9>=10?'r':'g',N9+'칸 공에서 반지름의 90% 안쪽이 차지하는 부피는 '+fmt(a,a<0.1?4:1)+'%, 나머지 '+fmt(100-a,a<0.1?4:1)+'%는 얇은 겉껍질(반지름 0.9~1)에 있어요.'],['a',N9>=10?'거의 모든 점이 껍질 근처 → 중심에서 보면 모두 "비슷하게 먼" 점들. 가까운 이웃 찾기가 약해지는 이유입니다(차원의 저주).':'칸이 적을 때는 안쪽이 넉넉합니다. 버튼으로 10칸, 100칸을 눌러 보세요.']]);v9b.dirty=true;}
+var r9b=$('#r9b');r9b.oninput=function(){N9=+r9b.value;$('#v9b').textContent=N9;up9b();};$$('[data-n9]').forEach(function(b){b.onclick=function(){N9=+b.dataset.n9;r9b.value=N9;$('#v9b').textContent=N9;up9b();};});up9b();
+
+/* ── 10번 방: 곧은 자의 한계 ── */
+var M10='cm',Q=EG.UNITQ,CA=EG.UNITC[0],CB=EG.UNITC[1];
+var P10=new P2($('#cv10'),{xr:[155,175],yr:[50,72],tick:1,labelTick:5,axes:['키(cm)','몸무게(kg)'],free:true,
+  draw:function(g,P){var f=EG.metric(M10),nn=EG.nearest(Q,M10,EG.UNITC),r=nn.d,ax=M10==='mm'?r/10:M10==='std'?r*EG.SPREAD.h:r,ay=M10==='std'?r*EG.SPREAD.w:r;
+    g.beginPath();g.ellipse(P.X(Q[1]),P.Y(Q[2]),ax*P.kx,ay*P.ky,0,0,7);g.fillStyle='rgba(15,127,134,.08)';g.fill();g.strokeStyle=cssv('--terrain');g.lineWidth=2;g.setLineDash([6,4]);g.stroke();g.setLineDash([]);
+    [CA,CB].forEach(function(c){var near=c===nn.k;P.line([Q[1],Q[2]],[c[1],c[2]],near?cssv('--gfp'):'rgba(91,104,116,.4)',near?3:1.4,near?[]:[4,4]);P.pt([c[1],c[2]],near?cssv('--gfp'):cssv('--muted'),c[0]+' ('+c[1]+', '+c[2]+')  '+fmt(f(Q,c),2),6,c[0]==='A'?18:-14);});
+    P.pt([Q[1],Q[2]],cssv('--amber'),'새 손님 Q (165, 60)',7,-16);P.text([174.5,51],'점선 = Q에서 "같은 거리"인 곳',cssv('--terrain'),'right');}});
+function up10(){var f=EG.metric(M10),da=f(Q,CA),db=f(Q,CB),nn=EG.nearest(Q,M10,EG.UNITC);$('#m10a').textContent=fmt(da,2);$('#m10b').textContent=fmt(db,2);$('#m10c').textContent=nn.k[0];
+  $('#m10d').textContent={cm:'키·몸무게 함께',mm:'거의 키 혼자',std:'키·몸무게 고르게'}[M10];
+  var msg={cm:['g','cm·kg 그대로: A는 키 2·몸무게 2 차이(2.83), B는 몸무게 6 차이(6). A가 더 가깝습니다.'],
+    mm:['r','키를 mm로: A의 키 차이 2cm가 20이 되어 거리 20.10. B는 키가 같아 6 그대로. 가장 가까운 사람이 B로 바뀌었어요.'],
+    std:['m','단위 맞추기: 키 8cm, 몸무게 10kg을 한 칸으로. A (0.25, 0.2) → 0.32, B (0, 0.6) → 0.6. 다시 A가 가깝습니다.']}[M10];
+  U.ins($('#i10'),[msg,['a','점선 타원이 "Q에서 같은 거리"인 곳입니다. 키를 mm로 쓰면 가로로 납작해져, 키가 조금만 달라도 멀어져요.']]);P10.dirty=true;}
+U.btns($('#g10'),[['cm','cm·kg 그대로'],['mm','키를 mm로'],['std','단위 맞추기']],'cm',function(v){M10=v;up10();});up10();
+var TH=90;var v10b=V($('#cv10b'),function(){var R=U.setup($('#cv10b')),g=R.g,w=R.w,h=R.h;U.grid24(g,w,h);var cx=w*0.36,cy=h*0.52,rr=Math.min(w*0.3,h*0.4),t=EG.rad(TH),a0=-Math.PI/2-t/2;
+  g.beginPath();g.arc(cx,cy,rr,0,7);g.fillStyle='rgba(30,85,200,.06)';g.fill();g.strokeStyle='rgba(30,85,200,.4)';g.lineWidth=1.4;g.stroke();
+  var p1=[cx+rr*Math.cos(a0),cy+rr*Math.sin(a0)],p2=[cx+rr*Math.cos(a0+t),cy+rr*Math.sin(a0+t)];
+  g.beginPath();g.arc(cx,cy,rr,a0,a0+t);g.strokeStyle=cssv('--gfp');g.lineWidth=4;g.stroke();g.beginPath();g.moveTo(p1[0],p1[1]);g.lineTo(p2[0],p2[1]);g.strokeStyle=cssv('--amber');g.lineWidth=2.4;g.setLineDash([6,4]);g.stroke();g.setLineDash([]);
+  g.strokeStyle='rgba(22,33,43,.3)';g.lineWidth=1;g.beginPath();g.moveTo(cx,cy);g.lineTo(p1[0],p1[1]);g.moveTo(cx,cy);g.lineTo(p2[0],p2[1]);g.stroke();
+  g.beginPath();g.arc(cx,cy,22,a0,a0+t);g.strokeStyle=cssv('--stain');g.lineWidth=1.6;g.stroke();U.label(g,cx,cy+18,'θ = '+TH+'°',cssv('--stain'),'center');
+  [p1,p2].forEach(function(p,i){g.beginPath();g.arc(p[0],p[1],6,0,7);g.fillStyle=cssv('--eye');g.fill();U.label(g,p[0]+(i?10:-10),p[1]-12,i?'도시 B':'도시 A',cssv('--eye'),i?'left':'right');});
+  var lx=w*0.7;U.label(g,lx,h*0.35,'━ 호 '+fmt(EG.arc(TH),0)+'km',cssv('--gfp'));U.label(g,lx,h*0.35+26,'┅ 현 '+fmt(EG.chord(TH),0)+'km',cssv('--amber'));U.label(g,lx,h*0.35+52,'지구 반지름 6,371km',cssv('--muted'));U.stamp(g,w,'지구 단면');});
+function up10b(){var a=EG.arc(TH),c=EG.chord(TH);function km(x){return Math.round(x).toLocaleString('ko-KR')+'km';}$('#m10e').textContent=km(a);$('#m10f').textContent=km(c);$('#m10g').textContent=km(a-c);
+  U.ins($('#i10b'),[['g','θ = '+TH+'°: 호 '+km(a)+', 현 '+km(c)+'. 곧은 자는 땅속을 뚫고 지나가 '+fmt((a-c)/a*100,1)+'% 짧게 잽니다.'],['a',TH<=20?'가까운 두 도시는 호와 현이 거의 같아요. 동네 지도에서는 곧은 자로 충분합니다.':'멀어질수록 차이가 커져요. 휜 표면에서는 표면을 따라 재야 합니다.']]);v10b.dirty=true;}
+var r10b=$('#r10b');r10b.oninput=function(){TH=+r10b.value;$('#v10b').textContent=TH+'°';up10b();};up10b();
+
+/* ── 대결 ── */
+var DR=null,shown=false,SZC={S:cssv('--info'),M:cssv('--gfp'),L:cssv('--eye')};
+var PD=new P2($('#cvDuel'),{xr:[152,181],yr:[44,84],tick:1,labelTick:5,axes:['키(cm)','몸무게(kg)'],free:true,
+  draw:function(g,P){P.line([152,55],[181,55],'rgba(91,104,116,.35)',1,[3,3]);P.line([152,68],[181,68],'rgba(91,104,116,.35)',1,[3,3]);P.text([181,55],'S | M',cssv('--muted'),'right',-2,-9);P.text([181,68],'M | L',cssv('--muted'),'right',-2,-9);
+    if(shown&&DR)DR.forEach(function(d){P.line([d.q[1],d.q[2]],[d.sia[1],d.sia[2]],'rgba(90,90,110,.5)',1.6,[4,3]);P.line([d.q[1],d.q[2]],[d.moa[1],d.moa[2]],'rgba(147,101,26,.75)',2);});
+    EG.KNOWN.forEach(function(k){var s=EG.size(k[2]);P.pt([k[1],k[2]],SZC[s],k[0]+' '+s,5.5,-12);});
+    EG.NEWC.forEach(function(q){var gg=P.g;gg.save();gg.translate(P.X(q[1]),P.Y(q[2]));gg.rotate(Math.PI/4);gg.fillStyle=cssv('--amber');gg.fillRect(-6,-6,12,12);gg.strokeStyle='#fff';gg.lineWidth=1.6;gg.strokeRect(-6,-6,12,12);gg.restore();P.text([q[1],q[2]],q[0],cssv('--amber'),'left',9,12);});}});
+U.Duel({el:'#duel',run:function(){DR=EG.duel();shown=true;return DR;},
+  show:function(r,pred){var ns=r.filter(function(x){return x.siaOk;}).length,nm=r.filter(function(x){return x.moaOk;}).length;
+    $('#d-tbl').innerHTML=r.map(function(x){return '<tr><td>'+x.q[0]+'</td><td>'+x.q[1]+'cm, '+x.q[2]+'kg</td><td><b>'+x.truth+'</b></td><td>'+x.sia[0]+' → '+x.siaSize+(x.siaOk?' ✓':' ✗')+'</td><td>'+x.moa[0]+' → '+x.moaSize+(x.moaOk?' ✓':' ✗')+'</td></tr>';}).join('');
+    $('#d-bs').style.width=(ns/6*100)+'%';$('#d-bm').style.width=(nm/6*100)+'%';$('#d-vs').textContent=ns+' / 6';$('#d-vm').textContent=nm+' / 6';var moaWin=nm>ns;
+    $('#d-say').innerHTML=U.say('asst','asst_firm','판정합니다. N4(171cm, 75kg)와 N6(169cm, 62kg)에서 갈렸어요. 키를 mm로 재면 키 1cm 차이가 몸무게 10kg 차이와 같아져서, 시아는 키만 비슷한 K4·K3를 골랐습니다. 사이즈는 몸무게로 정해지는데 말이죠. 맞힌 수 시아 '+ns+', 모아 '+nm+'.')+U.say('sia','sia_doze','적힌 그대로가 정직한 줄 알았는데… 단위가 거리를 몰래 정하고 있었네요.',true)+U.say('moa','moa_cheer','열마다 출발선을 맞췄을 뿐이에요. 어떤 열이 중요한지는 문제마다 달라요!');U.fillImgs();
+    $('#d-score').textContent='이번 판: '+(moaWin?'모아 승':nm===ns?'무승부':'시아 승');$('#d-pred').textContent=pred?('내 예상: '+(pred==='moa'?'모아':'시아')+' → '+((pred==='moa')===moaWin?'맞힘':'빗나감')):'예상을 고르지 않았어요';
+    U.setMood($('#d-sia'),moaWin?'sia_doze':'sia_smile');U.setMood($('#d-moa'),moaWin?'moa_cheer':'moa_tea');PD.dirty=true;},
+  reset:function(){shown=false;DR=null;PD.dirty=true;U.setMood($('#d-sia'),'sia_guide');U.setMood($('#d-moa'),'moa_report');}});
+
+/* ── 끝없는 방 ── */
+var NE=10;function sig(t){return 0.55*Math.sin(2*Math.PI*t)+0.3*Math.sin(6*Math.PI*t+0.6)+0.12*Math.sin(14*Math.PI*t);}
+var vE=V($('#cvEnd'),function(){var R=U.setup($('#cvEnd')),g=R.g,w=R.w,h=R.h,L=40,Rm=20,mid=h*0.5,amp=h*0.36;U.grid24(g,w,h);
+  g.strokeStyle=cssv('--rule');g.beginPath();g.moveTo(L,mid);g.lineTo(w-Rm,mid);g.stroke();var X=function(t){return L+t*(w-L-Rm);};
+  if(NE<0){g.strokeStyle=cssv('--terrain');g.lineWidth=3;g.beginPath();for(var i=0;i<=600;i++){var t=i/600,y=mid-sig(t)*amp;i?g.lineTo(X(t),y):g.moveTo(X(t),y);}g.stroke();U.label(g,L,24,'끝없이: 숫자 묶음이 곡선 하나가 됨',cssv('--terrain'));}
+  else{var bw=Math.max(1.5,(w-L-Rm)/NE*0.6);for(var k=0;k<NE;k++){var t=(k+0.5)/NE,v=sig(t),x=X(t);g.fillStyle=NE>50?'rgba(15,127,134,.7)':cssv('--terrain');g.fillRect(x-bw/2,Math.min(mid,mid-v*amp),bw,Math.abs(v*amp));if(NE<=10){g.beginPath();g.arc(x,mid-v*amp,4,0,7);g.fill();}}
+    g.strokeStyle='rgba(15,127,134,.18)';g.lineWidth=1;g.setLineDash([3,3]);g.beginPath();for(var i=0;i<=300;i++){var t=i/300,y=mid-sig(t)*amp;i?g.lineTo(X(t),y):g.moveTo(X(t),y);}g.stroke();g.setLineDash([]);U.label(g,L,24,NE+'칸: 점 하나 = 숫자 '+NE+'개',cssv('--muted'));}
+  g.fillStyle=cssv('--muted');g.font='11.5px '+cssv('--font');g.fillText('시간 →',w-Rm-46,mid+16);U.stamp(g,w,'설명용 소리 모양');});
+function upE(){var M={2:'2칸이면 소리를 숫자 두 개로만 기억합니다. 원래 모양(흐린 점선)은 거의 알 수 없어요.',3:'3칸: 아직 모양이 거칠어요.',10:'10칸: 오르내림이 보이기 시작합니다. 여기까지는 유클리드 방에서 거리를 잴 수 있어요.',100:'100칸: 거의 곡선처럼 보입니다. 그래도 아직 "칸이 정해진" 방이에요.','-1':'끝없이: 칸 사이 빈틈이 사라지고 곡선 하나가 됐습니다. 이 곡선 하나가 끝없는 방의 점 하나예요. 문이 열렸습니다!'};
+  U.ins($('#iEnd'),[[NE<0?'m':'g',M[String(NE)]],NE<0?['a','곡선끼리 겹침 점수를 재려면 "같은 자리끼리 곱해서 더하기"를 "곱해서 넓이 구하기"로 바꾸면 됩니다. 그 이야기는 다음 편에서!']:['a','칸을 늘릴수록 거리 식의 항도 늘어납니다. 끝까지 늘리면 어떻게 될까요?']]);vE.dirty=true;}
+U.btns($('#gEnd'),[[2,'2'],[3,'3'],[10,'10'],[100,'100'],[-1,'끝없이']],10,function(v){NE=v;upE();});upE();
+
+/* ── 용어 ── */
+U.Gloss({
+ '그림자':['그림자(정사영)','orthogonal projection','점에서 바닥(선·평면)으로 똑바로 내린 발. 바닥 위에서 가장 가까운 점.'],
+ '예측선 긋기':['예측선 긋기(선형 회귀)','linear regression · least squares','빗나간 거리의 제곱 합이 가장 작은 직선을 고르는 방법. 예측 = 정답의 그림자.'],
+ '칸막이':['칸막이(초평면)','hyperplane','n칸 방을 둘로 나누는 한 칸 적은 판. 2칸 방에선 선, 3칸 방에선 평면.'],
+ '로지스틱 회귀':['로지스틱 회귀','logistic regression','칸막이로부터의 거리를 0~1 확률로 바꿔 두 편으로 가르는 방법.'],
+ 'SVM':['SVM','Support Vector Machine','두 무리 사이 틈이 가장 넓도록 칸막이를 세우는 방법.'],
+ '데이터 늘리기':['데이터 늘리기','data augmentation','사진을 돌리고 뒤집어 학습 데이터를 불리는 일.'],
+ '차원의 저주':['차원의 저주','curse of dimensionality','칸이 아주 많으면 거의 모든 점이 서로 비슷하게 멀어져, 거리로 하는 판단이 약해지는 현상.'],
+ '단위 맞추기':['단위 맞추기(특성 스케일링)','feature scaling · standardization','열마다 한 칸의 크기를 비슷하게 바꾸는 일. 보통 평균을 빼고 퍼짐(표준편차)으로 나눈다.'],
+ 'KNN':['KNN','k-Nearest Neighbors','가장 가까운 이웃 k명을 보고 답을 정하는 방법.'],
+ '겹침 점수':['겹침 점수(내적)','inner product','같은 자리 숫자끼리 곱해서 모두 더한 값.']
+},['그림자','예측선 긋기','칸막이','차원의 저주','단위 맞추기']);
+
+/* ── 퀴즈 ── */
+U.Study({quiz:{
+ r6:[{q:'세 숫자 2, 4, 9를 숫자 하나로 대표할 때 빗나간 거리² 합이 가장 작은 값은?',o:['5 (평균)','4 (가운데 값)','9 (가장 큰 값)','2 (가장 작은 값)'],a:0,why:'평균 (2 + 4 + 9) ÷ 3 = 5가 그림자입니다. 9 + 1 + 16 = 26으로 가장 작아요.',hint:'6번 방 ② 패널의 그릇 바닥은 어디였나요?'}],
+ r7:[{q:'칸막이 x₁ + 2x₂ + 2x₃ = 6에서 점 (1, 1, 1)은?',o:['아래쪽 (5 < 6)','위쪽 (5 > 6)','칸막이 위 (= 6)','알 수 없다 (그림이 필요)'],a:0,why:'1 + 2 + 2 = 5 < 6이라 아래쪽, 거리는 1 ÷ 3 ≈ 0.33입니다.',hint:'꽂힌 화살표 (1, 2, 2)와 겹침 점수를 구해 6과 비교하세요.'}],
+ r8:[{q:'점 사이 거리를 바꾸는 움직임은?',o:['2배 늘리기','밀기','돌리기','뒤집기'],a:0,why:'밀기·돌리기·뒤집기는 거리를 지키고, 늘리기는 모든 거리를 같은 배수로 바꿉니다.',hint:'변 길이 표에서 ✗가 나온 버튼은?'}],
+ r9:[{q:'10칸 공에서 반지름 0.9 안쪽이 차지하는 부피는 대략?',o:['35%','90%','81%','1%'],a:0,why:'0.9¹⁰ ≈ 0.349, 약 35%. 나머지 65%가 얇은 껍질에 있어요.',hint:'0.9를 칸 수만큼 곱합니다.'}],
+ r10:[{q:'키(cm)와 몸무게(kg)로 KNN을 하기 전에 먼저 할 일은?',o:['열마다 단위 맞추기','키를 mm로 바꾸기','몸무게를 빼기','칸을 100개로 늘리기'],a:0,why:'단위가 큰 열이 거리를 독차지하지 않게, 열마다 한 칸의 크기를 비슷하게 맞춥니다.',hint:'10번 방 ① 패널의 세 번째 버튼.'}],
+ duel:[{q:'대결에서 시아가 N4를 틀린 까닭은?',o:['키를 mm로 재서 키만 비슷한 이웃을 골라서','몸무게를 mm로 재서','이웃을 두 명 골라서','정답이 잘못돼서'],a:0,why:'키 1cm 차이가 10이 되어 거리를 독차지했고, 사이즈를 정하는 몸무게는 거의 무시됐습니다.',hint:'조수의 판정 말풍선을 다시 읽어 보세요.'}]
+}});
+U.start();
+})();
+</script>
+</body>
+</html>

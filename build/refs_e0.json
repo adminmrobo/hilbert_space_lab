@@ -1,0 +1,58 @@
+[
+ {
+  "id": "eea_euclid",
+  "type": "graphic",
+  "title": "EUCLIDEAN SPACE 01~10",
+  "author": [
+   {
+    "literal": "eeanimation"
+   }
+  ],
+  "accessed": {
+   "date-parts": [
+    [
+     2026,
+     11,
+     19
+    ]
+   ]
+  },
+  "lab": {
+   "work": "lab:work/eea_euclid",
+   "role": "background",
+   "supports": [],
+   "locs": [],
+   "verified": {
+    "title": true,
+    "author": true,
+    "year": false,
+    "url": false
+   },
+   "checkedBy": "사용자 제공 이미지에서 옮김. 원 게시물 주소·게시일은 받지 못함",
+   "note": "카드 구성과 도표 좌표만 따르고 그림은 새로 그림"
+  }
+ },
+ {
+  "id": "moe_curriculum",
+  "type": "report",
+  "title": "고등학교 수학·기하 교육과정",
+  "author": [
+   {
+    "literal": "교육부"
+   }
+  ],
+  "lab": {
+   "work": "lab:work/moe_curriculum",
+   "role": "background",
+   "supports": [],
+   "locs": [],
+   "verified": {
+    "title": true,
+    "author": true,
+    "year": false,
+    "url": false
+   },
+   "checkedBy": "교과 단원 이름 대조"
+  }
+ }
+]

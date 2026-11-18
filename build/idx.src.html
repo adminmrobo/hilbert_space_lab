@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>유클리드 공간 · 힐베르트 공간 — 연구실 복도의 방 탈출</title>
+<meta name="description" content="시아·모아가 연구실 복도의 방을 하나씩 통과하며 유클리드 공간과 힐베르트 공간을 배웁니다. 데이터를 점으로 놓고 거리·각도·그림자로 인공지능·머신러닝을 읽는 연구실 해설 시리즈.">
+<meta property="og:title" content="유클리드 공간 · 힐베르트 공간 — 연구실 복도의 방 탈출">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+<!--@@CSS@@-->
+</head>
+<body>
+<nav class="top" aria-label="바로가기"><div class="row">
+  <a class="logo" href="index.html">자와 각도기의 <i>방</i></a>
+  <div class="links"><a href="#euclid">유클리드 공간</a><a href="#hilbert">힐베르트 공간</a><a href="#cast">등장인물</a><a href="#about">이 시리즈</a></div>
+</div></nav>
+
+<div class="cover" id="cover" data-img="cover_index"><div class="frame">
+  <canvas id="coverCv" aria-hidden="true"></canvas>
+  <div class="cast4"><img class="s" data-mood="fly_magnify" alt="" aria-hidden="true"><img data-mood="sia_guide" alt="" aria-hidden="true"><img data-mood="moa_smile" alt="" aria-hidden="true"><img class="s" data-mood="doc_front" alt="" aria-hidden="true"></div>
+  <span class="cap">연구실 복도, 번호 붙은 문 열 개</span>
+  <span class="badge">표지 그림 준비 중 · 설명용 그림</span>
+  <span class="cover-chip">유클리드 공간 · 힐베르트 공간</span>
+</div></div>
+
+<header class="hero" id="top"><div class="wrap">
+  <div class="eyebrow">연구실 해설 시리즈 · 공간 좌표 · 인공지능의 기초</div>
+  <h1>자와 각도기의 방 — 유클리드 공간에서 힐베르트 공간까지</h1>
+  <p class="question">데이터를 방 안의 점으로 놓으면, 인공지능은 그 방에서 무엇을 잴까?</p>
+  <p class="lead">추천, 비슷한 것 찾기, 예측선 긋기, 분류, 음성 인식은 모두 "얼마나 먼가", "얼마나 닮았나", "가장 가까운 답은 어디인가"를 잽니다. 박사가 연구실 복도에 만든 방을 인턴 <b>시아</b>와 <b>모아</b>가 하나씩 통과하며, 그 계산이 어떤 자와 각도기로 이뤄지는지 배웁니다. 수식은 고등학교 수학 용어까지만 쓰고, 조수 하루가 숫자로 한 번씩 풀어 드립니다.</p>
+  <p class="byline">글 · 안상선 ((주)M-Robo 대표) · <a href="https://adminmrobo.github.io/who_am_i/who_am_i.html">저자 소개</a> · 2026-11-19</p>
+  <div class="start"><b>먼저 보고 오면 좋은 시리즈</b> <a href="https://adminmrobo.github.io/optimization_3d_map/">좌표축 위의 그릇 — 3D 지도로 본 모델 최적화</a>. 좌표축 위에 오차의 그릇을 세우고 바닥으로 걸어가는 이야기입니다. 처음이라면 0편 가방 점검만 읽어도 따라올 수 있어요.</div>
+</div></header>
+
+<main>
+<section class="sec" id="euclid" aria-labelledby="h-eu"><div class="wrap">
+  <h2 id="h-eu">유클리드 공간 — 자와 각도기의 방 열 개</h2>
+  <p class="lead">숫자 몇 개로 적은 데이터를 점으로 놓고, 곧은 자(거리)와 각도기(겹침 점수)로 잽니다. 원자료: 인포그래픽 「EUCLIDEAN SPACE 01~10」(@eeanimation)을 비전공자용으로 다시 구성했습니다.</p>
+  <div class="seriescards">
+    <a class="scard" href="e0_orientation.html"><span class="k">0편 · 오리엔테이션 · 5분</span><h3>가방 점검 — 방에 들어가기 전에</h3><p>좌표평면 · 피타고라스 정리 · sin·cos, 그리고 그릇 시리즈의 화살표</p></a>
+    <a class="scard" href="e1_ruler_rooms.html"><span class="k">①편 · 1~5번 방</span><h3>자와 각도기의 방</h3><p>점(특성 공간) · 화살표(임베딩) · 거리(KNN) · 각도(코사인 유사도) · 자 세트(PCA)</p></a>
+    <a class="scard" href="e2_shadow_rooms.html"><span class="k">②편 · 6~10번 방 + 대결</span><h3>그림자와 칸막이의 방</h3><p>그림자(예측선 긋기) · 칸막이(SVM) · 움직임(데이터 늘리기) · 공(차원의 저주) · 단위 맞추기 · 가장 가까운 이웃 찾기 대결</p></a>
+    <div class="scard" style="border-left-color:var(--amber)"><span class="k">이 편에서 쓰는 도구</span><h3>방 하나의 짜임</h3><p>왜 이 방법을 쓰나 · 조수 수식 상자 · 일상과 머신러닝 · 방 대화 · 실험 패널 · 이 방의 한계 · 확인 퀴즈</p></div>
+  </div>
+</div></section>
+
+<section class="sec" id="hilbert" aria-labelledby="h-hi"><div class="wrap">
+  <h2 id="h-hi">힐베르트 공간 — 끝없는 방의 자와 각도기 <span class="sub">곧 열립니다</span></h2>
+  <p class="lead">유클리드 방은 칸 수가 정해져 있어야 합니다. 소리·센서 곡선처럼 끝없이 이어지는 데이터를 위해, 자와 각도기는 그대로 두고 방을 끝없이 넓힌 곳이 힐베르트 공간입니다. 원자료: 「HILBERT SPACE 01~10」(@eeanimation).</p>
+  <div class="seriescards">
+    <div class="scard soon"><span class="k">①편 · 1~5번 방</span><h3>화살표의 방</h3><p>세 겹 상자 · 곡선의 겹침 점수 · 길이·거리·직각 · 빈틈 없는 방 · 세 종류의 방</p></div>
+    <div class="scard soon"><span class="k">②편 · 6~10번 방 + 대결</span><h3>곡선을 쪼개는 방</h3><p>자 세트 · 그림자 · 물결 조각(푸리에) · 피타고라스의 확장(파스발) · 커널 방</p></div>
+  </div>
+  <p class="muted" style="font-size:14px">유클리드 ②편 끝의 「복도 끝의 끝없는 방」이 힐베르트 공간으로 들어가는 문입니다.</p>
+</div></section>
+
+<section class="sec" id="cast" aria-labelledby="h-cast"><div class="wrap">
+  <h2 id="h-cast">등장인물</h2>
+  <div class="cast" id="castgrid"></div>
+  <div class="secret"><button class="bt" id="secretbtn" type="button" aria-expanded="false">방청석 보기 (미공개 식구)</button><div class="row" id="secretrow" hidden></div></div>
+</div></section>
+
+<section class="sec" id="about" aria-labelledby="h-about"><div class="wrap">
+  <h2 id="h-about">이 시리즈를 만든 방식</h2>
+  <ul>
+    <li>원자료 인포그래픽의 차트는 구도·좌표를 따라 새로 그렸고, 손으로 움직이는 실험 패널로 바꿨습니다. 원본 그림은 넣지 않았습니다.</li>
+    <li>용어는 고등학교 수학 용어까지만 본문에 쓰고, 나머지는 쉬운 말과 접는 풀이 상자로 바꿨습니다(겹침 점수 = 내적, 그림자 = 정사영 등).</li>
+    <li>모든 "숫자로 한 번 해 보기"는 다시 계산해 확인했습니다(<code>node code/check_euclid.js</code>).</li>
+    <li>제작 지침: <a href="docs/SPACE_COORDINATE_GUIDE.md">공간 좌표 해설 제작 지침서</a> · 기획안: <a href="docs/PLAN_euclidean_space.md">유클리드</a>, <a href="docs/PLAN_hilbert_space.md">힐베르트</a></li>
+  </ul>
+</div></section>
+</main>
+
+<footer><div class="wrap">
+  <p>캐릭터 이름·설정·그림은 저작권자 안상선의 허락 없이 사용할 수 없습니다.</p>
+  <p>글 · 안상선 ((주)M-Robo 대표) · <a href="https://adminmrobo.github.io/who_am_i/who_am_i.html">저자 소개</a> · <a href="https://www.ahnboat.xyz">ahnboat.xyz</a></p>
+</div></footer>
+
+<script>
+/*@@SPRITES@@*/
+/*@@GEO@@*/
+/*@@COMMON@@*/
+/*@@PLANE@@*/
+(function(){
+'use strict';
+var $=U.$,cssv=U.cssv;
+var CAST=[['sia','sia_guide','인턴 시아','직관파. 비유를 먼저 꺼냅니다. 주인공 ①'],['moa','moa_report','인턴 모아','꼼꼼파. 조건과 예외를 묻습니다. 주인공 ②'],['doc','doc_front','박사','복도에 방을 만든 사람. "머신러닝에서는"을 정리합니다.'],
+  ['asst','asst_smile','조수 하루','수식이 어려운 조수. 대신 묻고 숫자로 풀어 봅니다. 대결 심판.'],['fly','fly_magnify','초파리 연구원','의심 담당. "이걸 눌러 봐."'],['robo','robo_coin','주판봇','성급한 확신 담당. 흔한 오해를 먼저 말합니다.']];
+$('#castgrid').innerHTML=CAST.map(function(c){return '<div class="castc" style="--cc:var(--c-'+c[0]+')"><img src="'+U.spr(c[1])+'" alt="" aria-hidden="true"><div><b>'+c[2]+'</b><p>'+c[3]+'</p></div></div>';}).join('');
+$('#secretrow').innerHTML=['x1','x2','x3'].map(function(x,i){return U.say(x,x+'_hint',['(반짝)','(…끄덕)','(짝짝짝)'][i]);}).join('');
+$('#secretbtn').onclick=function(){var r=$('#secretrow');r.hidden=!r.hidden;this.setAttribute('aria-expanded',String(!r.hidden));this.textContent=r.hidden?'방청석 보기 (미공개 식구)':'방청석 닫기';};
+U.fillImgs();
+new P2($('#coverCv'),{xr:[0,22],yr:[0,9],axes:false,margin:10,draw:function(g,P){for(var i=0;i<10;i++){var x=1+i*2.1;P.poly([[x,2],[x+1.5,2],[x+1.5,7.6],[x,7.6]],'rgba(15,127,134,'+(0.05+i*0.012)+')','rgba(15,127,134,.45)',1.4);P.text([x+0.75,8.3],String(i+1),cssv('--terrain'),'center');}}});
+U.start();
+})();
+</script>
+</body>
+</html>
