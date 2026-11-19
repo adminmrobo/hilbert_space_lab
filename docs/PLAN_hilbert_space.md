@@ -186,8 +186,8 @@
 | 표지에서 자름 | 목차 썸네일, og:image | 별도 폴더 |
 | 재사용 | 박사·조수·초파리·주판봇·X1~X3 표정 | fruitfly-lab-expressions |
 
-### 표지 프롬프트 (초안, Genspark)
-> Bright daytime research lab corridor, clean white walls, ten numbered doors (1–10) with soft glowing frames, faint geometric overlays of arrows, a right angle mark, and gentle sine waves floating in the air. Two young female interns in maid-style lab outfits — one with black hair, one with beige hair — stand in front of door 1, one pointing confidently, the other holding a notebook with a curious look. Cute anime style matching the reference character sheet, soft pastel teal and orange accents, white background dominant, generous empty space on the right for title text. 16:9.
+### 표지 프롬프트
+픽셀풍(16비트 RPG 픽셀아트) 지시문은 [COVER_PROMPTS.md](COVER_PROMPTS.md) 참고. 초안의 애니메풍 문장은 지침 위반이라 폐기(2026-11-20).
 
 ## 10. 다음 단계
 1. 이 기획안 확정 — 인턴 이름 시아·모아, 별도 저장소, 0편 오리엔테이션 추가 확정
