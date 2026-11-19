@@ -1,0 +1,490 @@
+{
+ "version": "1.3",
+ "page": "h3_practice_rooms",
+ "nodes": [
+  {
+   "id": "lab:application/signal-processing",
+   "type": "Task",
+   "label": {
+    "ko": "신호 처리(물결 좌표·필터)",
+    "en": "Signal processing"
+   },
+   "page": "h3_practice_rooms",
+   "anchor": "#r11",
+   "level": 1,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "representation",
+   "domain": [
+    "ai"
+   ],
+   "match": [],
+   "definition": {
+    "ko": "물결 조각 위 그림자 = 좌표, 버린 그림자² = 오차."
+   }
+  },
+  {
+   "id": "lab:application/quantum-measurement",
+   "type": "Task",
+   "label": {
+    "ko": "양자 측정",
+    "en": "Quantum measurement"
+   },
+   "page": "h3_practice_rooms",
+   "anchor": "#r12",
+   "level": 2,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "representation",
+   "domain": [
+    "ai"
+   ],
+   "match": [],
+   "definition": {
+    "ko": "기준 상태 위 그림자² = 측정 확률."
+   }
+  },
+  {
+   "id": "lab:application/least-squares-estimation",
+   "type": "Task",
+   "label": {
+    "ko": "최소제곱 추정(보정·회귀)",
+    "en": "Least-squares estimation"
+   },
+   "page": "h3_practice_rooms",
+   "anchor": "#r13",
+   "level": 1,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "representation",
+   "domain": [
+    "ai"
+   ],
+   "match": [],
+   "definition": {
+    "ko": "설계표 바닥 위 그림자 = 최선의 맞춤."
+   }
+  },
+  {
+   "id": "lab:application/kernel-ridge",
+   "type": "Task",
+   "label": {
+    "ko": "커널 릿지 회귀",
+    "en": "Kernel ridge regression"
+   },
+   "page": "h3_practice_rooms",
+   "anchor": "#r14",
+   "level": 2,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "representation",
+   "domain": [
+    "ai"
+   ],
+   "match": [],
+   "definition": {
+    "ko": "닮음 점수와 제동 λ로 휜 패턴 맞추기."
+   }
+  },
+  {
+   "id": "lab:claim/prob-is-shadow-squared",
+   "type": "Claim",
+   "label": {
+    "ko": "측정 확률 = 그림자의 제곱",
+    "en": "Born rule as squared projection"
+   },
+   "page": "h3_practice_rooms",
+   "anchor": "#r12",
+   "level": 2,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "representation",
+   "domain": [
+    "ai"
+   ],
+   "match": []
+  },
+  {
+   "id": "lab:claim/residual-orthogonal",
+   "type": "Claim",
+   "label": {
+    "ko": "최소제곱의 빗나간 만큼은 설계표 열과 모두 직각",
+    "en": "Normal equations: residual ⟂ columns"
+   },
+   "page": "h3_practice_rooms",
+   "anchor": "#r13",
+   "level": 1,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "representation",
+   "domain": [
+    "ai"
+   ],
+   "match": []
+  },
+  {
+   "id": "lab:limitation/overfit-kernel",
+   "type": "Limitation",
+   "label": {
+    "ko": "σ·λ가 작으면 점마다 외운다(과적합)",
+    "en": "Small σ and λ overfit"
+   },
+   "page": "h3_practice_rooms",
+   "anchor": "#r14",
+   "level": 2,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "representation",
+   "domain": [
+    "ai"
+   ],
+   "match": []
+  },
+  {
+   "id": "lab:analogy/equalizer",
+   "type": "Analogy",
+   "label": {
+    "ko": "이퀄라이저 막대 = 물결 좌표",
+    "en": "Equalizer bars"
+   },
+   "page": "h3_practice_rooms",
+   "anchor": "#r11",
+   "level": 1,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "representation",
+   "domain": [
+    "ai"
+   ],
+   "match": []
+  },
+  {
+   "id": "lab:analogy/scale-thrice",
+   "type": "Analogy",
+   "label": {
+    "ko": "세 번 잰 체중계 값",
+    "en": "Weighing three times"
+   },
+   "page": "h3_practice_rooms",
+   "anchor": "#r13",
+   "level": 1,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "representation",
+   "domain": [
+    "ai"
+   ],
+   "match": []
+  },
+  {
+   "id": "lab:analogy/apartment-prices",
+   "type": "Analogy",
+   "label": {
+    "ko": "가까운 단지 시세를 많이 참고",
+    "en": "Nearby apartment prices"
+   },
+   "page": "h3_practice_rooms",
+   "anchor": "#r14",
+   "level": 1,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "representation",
+   "domain": [
+    "ai"
+   ],
+   "match": []
+  },
+  {
+   "id": "lab:sim/h3-filter",
+   "type": "Simulation",
+   "label": {
+    "ko": "필터 실험",
+    "en": "Filter experiment"
+   },
+   "page": "h3_practice_rooms",
+   "anchor": "#r11",
+   "level": 2,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "representation",
+   "domain": [
+    "ai"
+   ],
+   "match": []
+  },
+  {
+   "id": "lab:sim/h3-qubit",
+   "type": "Simulation",
+   "label": {
+    "ko": "큐비트 모의 측정",
+    "en": "Qubit measurement simulation"
+   },
+   "page": "h3_practice_rooms",
+   "anchor": "#r12",
+   "level": 2,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "representation",
+   "domain": [
+    "ai"
+   ],
+   "match": []
+  },
+  {
+   "id": "lab:sim/h3-lsq",
+   "type": "Simulation",
+   "label": {
+    "ko": "상수·직선 맞춤 실험",
+    "en": "Constant and line fit"
+   },
+   "page": "h3_practice_rooms",
+   "anchor": "#r13",
+   "level": 2,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "representation",
+   "domain": [
+    "ai"
+   ],
+   "match": []
+  },
+  {
+   "id": "lab:sim/h3-krr",
+   "type": "Simulation",
+   "label": {
+    "ko": "커널 회귀 σ·λ 실험",
+    "en": "Kernel regression σ/λ"
+   },
+   "page": "h3_practice_rooms",
+   "anchor": "#r14",
+   "level": 2,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "representation",
+   "domain": [
+    "ai"
+   ],
+   "match": []
+  },
+  {
+   "id": "lab:work/eea_practical",
+   "type": "Work",
+   "label": {
+    "ko": "eeanimation — PRACTICAL HILBERT SPACE 1/4~4/4",
+    "en": "eeanimation — Practical Hilbert Space"
+   },
+   "page": "h3_practice_rooms",
+   "anchor": "#top",
+   "level": 1,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "representation",
+   "domain": [
+    "ai"
+   ],
+   "match": []
+  },
+  {
+   "id": "lab:concept/fourier-series",
+   "type": "Concept",
+   "label": {
+    "ko": "물결 조각(푸리에 급수)",
+    "en": "Fourier series"
+   },
+   "page": "h2_wave_rooms",
+   "anchor": "h2_wave_rooms.html#r8",
+   "level": 1,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "mentioned",
+   "family": "representation",
+   "domain": [
+    "ai"
+   ],
+   "match": [],
+   "definition": {
+    "ko": "곡선을 서로 직각인 sin·cos 물결의 합으로."
+   }
+  },
+  {
+   "id": "lab:concept/hilbert-projection",
+   "type": "Concept",
+   "label": {
+    "ko": "끝없는 방의 그림자",
+    "en": "Projection theorem"
+   },
+   "page": "h2_wave_rooms",
+   "anchor": "h2_wave_rooms.html#r7",
+   "level": 2,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "mentioned",
+   "family": "representation",
+   "domain": [
+    "ai"
+   ],
+   "match": [],
+   "definition": {
+    "ko": "닫힌 바닥 위 가장 가까운 점은 하나뿐이고, 빗나간 만큼은 바닥과 직각."
+   }
+  },
+  {
+   "id": "lab:concept/kernel-method",
+   "type": "Method",
+   "label": {
+    "ko": "커널 방(RKHS)",
+    "en": "Kernel methods / RKHS"
+   },
+   "page": "h2_wave_rooms",
+   "anchor": "h2_wave_rooms.html#r10",
+   "level": 2,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "mentioned",
+   "family": "representation",
+   "domain": [
+    "ai"
+   ],
+   "match": [],
+   "definition": {
+    "ko": "닮음 점수표로 끝없는 방에서 곧게 가른다."
+   }
+  }
+ ],
+ "edges": [
+  {
+   "s": "lab:application/signal-processing",
+   "p": "lab:relatedTo",
+   "o": "lab:concept/fourier-series",
+   "anchor": "#r11",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:application/quantum-measurement",
+   "p": "lab:relatedTo",
+   "o": "lab:concept/hilbert-projection",
+   "anchor": "#r12",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:application/least-squares-estimation",
+   "p": "lab:relatedTo",
+   "o": "lab:concept/hilbert-projection",
+   "anchor": "#r13",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:application/kernel-ridge",
+   "p": "lab:relatedTo",
+   "o": "lab:concept/kernel-method",
+   "anchor": "#r14",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:claim/prob-is-shadow-squared",
+   "p": "lab:supports",
+   "o": "lab:application/quantum-measurement",
+   "anchor": "#r12",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:claim/residual-orthogonal",
+   "p": "lab:supports",
+   "o": "lab:application/least-squares-estimation",
+   "anchor": "#r13",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:application/kernel-ridge",
+   "p": "lab:hasLimitation",
+   "o": "lab:limitation/overfit-kernel",
+   "anchor": "#r14",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:analogy/equalizer",
+   "p": "lab:analogyOf",
+   "o": "lab:application/signal-processing",
+   "anchor": "#r11",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:analogy/scale-thrice",
+   "p": "lab:analogyOf",
+   "o": "lab:application/least-squares-estimation",
+   "anchor": "#r13",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:analogy/apartment-prices",
+   "p": "lab:analogyOf",
+   "o": "lab:application/kernel-ridge",
+   "anchor": "#r14",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:sim/h3-filter",
+   "p": "lab:demonstratedBy",
+   "o": "lab:application/signal-processing",
+   "anchor": "#r11",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:sim/h3-qubit",
+   "p": "lab:demonstratedBy",
+   "o": "lab:claim/prob-is-shadow-squared",
+   "anchor": "#r12",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:sim/h3-lsq",
+   "p": "lab:demonstratedBy",
+   "o": "lab:claim/residual-orthogonal",
+   "anchor": "#r13",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:sim/h3-krr",
+   "p": "lab:demonstratedBy",
+   "o": "lab:limitation/overfit-kernel",
+   "anchor": "#r14",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:application/signal-processing",
+   "p": "lab:derivedFrom",
+   "o": "lab:work/eea_practical",
+   "anchor": "#top",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:application/least-squares-estimation",
+   "p": "lab:broader",
+   "o": "lab:topic/linear-regression",
+   "anchor": "#sum",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:application/kernel-ridge",
+   "p": "lab:relatedTo",
+   "o": "lab:topic/svm",
+   "anchor": "#sum",
+   "confidence": "high"
+  }
+ ]
+}

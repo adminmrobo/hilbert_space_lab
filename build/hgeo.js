@@ -57,6 +57,22 @@ function duelPlan(order){var tot=0,ks=Object.keys(DUEL).map(Number);ks.forEach(f
   var seq=order==='low'?[1,2,3,4,5,6,7,8]:ks.slice().sort(function(a,b){return DUEL[b]*DUEL[b]-DUEL[a]*DUEL[a];});
   var acc=0,steps=[];for(var i=0;i<seq.length;i++){var c=DUEL[seq[i]]||0;acc+=c*c;steps.push({k:seq[i],e:acc/tot});if(acc/tot>=0.95)break;}return {steps:steps,n:steps.length,tot:tot};}
 
-return {PI:PI,integ:integ,ip:ip,nrm:nrm,f2:f2,g2:g2,ROOT2:ROOT2,ramp:ramp,step:step,rampGap:rampGap,psum:psum,ek:ek,C6:C6,f6:f6,X7:X7,TWO:TWO,sig8:sig8,sq8:sq8,basis:basis,coeffs:coeffs,partial:partial,err:err,energy:energy,RING:RING,kscore:kscore,kacc:kacc,lineAcc:lineAcc,DUEL:DUEL,duelSig:duelSig,duelPlan:duelPlan};
+/* ── ③ 실전편 ── */
+/* 11번: 신호 x(t) = a₁ sin t + a₃ sin 3t on [0, 2π]. ‖a sin kt‖² = π a² */
+function sig11(a1,a3){return function(t){return a1*Math.sin(t)+a3*Math.sin(3*t);};}
+/* 12번: 큐비트 측정 — 시드 고정 동전 던지기 */
+function measure(p0,n,seed){var s=seed||9,c0=0;for(var i=0;i<n;i++){s=(s*16807)%2147483647;if(s/2147483647<p0)c0++;}return c0;}
+/* 13번: 최소제곱 — 상수 하나 / 직선 a + b·x (x = 1, 2, 3) */
+function fitConst(b){var c=(b[0]+b[1]+b[2])/3;return {c:c,hat:[c,c,c],r:b.map(function(v){return v-c;})};}
+function fitLine(b){var xs=[1,2,3],mx=2,my=(b[0]+b[1]+b[2])/3,sxy=0,sxx=0;xs.forEach(function(x,i){sxy+=(x-mx)*(b[i]-my);sxx+=(x-mx)*(x-mx);});var k=sxy/sxx,a=my-k*mx,hat=xs.map(function(x){return a+k*x;});return {a:a,k:k,hat:hat,r:b.map(function(v,i){return v-hat[i];})};}
+/* 14번: 커널 회귀 — U자 데이터, 가우스 커널, (K + λI)α = y */
+var UDATA=(function(){var out=[],s=21;function r(){s=(s*16807)%2147483647;return s/2147483647;}for(var i=0;i<18;i++){var x=0.4+i*9.2/17;out.push([x,Math.pow(x-5,2)/5+1+(r()-0.5)*1.2]);}return out;})();
+function gk(d,sig){return Math.exp(-d*d/(2*sig*sig));}
+function solve(A,y){var n=y.length,M=A.map(function(r,i){return r.concat([y[i]]);});for(var c=0;c<n;c++){var p=c;for(var r=c+1;r<n;r++)if(Math.abs(M[r][c])>Math.abs(M[p][c]))p=r;var t=M[c];M[c]=M[p];M[p]=t;for(r=0;r<n;r++){if(r===c)continue;var f=M[r][c]/M[c][c];for(var k=c;k<=n;k++)M[r][k]-=f*M[c][k];}}return M.map(function(r,i){return r[n]/r[i];});}
+function kfit(sig,lam){var X=UDATA.map(function(p){return p[0];}),Y=UDATA.map(function(p){return p[1];}),K=X.map(function(a,i){return X.map(function(b,j){return gk(a-b,sig)+(i===j?lam:0);});}),al=solve(K,Y);
+  var f=function(x){var s=0;for(var i=0;i<X.length;i++)s+=al[i]*gk(x-X[i],sig);return s;};var mse=0;UDATA.forEach(function(p){mse+=Math.pow(p[1]-f(p[0]),2);});return {f:f,alpha:al,mse:mse/UDATA.length};}
+function lfit(){var n=UDATA.length,mx=0,my=0;UDATA.forEach(function(p){mx+=p[0]/n;my+=p[1]/n;});var sxy=0,sxx=0;UDATA.forEach(function(p){sxy+=(p[0]-mx)*(p[1]-my);sxx+=(p[0]-mx)*(p[0]-mx);});var k=sxy/sxx,a=my-k*mx,f=function(x){return a+k*x;},mse=0;UDATA.forEach(function(p){mse+=Math.pow(p[1]-f(p[0]),2);});return {f:f,mse:mse/n};}
+
+return {sig11:sig11,measure:measure,fitConst:fitConst,fitLine:fitLine,UDATA:UDATA,gk:gk,kfit:kfit,lfit:lfit,PI:PI,integ:integ,ip:ip,nrm:nrm,f2:f2,g2:g2,ROOT2:ROOT2,ramp:ramp,step:step,rampGap:rampGap,psum:psum,ek:ek,C6:C6,f6:f6,X7:X7,TWO:TWO,sig8:sig8,sq8:sq8,basis:basis,coeffs:coeffs,partial:partial,err:err,energy:energy,RING:RING,kscore:kscore,kacc:kacc,lineAcc:lineAcc,DUEL:DUEL,duelSig:duelSig,duelPlan:duelPlan};
 })();
 if(typeof module!=='undefined')module.exports=HG;

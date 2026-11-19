@@ -205,6 +205,33 @@ h2e = [E('lab:concept/hilbert-basis', 'partOf', 'lab:concept/hilbert-space', '#r
        E('lab:concept/kernel-method', 'relatedTo', 'lab:topic/svm'), E('lab:concept/fourier-series', 'relatedTo', 'lab:topic/positional-encoding'), E('lab:concept/parseval', 'relatedTo', 'lab:topic/pca'), E('lab:concept/hilbert-projection', 'relatedTo', 'lab:topic/linear-regression')]
 EEH = dict(EEA); EEH = json.loads(json.dumps(EEA)); EEH['id'] = 'eea_hilbert'; EEH['title'] = 'HILBERT SPACE 01~10'; EEH['lab']['work'] = 'lab:work/eea_hilbert'
 
+# ── h3 실전 ──
+P = 'h3_practice_rooms'
+h3n = [N('lab:application/signal-processing', 'Task', '신호 처리(물결 좌표·필터)', 'Signal processing', P, '#r11', 1, '물결 조각 위 그림자 = 좌표, 버린 그림자² = 오차.'),
+       N('lab:application/quantum-measurement', 'Task', '양자 측정', 'Quantum measurement', P, '#r12', 2, '기준 상태 위 그림자² = 측정 확률.'),
+       N('lab:application/least-squares-estimation', 'Task', '최소제곱 추정(보정·회귀)', 'Least-squares estimation', P, '#r13', 1, '설계표 바닥 위 그림자 = 최선의 맞춤.'),
+       N('lab:application/kernel-ridge', 'Task', '커널 릿지 회귀', 'Kernel ridge regression', P, '#r14', 2, '닮음 점수와 제동 λ로 휜 패턴 맞추기.'),
+       N('lab:claim/prob-is-shadow-squared', 'Claim', '측정 확률 = 그림자의 제곱', 'Born rule as squared projection', P, '#r12', 2),
+       N('lab:claim/residual-orthogonal', 'Claim', '최소제곱의 빗나간 만큼은 설계표 열과 모두 직각', 'Normal equations: residual ⟂ columns', P, '#r13', 1),
+       N('lab:limitation/overfit-kernel', 'Limitation', 'σ·λ가 작으면 점마다 외운다(과적합)', 'Small σ and λ overfit', P, '#r14', 2),
+       N('lab:analogy/equalizer', 'Analogy', '이퀄라이저 막대 = 물결 좌표', 'Equalizer bars', P, '#r11', 1),
+       N('lab:analogy/scale-thrice', 'Analogy', '세 번 잰 체중계 값', 'Weighing three times', P, '#r13', 1),
+       N('lab:analogy/apartment-prices', 'Analogy', '가까운 단지 시세를 많이 참고', 'Nearby apartment prices', P, '#r14', 1),
+       N('lab:sim/h3-filter', 'Simulation', '필터 실험', 'Filter experiment', P, '#r11', 2),
+       N('lab:sim/h3-qubit', 'Simulation', '큐비트 모의 측정', 'Qubit measurement simulation', P, '#r12', 2),
+       N('lab:sim/h3-lsq', 'Simulation', '상수·직선 맞춤 실험', 'Constant and line fit', P, '#r13', 2),
+       N('lab:sim/h3-krr', 'Simulation', '커널 회귀 σ·λ 실험', 'Kernel regression σ/λ', P, '#r14', 2),
+       N('lab:work/eea_practical', 'Work', 'eeanimation — PRACTICAL HILBERT SPACE 1/4~4/4', 'eeanimation — Practical Hilbert Space', P, '#top', 1)]
+h3e = [E('lab:application/signal-processing', 'relatedTo', 'lab:concept/fourier-series', '#r11'), E('lab:application/quantum-measurement', 'relatedTo', 'lab:concept/hilbert-projection', '#r12'),
+       E('lab:application/least-squares-estimation', 'relatedTo', 'lab:concept/hilbert-projection', '#r13'), E('lab:application/kernel-ridge', 'relatedTo', 'lab:concept/kernel-method', '#r14'),
+       E('lab:claim/prob-is-shadow-squared', 'supports', 'lab:application/quantum-measurement', '#r12'), E('lab:claim/residual-orthogonal', 'supports', 'lab:application/least-squares-estimation', '#r13'),
+       E('lab:application/kernel-ridge', 'hasLimitation', 'lab:limitation/overfit-kernel', '#r14'),
+       E('lab:analogy/equalizer', 'analogyOf', 'lab:application/signal-processing', '#r11'), E('lab:analogy/scale-thrice', 'analogyOf', 'lab:application/least-squares-estimation', '#r13'), E('lab:analogy/apartment-prices', 'analogyOf', 'lab:application/kernel-ridge', '#r14'),
+       E('lab:sim/h3-filter', 'demonstratedBy', 'lab:application/signal-processing', '#r11'), E('lab:sim/h3-qubit', 'demonstratedBy', 'lab:claim/prob-is-shadow-squared', '#r12'), E('lab:sim/h3-lsq', 'demonstratedBy', 'lab:claim/residual-orthogonal', '#r13'), E('lab:sim/h3-krr', 'demonstratedBy', 'lab:limitation/overfit-kernel', '#r14'),
+       E('lab:application/signal-processing', 'derivedFrom', 'lab:work/eea_practical', '#top'),
+       E('lab:application/least-squares-estimation', 'broader', 'lab:topic/linear-regression'), E('lab:application/kernel-ridge', 'relatedTo', 'lab:topic/svm')]
+EEP = json.loads(json.dumps(EEA)); EEP['id'] = 'eea_practical'; EEP['title'] = 'PRACTICAL HILBERT SPACE 1/4~4/4'; EEP['lab']['work'] = 'lab:work/eea_practical'
+
 pages = {
  'e0': (e0n, e0e, [EEA, CURR], meta('e0', '유클리드 공간 0편 가방 점검 — 좌표평면·피타고라스·sin·cos', '0', 'e0_orientation.html', ['lab:concept/coordinate-plane', 'lab:concept/pythagorean-theorem'], ['moe_curriculum'])),
  'e1': (e1n, e1e, [EEA, CURR, ref('mikolov2013', 'Efficient Estimation of Word Representations in Vector Space', [{"family": "Mikolov", "given": "Tomas"}, {"family": "Chen", "given": "Kai"}, {"family": "Corrado", "given": "Greg"}, {"family": "Dean", "given": "Jeffrey"}], 2013, {"type": "paper-conference", "URL": "https://arxiv.org/abs/1301.3781"}, ['lab:concept/vector'])],
@@ -214,6 +241,9 @@ pages = {
  'h2': (h2n, h2e, [EEH, CURR, ref('scholkopf2002', 'Learning with Kernels', [{"family": "Schölkopf", "given": "Bernhard"}, {"family": "Smola", "given": "Alexander J."}], 2002, {"type": "book", "publisher": "MIT Press"}, ['lab:concept/kernel-method']),
         ref('vaswani2017', 'Attention Is All You Need', [{"family": "Vaswani", "given": "Ashish"}], 2017, {"type": "paper-conference", "URL": "https://arxiv.org/abs/1706.03762"}, ['lab:concept/fourier-series'])],
         meta('h2', '힐베르트 공간 ② 곡선을 쪼개는 방 — 자 세트·그림자·물결 조각·피타고라스의 확장·커널 방', '4', 'h2_wave_rooms.html', ['lab:concept/fourier-series', 'lab:concept/parseval', 'lab:concept/kernel-method'], ['eea_hilbert', 'moe_curriculum'])),
+ 'h3': (h3n, h3e, [EEP, CURR, ref('nielsen2010', 'Quantum Computation and Quantum Information', [{"family": "Nielsen", "given": "Michael A."}, {"family": "Chuang", "given": "Isaac L."}], 2010, {"type": "book", "publisher": "Cambridge University Press"}, ['lab:application/quantum-measurement']),
+        ref('scholkopf2002', 'Learning with Kernels', [{"family": "Schölkopf", "given": "Bernhard"}, {"family": "Smola", "given": "Alexander J."}], 2002, {"type": "book", "publisher": "MIT Press"}, ['lab:application/kernel-ridge'])],
+        meta('h3', '힐베르트 공간 ③ 실전 — 네 개의 작업실: 신호·양자 측정·최소제곱·커널 회귀', '5', 'h3_practice_rooms.html', ['lab:application/signal-processing', 'lab:application/least-squares-estimation', 'lab:application/kernel-ridge'], ['eea_practical', 'moe_curriculum'])),
  'e2': (e2n, e2e, [EEA, CURR,
         ref('cortes1995', 'Support-vector networks', [{"family": "Cortes", "given": "Corinna"}, {"family": "Vapnik", "given": "Vladimir"}], 1995, {"container-title": "Machine Learning", "volume": "20", "page": "273-297", "DOI": "10.1007/BF00994018"}, ['lab:concept/hyperplane']),
         ref('bellman1961', 'Adaptive Control Processes: A Guided Tour', [{"family": "Bellman", "given": "Richard"}], 1961, {"type": "book", "publisher": "Princeton University Press"}, ['lab:concept/curse-of-dimensionality'])],

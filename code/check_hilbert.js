@@ -16,4 +16,9 @@ const cq=H.coeffs(H.sq8,25);[5,25].forEach(n=>{const p=H.partial(cq,n);let mx=-9
 console.log('9번 방');ok('∫(3e₁+4e₂)²',H.energy(3,4),25);
 console.log('10번 방');ok('커널 σ=0.5 맞힌 수',H.kacc(0.5),32,0);ok('곧은 칸막이 최고',H.lineAcc(),23,0);
 console.log('대결');ok('시아(낮은 물결부터) 조각 수',H.duelPlan('low').n,7,0);ok('모아(큰 조각부터) 조각 수',H.duelPlan('big').n,3,0);ok('모아 3조각 에너지 %',H.duelPlan('big').steps[2].e*100,99.07,0.01);
+console.log('③ 실전');ok('11 버린 세기 π/4',H.integ(t=>(0.5*Math.sin(3*t))**2,0,2*Math.PI),Math.PI/4);ok('11 sin t 좌표',H.ip(H.sig11(1,.5),Math.sin,0,2*Math.PI)/Math.PI,1);ok('11 sin 3t 좌표',H.ip(H.sig11(1,.5),t=>Math.sin(3*t),0,2*Math.PI)/Math.PI,0.5);
+{let mx=-9;for(let i=0;i<=20000;i++)mx=Math.max(mx,H.sig11(1,.5)(i/20000*Math.PI));ok('11 봉우리',mx,1.076,0.001);}ok('11 π/2 값',H.sig11(1,.5)(Math.PI/2),0.5);ok('11 남긴 비율 %',(1/1.25)*100,80);
+ok('12 P(0) 60°',Math.cos(Math.PI/3)**2,0.25);ok('12 P(1)',Math.sin(Math.PI/3)**2,0.75);ok('12 모의 측정 1000번 중 0',H.measure(0.25,1000),225,0);
+const fc=H.fitConst([2,3,4]);ok('13 c',fc.c,3);ok('13 r 합',fc.r.reduce((a,b)=>a+b,0),0);const fl=H.fitLine([2,3,4]);ok('13 직선 기울기',fl.k,1);ok('13 직선 절편',fl.a,1);
+ok('14 k(σ)',Math.exp(-0.5),0.607,0.001);ok('14 k(2σ)',Math.exp(-2),0.135,0.001);ok('14 직선 오차²',H.lfit().mse,1.775,0.001);ok('14 커널 σ=1 λ=0.1',H.kfit(1,0.1).mse,0.073,0.001);
 console.log(bad?('\n틀린 곳 '+bad+'개'):'\n모두 맞음');process.exit(bad?1:0);

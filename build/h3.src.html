@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>힐베르트 공간 ③ 실전 — 네 개의 작업실: 신호·양자 측정·최소제곱·커널 회귀</title>
+<meta name="description" content="복도를 나온 시아·모아가 힐베르트 공간이 실제로 일하는 네 작업실을 돕니다. 신호 처리(물결 좌표), 양자 측정(그림자² = 확률), 최소제곱 추정(그림자 = 최선의 맞춤), 커널 머신러닝(닮음 점수로 휜 패턴 맞추기).">
+<meta property="og:title" content="힐베르트 공간 ③ 실전 — 네 개의 작업실">
+<meta property="og:description" content="음성 필터, 큐비트 측정, 센서 보정, 커널 회귀 — 겹침 점수와 그림자가 일하는 현장">
+<meta property="og:type" content="article">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+<!--@@CSS@@-->
+</head>
+<body>
+<nav class="top" aria-label="섹션 바로가기"><div class="row">
+  <a class="logo" href="index.html">힐베르트 <i>공간</i> ③ 실전</a>
+  <div class="links">
+    <a href="h2_wave_rooms.html">← ②</a><a href="#r11">11 신호실</a><a href="#r12">12 양자 측정실</a><a href="#r13">13 보정실</a><a href="#r14">14 커널 작업실</a><a href="#sum">정리</a><a href="#kg">색인</a><a href="#export">꾸러미</a>
+  </div>
+</div></nav>
+
+<div class="cover" id="cover" data-img="cover_h3"><div class="frame">
+  <canvas id="coverCv" aria-hidden="true"></canvas>
+  <div class="cast4"><img class="s" data-mood="robo_happy" alt="" aria-hidden="true"><img data-mood="sia_guide" alt="" aria-hidden="true"><img data-mood="moa_report" alt="" aria-hidden="true"><img class="s" data-mood="doc_judge" alt="" aria-hidden="true"></div>
+  <span class="cap">복도 밖, 일하는 힐베르트 공간</span>
+  <span class="badge">표지 그림 준비 중 · 설명용 그림</span>
+  <span class="cover-chip">힐베르트 공간 · ③ 실전</span>
+</div></div>
+
+<header class="hero" id="top"><div class="wrap">
+  <div class="eyebrow">힐베르트 공간 · ③ 실전 · 11~14번 작업실</div>
+  <h1>힐베르트 공간 ③ 실전 — 네 개의 작업실</h1>
+  <p class="question">겹침 점수와 그림자는 실제로 어디서 일하고 있을까?</p>
+  <p class="lead">복도의 방 스무 개를 지나온 시아와 모아에게 박사가 출장 명단을 건넵니다. <b>신호실</b>(소리를 물결 좌표로), <b>양자 측정실</b>(그림자의 제곱이 확률), <b>보정실</b>(그림자가 최선의 맞춤), <b>커널 작업실</b>(닮음 점수로 휜 패턴 맞추기). 네 곳 모두 ①·②편의 도구 — 겹침 점수, 직각, 그림자 — 를 그대로 씁니다.</p>
+  <p class="byline">글 · 안상선 ((주)M-Robo 대표) · <a href="https://adminmrobo.github.io/who_am_i/who_am_i.html">저자 소개</a> · 2026-11-19 · v1.0</p>
+  <div class="three"><b>처음 오신 분께 — 이 페이지를 3줄로</b><ol>
+    <li><b>무엇을</b>: 힐베르트 공간이 쓰이는 네 현장을 실험 하나씩으로 봅니다.</li>
+    <li><b>왜 중요한가</b>: 음성 필터, 양자컴퓨터, 센서 보정·회귀, 커널 머신러닝이 모두 "겹침 점수 + 그림자" 한 가지 계산입니다.</li>
+    <li><b>업무에서는</b>: 진동 신호에서 고장 주파수 골라내기, 측정값 보정선 긋기, 데이터가 적을 때 휜 패턴 예측하기에 바로 씁니다.</li></ol>
+    <p style="margin:8px 0 0">코드·수식을 몰라도 됩니다. 앞 편의 방 번호를 함께 적어 두었습니다.</p>
+    <details class="fold" style="margin:8px 0 0"><summary>이 페이지에 나오는 기호 풀이</summary>
+      <div class="gloss" style="margin-top:8px">
+        <div><b>|0⟩, |1⟩</b> 큐비트의 두 기준 상태(자 세트). |ψ⟩는 지금 상태.</div>
+        <div><b>⟨0|ψ⟩</b> 겹침 점수(내적)를 양자역학에서 적는 법.</div>
+        <div><b>A, b, x̂</b> 측정 설계표, 측정값, 가장 잘 맞는 계수.</div>
+        <div><b>b̂ = Ax̂</b> 측정값의 그림자(맞춤값).</div>
+        <div><b>φ(x)</b> 점을 끝없는 방으로 옮기는 지도. 직접 계산하지 않는다.</div>
+        <div><b>λ</b> 너무 꼬불꼬불 외우지 않게 거는 제동.</div>
+      </div></details>
+  </div>
+  <div class="start"><b>앞 편</b> 물결 조각·피타고라스 확장은 <a href="h2_wave_rooms.html#r8">②편 8·9번 방</a>, 그림자는 <a href="h2_wave_rooms.html#r7">7번 방</a>, 커널 방은 <a href="h2_wave_rooms.html#r10">10번 방</a>에서 처음 나옵니다.</div>
+  <div class="kpis" aria-label="숫자 요약">
+    <div class="kpi g"><b>π/4</b><span>sin t만 남겼을 때 버린 0.5 sin 3t의 세기 (≈ 0.785)</span></div>
+    <div class="kpi m"><b>25% : 75%</b><span>60° 기운 큐비트를 재면 0과 1이 나올 확률</span></div>
+    <div class="kpi a"><b>3</b><span>측정값 2, 3, 4에 가장 잘 맞는 상수 하나</span></div>
+    <div class="kpi r"><b>0.607</b><span>거리가 σ인 두 점의 가우스 닮음 점수</span></div>
+  </div>
+  <div data-dlg="hero"></div>
+</div></header>
+
+<main>
+<!-- 11 신호실 -->
+<section class="sec" id="r11" aria-labelledby="h-r11"><div class="wrap">
+  <h2 id="h-r11"><span class="door">11</span>신호실 — 소리를 물결 좌표로 <span class="sub">원자료 PRACTICAL 1/4</span></h2>
+  <div class="tags"><span class="tag">방법: 물결 조각의 세기 = 좌표</span><span class="tag">일상: 이퀄라이저로 고음만 줄이기</span><span class="tag">원자료: PRACTICAL HILBERT SPACE 1/4 (@eeanimation)</span></div>
+  <div class="wm">
+    <div class="why"><h4>왜 이 방법을 쓰나</h4><ol>
+      <li><b>문제</b>: 소리·진동 신호에서 특정 높이의 성분만 빼거나 남기고 싶습니다(잡음 제거, 고장 진동 찾기).</li>
+      <li><b>앞 방법의 한계</b>: 시간에 따른 그래프만 보면 어떤 높이의 소리가 얼마나 섞였는지 보이지 않아요.</li>
+      <li><b>해법</b>: 서로 직각인 물결 조각(sin t, sin 3t …)과의 겹침 점수로 좌표를 구합니다. 필요 없는 조각의 좌표를 0으로 만들면 필터가 됩니다.</li></ol>
+      <div class="easy"><b>쉽게 말하면</b> 곡선 하나가 "1번 물결 1만큼, 3번 물결 0.5만큼"이라는 막대 두 개가 됩니다(②편 8번 방).</div></div>
+    <div class="am"><h4><img data-mood="asst_shock" alt="" aria-hidden="true">수학 수식을 어려워하는 조수가 대신 물어봅니다</h4>
+      <p class="aq">"3번 물결을 버리면 신호가 얼마나 망가지는지 숫자로 알 수 있어요?"</p>
+      <span class="lbl">학교 수학으로 보면</span>삼각함수의 정적분입니다. 0부터 2π까지 sin²(kt)의 넓이는 늘 π예요.
+      <table><thead><tr><th>식 조각</th><th>뜻</th></tr></thead><tbody>
+        <tr><td>x(t) = sin t + 0.5 sin 3t</td><td>신호 = 물결 두 조각의 합</td></tr>
+        <tr><td>⟨f, g⟩ = ∫₀²π f g dt</td><td>겹침 점수 (곡선 방 L²[0, 2π])</td></tr>
+        <tr><td>남은 것 = 0.5 sin 3t</td><td>sin t만 남기고 버린 조각</td></tr>
+        <tr><td>‖0.5 sin 3t‖² = 0.25 × π</td><td>버린 세기 = 오차²</td></tr></tbody></table>
+      <span class="lbl">숫자로 한 번 해 보기</span>
+      <div class="try">좌표: sin t 쪽 <b>1</b>, sin 3t 쪽 <b>0.5</b> (겹침 점수 ÷ π)<br>sin t만 남기면 오차² = 0.25 × π = <b>π/4 ≈ 0.785</b>, 전체 세기 1.25π ≈ 3.93의 <b>20%</b></div>
+      <div class="ac"><img data-mood="asst_smile" alt="" aria-hidden="true"><p>버린 막대의 제곱만 더하면 잃은 양이 나오네요. 9번 방 피타고라스 그대로!</p></div></div>
+  </div>
+  <div class="pair">
+    <div><div class="tl">일상으로 치면</div>음악 앱 이퀄라이저에서 고음 막대만 내리면 "치익" 하는 잡음이 줄어듭니다. 막대 하나하나가 물결 조각의 좌표예요.</div>
+    <div><div class="tr">머신러닝에서는</div>공장 설비의 진동을 물결 좌표로 바꿔 모델에 넣으면, 베어링 고장처럼 특정 높이에서만 커지는 진동을 잡아냅니다(예지 정비). 음성 인식·통신도 같은 좌표를 씁니다.</div>
+  </div>
+  <div data-dlg="r11"></div>
+  <div class="panel">
+    <div class="ptitle">물결 좌표를 바꾸고, 필터를 켜 보기 — 왼쪽: 신호, 오른쪽: 좌표 막대</div>
+    <div class="twin"><div class="cwrap tall"><canvas id="cv11" aria-label="신호 x(t)와 두 물결 조각, 필터를 거친 신호"></canvas></div><div class="cwrap tall"><canvas id="cv11b" aria-label="1번·2번·3번 물결의 좌표 막대"></canvas></div></div>
+    <div class="ctrl"><div class="group"><label class="glabel" for="s11a">sin t 좌표</label><input type="range" id="s11a" min="0" max="1.5" step="0.1" value="1"><span class="val" id="v11a">1</span>
+      <label class="glabel" for="s11b">sin 3t 좌표</label><input type="range" id="s11b" min="0" max="1.5" step="0.1" value="0.5"><span class="val" id="v11b">0.5</span></div>
+      <div class="group"><button class="bt" type="button" id="b11" aria-pressed="false">필터: sin t만 남기기</button></div></div>
+    <div class="minis"><div class="mini m"><span>전체 세기 ‖x‖²</span><b id="m11a">—</b></div><div class="mini r"><span>버린 세기 (오차²)</span><b id="m11b">—</b></div><div class="mini g"><span>남긴 비율</span><b id="m11c">—</b></div><div class="mini a"><span>지금 신호의 가장 높은 점</span><b id="m11d">—</b></div></div>
+    <div class="insight" id="i11" aria-live="polite"></div>
+  </div>
+  <p class="muted" style="font-size:13.5px">원자료 1/4의 신호 그래프는 봉우리가 약 1.2, π/2의 골짜기가 약 0.65로 그려져 있지만, x(t) = sin t + 0.5 sin 3t의 실제 값은 봉우리 약 1.08, π/2에서 0.5입니다. 이 페이지는 계산한 값으로 그립니다.</p>
+  <details class="fold"><summary>교안의 파이썬 코드로 보면 (몰라도 됩니다)</summary>
+    <pre>X = np.fft.rfft(x); X[3:] = 0; y = np.fft.irfft(X)   # 높은 물결을 0으로 → 필터</pre></details>
+  <div class="lim"><b>이 작업실의 한계</b> 실제 신호는 시간이 지나며 성분이 바뀝니다. 그래서 짧게 잘라 조각마다 좌표를 구합니다(스펙트로그램). 물결 조각이 서로 직각이 아니면 버린 세기를 이렇게 단순히 더할 수 없어요.</div>
+  <div class="quiz" data-quiz="r11"></div>
+</div></section>
+
+<!-- 12 양자 측정실 -->
+<section class="sec" id="r12" aria-labelledby="h-r12"><div class="wrap">
+  <h2 id="h-r12"><span class="door">12</span>양자 측정실 — 그림자의 제곱이 확률 <span class="sub">원자료 PRACTICAL 2/4</span></h2>
+  <div class="tags"><span class="tag">방법: 확률 = 기준 상태와의 겹침 점수²</span><span class="tag">일상: 비스듬히 선 막대의 두 그림자</span><span class="tag">원자료: PRACTICAL HILBERT SPACE 2/4</span></div>
+  <div class="wm">
+    <div class="why"><h4>왜 이 방법을 쓰나</h4><ol>
+      <li><b>문제</b>: 큐비트는 재기 전에는 0과 1 사이에 "기울어진" 상태입니다. 재면 0이 나올지 1이 나올지 확률로 예측해야 해요.</li>
+      <li><b>앞 방의 한계</b>: 지금까지 그림자는 "가장 가까운 점"을 찾는 데만 썼어요.</li>
+      <li><b>해법</b>: 상태를 길이 1인 화살표로 놓고, 기준 상태 |0⟩·|1⟩ 위 그림자의 <b>제곱</b>을 확률로 씁니다. 길이 1이라 두 제곱의 합이 늘 1(피타고라스)이에요.</li></ol>
+      <div class="easy"><b>쉽게 말하면</b> 길이 1인 막대를 60° 세우면 바닥 그림자 ½, 벽 그림자 √3/2. 제곱하면 ¼ + ¾ = 1 — 그대로 확률입니다.</div></div>
+    <div class="am"><h4><img data-mood="asst_shock" alt="" aria-hidden="true">수학 수식을 어려워하는 조수가 대신 물어봅니다</h4>
+      <p class="aq">"왜 그림자를 그냥 쓰지 않고 제곱해요?"</p>
+      <span class="lbl">학교 수학으로 보면</span>삼각함수 cos² θ + sin² θ = 1입니다. 확률은 합이 1이어야 하니, 제곱한 값이 딱 맞아요.
+      <table><thead><tr><th>식 조각</th><th>뜻</th></tr></thead><tbody>
+        <tr><td>|ψ⟩ = ½|0⟩ + (√3/2)|1⟩</td><td>지금 상태 = 두 기준 상태의 섞임</td></tr>
+        <tr><td>⟨ψ|ψ⟩ = 1</td><td>상태 화살표의 길이는 1</td></tr>
+        <tr><td>P(0) = |⟨0|ψ⟩|²</td><td>0이 나올 확률 = |0⟩ 쪽 그림자²</td></tr>
+        <tr><td>P(1) = |⟨1|ψ⟩|²</td><td>1이 나올 확률 = |1⟩ 쪽 그림자²</td></tr></tbody></table>
+      <span class="lbl">숫자로 한 번 해 보기</span>
+      <div class="try">60° 기운 상태: 그림자 ½, √3/2 → P(0) = <b>¼ = 25%</b>, P(1) = <b>¾ = 75%</b><br>1000번 재면 0이 대략 250번 (이 페이지의 시드 고정 모의 측정: 225번)</div>
+      <div class="ac"><img data-mood="asst_smile" alt="" aria-hidden="true"><p>그림자 길이는 ½인데 확률은 ¼이구나. 제곱을 꼭 기억해야겠어요!</p></div></div>
+  </div>
+  <div class="pair">
+    <div><div class="tl">일상으로 치면</div>해가 비스듬히 비추면 막대 그림자가 땅과 벽에 하나씩 생깁니다. 막대가 땅 쪽으로 누울수록 땅 그림자가 길어지고, 0이 나올 확률이 커져요.</div>
+    <div><div class="tr">인공지능에서는</div>양자컴퓨터는 큐비트를 여러 번 재어 확률을 모아 답을 얻습니다. 양자 머신러닝도 이 측정 확률을 모델의 출력으로 씁니다. 일반적인 양자 상태의 좌표는 복소수라 "그림자"를 재는 규칙이 조금 다릅니다(원자료 Note).</div>
+  </div>
+  <div data-dlg="r12"></div>
+  <div class="panel">
+    <div class="ptitle">상태를 기울이고 재 보기 — 그림자², 그리고 모의 측정</div>
+    <div class="twin"><div class="cwrap sq"><canvas id="cv12" aria-label="|0⟩·|1⟩ 축 위의 상태 화살표 ψ와 두 그림자"></canvas></div><div class="cwrap sq"><canvas id="cv12b" aria-label="이론 확률과 모의 측정 횟수 막대"></canvas></div></div>
+    <div class="ctrl"><div class="group"><label class="glabel" for="s12">|0⟩에서 기운 각도 θ</label><input type="range" id="s12" min="0" max="90" step="5" value="60"><span class="val" id="v12">60°</span></div>
+      <div class="group" role="group" aria-label="측정 횟수"><span class="glabel">재는 횟수</span><span id="g12"></span></div></div>
+    <div class="minis"><div class="mini g"><span>P(0) = cos² θ</span><b id="m12a">—</b></div><div class="mini r"><span>P(1) = sin² θ</span><b id="m12b">—</b></div><div class="mini m"><span>모의 측정에서 0</span><b id="m12c">—</b></div><div class="mini a"><span>P(0) + P(1)</span><b id="m12d">—</b></div></div>
+    <div class="insight" id="i12" aria-live="polite"></div>
+  </div>
+  <p class="muted" style="font-size:13.5px">원자료처럼 좌표가 실수인 예만 다룹니다. 모의 측정은 시드 고정 난수로 만든 설명용 값입니다.</p>
+  <div class="lim"><b>이 작업실의 한계</b> 한 번 재면 상태가 |0⟩이나 |1⟩로 바뀌어, 같은 큐비트를 다시 재도 처음 확률을 볼 수 없습니다. 그래서 같은 상태를 여러 번 새로 만들어 잽니다.</div>
+  <div class="quiz" data-quiz="r12"></div>
+</div></section>
+
+<!-- 13 보정실 -->
+<section class="sec" id="r13" aria-labelledby="h-r13"><div class="wrap">
+  <h2 id="h-r13"><span class="door">13</span>보정실 — 최선의 맞춤은 그림자 <span class="sub">원자료 PRACTICAL 3/4</span></h2>
+  <div class="tags"><span class="tag">방법: 측정값을 "설계표가 만들 수 있는 값들"에 그림자로</span><span class="tag">일상: 세 번 잰 체중계 값을 하나로</span><span class="tag">원자료: PRACTICAL HILBERT SPACE 3/4</span></div>
+  <div class="wm">
+    <div class="why"><h4>왜 이 방법을 쓰나</h4><ol>
+      <li><b>문제</b>: 센서 값이 매번 조금씩 다르게 나옵니다. 상수 하나 또는 직선 하나로 가장 잘 맞추고 싶어요.</li>
+      <li><b>앞 방의 한계</b>: 정해진 모양(상수, 직선)으로는 모든 측정값을 정확히 지날 수 없을 때가 많아요.</li>
+      <li><b>해법</b>: 측정값 b를 "설계표 A로 만들 수 있는 값들의 바닥"에 그림자로 내립니다. 그림자 b̂ = Ax̂가 최선의 맞춤이고, 빗나간 만큼 r은 바닥과 직각이에요.</li></ol>
+      <div class="easy"><b>쉽게 말하면</b> <a href="e2_shadow_rooms.html#r6">유클리드 6번 방</a>의 "평균 = 그림자"를 측정 설계표로 넓힌 것입니다.</div></div>
+    <div class="am"><h4><img data-mood="asst_shock" alt="" aria-hidden="true">수학 수식을 어려워하는 조수가 대신 물어봅니다</h4>
+      <p class="aq">"Aᵀ(b − Ax̂) = 0은 무슨 주문이에요?"</p>
+      <span class="lbl">학교 수학으로 보면</span>벡터의 내적이 0이면 수직. 이 식은 "빗나간 만큼이 설계표의 모든 열과 직각"이라는 뜻일 뿐이에요.
+      <table><thead><tr><th>식 조각</th><th>뜻</th></tr></thead><tbody>
+        <tr><td>‖Ax − b‖² 를 가장 작게</td><td>빗나간 거리의 제곱 합을 최소로</td></tr>
+        <tr><td>b̂ = Ax̂</td><td>측정값의 그림자 = 맞춤값</td></tr>
+        <tr><td>Aᵀ(b − Ax̂) = 0</td><td>빗나간 만큼은 설계표의 열과 모두 직각</td></tr>
+        <tr><td>A의 열 = (1, 1, 1)</td><td>"상수 하나"로 맞출 때의 설계표</td></tr></tbody></table>
+      <span class="lbl">숫자로 한 번 해 보기</span>
+      <div class="try">측정값 (2, 3, 4)를 상수 하나로 → c = <b>3</b>, 빗나간 만큼 (−1, 0, 1), 합 <b>0</b> (= (1, 1, 1)과 직각)<br>직선(x = 1, 2, 3)으로 맞추면 1 + 1·x → 2, 3, 4를 딱 지나 빗나간 만큼 <b>0</b></div>
+      <div class="ac"><img data-mood="asst_smile" alt="" aria-hidden="true"><p>빗나간 합이 0이 되는 게 우연이 아니었네요. 직각이라서!</p></div></div>
+  </div>
+  <div class="pair">
+    <div><div class="tl">일상으로 치면</div>체중계에 세 번 올라 50.2, 50.4, 50.6이 나왔다면 "50.4"라고 적습니다. 평균이 세 값의 그림자예요.</div>
+    <div><div class="tr">머신러닝에서는</div>선형 회귀가 정확히 이 계산입니다. 특성 열들이 만드는 바닥에 정답을 그림자로 내린 것이 예측값이에요. 센서 보정·파라미터 추정도 같은 그림자를 씁니다.</div>
+  </div>
+  <div data-dlg="r13"></div>
+  <div class="panel">
+    <div class="ptitle">측정값을 바꾸고 맞춤 모양을 골라 보기 — 왼쪽: 측정값과 맞춤, 오른쪽: 측정값 세 개를 점 하나로 놓은 3칸 방의 그림자</div>
+    <div class="twin"><div class="cwrap sq"><canvas id="cv13" aria-label="x = 1, 2, 3에서의 측정값과 맞춤선"></canvas></div><div class="cwrap t3"><canvas id="cv13b" aria-label="측정값 b, 그림자 b̂, 빗나간 만큼 r과 설계표가 만드는 바닥"></canvas><span class="hint">끌어서 돌리기</span></div></div>
+    <div class="ctrl"><div class="group" role="group" aria-label="맞춤 모양"><span class="glabel">맞춤 모양</span><span id="g13"></span></div>
+      <div class="group"><label class="glabel" for="s13a">b₁</label><input type="range" id="s13a" min="0" max="6" step="0.5" value="2"><span class="val" id="v13a">2</span>
+      <label class="glabel" for="s13b">b₂</label><input type="range" id="s13b" min="0" max="6" step="0.5" value="3"><span class="val" id="v13b">3</span>
+      <label class="glabel" for="s13c">b₃</label><input type="range" id="s13c" min="0" max="6" step="0.5" value="4"><span class="val" id="v13c">4</span></div></div>
+    <div class="minis"><div class="mini g"><span>맞춤</span><b id="m13a" style="font-size:16px">—</b></div><div class="mini r"><span>빗나간 만큼 r</span><b id="m13b" style="font-size:16px">—</b></div><div class="mini m"><span>r의 합 (열 (1,1,1)과 겹침)</span><b id="m13c">—</b></div><div class="mini a"><span>‖r‖²</span><b id="m13d">—</b></div></div>
+    <div class="insight" id="i13" aria-live="polite"></div>
+  </div>
+  <p class="muted" style="font-size:13.5px">원자료 3/4의 그림은 열이 두 개인 설계표의 바닥(평면)을, 예시는 열이 하나인 "상수 맞춤"(바닥이 직선)을 보여 줍니다. 이 페이지는 두 경우를 버튼으로 나눴습니다. 축 이름은 x₁·x₂·x₃(측정 1·2·3번)으로 씁니다.</p>
+  <details class="fold"><summary>교안의 파이썬 코드로 보면 (몰라도 됩니다)</summary>
+    <pre>x_hat, *_ = np.linalg.lstsq(A, b)    # 최소제곱 = 그림자의 좌표</pre></details>
+  <div class="lim"><b>이 작업실의 한계</b> 바닥(설계표)이 곧은 모양만 만들 수 있으면, 휜 패턴은 아무리 그림자를 내려도 잘 안 맞습니다. 휜 패턴은 → 14번 커널 작업실.</div>
+  <div class="quiz" data-quiz="r13"></div>
+</div></section>
+
+<!-- 14 커널 작업실 -->
+<section class="sec" id="r14" aria-labelledby="h-r14"><div class="wrap">
+  <h2 id="h-r14"><span class="door">14</span>커널 작업실 — 닮음 점수로 휜 패턴 맞추기 <span class="sub">원자료 PRACTICAL 4/4</span></h2>
+  <div class="tags"><span class="tag">방법: 커널 회귀 = 끝없는 방에서의 최소제곱</span><span class="tag">일상: 가까운 동네 시세를 많이, 먼 동네는 조금 참고</span><span class="tag">원자료: PRACTICAL HILBERT SPACE 4/4</span></div>
+  <div class="wm">
+    <div class="why"><h4>왜 이 방법을 쓰나</h4><ol>
+      <li><b>문제</b>: 데이터가 U자처럼 휘어 있습니다. 직선으로는 가운데와 양 끝을 동시에 못 맞춰요.</li>
+      <li><b>앞 방의 한계</b>: 13번 방의 그림자는 설계표가 만드는 곧은 바닥에만 내릴 수 있었어요.</li>
+      <li><b>해법</b>: 점을 끝없는 방으로 옮기면(φ) 그곳에서는 곧은 맞춤이 됩니다. 옮기는 계산 대신 닮음 점수 k(x, z) = ⟨φ(x), φ(z)⟩만 쓰면 돼요(②편 10번 방). 예측 = 이웃마다 (가중치 × 닮음 점수)의 합.</li></ol>
+      <div class="easy"><b>쉽게 말하면</b> 새 지점의 값을, 가까운 데이터일수록 크게 참고해 섞어 만듭니다. 섞는 가중치는 그림자 계산으로 정해요.</div></div>
+    <div class="am"><h4><img data-mood="asst_shock" alt="" aria-hidden="true">수학 수식을 어려워하는 조수가 대신 물어봅니다</h4>
+      <p class="aq">"σ랑 λ는 뭘 조절하는 손잡이예요?"</p>
+      <span class="lbl">학교 수학으로 보면</span>지수함수와 두 점 사이 거리, 그리고 연립방정식입니다.
+      <table><thead><tr><th>식 조각</th><th>뜻</th></tr></thead><tbody>
+        <tr><td>k(x, z) = e<sup>−‖x − z‖²/(2σ²)</sup></td><td>가우스 닮음 점수: σ는 "얼마나 멀리까지 이웃으로 보나"</td></tr>
+        <tr><td>f(x) = Σ αᵢ k(xᵢ, x)</td><td>예측 = 이웃마다 가중치 × 닮음</td></tr>
+        <tr><td>(K + λI) α = y</td><td>가중치 구하기. λ는 너무 꼬불꼬불 외우지 않게 거는 제동</td></tr>
+        <tr><td>H = RKHS</td><td>닮음 점수표로 만든 끝없는 방</td></tr></tbody></table>
+      <span class="lbl">숫자로 한 번 해 보기</span>
+      <div class="try">거리 = σ → k = e<sup>−0.5</sup> ≈ <b>0.607</b>, 거리 = 2σ → e<sup>−2</sup> ≈ 0.135<br>이 데이터(18개): 직선 맞춤 평균 오차² <b>1.78</b> → 커널(σ = 1, λ = 0.1) <b>0.07</b></div>
+      <div class="ac"><img data-mood="asst_smile" alt="" aria-hidden="true"><p>σ가 너무 작으면 점마다 외우고, λ가 크면 둔해지는군요. 둘 다 적당히!</p></div></div>
+  </div>
+  <div class="pair">
+    <div><div class="tl">일상으로 치면</div>아파트 시세를 짐작할 때 바로 옆 단지는 많이, 두 정거장 떨어진 단지는 조금 참고합니다. "얼마나 멀리까지 참고하나"가 σ예요.</div>
+    <div><div class="tr">머신러닝에서는</div>커널 릿지 회귀와 SVM이 이 방법입니다. 데이터가 수백~수천 개일 때 딥러닝보다 안정적이고, 가우스 과정(불확실성까지 예측)도 같은 닮음 점수를 씁니다.</div>
+  </div>
+  <div data-dlg="r14"></div>
+  <div class="panel">
+    <div class="ptitle">σ와 λ를 바꿔 보기 — 점: 데이터, 주황: 커널 맞춤, 회색 점선: 직선 맞춤, 연한 초록: 숨은 진짜 모양</div>
+    <div class="cwrap tall"><canvas id="cv14" aria-label="U자 데이터와 커널 회귀 곡선, 직선 맞춤"></canvas></div>
+    <div class="ctrl"><div class="group"><label class="glabel" for="s14a">σ</label><input type="range" id="s14a" min="0.2" max="4" step="0.1" value="1"><span class="val" id="v14a">1.0</span>
+      <span class="glabel">λ</span><span id="g14"></span></div></div>
+    <div class="minis"><div class="mini r"><span>직선 맞춤 오차²</span><b id="m14a">—</b></div><div class="mini g"><span>커널 맞춤 오차² (배운 데이터)</span><b id="m14b">—</b></div><div class="mini m"><span>숨은 모양과의 차이² (처음 보는 곳)</span><b id="m14c">—</b></div><div class="mini a"><span>거리 σ의 닮음 점수</span><b>0.607</b></div></div>
+    <div class="insight" id="i14" aria-live="polite"></div>
+  </div>
+  <p class="muted" style="font-size:13.5px">데이터는 숨은 모양 y = (x − 5)²/5 + 1에 시드 고정 흔들림을 더한 설명용 예시입니다. "처음 보는 곳"은 0~10 구간 전체에서 숨은 모양과 맞춤 곡선의 차이²를 평균한 값입니다.</p>
+  <details class="fold"><summary>교안의 파이썬 코드로 보면 (몰라도 됩니다)</summary>
+    <pre>KernelRidge(kernel="rbf", gamma=1/(2*sigma**2), alpha=lam).fit(X, y)</pre></details>
+  <div class="lim"><b>이 작업실의 한계</b> 데이터가 n개면 n × n 닮음 점수표를 풀어야 해서, 수십만 개를 넘으면 느려집니다. σ·λ는 검증 데이터로 골라야 해요(<a href="https://adminmrobo.github.io/optimization_3d_map/first_step_0.html">최적화 첫걸음 ⓪</a>).</div>
+  <div class="quiz" data-quiz="r14"></div>
+</div></section>
+
+<section class="sec" id="sum" aria-labelledby="h-sum"><div class="wrap">
+  <h2 id="h-sum">정리 — 네 작업실, 한 가지 계산</h2>
+  <div class="tblwrap"><table class="cmp"><thead><tr><th>작업실</th><th>힐베르트 공간</th><th>겹침 점수</th><th>그림자가 하는 일</th><th>쓰이는 곳</th><th>앞 편</th></tr></thead><tbody>
+    <tr><td>11 신호실</td><td>곡선 방 L²[0, 2π]</td><td>∫ f g dt</td><td>물결 조각 위 그림자 = 좌표, 버린 그림자² = 오차</td><td>음성 필터, 진동 분석, 통신</td><td><a href="h2_wave_rooms.html#r8">②편 8·9번</a></td></tr>
+    <tr><td>12 양자 측정실</td><td>ℂ² (예시는 실수)</td><td>⟨0|ψ⟩</td><td>기준 상태 위 그림자² = 확률</td><td>큐비트 측정, 양자 머신러닝</td><td><a href="h1_arrow_rooms.html#r3">①편 3번</a></td></tr>
+    <tr><td>13 보정실</td><td>ℝⁿ</td><td>uᵀv</td><td>설계표 바닥 위 그림자 = 최선의 맞춤</td><td>센서 보정, 회귀, 파라미터 추정</td><td><a href="h2_wave_rooms.html#r7">②편 7번</a></td></tr>
+    <tr><td>14 커널 작업실</td><td>RKHS</td><td>k(x, z)</td><td>끝없는 방의 그림자 = 휜 맞춤</td><td>커널 릿지 회귀, SVM</td><td><a href="h2_wave_rooms.html#r10">②편 10번</a></td></tr>
+  </tbody></table></div>
+  <h3>비유의 한계</h3>
+  <ul>
+    <li>12번 작업실은 좌표가 실수인 예만 다룹니다. 실제 양자 상태는 복소수 좌표를 쓰고, 겹침 점수의 규칙이 조금 다릅니다.</li>
+    <li>11·14번의 신호와 데이터, 12번의 모의 측정은 모두 설명용 예시입니다.</li>
+  </ul>
+</div></section>
+
+<section class="sec" id="outro" aria-labelledby="h-outro"><div class="wrap">
+  <h2 id="h-outro">아웃트로 — 출장 보고</h2>
+  <div data-dlg="outro"></div>
+  <div class="next"><a href="index.html"><b>목차로</b><br>유클리드 0편부터 다시 보기</a><a href="h2_wave_rooms.html"><b>② 곡선을 쪼개는 방</b></a><a href="https://adminmrobo.github.io/optimization_3d_map/"><b>좌표축 위의 그릇</b><br>σ·λ 고르기는 최적화 이야기로</a></div>
+</div></section>
+</main>
+
+<footer><div class="wrap">
+  <h3>출처</h3>
+  <table><thead><tr><th>#</th><th>자료</th><th>이 페이지에서 쓴 곳</th></tr></thead><tbody>
+    <tr><td>[1]</td><td>eeanimation, 인포그래픽 「PRACTICAL HILBERT SPACE」 Panel 1/4~4/4 (사용자 제공 이미지, 원 게시물 주소·게시일 미확인)</td><td>11~14번 작업실 — 패널의 구성·예시(sin t + 0.5 sin 3t와 π/4, ½·√3/2와 25%·75%, (2, 3, 4)의 상수 맞춤, 가우스 커널 0.607)를 따라 새로 그림</td></tr>
+    <tr><td>[2]</td><td>교육부 고등학교 수학·미적분·기하 교육과정 (삼각함수, 정적분, 내적, 지수함수)</td><td>조수 수식 상자의 "학교 수학으로 보면"</td></tr>
+    <tr><td>[3]</td><td>Nielsen, M. A. & Chuang, I. L. (2010). Quantum Computation and Quantum Information. Cambridge University Press.</td><td>12번 작업실 — 측정 확률 규칙</td></tr>
+    <tr><td>[4]</td><td>Schölkopf, B. & Smola, A. J. (2002). Learning with Kernels. MIT Press.</td><td>14번 작업실 — 커널 릿지 회귀, RKHS</td></tr>
+  </tbody></table>
+  <h3>예시값·설명용 모형인 것</h3>
+  <ul><li>11번 신호와 좌표 슬라이더, 12번 모의 측정(시드 고정), 13번 측정값, 14번 U자 데이터 18개(시드 고정)와 숨은 모양</li></ul>
+  <p>원자료와 다르게 쓴 곳: 1/4 신호 그래프의 높이를 계산값(봉우리 ≈ 1.08, π/2에서 0.5)으로 다시 그림. 3/4 그림(열 두 개, 평면)과 예시(열 하나, 직선)를 버튼으로 나눔, 축 이름을 x₁·x₂·x₃으로. 계산 값은 모두 다시 검산함(code/check_hilbert.js).</p>
+  <p>캐릭터 이름·설정·그림은 저작권자 안상선의 허락 없이 사용할 수 없습니다.</p>
+  <p>글 · 안상선 ((주)M-Robo 대표) · <a href="https://adminmrobo.github.io/who_am_i/who_am_i.html">저자 소개</a> · <a href="index.html">목차</a> · <a href="h1_arrow_rooms.html">①편</a> · <a href="h2_wave_rooms.html">②편</a></p>
+</div></footer>
+
+<script>
+/*@@SPRITES@@*/
+/*@@GEO@@*/
+/*@@HGEO@@*/
+/*@@COMMON@@*/
+/*@@PLANE@@*/
+(function(){
+'use strict';
+var $=U.$,$$=U.$$,fmt=U.fmt,cssv=U.cssv,PI=Math.PI;
+function f1(x){return fmt(x,Math.abs(x-Math.round(x))<1e-9?0:2);}
+function V(cv,draw){var o={dirty:true};U.reg(cv,function(dt){if(o.dirty||dt===0){draw();o.dirty=false;}});return o;}
+function curve(o,f,a,b,col,wd,dash,n){var g=o.g;n=n||400;g.strokeStyle=col;g.lineWidth=wd||2;g.setLineDash(dash||[]);g.beginPath();for(var i=0;i<=n;i++){var t=a+(b-a)*i/n,x=o.X(t),y=o.Y(f(t));i?g.lineTo(x,y):g.moveTo(x,y);}g.stroke();g.setLineDash([]);}
+function bars(cv,vals,labels,cols,o){o=o||{};var R=U.setup(cv),g=R.g,w=R.w,h=R.h,L=44,B=30,T=26,mx=o.max||1,bw=(w-L-20)/vals.length;U.grid24(g,w,h);
+  g.strokeStyle=cssv('--rule');g.beginPath();g.moveTo(L,h-B+.5);g.lineTo(w-10,h-B+.5);g.stroke();
+  vals.forEach(function(v,i){var bh=(h-B-T)*Math.min(1,Math.abs(v)/mx),x=L+i*bw+bw*0.18;g.fillStyle=cols[i];g.fillRect(x,h-B-bh,bw*0.64,bh);g.fillStyle=cssv('--text');g.font='600 12px '+cssv('--font');g.textAlign='center';g.fillText(o.fmt?o.fmt(v,i):fmt(v,2),x+bw*0.32,h-B-bh-6);g.fillStyle=cssv('--muted');g.font='12px '+cssv('--font');g.fillText(labels[i],x+bw*0.32,h-B+16);});
+  if(o.title)U.label(g,L,13,o.title,cssv('--muted'));if(o.stamp)U.stamp(g,w,o.stamp);return {g:g,w:w,h:h};}
+var xf=function(t){return t===0?'0':Math.abs(t-PI/2)<0.01?'π/2':Math.abs(t-PI)<0.01?'π':Math.abs(t-1.5*PI)<0.01?'3π/2':'2π';};
+
+var DLG={
+ hero:[["doc","doc_judge","복도는 다 지났습니다. 이제 이 도구들이 실제로 일하는 작업실 네 곳에 출장을 다녀오세요."],
+   ["sia","sia_guide","출장이요? 신호실부터 갈게요! 소리는 그림으로 보기 좋으니까요."],
+   ["moa","moa_report","저는 양자 측정실이 궁금해요. 확률이 어떻게 그림자에서 나오는지요."],
+   ["robo","robo_happy","나는 보정실! 평균 계산은 주판이 제일 잘하지."]],
+ r11:[["doc","doc_think","3번 물결을 버리면 신호가 얼마나 달라질까요?"],
+   ["robo","robo_coin","0.5짜리 조각이니까 절반쯤 망가지겠지!"],
+   ["fly","fly_point","'필터: sin t만 남기기'를 눌러 보고 '버린 세기'를 봐."],
+   ["sia","sia_signal","0.785, 전체의 20%예요. 막대 길이는 절반인데 세기는 제곱이라 4분의 1로 줄었네요!"]],
+ r12:[["moa","moa_report","60° 기울었으면 0이 나올 확률은 60%쯤인가요?"],
+   ["robo","robo_calc","그림자 길이가 ½이니까 50%!"],
+   ["fly","fly_magnify","그림자를 제곱해야 돼. 재는 횟수를 1000번으로 늘려서 확인해 봐."],
+   ["sia","sia_explain","0이 225번! ¼ 근처예요. 그림자² = 확률이 맞네요."]],
+ r13:[["sia","sia_think","측정값 2, 3, 4를 숫자 하나로 말하면 3이죠? 그게 왜 '최선'이에요?"],
+   ["robo","robo_smile","평균이니까 최선이지. 이유는 몰라도 돼!"],
+   ["fly","fly_point","오른쪽 3D를 돌려 봐. 빗나간 만큼 r이 바닥과 어떤 각을 이루나?"],
+   ["moa","moa_ok","직각이에요. 그래서 r을 모두 더하면 0이 되고, 그보다 가까운 맞춤은 없어요."]],
+ r14:[["moa","moa_report","U자 데이터는 직선으로는 못 맞추잖아요."],
+   ["robo","robo_coin","그럼 점을 다 지나게 꼬불꼬불 그리면 되지!"],
+   ["fly","fly_magnify","σ를 0.2로, λ를 아주 작게 해 봐. 배운 데이터 오차랑 '처음 보는 곳' 오차를 같이 봐."],
+   ["sia","sia_signal","배운 데이터는 0인데 처음 보는 곳은 엉망이에요! 다 외우면 안 되는구나."]],
+ outro:[["doc","doc_magic","출장 보고를 받겠습니다. 네 곳 모두 같은 계산이었죠.<br>① 신호: 물결 위 그림자 = 좌표 ② 양자: 그림자² = 확률 ③ 보정: 바닥 위 그림자 = 최선의 맞춤 ④ 커널: 끝없는 방의 그림자 = 휜 맞춤."],
+   ["robo","robo_sigh","평균도 그림자, 확률도 그림자… 주판알보다 그림자가 더 바쁘군."],
+   ["sia","sia_smile","신호실에서 본 이퀄라이저, 이제 막대가 좌표로 보여요!"],
+   ["moa","moa_cheer","σ랑 λ 고르기는 그릇 시리즈의 검증 이야기로 이어진대요. 거기도 가 볼래요!"],
+   ["asst","asst_proud","식은 다 숫자로 풀었어요. 출장 수고하셨습니다!"]]
+};
+U.dialogues(DLG);U.fillImgs();
+
+/* 표지 */
+V($('#coverCv'),function(){var o=U.plot($('#coverCv'),{xr:[0,2*PI],yr:[-1.4,1.4],xt:[],yt:[]});curve(o,HG.sig11(1,0.5),0,2*PI,cssv('--terrain'),3.4);curve(o,Math.sin,0,2*PI,'rgba(30,85,200,.55)',1.8,[5,4]);curve(o,function(t){return 0.5*Math.sin(3*t);},0,2*PI,'rgba(163,92,0,.6)',1.8,[5,4]);});
+
+/* 11 신호실 */
+var A1=1,A3=0.5,FIL=false;
+var v11=V($('#cv11'),function(){var x=HG.sig11(A1,A3),y=HG.sig11(A1,FIL?0:A3),o=U.plot($('#cv11'),{xr:[0,2*PI],yr:[-2.2,2.2],xt:[0,PI/2,PI,1.5*PI,2*PI],xf:xf,yt:[-2,-1,0,1,2],xl:'t',stamp:FIL?'필터 켬':'원래 신호'});
+  curve(o,function(t){return A1*Math.sin(t);},0,2*PI,'rgba(15,127,134,.5)',1.6,[5,4]);curve(o,function(t){return A3*Math.sin(3*t);},0,2*PI,'rgba(163,92,0,.6)',1.6,[5,4]);
+  curve(o,x,0,2*PI,cssv('--info'),2.8);if(FIL)curve(o,y,0,2*PI,cssv('--gfp'),2.8);U.label(o.g,o.X(0.1),o.Y(2.0),'파랑 = x(t)'+(FIL?' · 초록 = 필터 후':'')+' · 점선 = 두 조각',cssv('--muted'));});
+var v11b=V($('#cv11b'),function(){bars($('#cv11b'),[A1,0,FIL?0:A3],['1번','2번','3번'],[cssv('--terrain'),'rgba(91,104,116,.3)',FIL?'rgba(91,104,116,.3)':cssv('--amber')],{max:1.5,title:'물결 좌표 (sin kt 쪽)',stamp:'예시값'});});
+function up11(){var tot=PI*(A1*A1+A3*A3),lost=FIL?PI*A3*A3:0,mx=-9;for(var i=0;i<=2000;i++)mx=Math.max(mx,HG.sig11(A1,FIL?0:A3)(i/2000*2*PI));
+  $('#m11a').textContent=fmt(tot,3);$('#m11b').textContent=fmt(lost,3);$('#m11c').textContent=tot?fmt((tot-lost)/tot*100,0)+'%':'—';$('#m11d').textContent=fmt(mx,3);
+  U.ins($('#i11'),[['g','좌표 (sin t: '+f1(A1)+', sin 3t: '+f1(A3)+') → 전체 세기 π × ('+f1(A1)+'² + '+f1(A3)+'²) = '+fmt(tot,3)+'.'],FIL?['r','3번 물결을 0으로: 버린 세기 π × '+f1(A3)+'² = '+fmt(lost,3)+(Math.abs(A3-0.5)<1e-9?' = π/4':'')+'. 초록 곡선이 필터를 거친 신호예요.']:['a','필터를 켜면 3번 물결 막대가 0이 되고, 버린 세기가 곧 오차²입니다.']]);v11.dirty=true;v11b.dirty=true;}
+[['s11a','v11a',function(v){A1=v;}],['s11b','v11b',function(v){A3=v;}]].forEach(function(z){var r=$('#'+z[0]);r.oninput=function(){z[2](+r.value);$('#'+z[1]).textContent=f1(+r.value);up11();};});
+$('#b11').onclick=function(){FIL=!FIL;this.setAttribute('aria-pressed',String(FIL));up11();};up11();
+
+/* 12 양자 측정실 */
+var TH=60,NM=1000;
+var P12=new P2($('#cv12'),{xr:[-0.25,1.25],yr:[-0.25,1.25],tick:0.5,labelTick:0.5,axes:['|0⟩','|1⟩'],draw:function(g,P){var t=EG.rad(TH),c=Math.cos(t),s=Math.sin(t);
+  g.beginPath();g.arc(P.X(0),P.Y(0),P.kx,-PI/2,0);g.strokeStyle='rgba(155,63,181,.35)';g.lineWidth=1.4;g.stroke();
+  P.line([c,0],[c,s],cssv('--amber'),1.6,[5,4]);P.line([0,s],[c,s],'rgba(15,127,134,.7)',1.6,[5,4]);P.line([0,0],[c,0],cssv('--terrain'),6);P.line([0,0],[0,s],cssv('--amber'),6);
+  P.arrow([0,0],[c,s],cssv('--eye'),3);P.pt([c,s],cssv('--eye'),'|ψ⟩',5);if(TH>0&&TH<90)P.arcAng([0,0],30,0,t,cssv('--amber'));
+  P.text([c/2,0],'⟨0|ψ⟩ = '+fmt(c,3),cssv('--terrain'),'center',0,18);P.text([0,s/2],'⟨1|ψ⟩ = '+fmt(s,3),cssv('--amber'),'left',8,0);}});
+var v12b=V($('#cv12b'),function(){var t=EG.rad(TH),p0=Math.cos(t)*Math.cos(t),c0=HG.measure(p0,NM);bars($('#cv12b'),[p0,1-p0,c0/NM,1-c0/NM],['P(0)','P(1)','측정 0','측정 1'],[cssv('--terrain'),cssv('--amber'),'rgba(15,127,134,.45)','rgba(163,92,0,.45)'],{max:1,fmt:function(v,i){return i<2?fmt(v*100,0)+'%':(i===2?c0:NM-c0)+'번';},title:'이론 확률 vs '+NM+'번 모의 측정',stamp:'시드 고정'});});
+function up12(){var t=EG.rad(TH),p0=Math.cos(t)*Math.cos(t),c0=HG.measure(p0,NM);$('#m12a').textContent=fmt(p0*100,1)+'%';$('#m12b').textContent=fmt((1-p0)*100,1)+'%';$('#m12c').textContent=c0+' / '+NM;$('#m12d').textContent=fmt(p0+1-p0,3);
+  U.ins($('#i12'),[['g','θ = '+TH+'°: 그림자 cos θ = '+fmt(Math.cos(t),3)+', sin θ = '+fmt(Math.sin(t),3)+' → 제곱하면 '+fmt(p0*100,1)+'% : '+fmt((1-p0)*100,1)+'%.'],['a',NM<=10?'10번만 재면 이론값과 꽤 다를 수 있어요. 재는 횟수를 늘려 보세요.':'모의 측정에서 0이 '+c0+'번 — 재는 횟수가 많을수록 이론 확률에 가까워집니다.']]);P12.dirty=true;v12b.dirty=true;}
+var s12=$('#s12');s12.oninput=function(){TH=+s12.value;$('#v12').textContent=TH+'°';up12();};U.btns($('#g12'),[[10,'10'],[100,'100'],[1000,'1000']],1000,function(v){NM=v;up12();});up12();
+
+/* 13 보정실 */
+var B13=[2,3,4],MODE='const';
+function fit(){return MODE==='const'?HG.fitConst(B13):HG.fitLine(B13);}
+var P13=new P2($('#cv13'),{xr:[0,4],yr:[0,6.5],axes:['측정 순서 x','측정값'],free:true,draw:function(g,P){var F=fit();
+  if(MODE==='const')P.line([0.3,F.c],[3.7,F.c],cssv('--gfp'),2.6);else P.line([0.3,F.a+F.k*0.3],[3.7,F.a+F.k*3.7],cssv('--gfp'),2.6);
+  [1,2,3].forEach(function(x,i){P.line([x,B13[i]],[x,F.hat[i]],cssv('--amber'),2,[4,3]);P.pt([x,F.hat[i]],cssv('--gfp'),null,4);P.pt([x,B13[i]],cssv('--info'),'b'+'₁₂₃'[i]+' = '+f1(B13[i]),6,-12);});}});
+var S13=new U.Space3D($('#cv13b'),{L:6,zoom:1.15,yaw:-0.75,pitch:0.35,ticks:false,axes:['x₁','x₂','x₃'],aria:'측정값 b와 그림자 b̂'});
+S13.ov.push(function(g,S){var F=fit(),b=B13,h=F.hat;
+  if(MODE==='const'){S.line3(g,[[0,0,0],[6,6,6]],'rgba(15,127,134,.6)',3);var q=S.P(5.6,5.6,5.6);U.label(g,q[0]+6,q[1],'바닥 = (1,1,1) 방향 직선',cssv('--terrain'));}
+  else{g.beginPath();[[-0.5,-1,-1.5],[5.5,5,4.5],[6.5,7,7.5],[0.5,1,1.5]].forEach(function(p,i){var r=S.P(p[0],p[1],p[2]);i?g.lineTo(r[0],r[1]):g.moveTo(r[0],r[1]);});g.closePath();g.fillStyle='rgba(15,127,134,.13)';g.fill();g.strokeStyle='rgba(15,127,134,.5)';g.stroke();var q2=S.P(6,6,6);U.label(g,q2[0]+6,q2[1],'바닥 = 열 (1,1,1)·(1,2,3)이 만드는 평면',cssv('--terrain'));}
+  S.arrow3(g,[0,0,0],b,cssv('--info'),2.6);S.arrow3(g,[0,0,0],h,cssv('--gfp'),2.6);S.line3(g,[b,h],cssv('--amber'),2.4);
+  var q=S.dot3(g,b[0],b[1],b[2],cssv('--info'),5.5);U.label(g,q[0]+8,q[1]-8,'b',cssv('--info'));q=S.dot3(g,h[0],h[1],h[2],cssv('--gfp'),5);U.label(g,q[0]+8,q[1]+12,'b̂',cssv('--gfp'));});
+function up13(){var F=fit(),rs=F.r.reduce(function(a,v){return a+v;},0),rr=F.r.reduce(function(a,v){return a+v*v;},0);
+  $('#m13a').textContent=MODE==='const'?'c = '+f1(F.c):f1(F.a)+' + '+f1(F.k)+'·x';$('#m13b').textContent='('+F.r.map(function(v){return f1(Math.round(v*100)/100);}).join(', ')+')';$('#m13c').textContent=f1(Math.abs(rs)<1e-9?0:rs);$('#m13d').textContent=f1(Math.round(rr*1000)/1000);
+  U.ins($('#i13'),[['g',MODE==='const'?'상수 맞춤: c = 평균 '+f1(F.c)+'. 빗나간 만큼의 합 0 — (1, 1, 1)과 직각이라는 뜻입니다.':'직선 맞춤: '+f1(F.a)+' + '+f1(F.k)+'·x. 빗나간 만큼은 열 (1,1,1)·(1,2,3) 모두와 직각 — 합도 0, x를 곱한 합도 0.'],[rr<1e-9?'m':'a',rr<1e-9?'세 점이 맞춤 모양 위에 딱 있어 빗나간 만큼이 0입니다. b가 바닥 위에 있으면 그림자는 자기 자신이에요.':'‖r‖² = '+f1(Math.round(rr*1000)/1000)+'. 바닥 위 다른 어떤 맞춤도 이보다 크게 빗나갑니다.']]);P13.dirty=true;S13.dirty=true;}
+[['s13a','v13a',0],['s13b','v13b',1],['s13c','v13c',2]].forEach(function(z){var r=$('#'+z[0]);r.oninput=function(){B13[z[2]]=+r.value;$('#'+z[1]).textContent=f1(+r.value);up13();};});
+U.btns($('#g13'),[['const','상수 하나 (원자료 예시)'],['line','직선 (기울기 포함)']],'const',function(v){MODE=v;up13();});up13();
+
+/* 14 커널 작업실 */
+var SG=1,LM=0.1;function tru(x){return Math.pow(x-5,2)/5+1;}
+var v14=V($('#cv14'),function(){var K=HG.kfit(SG,LM),L=HG.lfit(),o=U.plot($('#cv14'),{xr:[0,10],yr:[-1,8],xt:[0,2,4,6,8,10],yt:[0,2,4,6,8],xl:'x',stamp:'σ = '+fmt(SG,1)+', λ = '+LM});
+  curve(o,tru,0,10,'rgba(19,115,58,.25)',8);curve(o,L.f,0,10,'rgba(91,104,116,.8)',2,[6,4]);curve(o,function(x){return Math.max(-1,Math.min(8,K.f(x)));},0,10,cssv('--amber'),2.8,null,600);
+  HG.UDATA.forEach(function(p){o.g.beginPath();o.g.arc(o.X(p[0]),o.Y(p[1]),5,0,7);o.g.fillStyle=cssv('--terrain');o.g.fill();o.g.strokeStyle='#fff';o.g.lineWidth=1.6;o.g.stroke();});});
+function gen(f){var s=0,n=200;for(var i=0;i<=n;i++){var x=10*i/n;s+=Math.pow(f(x)-tru(x),2);}return s/(n+1);}
+function up14(){var K=HG.kfit(SG,LM),L=HG.lfit(),ge=gen(K.f);$('#m14a').textContent=fmt(L.mse,2);$('#m14b').textContent=fmt(K.mse,3);$('#m14c').textContent=fmt(ge,3);
+  var msg=SG<0.5&&LM<0.01?['r','배운 데이터는 거의 0인데 처음 보는 곳의 차이가 '+fmt(ge,2)+'. 점마다 외워서 사이가 출렁입니다(과적합).']:SG>2.5||LM>=1?['a','σ가 크거나 λ가 크면 맞춤이 둔해져 U자의 바닥을 덜 따라갑니다.']:['g','적당한 σ·λ에서 U자 모양을 잘 따라갑니다. 직선(오차² '+fmt(L.mse,2)+')보다 훨씬 작아요.'];
+  U.ins($('#i14'),[msg,['m','예측 f(x)는 데이터 18개와의 닮음 점수에 가중치를 곱해 더한 값. 가중치는 (K + λI)α = y를 풀어 얻습니다 — 끝없는 방에서의 그림자 계산이에요.']]);v14.dirty=true;}
+var s14a=$('#s14a');s14a.oninput=function(){SG=+s14a.value;$('#v14a').textContent=fmt(SG,1);up14();};U.btns($('#g14'),[[0.0001,'0.0001'],[0.01,'0.01'],[0.1,'0.1'],[1,'1']],0.1,function(v){LM=v;up14();});up14();
+
+U.Gloss({
+ '물결 좌표':['물결 좌표(푸리에 계수)','Fourier coefficients','곡선과 각 물결 조각의 겹침 점수. 곡선을 막대 몇 개로 바꾼다.'],
+ '예지 정비':['예지 정비','predictive maintenance','진동·온도 신호로 고장을 미리 알아채 정비하는 일.'],
+ '큐비트':['큐비트','qubit','0과 1을 섞은 상태로 있을 수 있는 양자컴퓨터의 정보 단위.'],
+ '선형 회귀':['선형 회귀(최소제곱)','linear regression · least squares','특성 열들이 만드는 바닥에 정답을 그림자로 내린 예측.'],
+ '커널 릿지 회귀':['커널 릿지 회귀','kernel ridge regression','닮음 점수와 제동 λ로 휜 패턴을 맞추는 회귀.'],
+ 'SVM':['SVM','Support Vector Machine','커널과 함께 휘어진 경계를 만드는 분류 방법.'],
+ '가우스 과정':['가우스 과정','Gaussian process','닮음 점수로 예측과 그 불확실성을 함께 주는 방법.'],
+ '과적합':['과적합','overfitting','배운 데이터만 외워 처음 보는 데이터에 약한 상태.']
+},['물결 좌표','큐비트','선형 회귀','커널 릿지 회귀']);
+U.Study({quiz:{
+ r11:[{q:'x(t) = sin t + 0.5 sin 3t에서 sin t만 남기면 버린 세기(오차²)는?',o:['π/4 ≈ 0.785','0.5','π/2','0.25'],a:0,why:'버린 조각 0.5 sin 3t의 세기 = 0.5² × π = π/4.',hint:'0부터 2π까지 sin²의 넓이는 π.'}],
+ r12:[{q:'|ψ⟩ = ½|0⟩ + (√3/2)|1⟩을 재면 1이 나올 확률은?',o:['75%','87%','50%','25%'],a:0,why:'(√3/2)² = ¾ = 75%. 그림자를 제곱합니다.',hint:'그림자 √3/2 ≈ 0.87을 제곱.'}],
+ r13:[{q:'측정값 (2, 3, 4)를 상수 하나로 맞췄을 때 빗나간 만큼의 합은?',o:['0','3','1','−1'],a:0,why:'빗나간 만큼 (−1, 0, 1)은 (1, 1, 1)과 직각이라 합이 0입니다.',hint:'Aᵀ(b − Ax̂) = 0.'}],
+ r14:[{q:'σ를 아주 작게, λ를 아주 작게 하면?',o:['배운 데이터는 맞히지만 처음 보는 곳에서 크게 빗나간다','U자를 가장 잘 따라간다','직선이 된다','오차가 모두 0이 된다'],a:0,why:'점마다 외워 사이가 출렁이는 과적합입니다.',hint:'세 번째 미니 칸.'}]
+}});
+U.start();
+})();
+</script>
+</body>
+</html>

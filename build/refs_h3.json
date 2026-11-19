@@ -1,0 +1,134 @@
+[
+ {
+  "id": "eea_practical",
+  "type": "graphic",
+  "title": "PRACTICAL HILBERT SPACE 1/4~4/4",
+  "author": [
+   {
+    "literal": "eeanimation"
+   }
+  ],
+  "accessed": {
+   "date-parts": [
+    [
+     2026,
+     11,
+     19
+    ]
+   ]
+  },
+  "lab": {
+   "work": "lab:work/eea_practical",
+   "role": "background",
+   "supports": [],
+   "locs": [],
+   "verified": {
+    "title": true,
+    "author": true,
+    "year": false,
+    "url": false
+   },
+   "checkedBy": "사용자 제공 이미지에서 옮김. 원 게시물 주소·게시일은 받지 못함",
+   "note": "카드 구성과 도표 좌표만 따르고 그림은 새로 그림"
+  }
+ },
+ {
+  "id": "moe_curriculum",
+  "type": "report",
+  "title": "고등학교 수학·기하 교육과정",
+  "author": [
+   {
+    "literal": "교육부"
+   }
+  ],
+  "lab": {
+   "work": "lab:work/moe_curriculum",
+   "role": "background",
+   "supports": [],
+   "locs": [],
+   "verified": {
+    "title": true,
+    "author": true,
+    "year": false,
+    "url": false
+   },
+   "checkedBy": "교과 단원 이름 대조"
+  }
+ },
+ {
+  "id": "nielsen2010",
+  "type": "book",
+  "title": "Quantum Computation and Quantum Information",
+  "author": [
+   {
+    "family": "Nielsen",
+    "given": "Michael A."
+   },
+   {
+    "family": "Chuang",
+    "given": "Isaac L."
+   }
+  ],
+  "issued": {
+   "date-parts": [
+    [
+     2010
+    ]
+   ]
+  },
+  "lab": {
+   "work": "lab:work/nielsen2010",
+   "role": "background",
+   "supports": [
+    "lab:application/quantum-measurement"
+   ],
+   "locs": [],
+   "verified": {
+    "title": true,
+    "author": true,
+    "year": true,
+    "url": false
+   },
+   "checkedBy": "2026-11-19"
+  },
+  "publisher": "Cambridge University Press"
+ },
+ {
+  "id": "scholkopf2002",
+  "type": "book",
+  "title": "Learning with Kernels",
+  "author": [
+   {
+    "family": "Schölkopf",
+    "given": "Bernhard"
+   },
+   {
+    "family": "Smola",
+    "given": "Alexander J."
+   }
+  ],
+  "issued": {
+   "date-parts": [
+    [
+     2002
+    ]
+   ]
+  },
+  "lab": {
+   "work": "lab:work/scholkopf2002",
+   "role": "background",
+   "supports": [
+    "lab:application/kernel-ridge"
+   ],
+   "locs": [],
+   "verified": {
+    "title": true,
+    "author": true,
+    "year": true,
+    "url": false
+   },
+   "checkedBy": "2026-11-19"
+  },
+  "publisher": "MIT Press"
+ }
+]

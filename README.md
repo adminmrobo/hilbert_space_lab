@@ -14,20 +14,21 @@
 | 유클리드 ② | `e2_shadow_rooms.html` | 6 그림자(예측선 긋기·평균) · 7 칸막이(SVM) · 8 움직임(데이터 늘리기) · 9 공(차원의 저주) · 10 단위 맞추기·호와 현 · 복도 끝의 끝없는 방(힐베르트 예고) | 가장 가까운 이웃 찾기 — 시아(단위 그대로) vs 모아(단위 맞춤) → 모아 승 |
 | 힐베르트 ① | `h1_arrow_rooms.html` | 입구 방(유클리드 요약) · 1 세 겹 상자 · 2 곡선의 겹침 점수 · 3 길이·거리·직각 · 4 빈틈 없는 방(√2 구멍, 경사로 → 계단) · 5 세 종류의 방(ℝⁿ·ℓ²·L²) | — |
 | 힐베르트 ② | `h2_wave_rooms.html` | 6 자 세트 · 7 그림자 · 8 물결 조각(푸리에, 네모파의 튀어나옴) · 9 피타고라스의 확장(파스발) · 10 쓰이는 곳(커널 방 실험) | 곡선 맞히기 — 시아(낮은 물결부터) vs 모아(큰 조각부터) → 모아 승 (3 : 7조각) |
+| 힐베르트 ③ 실전 | `h3_practice_rooms.html` | 11 신호실(물결 좌표·필터, π/4) · 12 양자 측정실(그림자² = 확률, 25%·75%) · 13 보정실(최소제곱, (2, 3, 4) → 3) · 14 커널 작업실(커널 릿지 회귀, σ·λ) — 원자료 「PRACTICAL HILBERT SPACE」 1/4~4/4 | — |
 
 모든 페이지는 단일 HTML(외부 요청은 글꼴 하나)이고, 끝에 지식 색인(`#kg`)과 온톨로지·서지 꾸러미(`#export`)가 있습니다.
 
 ## 바탕 자료와 저작권
-- eeanimation 인포그래픽 「EUCLIDEAN SPACE 01~10」, 「HILBERT SPACE 01~10」 — 사용자가 제공한 자료입니다. 원본 그림은 이 저장소에 넣지 않았고, 도표는 구도·좌표만 따라 모두 새로 그렸습니다. 원 게시물 주소·게시일은 아직 받지 못해 "미확인"으로 적었습니다.
-- 교육부 고등학교 수학·기하 교육과정(단원 이름 대조), Mikolov 외(2013), Cortes·Vapnik(1995), Bellman(1961), Kreyszig(1978), Schölkopf·Smola(2002), Vaswani 외(2017).
+- eeanimation 인포그래픽 「EUCLIDEAN SPACE 01~10」, 「HILBERT SPACE 01~10」, 「PRACTICAL HILBERT SPACE 1/4~4/4」 — 사용자가 제공한 자료입니다. 원본 그림은 이 저장소에 넣지 않았고, 도표는 구도·좌표만 따라 모두 새로 그렸습니다. 원 게시물 주소·게시일은 아직 받지 못해 "미확인"으로 적었습니다.
+- 교육부 고등학교 수학·기하 교육과정(단원 이름 대조), Mikolov 외(2013), Cortes·Vapnik(1995), Bellman(1961), Kreyszig(1978), Schölkopf·Smola(2002), Vaswani 외(2017), Nielsen·Chuang(2010).
 - 캐릭터 이름·설정·그림은 저작권자 안상선의 허락 없이 사용할 수 없습니다.
 
 ## 폴더
 ```
 .
-├─ index.html · e0~e2 (유클리드) · h1_arrow_rooms.html · h2_wave_rooms.html (힐베르트)   완성 페이지 (build/에서 만듦)
+├─ index.html · e0~e2 (유클리드) · h1_arrow_rooms.html · h2_wave_rooms.html · h3_practice_rooms.html (힐베르트)   완성 페이지 (build/에서 만듦)
 ├─ build/
-│  ├─ idx·e0·e1·e2·h1·h2 .src.html   페이지 원본
+│  ├─ idx·e0·e1·e2·h1·h2·h3 .src.html   페이지 원본
 │  ├─ common.css · common.js   공용 디자인·모듈 (optimization_3d_map에서 가져와 방 짜임 추가)
 │  ├─ plane.js                 2D 좌표평면 도우미 (점 끌기)
 │  ├─ geo.js                   유클리드 계산 모듈 (거리·내적·그림자·칸막이·껍질 비율·대결 데이터)

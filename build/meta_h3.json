@@ -1,0 +1,38 @@
+{
+ "title": "힐베르트 공간 ③ 실전 — 네 개의 작업실: 신호·양자 측정·최소제곱·커널 회귀",
+ "series": "유클리드 공간 · 힐베르트 공간",
+ "number": "5",
+ "creator": [
+  {
+   "name": "안상선",
+   "role": "author",
+   "affiliation": "(주)M-Robo"
+  }
+ ],
+ "contributor": [
+  {
+   "name": "AI 보조 제작",
+   "role": "assistant"
+  }
+ ],
+ "date": "2026-11-19",
+ "version": "1.0",
+ "language": [
+  "ko"
+ ],
+ "license": "",
+ "url": "https://adminmrobo.github.io/hilbert_space_lab/h3_practice_rooms.html",
+ "about": [
+  "lab:application/signal-processing",
+  "lab:application/least-squares-estimation",
+  "lab:application/kernel-ridge"
+ ],
+ "basedOn": [
+  "eea_practical",
+  "moe_curriculum"
+ ],
+ "educationalLevel": "입문",
+ "learningResourceType": "interactive explainer",
+ "registry": "KG_00_registry 0.2",
+ "suggestedCitation": "안상선 (2026). 힐베르트 공간 ③ 실전 — 네 개의 작업실: 신호·양자 측정·최소제곱·커널 회귀. 유클리드 공간 · 힐베르트 공간 5, v1.0."
+}
