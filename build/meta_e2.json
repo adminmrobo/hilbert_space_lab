@@ -1,5 +1,5 @@
 {
- "title": "유클리드 공간 ② 그림자와 칸막이의 방 — 그림자·칸막이·움직임·공·곧은 자의 한계",
+ "title": "유클리드 공간 ② 그림자와 경계판의 방 — 그림자·경계판·움직임·공·곧은 자의 한계",
  "series": "유클리드 공간 · 힐베르트 공간",
  "number": "2",
  "creator": [
@@ -34,5 +34,5 @@
  "educationalLevel": "입문",
  "learningResourceType": "interactive explainer",
  "registry": "KG_00_registry 0.2",
- "suggestedCitation": "안상선 (2026). 유클리드 공간 ② 그림자와 칸막이의 방 — 그림자·칸막이·움직임·공·곧은 자의 한계. 유클리드 공간 · 힐베르트 공간 2, v1.0."
+ "suggestedCitation": "안상선 (2026). 유클리드 공간 ② 그림자와 경계판의 방 — 그림자·경계판·움직임·공·곧은 자의 한계. 유클리드 공간 · 힐베르트 공간 2, v1.0."
 }

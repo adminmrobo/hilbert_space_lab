@@ -334,14 +334,14 @@ section.sec{padding:88px 0 40px}
   <div class="seriescards">
     <a class="scard" href="e0_orientation.html"><span class="k">0편 · 오리엔테이션 · 5분</span><h3>가방 점검 — 방에 들어가기 전에</h3><p>좌표평면 · 피타고라스 정리 · sin·cos, 그리고 그릇 시리즈의 화살표</p></a>
     <a class="scard" href="e1_ruler_rooms.html"><span class="k">①편 · 1~5번 방</span><h3>자와 각도기의 방</h3><p>점(특성 공간) · 화살표(임베딩) · 거리(KNN) · 각도(코사인 유사도) · 자 세트(PCA)</p></a>
-    <a class="scard" href="e2_shadow_rooms.html"><span class="k">②편 · 6~10번 방 + 대결</span><h3>그림자와 칸막이의 방</h3><p>그림자(예측선 긋기) · 칸막이(SVM) · 움직임(데이터 늘리기) · 공(차원의 저주) · 단위 맞추기 · 가장 가까운 이웃 찾기 대결</p></a>
+    <a class="scard" href="e2_shadow_rooms.html"><span class="k">②편 · 6~10번 방 + 대결</span><h3>그림자와 경계판의 방</h3><p>그림자(예측선 긋기) · 경계판(SVM) · 움직임(데이터 늘리기) · 공(차원의 저주) · 단위 맞추기 · 가장 가까운 이웃 찾기 대결</p></a>
     <div class="scard" style="border-left-color:var(--amber)"><span class="k">이 편에서 쓰는 도구</span><h3>방 하나의 짜임</h3><p>왜 이 방법을 쓰나 · 조수 수식 상자 · 일상과 머신러닝 · 방 대화 · 실험 패널 · 이 방의 한계 · 확인 퀴즈</p></div>
   </div>
 </div></section>
 
 <section class="sec" id="hilbert" aria-labelledby="h-hi"><div class="wrap">
   <h2 id="h-hi">힐베르트 공간 — 끝없는 방의 자와 각도기</h2>
-  <p class="lead">유클리드 방은 칸 수가 정해져 있어야 합니다. 소리·센서 곡선처럼 끝없이 이어지는 데이터를 위해, 자와 각도기는 그대로 두고 방을 끝없이 넓힌 곳이 힐베르트 공간입니다. 원자료: 「HILBERT SPACE 01~10」(@eeanimation).</p>
+  <p class="lead">유클리드 방은 축 수가 정해져 있어야 합니다. 소리·센서 곡선처럼 끝없이 이어지는 데이터를 위해, 자와 각도기는 그대로 두고 방을 끝없이 넓힌 곳이 힐베르트 공간입니다. 원자료: 「HILBERT SPACE 01~10」(@eeanimation).</p>
   <div class="seriescards">
     <a class="scard" href="h1_arrow_rooms.html"><span class="k">①편 · 입구 방 + 1~5번 방</span><h3>화살표의 방</h3><p>세 겹 상자 · 곡선의 겹침 점수 · 길이·거리·직각 · 빈틈 없는 방 · 세 종류의 방(ℝⁿ·ℓ²·L²)</p></a>
     <a class="scard" href="h2_wave_rooms.html"><span class="k">②편 · 6~10번 방 + 대결</span><h3>곡선을 쪼개는 방</h3><p>자 세트 · 그림자 · 물결 조각(푸리에) · 피타고라스의 확장(파스발) · 커널 방 · 곡선 맞히기 대결</p></a>
@@ -551,7 +551,7 @@ Surf3D.prototype.draw=function(){var S=this,R=setup(S.cv),g=R.g,w=R.w,h=R.h;S.w=
   /* 축 */
   var ax=S.o.axes||['w₁','w₂','오차'],o0=S.P(S.xr[0],S.yr[0],S.zr[0]),ex=S.P(S.xr[1],S.yr[0],S.zr[0]),ey=S.P(S.xr[0],S.yr[1],S.zr[0]),ez=S.P(S.xr[0],S.yr[0],S.zr[1]);
   arrow2(g,o0[0],o0[1],ex[0],ex[1],cssv('--eye'),1.5);arrow2(g,o0[0],o0[1],ey[0],ey[1],cssv('--terrain'),1.5);arrow2(g,o0[0],o0[1],ez[0],ez[1],'rgba(22,33,43,.6)',1.5);
-  /* 곡면: 먼 칸부터 */
+  /* 곡면: 먼 쪽부터 */
   if(S.o.surface!==false){var quads=[];for(j=0;j<n;j++)for(i=0;i<n;i++){var A=pts[j][i],B=pts[j][i+1],C=pts[j+1][i+1],D=pts[j+1][i];if(!A||!B||!C||!D)continue;var z4=(Z[j][i]+Z[j][i+1]+Z[j+1][i+1]+Z[j+1][i])/4;quads.push([(A[2]+B[2]+C[2]+D[2])/4,A,B,C,D,z4]);}
     quads.sort(function(a,b){return b[0]-a[0];});var al=S.o.alpha==null?0.86:S.o.alpha;g.lineWidth=0.6;
     quads.forEach(function(q){g.beginPath();g.moveTo(q[1][0],q[1][1]);g.lineTo(q[2][0],q[2][1]);g.lineTo(q[3][0],q[3][1]);g.lineTo(q[4][0],q[4][1]);g.closePath();g.fillStyle=cmap(S.nz(q[5]),al);g.fill();g.strokeStyle='rgba(22,33,43,.22)';g.stroke();});}

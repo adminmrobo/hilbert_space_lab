@@ -87,7 +87,7 @@
    ],
    "match": [],
    "definition": {
-    "ko": "칸마다 차이를 제곱해 더한 뒤 제곱근."
+    "ko": "자리마다 차이를 제곱해 더한 뒤 제곱근."
    }
   },
   {
@@ -201,7 +201,7 @@
    "id": "lab:claim/distance-any-dim",
    "type": "Claim",
    "label": {
-    "ko": "칸이 몇 개든 거리 식은 같다(항만 늘어난다)",
+    "ko": "축이 몇 개든 거리 식은 같다(항만 늘어난다)",
     "en": "Distance formula holds in any dimension"
    },
    "page": "e1_ruler_rooms",
@@ -315,7 +315,7 @@
    "id": "lab:sim/e1-dims",
    "type": "Simulation",
    "label": {
-    "ko": "칸 수 늘리기 실험",
+    "ko": "축 수 늘리기 실험",
     "en": "Adding dimensions"
    },
    "page": "e1_ruler_rooms",

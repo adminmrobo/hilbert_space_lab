@@ -171,7 +171,7 @@
   </div>
   <div data-dlg="r13"></div>
   <div class="panel">
-    <div class="ptitle">측정값을 바꾸고 맞춤 모양을 골라 보기 — 왼쪽: 측정값과 맞춤, 오른쪽: 측정값 세 개를 점 하나로 놓은 3칸 방의 그림자</div>
+    <div class="ptitle">측정값을 바꾸고 맞춤 모양을 골라 보기 — 왼쪽: 측정값과 맞춤, 오른쪽: 측정값 세 개를 점 하나로 놓은 축 3개인 방의 그림자</div>
     <div class="twin"><div class="cwrap sq"><canvas id="cv13" aria-label="x = 1, 2, 3에서의 측정값과 맞춤선"></canvas></div><div class="cwrap t3"><canvas id="cv13b" aria-label="측정값 b, 그림자 b̂, 빗나간 만큼 r과 설계표가 만드는 바닥"></canvas><span class="hint">끌어서 돌리기</span></div></div>
     <div class="ctrl"><div class="group" role="group" aria-label="맞춤 모양"><span class="glabel">맞춤 모양</span><span id="g13"></span></div>
       <div class="group"><label class="glabel" for="s13a">b₁</label><input type="range" id="s13a" min="0" max="6" step="0.5" value="2"><span class="val" id="v13a">2</span>
@@ -383,7 +383,7 @@ U.Study({quiz:{
  r11:[{q:'x(t) = sin t + 0.5 sin 3t에서 sin t만 남기면 버린 세기(오차²)는?',o:['π/4 ≈ 0.785','0.5','π/2','0.25'],a:0,why:'버린 조각 0.5 sin 3t의 세기 = 0.5² × π = π/4.',hint:'0부터 2π까지 sin²의 넓이는 π.'}],
  r12:[{q:'|ψ⟩ = ½|0⟩ + (√3/2)|1⟩을 재면 1이 나올 확률은?',o:['75%','87%','50%','25%'],a:0,why:'(√3/2)² = ¾ = 75%. 그림자를 제곱합니다.',hint:'그림자 √3/2 ≈ 0.87을 제곱.'}],
  r13:[{q:'측정값 (2, 3, 4)를 상수 하나로 맞췄을 때 빗나간 만큼의 합은?',o:['0','3','1','−1'],a:0,why:'빗나간 만큼 (−1, 0, 1)은 (1, 1, 1)과 직각이라 합이 0입니다.',hint:'Aᵀ(b − Ax̂) = 0.'}],
- r14:[{q:'σ를 아주 작게, λ를 아주 작게 하면?',o:['배운 데이터는 맞히지만 처음 보는 곳에서 크게 빗나간다','U자를 가장 잘 따라간다','직선이 된다','오차가 모두 0이 된다'],a:0,why:'점마다 외워 사이가 출렁이는 과적합입니다.',hint:'세 번째 미니 칸.'}]
+ r14:[{q:'σ를 아주 작게, λ를 아주 작게 하면?',o:['배운 데이터는 맞히지만 처음 보는 곳에서 크게 빗나간다','U자를 가장 잘 따라간다','직선이 된다','오차가 모두 0이 된다'],a:0,why:'점마다 외워 사이가 출렁이는 과적합입니다.',hint:'세 번째 숫자 상자.'}]
 }});
 U.start();
 })();

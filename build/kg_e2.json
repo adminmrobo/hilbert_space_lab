@@ -72,7 +72,7 @@
    "id": "lab:concept/hyperplane",
    "type": "Concept",
    "label": {
-    "ko": "칸막이(초평면)",
+    "ko": "경계판(초평면)",
     "en": "Hyperplane"
    },
    "page": "e2_shadow_rooms",
@@ -87,7 +87,7 @@
    ],
    "match": [],
    "definition": {
-    "ko": "n칸 방을 둘로 나누는 한 칸 적은 판. 꽂힌 화살표 n과의 겹침 점수가 일정한 점들."
+    "ko": "n차원 방을 둘로 나누는 한 차원 낮은 판. 꽂힌 화살표 n과의 겹침 점수가 일정한 점들."
    }
   },
   {
@@ -169,7 +169,7 @@
    ],
    "match": [],
    "definition": {
-    "ko": "칸이 많으면 공의 부피가 거의 껍질에 몰려 모두 비슷하게 멀어진다."
+    "ko": "축이 많으면 공의 부피가 거의 껍질에 몰려 모두 비슷하게 멀어진다."
    }
   },
   {
@@ -191,7 +191,7 @@
    ],
    "match": [],
    "definition": {
-    "ko": "열마다 한 칸의 크기를 비슷하게 맞춘 뒤 거리를 잰다."
+    "ko": "열마다 한 눈금의 크기를 비슷하게 맞춘 뒤 거리를 잰다."
    }
   },
   {
@@ -312,7 +312,7 @@
    "id": "lab:analogy/hollow-balloon",
    "type": "Analogy",
    "label": {
-    "ko": "속이 빈 100칸 풍선",
+    "ko": "속이 빈 100차원 풍선",
     "en": "Hollow 100-dimensional balloon"
    },
    "page": "e2_shadow_rooms",
@@ -331,7 +331,7 @@
    "id": "lab:limitation/finite-dims",
    "type": "Limitation",
    "label": {
-    "ko": "칸 수가 정해져 있어야 한다",
+    "ko": "축 수가 정해져 있어야 한다",
     "en": "Needs a fixed, finite number of dimensions"
    },
    "page": "e2_shadow_rooms",
@@ -410,7 +410,7 @@
    "id": "lab:sim/e2-plane",
    "type": "Simulation",
    "label": {
-    "ko": "칸막이 실험",
+    "ko": "경계판 실험",
     "en": "Hyperplane side"
    },
    "page": "e2_shadow_rooms",
@@ -567,7 +567,7 @@
    ],
    "match": [],
    "definition": {
-    "ko": "칸마다 차이를 제곱해 더한 뒤 제곱근."
+    "ko": "자리마다 차이를 제곱해 더한 뒤 제곱근."
    }
   }
  ],
