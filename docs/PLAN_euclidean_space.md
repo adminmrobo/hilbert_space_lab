@@ -6,14 +6,14 @@
 
 ## 저장소 위치 (v1.1에서 바뀐 점)
 - 기획안은 별도 저장소(euclidean_space_lab)였으나, **hilbert_space_lab 한 저장소에서 유클리드 → 힐베르트로 이어지는 시리즈**로 만들기로 함(2026-11-19).
-- 파일: `index.html`(시리즈 목차) · `e0_orientation.html` · `e1_ruler_rooms.html` · `e2_shadow_rooms.html`. 힐베르트 편은 `h…` 이름으로 이어 붙인다.
+- 파일: `index.html`(시리즈 목차) · `https://adminmrobo.github.io/euclidean_space_lab/00_orientation.html` · `https://adminmrobo.github.io/euclidean_space_lab/01_ruler_rooms.html` · `https://adminmrobo.github.io/euclidean_space_lab/02_shadow_rooms.html`. 힐베르트 편은 `h…` 이름으로 이어 붙인다.
 
 ## 편 구성
 | 편 | 파일 | 내용 |
 |---|---|---|
-| 0 | e0_orientation.html | 가방 점검 — 좌표평면·피타고라스·sin·cos 카드 3장(요약 3줄 + 실험 1개 + 링크), 그릇 시리즈 화살표 대응표, 마지막 점검 3문항(다 맞히면 문 열림). 건너뛰기 버튼 |
-| ① | e1_ruler_rooms.html | 1 n차원 방 · 2 점과 화살표 · 3 거리 · 4 겹침 점수와 각도 · 5 자 세트 |
-| ② | e2_shadow_rooms.html | 6 그림자(+대표값 그릇) · 7 경계판(3D) · 8 움직임 · 9 공(+껍질 비율 0.9ⁿ) · 10 단위·호와 현 · 대결 · 정리 · 복도 끝의 끝없는 방(힐베르트 예고) |
+| 0 | https://adminmrobo.github.io/euclidean_space_lab/00_orientation.html | 가방 점검 — 좌표평면·피타고라스·sin·cos 카드 3장(요약 3줄 + 실험 1개 + 링크), 그릇 시리즈 화살표 대응표, 마지막 점검 3문항(다 맞히면 문 열림). 건너뛰기 버튼 |
+| ① | https://adminmrobo.github.io/euclidean_space_lab/01_ruler_rooms.html | 1 n차원 방 · 2 점과 화살표 · 3 거리 · 4 겹침 점수와 각도 · 5 자 세트 |
+| ② | https://adminmrobo.github.io/euclidean_space_lab/02_shadow_rooms.html | 6 그림자(+대표값 그릇) · 7 가름판(3D) · 8 움직임 · 9 공(+껍질 비율 0.9ⁿ) · 10 단위·호와 현 · 대결 · 정리 · 복도 끝의 끝없는 방(힐베르트 예고) |
 
 ## 대결 — 가장 가까운 이웃 찾기 (확정)
 - 시아: 키 mm·몸무게 kg 그대로 / 모아: 단위 맞추기(키 8cm, 몸무게 10kg = 한 눈금) / 심판 조수 하루

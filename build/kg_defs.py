@@ -94,12 +94,12 @@ e1e = [E('lab:concept/feature-space', 'broader', 'lab:concept/euclidean-space', 
        E('lab:concept/cosine-similarity', 'relatedTo', 'lab:topic/attention-mechanism'),
        E('lab:concept/vector', 'relatedTo', 'lab:topic/word-embedding'),
        E('lab:concept/orthonormal-basis', 'relatedTo', 'lab:topic/pca')]
-# ── e2 그림자와 경계판의 방 ──
+# ── e2 그림자와 가름판의 방 ──
 P = 'e2_shadow_rooms'
 e2n = [N('lab:concept/orthogonal-projection', 'Concept', '그림자(정사영)', 'Orthogonal projection', P, '#r6', 1, '바닥에 똑바로 내린 발. 바닥 위에서 가장 가까운 점.'),
        N('lab:concept/residual', 'Concept', '빗나간 만큼(잔차)', 'Residual', P, '#r6', 1, '정답 − 그림자. 바닥과 직각.'),
        N('lab:method/least-squares', 'Method', '예측선 긋기(최소제곱)', 'Least squares', P, '#r6', 1, '빗나간 거리 제곱 합이 가장 작은 답을 고른다. 예측 = 정답의 그림자.'),
-       N('lab:concept/hyperplane', 'Concept', '경계판(초평면)', 'Hyperplane', P, '#r7', 1, 'n차원 방을 둘로 나누는 한 차원 낮은 판. 꽂힌 화살표 n과의 겹침 점수가 일정한 점들.'),
+       N('lab:concept/hyperplane', 'Concept', '가름판(초평면)', 'Hyperplane', P, '#r7', 1, 'n차원 방을 둘로 나누는 한 차원 낮은 판. 꽂힌 화살표 n과의 겹침 점수가 일정한 점들.'),
        N('lab:concept/decision-boundary', 'Concept', '결정 경계', 'Decision boundary', P, '#r7', 1),
        N('lab:concept/isometry', 'Concept', '거리를 지키는 움직임(등거리 변환)', 'Isometry', P, '#r8', 2, '밀기·돌리기·뒤집기. 모든 점 사이 거리를 그대로 둔다.'),
        N('lab:concept/ball', 'Concept', '공(반지름 r 안쪽)', 'Ball', P, '#r9', 1),
@@ -116,7 +116,7 @@ e2n = [N('lab:concept/orthogonal-projection', 'Concept', '그림자(정사영)',
        N('lab:limitation/straight-ruler', 'Limitation', '곧은 자는 휜 표면에서 짧게 잰다', 'Straight ruler underestimates on curved surfaces', P, '#r10', 2),
        N('lab:concept/hilbert-space', 'Concept', '힐베르트 공간(예고)', 'Hilbert space (preview)', P, '#endless', 2, '자와 각도기는 그대로, 방을 끝없이 넓힌 것.'),
        N('lab:sim/e2-shadow', 'Simulation', '그림자와 그릇 실험', 'Projection and bowl', P, '#r6', 2),
-       N('lab:sim/e2-plane', 'Simulation', '경계판 실험', 'Hyperplane side', P, '#r7', 2),
+       N('lab:sim/e2-plane', 'Simulation', '가름판 실험', 'Hyperplane side', P, '#r7', 2),
        N('lab:sim/e2-shell', 'Simulation', '껍질 비율 실험', 'Shell volume ratio', P, '#r9', 2),
        N('lab:sim/e2-duel', 'Simulation', '가장 가까운 이웃 찾기 대결', 'Nearest-neighbour duel', P, '#duel', 2),
        N('lab:question/e2-units', 'Question', '단위가 다른 열을 섞으면 거리는 무엇을 재나?', 'What does distance measure across mixed units?', P, '#duel', 1)]
@@ -190,7 +190,7 @@ h2n = [N('lab:concept/hilbert-basis', 'Concept', '곡선 방의 자 세트(힐�
        N('lab:analogy/smoothie', 'Analogy', '스무디를 과일별 컵 수로', 'Smoothie back to fruit cups', P, '#r6', 1),
        N('lab:analogy/choir-parts', 'Analogy', '합창을 파트별로', 'Choir parts', P, '#r8', 1),
        N('lab:analogy/allowance-accounts', 'Analogy', '용돈을 통장에 나눠도 합은 같다', 'Allowance split across accounts', P, '#r9', 1),
-       N('lab:claim/kernel-beats-line', 'Claim', '커널 방은 곧은 경계판가 못 가르는 원 무리를 가른다', 'Kernel separates ring data a line cannot', P, '#r10', 2),
+       N('lab:claim/kernel-beats-line', 'Claim', '커널 방은 곧은 가름판가 못 가르는 원 무리를 가른다', 'Kernel separates ring data a line cannot', P, '#r10', 2),
        N('lab:claim/largest-first', 'Claim', '큰 조각부터 고르면 가장 적은 조각으로 세기를 살린다', 'Largest coefficients first is most efficient', P, '#duel', 1),
        N('lab:sim/h2-basis', 'Simulation', '조각 켜기 실험', 'Toggle basis components', P, '#r6', 2),
        N('lab:sim/h2-fourier', 'Simulation', '물결 조각 늘리기 실험', 'Fourier partial sums', P, '#r8', 2),
@@ -247,17 +247,26 @@ pages = {
  'e2': (e2n, e2e, [EEA, CURR,
         ref('cortes1995', 'Support-vector networks', [{"family": "Cortes", "given": "Corinna"}, {"family": "Vapnik", "given": "Vladimir"}], 1995, {"container-title": "Machine Learning", "volume": "20", "page": "273-297", "DOI": "10.1007/BF00994018"}, ['lab:concept/hyperplane']),
         ref('bellman1961', 'Adaptive Control Processes: A Guided Tour', [{"family": "Bellman", "given": "Richard"}], 1961, {"type": "book", "publisher": "Princeton University Press"}, ['lab:concept/curse-of-dimensionality'])],
-        meta('e2', '유클리드 공간 ② 그림자와 경계판의 방 — 그림자·경계판·움직임·공·곧은 자의 한계', '2', 'e2_shadow_rooms.html', ['lab:concept/orthogonal-projection', 'lab:concept/hyperplane', 'lab:method/feature-scaling'], ['eea_euclid', 'moe_curriculum'])),
+        meta('e2', '유클리드 공간 ② 그림자와 가름판의 방 — 그림자·가름판·움직임·공·곧은 자의 한계', '2', 'e2_shadow_rooms.html', ['lab:concept/orthogonal-projection', 'lab:concept/hyperplane', 'lab:method/feature-scaling'], ['eea_euclid', 'moe_curriculum'])),
 }
 ALL = {}
+# 유클리드 편은 독립 저장소(euclidean_space_lab)에 있다. e 정의는 다른 편 개념 이름(스텁)으로만 쓰고 파일은 만들지 않는다.
+EU = 'https://adminmrobo.github.io/euclidean_space_lab/'
+EU_FILE = {'e0_orientation': '00_orientation', 'e1_ruler_rooms': '01_ruler_rooms', 'e2_shadow_rooms': '02_shadow_rooms'}
+def stub_url(page, a):
+    if page not in EU_FILE: return page + '.html' + a
+    if a == '#endless': a = '#outro'
+    elif a.startswith('#r') and a[2:].isdigit(): a = '#r%02d' % int(a[2:])
+    return EU + EU_FILE[page] + '.html' + a
 for k, v in pages.items():
     for n in v[0]: ALL.setdefault(n['id'], n)
 for k, (nodes, edges, refs, m) in pages.items():
+    if k.startswith('e'): continue
     have = {n['id'] for n in nodes}
     for e in edges:
         for x in (e['s'], e['o']):
             if x not in have and x in ALL:
-                st = dict(ALL[x]); st['anchor'] = ALL[x]['page'] + '.html' + ALL[x]['anchor']; st['coverage'] = 'mentioned'; nodes.append(st); have.add(x)
+                st = dict(ALL[x]); st['anchor'] = stub_url(ALL[x]['page'], ALL[x]['anchor']); st['coverage'] = 'mentioned'; nodes.append(st); have.add(x)
 
     page = m['url'].split('/')[-1].replace('.html', '')
     json.dump({"version": "1.3", "page": page, "nodes": nodes, "edges": edges}, open(os.path.join(B, 'kg_%s.json' % k), 'w'), ensure_ascii=False, indent=1)

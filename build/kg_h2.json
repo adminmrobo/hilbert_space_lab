@@ -211,7 +211,7 @@
    "id": "lab:claim/kernel-beats-line",
    "type": "Claim",
    "label": {
-    "ko": "커널 방은 곧은 경계판가 못 가르는 원 무리를 가른다",
+    "ko": "커널 방은 곧은 가름판가 못 가르는 원 무리를 가른다",
     "en": "Kernel separates ring data a line cannot"
    },
    "page": "h2_wave_rooms",

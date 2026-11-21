@@ -49,11 +49,11 @@
         <div><b>δⱼₖ</b> j = k면 1, 아니면 0.</div>
       </div></details>
   </div>
-  <div class="start"><b>앞 편</b> 곡선의 겹침 점수(넓이)와 직각이 처음이면 <a href="h1_arrow_rooms.html">① 화살표의 방</a>부터 보세요. 6번 방의 자 세트는 <a href="e1_ruler_rooms.html#r5">유클리드 5번 방</a>, 7번 방의 그림자는 <a href="e2_shadow_rooms.html#r6">유클리드 6번 방</a>을 끝없는 방으로 넓힌 것입니다.</div>
+  <div class="start"><b>앞 편</b> 곡선의 겹침 점수(넓이)와 직각이 처음이면 <a href="h1_arrow_rooms.html">① 화살표의 방</a>부터 보세요. 6번 방의 자 세트는 <a href="https://adminmrobo.github.io/euclidean_space_lab/01_ruler_rooms.html#r05">유클리드 5번 방</a>, 7번 방의 그림자는 <a href="https://adminmrobo.github.io/euclidean_space_lab/02_shadow_rooms.html#r06">유클리드 6번 방</a>을 끝없는 방으로 넓힌 것입니다.</div>
   <div class="kpis" aria-label="숫자 요약">
     <div class="kpi g"><b>25</b><span>3e₁ + 4e₂ 곡선의 세기 = 3² + 4²</span></div>
     <div class="kpi m"><b>0.71 → 0</b><span>물결 조각 1개 → 5개일 때 남은 오차<sup>①</sup></span></div>
-    <div class="kpi a"><b>32 : 23</b><span>커널 방 vs 곧은 경계판가 맞힌 점 (32개 중)<sup>①</sup></span></div>
+    <div class="kpi a"><b>32 : 23</b><span>커널 방 vs 곧은 가름판가 맞힌 점 (32개 중)<sup>①</sup></span></div>
     <div class="kpi r"><b>3 : 7</b><span>대결에서 95%를 살리는 데 쓴 조각 수 (모아 : 시아)<sup>①</sup></span></div>
   </div>
   <p class="muted" style="font-size:13px">① 설명용 예시 곡선·데이터로 계산한 값입니다.</p>
@@ -109,7 +109,7 @@
       <li><b>문제</b>: 쓸 수 있는 조각이 정해져 있을 때, 그 조각들로 만들 수 있는 곡선 중 원래 곡선에 가장 가까운 것을 찾고 싶습니다.</li>
       <li><b>앞 방의 한계</b>: 6번 방에서 조각을 몇 개만 켜면 원래 곡선과 어긋났어요. "어긋난 것 중 최선"인지는 몰랐죠.</li>
       <li><b>해법</b>: 그 조각들이 이루는 바닥 M에 똑바로 그림자를 내립니다. 빗나간 만큼 r은 바닥과 직각이고, 그림자 p보다 가까운 곳은 없어요.</li></ol>
-      <div class="easy"><b>쉽게 말하면</b> <a href="e2_shadow_rooms.html#r6">유클리드 6번 방</a>의 그림자가 끝없는 방에서도 그대로 통합니다. 6번 방에서 앞 조각 몇 개만 켠 곡선이 바로 그 그림자예요.</div></div>
+      <div class="easy"><b>쉽게 말하면</b> <a href="https://adminmrobo.github.io/euclidean_space_lab/02_shadow_rooms.html#r06">유클리드 6번 방</a>의 그림자가 끝없는 방에서도 그대로 통합니다. 6번 방에서 앞 조각 몇 개만 켠 곡선이 바로 그 그림자예요.</div></div>
     <div class="am"><h4><img data-mood="asst_shock" alt="" aria-hidden="true">수학 수식을 어려워하는 조수가 대신 물어봅니다</h4>
       <p class="aq">"끝없는 방에서도 그림자가 하나뿐이에요? 여러 개면 어떡해요?"</p>
       <span class="lbl">학교 수학으로 보면</span>정사영과 점과 평면 사이의 거리입니다. 바닥이 "닫혀" 있으면(빈틈 없으면) 그림자는 딱 하나예요.
@@ -228,14 +228,14 @@
     <div class="step"><b>신호</b>곡선을 직각인 조각에 그림자로 내려 근사합니다(8·9번 방, <a href="h3_practice_rooms.html#r11">③편 11번 작업실</a>).</div>
     <div class="step"><b>양자역학</b>입자의 상태는 복소수 힐베르트 공간의 길이 1인 화살표입니다(<a href="h3_practice_rooms.html#r12">③편 12번 작업실</a>).</div>
     <div class="step"><b>미분방정식</b>열·파동 방정식의 "약한 해"를 곡선 방에서 찾습니다(이름만 소개).</div>
-    <div class="step"><b>머신러닝 — 커널 방</b>곧은 경계판로 안 갈리는 무리를, 끝없는 방에서 곧게 가릅니다(아래 실험).</div>
+    <div class="step"><b>머신러닝 — 커널 방</b>곧은 가름판로 안 갈리는 무리를, 끝없는 방에서 곧게 가릅니다(아래 실험).</div>
   </div>
   <div class="wm">
     <div class="why"><h4>왜 이 방법을 쓰나 (커널 방)</h4><ol>
       <li><b>문제</b>: 안쪽 원의 점(+)과 바깥 고리의 점(−)을 가르고 싶습니다.</li>
-      <li><b>앞 방의 한계</b>: <a href="e2_shadow_rooms.html#r7">유클리드 7번 방</a>의 곧은 경계판로는 원을 둘러싼 무리를 가를 수 없어요.</li>
-      <li><b>해법</b>: 점마다 "다른 점들과의 닮음 점수표(커널)"를 붙여 끝없는 방으로 옮기면, 그곳에서는 곧은 경계판로 갈립니다. 원래 방으로 돌아와 보면 그 경계판가 휘어진 경계로 보여요.</li></ol>
-      <div class="easy"><b>쉽게 말하면</b> 좌표를 몰라도 "누구와 누가 얼마나 닮았나" 표만 있으면 경계판를 세울 수 있습니다.</div></div>
+      <li><b>앞 방의 한계</b>: <a href="https://adminmrobo.github.io/euclidean_space_lab/02_shadow_rooms.html#r07">유클리드 7번 방</a>의 곧은 가름판로는 원을 둘러싼 무리를 가를 수 없어요.</li>
+      <li><b>해법</b>: 점마다 "다른 점들과의 닮음 점수표(커널)"를 붙여 끝없는 방으로 옮기면, 그곳에서는 곧은 가름판로 갈립니다. 원래 방으로 돌아와 보면 그 가름판가 휘어진 경계로 보여요.</li></ol>
+      <div class="easy"><b>쉽게 말하면</b> 좌표를 몰라도 "누구와 누가 얼마나 닮았나" 표만 있으면 가름판를 세울 수 있습니다.</div></div>
     <div class="am"><h4><img data-mood="asst_shock" alt="" aria-hidden="true">수학 수식을 어려워하는 조수가 대신 물어봅니다</h4>
       <p class="aq">"끝없는 방으로 옮기면 계산도 끝없이 많아지는 거 아니에요?"</p>
       <span class="lbl">학교 수학으로 보면</span>지수함수와 두 점 사이의 거리입니다. 끝없는 방의 겹침 점수를 닮음 점수표 한 번으로 바로 계산해요.
@@ -245,7 +245,7 @@
         <tr><td>f(x) = 0</td><td>원래 방에서 보이는 휘어진 경계</td></tr>
         <tr><td>σ</td><td>닮음이 미치는 거리</td></tr></tbody></table>
       <span class="lbl">숫자로 한 번 해 보기</span>
-      <div class="try">거리 0 → 닮음 1, 거리 = σ → e<sup>−0.5</sup> ≈ <b>0.61</b>, 거리 = 3σ → e<sup>−4.5</sup> ≈ <b>0.011</b><br>점 32개: 곧은 경계판 최고 <b>23개</b>, 커널 방(σ = 0.5) <b>32개</b> 모두 맞힘</div>
+      <div class="try">거리 0 → 닮음 1, 거리 = σ → e<sup>−0.5</sup> ≈ <b>0.61</b>, 거리 = 3σ → e<sup>−4.5</sup> ≈ <b>0.011</b><br>점 32개: 곧은 가름판 최고 <b>23개</b>, 커널 방(σ = 0.5) <b>32개</b> 모두 맞힘</div>
       <div class="ac"><img data-mood="asst_smile" alt="" aria-hidden="true"><p>끝없는 방에 직접 안 가고 닮음 점수표만으로 계산하는 거군요. 똑똑하다!</p></div></div>
   </div>
   <div class="pair">
@@ -256,11 +256,11 @@
   <div class="panel">
     <div class="ptitle">닮음이 미치는 거리 σ를 바꿔 보기 — 색 = 점수 f(x), 경계선 = f(x) = 0</div>
     <div class="cwrap sq"><canvas id="cv10" aria-label="안쪽 원의 점과 바깥 고리의 점, 커널 점수 색과 경계"></canvas></div>
-    <div class="ctrl"><div class="group"><label class="glabel" for="s10">σ</label><input type="range" id="s10" min="0.3" max="2" step="0.1" value="0.5"><span class="val" id="v10">0.5</span><button class="bt" type="button" id="b10" aria-pressed="false">곧은 경계판 최선 보기</button></div></div>
-    <div class="minis"><div class="mini g"><span>커널 방이 맞힌 점</span><b id="m10a">—</b></div><div class="mini r"><span>곧은 경계판 최고</span><b>23 / 32</b></div><div class="mini m"><span>σ</span><b id="m10b">—</b></div><div class="mini a"><span>경계 모양</span><b id="m10c" style="font-size:16px">—</b></div></div>
+    <div class="ctrl"><div class="group"><label class="glabel" for="s10">σ</label><input type="range" id="s10" min="0.3" max="2" step="0.1" value="0.5"><span class="val" id="v10">0.5</span><button class="bt" type="button" id="b10" aria-pressed="false">곧은 가름판 최선 보기</button></div></div>
+    <div class="minis"><div class="mini g"><span>커널 방이 맞힌 점</span><b id="m10a">—</b></div><div class="mini r"><span>곧은 가름판 최고</span><b>23 / 32</b></div><div class="mini m"><span>σ</span><b id="m10b">—</b></div><div class="mini a"><span>경계 모양</span><b id="m10c" style="font-size:16px">—</b></div></div>
     <div class="insight" id="i10" aria-live="polite"></div>
   </div>
-  <div class="lim"><b>이 방의 한계</b> σ가 너무 작으면 점마다 섬처럼 외워 버리고(과적합), 너무 크면 곧은 경계판처럼 둔해집니다. σ는 검증 데이터로 고릅니다(<a href="https://adminmrobo.github.io/optimization_3d_map/first_step_0.html#s03">최적화 첫걸음 ⓪ 0.3</a>).</div>
+  <div class="lim"><b>이 방의 한계</b> σ가 너무 작으면 점마다 섬처럼 외워 버리고(과적합), 너무 크면 곧은 가름판처럼 둔해집니다. σ는 검증 데이터로 고릅니다(<a href="https://adminmrobo.github.io/optimization_3d_map/first_step_0.html#s03">최적화 첫걸음 ⓪ 0.3</a>).</div>
   <div class="quiz" data-quiz="r10"></div>
 </div></section>
 
@@ -366,10 +366,10 @@ var DLG={
    ["robo","robo_coin","곡선은 휘었는데 같을 리가 없지!"],
    ["fly","fly_magnify","a, b를 아무렇게나 바꿔 봐. 두 상자의 숫자를 비교해."],
    ["sia","sia_signal","언제나 똑같아요! 3, 4면 둘 다 25."]],
- r10:[["sia","sia_think","원 안쪽이랑 바깥 고리는 곧은 경계판로 못 가르잖아요."],
+ r10:[["sia","sia_think","원 안쪽이랑 바깥 고리는 곧은 가름판로 못 가르잖아요."],
    ["robo","robo_coin","그럼 그냥 포기해야지!"],
-   ["fly","fly_point","σ를 0.5로 두고 색을 봐. 그다음 '곧은 경계판 최선'과 비교해."],
-   ["moa","moa_ok","커널 방은 32개 다 맞히고, 곧은 경계판는 23개가 최고예요."]],
+   ["fly","fly_point","σ를 0.5로 두고 색을 봐. 그다음 '곧은 가름판 최선'과 비교해."],
+   ["moa","moa_ok","커널 방은 32개 다 맞히고, 곧은 가름판는 23개가 최고예요."]],
  dsia:[["sia","sia_guide","1번 물결, 2번 물결… 순서대로 쌓는 게 제일 깔끔하죠!"]],
  dmoa:[["moa","moa_report","겹침 점수로 조각마다 세기를 먼저 재 볼게요. 큰 것부터요."]],
  outro:[["doc","doc_magic","유클리드 방 열 개, 끝없는 방 열 개를 지나왔습니다. 남은 것 세 줄.<br>① 곡선도 화살표 — 겹침 점수는 곱해서 넓이 ② 그림자는 끝없는 방에서도 하나뿐이고 가장 가깝다 ③ 조각 세기의 합이 전체 세기라, 큰 조각만 남겨도 된다."],
@@ -437,11 +437,11 @@ function bestLine(){var best=[0,0,0,-1];for(var a=0;a<180;a+=2){var t=a*PI/180,n
 var BL=bestLine();
 var P10=new P2($('#cv10'),{xr:[-3,3],yr:[-3,3],axes:false,draw:function(g,P){var n=60,st=6/n;for(var i=0;i<n;i++)for(var j=0;j<n;j++){var x=-3+(i+0.5)*st,y=-3+(j+0.5)*st,s=HG.kscore(x,y,SG),a=Math.min(0.35,Math.abs(s)*0.25);g.fillStyle=s>0?'rgba(19,115,58,'+a+')':'rgba(201,48,44,'+a+')';g.fillRect(P.X(x-st/2),P.Y(y+st/2),st*P.kx+1,st*P.ky+1);}
     g.fillStyle=cssv('--text');for(i=0;i<n;i++)for(j=0;j<n;j++){var x0=-3+(i+0.5)*st,y0=-3+(j+0.5)*st,s0=HG.kscore(x0,y0,SG),s1=HG.kscore(x0+st,y0,SG),s2=HG.kscore(x0,y0+st,SG);if(s0*s1<0||s0*s2<0)g.fillRect(P.X(x0)-1,P.Y(y0)-1,2.4,2.4);}
-    if(LINE){var nx=BL[0],ny=BL[1],b=BL[2],px=nx*b,py=ny*b;P.line([px-ny*5,py+nx*5],[px+ny*5,py-nx*5],cssv('--stain'),2.6,[8,5]);P.text([2.8,-2.7],'곧은 경계판 최선: '+BL[3]+' / 32',cssv('--stain'),'right');}
+    if(LINE){var nx=BL[0],ny=BL[1],b=BL[2],px=nx*b,py=ny*b;P.line([px-ny*5,py+nx*5],[px+ny*5,py-nx*5],cssv('--stain'),2.6,[8,5]);P.text([2.8,-2.7],'곧은 가름판 최선: '+BL[3]+' / 32',cssv('--stain'),'right');}
     HG.RING.forEach(function(p){var ok=Math.sign(HG.kscore(p[0],p[1],SG))===p[2];P.pt([p[0],p[1]],p[2]>0?cssv('--gfp'):cssv('--eye'),null,ok?5:7);if(!ok){g.strokeStyle=cssv('--amber');g.lineWidth=2;g.beginPath();g.arc(P.X(p[0]),P.Y(p[1]),10,0,7);g.stroke();}});
     U.label(g,P.X(-2.9),P.Y(2.8),'초록 = 안쪽(+), 빨강 = 바깥(−), 검은 점선 = 경계',cssv('--muted'));}});
 function up10(){var a=HG.kacc(SG);$('#m10a').textContent=a+' / 32';$('#m10b').textContent=fmt(SG,1);$('#m10c').textContent=SG<0.45?'점마다 섬':SG<=1?'둥근 경계':'둔한 경계';
-  U.ins($('#i10'),[[a===32?'g':'a','σ = '+fmt(SG,1)+': 커널 방이 '+a+'개를 맞혔어요. 곧은 경계판의 최선은 23개입니다.'],['m',SG<0.45?'σ가 작으면 점 하나하나 둘레에 작은 섬을 그립니다. 처음 보는 점에는 약할 수 있어요(과적합).':SG<=1?'적당한 σ에서는 원 모양 경계가 생깁니다. 끝없는 방의 곧은 경계판가 원래 방에서는 원으로 보이는 셈이에요.':'σ가 크면 모든 점이 서로 닮아 보여 경계가 둔해지고, 바깥 고리 일부를 놓칩니다.']]);P10.dirty=true;}
+  U.ins($('#i10'),[[a===32?'g':'a','σ = '+fmt(SG,1)+': 커널 방이 '+a+'개를 맞혔어요. 곧은 가름판의 최선은 23개입니다.'],['m',SG<0.45?'σ가 작으면 점 하나하나 둘레에 작은 섬을 그립니다. 처음 보는 점에는 약할 수 있어요(과적합).':SG<=1?'적당한 σ에서는 원 모양 경계가 생깁니다. 끝없는 방의 곧은 가름판가 원래 방에서는 원으로 보이는 셈이에요.':'σ가 크면 모든 점이 서로 닮아 보여 경계가 둔해지고, 바깥 고리 일부를 놓칩니다.']]);P10.dirty=true;}
 var r10=$('#s10');r10.oninput=function(){SG=+r10.value;$('#v10').textContent=fmt(SG,1);up10();};$('#b10').onclick=function(){LINE=!LINE;this.setAttribute('aria-pressed',String(LINE));up10();};up10();
 
 /* 대결 */
@@ -465,7 +465,7 @@ U.Gloss({
  '위치 인코딩':['위치 인코딩','positional encoding','트랜스포머가 단어의 순서를 알도록 여러 빠르기의 sin·cos 값을 붙이는 방법.'],
  '피타고라스':['피타고라스의 확장(파스발 항등식)','Parseval\'s identity','완전한 자 세트에서 곡선의 길이² = 좌표²의 합.'],
  '커널':['커널(닮음 점수표)','kernel','두 점이 얼마나 닮았는지 주는 함수. 끝없는 방의 겹침 점수를 대신 계산한다.'],
- 'SVM':['SVM','Support Vector Machine','두 무리 사이 틈이 가장 넓도록 경계판를 세우는 방법. 커널과 함께 쓰면 휘어진 경계도 만든다.'],
+ 'SVM':['SVM','Support Vector Machine','두 무리 사이 틈이 가장 넓도록 가름판를 세우는 방법. 커널과 함께 쓰면 휘어진 경계도 만든다.'],
  '과적합':['과적합','overfitting','배운 데이터는 잘 맞히지만 처음 보는 데이터에는 약한 상태.']
 },['자 세트','그림자','물결 조각','커널','피타고라스']);
 U.Study({quiz:{
@@ -473,7 +473,7 @@ U.Study({quiz:{
  r7:[{q:'x = (2, 1, 3)을 x₁x₂ 바닥에 떨어뜨린 그림자는?',o:['(2, 1, 0)','(0, 0, 3)','(2, 1, 3)','(1, 1, 0)'],a:0,why:'높이(x₃)만 0으로. 빗나간 만큼 r = (0, 0, 3)은 바닥과 직각입니다.',hint:'정오의 그림자는 바로 발밑.'}],
  r8:[{q:'꺾인 네모파에 물결 조각을 많이 더하면?',o:['전체 오차는 줄지만 꺾인 곳 옆에 튀어나온 뿔이 남는다','모든 점에서 딱 맞는다','오차가 오히려 커진다','조각이 하나뿐이면 충분하다'],a:0,why:'평균제곱 수렴이 모든 점의 수렴을 뜻하지는 않습니다. 최고점이 약 1.18로 남아요.',hint:'"꺾인 네모파"에서 n = 25.'}],
  r9:[{q:'x = 3e₁ + 4e₂일 때 곡선 제곱의 넓이 ‖x‖²는?',o:['25','7','5','12'],a:0,why:'서로 직각인 조각이라 3² + 4² = 25. 길이는 5입니다.',hint:'피타고라스 정리.'}],
- r10:[{q:'커널 방법이 원 모양 경계를 만들 수 있는 이유는?',o:['닮음 점수표로 끝없는 방에 옮겨 그곳에서 곧게 가르기 때문','점을 하나씩 외우기 때문','곧은 경계판를 여러 개 겹치기 때문','σ가 항상 0.5라서'],a:0,why:'끝없는 방의 곧은 경계판가 원래 방에서는 휘어진 경계로 보입니다.',hint:'왜 이 방법을 쓰나 ③.'}],
+ r10:[{q:'커널 방법이 원 모양 경계를 만들 수 있는 이유는?',o:['닮음 점수표로 끝없는 방에 옮겨 그곳에서 곧게 가르기 때문','점을 하나씩 외우기 때문','곧은 가름판를 여러 개 겹치기 때문','σ가 항상 0.5라서'],a:0,why:'끝없는 방의 곧은 가름판가 원래 방에서는 휘어진 경계로 보입니다.',hint:'왜 이 방법을 쓰나 ③.'}],
  duel:[{q:'모아가 적은 조각으로 이긴 까닭은?',o:['조각마다 세기를 먼저 재서 큰 조각부터 골랐다','낮은 물결부터 골랐다','조각을 더 많이 썼다','곡선을 외웠다'],a:0,why:'곡선의 세기 = 조각 세기의 합(9번 방)이라, 큰 조각부터 고르면 가장 빨리 95%에 닿습니다.',hint:'모아의 말풍선.'}]
 }});
 U.start();

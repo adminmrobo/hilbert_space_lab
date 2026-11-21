@@ -31,7 +31,7 @@ function attach(H,kg,refs,meta){
   H=H.replace('</head>',bh+'</head>');
   let i=H.lastIndexOf('<footer'),j=H.lastIndexOf('</body>'),p=(i>=0&&i<j)?i:j;H=H.slice(0,p)+body+H.slice(p);
   j=H.lastIndexOf('</body>');H=H.slice(0,j)+sc+H.slice(j);return H;}
-const pages=[['idx','index.html'],['e0','e0_orientation.html'],['e1','e1_ruler_rooms.html'],['e2','e2_shadow_rooms.html'],['h1','h1_arrow_rooms.html'],['h2','h2_wave_rooms.html'],['h3','h3_practice_rooms.html']];
+const pages=[['idx','index.html'],['h1','h1_arrow_rooms.html'],['h2','h2_wave_rooms.html'],['h3','h3_practice_rooms.html']];
 for(const [n,out] of pages){
   const src=n+'.src.html';if(!fs.existsSync(path.join(B,src)))continue;
   let H=rd(src).replace('<!--@@CSS@@-->','<style>\n'+css+'\n</style>')
